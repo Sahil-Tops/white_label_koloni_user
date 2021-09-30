@@ -17,8 +17,8 @@ target 'KoloniKube_Swift' do
   pod 'IQKeyboardManagerSwift'
   pod 'ISMessages'
   pod 'NVActivityIndicatorView'
-#  pod 'GoogleMaps'
-#  pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   pod 'GoogleSignIn'
   
   pod 'UPCarouselFlowLayout'
