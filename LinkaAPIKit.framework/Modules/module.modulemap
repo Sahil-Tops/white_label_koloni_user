@@ -1,0 +1,11 @@
+framework module LinkaAPIKit {
+  umbrella header "LinkaAPIKit.h"
+
+  export *
+  module * { export * }
+}
+
+module LinkaAPIKit.Swift {
+    header "LinkaAPIKit-Swift.h"
+    requires objc
+}

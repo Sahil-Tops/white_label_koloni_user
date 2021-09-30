@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DateTimePicker" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95z-xR-9SC">
+                    <rect key="frame" x="0.0" y="597" width="414" height="265"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="T6k-kk-Vng">
+                            <rect key="frame" x="0.0" y="45" width="414" height="220"/>
+                            <color key="backgroundColor" name="Color"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="220" id="b6c-Yj-Lts"/>
+                            </constraints>
+                        </datePicker>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhy-nd-QsB">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="Paf-I0-Fdb"/>
+                            </constraints>
+                            <items>
+                                <barButtonItem title="Cancel" id="gAE-ck-PuH">
+                                    <connections>
+                                        <action selector="tapCancelBtn:" destination="iN0-l3-epB" id="bUH-QY-izA"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem systemItem="flexibleSpace" id="fVZ-Xa-JsP"/>
+                                <barButtonItem title="Done" id="kLp-cm-1Wk">
+                                    <connections>
+                                        <action selector="tapDoneBtn:" destination="iN0-l3-epB" id="GEG-br-BsQ"/>
+                                    </connections>
+                                </barButtonItem>
+                            </items>
+                        </toolbar>
+                    </subviews>
+                    <color key="backgroundColor" name="Color"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="T6k-kk-Vng" secondAttribute="trailing" id="13L-Q5-ZQc"/>
+                        <constraint firstAttribute="bottom" secondItem="T6k-kk-Vng" secondAttribute="bottom" id="62U-Ep-zi9"/>
+                        <constraint firstItem="T6k-kk-Vng" firstAttribute="leading" secondItem="95z-xR-9SC" secondAttribute="leading" id="CFM-1e-kwc"/>
+                        <constraint firstItem="Fhy-nd-QsB" firstAttribute="leading" secondItem="95z-xR-9SC" secondAttribute="leading" symbolic="YES" id="Ca4-1V-u8u"/>
+                        <constraint firstItem="T6k-kk-Vng" firstAttribute="top" secondItem="Fhy-nd-QsB" secondAttribute="bottom" id="aDt-bx-U7E"/>
+                        <constraint firstItem="Fhy-nd-QsB" firstAttribute="top" secondItem="95z-xR-9SC" secondAttribute="top" id="keT-3a-5L0"/>
+                        <constraint firstAttribute="trailing" secondItem="Fhy-nd-QsB" secondAttribute="trailing" symbolic="YES" id="mIf-hv-Una"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.90351027390000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="95z-xR-9SC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0hB-jf-kzv"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="95z-xR-9SC" secondAttribute="bottom" id="Qhz-jb-oFP"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="95z-xR-9SC" secondAttribute="trailing" id="zgk-AT-Zlq"/>
+            </constraints>
+            <connections>
+                <outlet property="picker" destination="T6k-kk-Vng" id="0rM-eK-co3"/>
+                <outlet property="pickerContainerView" destination="95z-xR-9SC" id="2jZ-CK-yJb"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="120"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Color">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

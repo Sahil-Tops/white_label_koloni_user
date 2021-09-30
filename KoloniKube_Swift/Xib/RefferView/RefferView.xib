@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="kolonishare-phase2-ttf.ttf">
+            <string>Kolonishare</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RefferView" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puW-Ba-imU" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="20" y="65.5" width="280" height="437.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refer a Friend!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ME-R4-PPN">
+                            <rect key="frame" x="30" y="50" width="230" height="30.5"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
+                            <color key="textColor" red="0.32941176470588235" green="0.29803921568627451" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-A7-BB0">
+                            <rect key="frame" x="70" y="95.5" width="140" height="70"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="3lF-A7-BB0" secondAttribute="height" multiplier="200:100" id="y4h-qc-EZk"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A B C 1 2 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6o-jc-CLC">
+                            <rect key="frame" x="70" y="103.5" width="140" height="27.5"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Kv-Ib-3JN">
+                            <rect key="frame" x="95" y="139" width="90" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="7fk-jG-ZqI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <state key="normal" title="Tap to copy">
+                                <color key="titleColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickOnButtons:" destination="iN0-l3-epB" eventType="touchUpInside" id="Z5U-sS-dcE"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-VN-0Hy">
+                            <rect key="frame" x="0.0" y="185.5" width="280" height="48"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex Freasda, get your friends on koloni!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMK-X0-EaI">
+                                    <rect key="frame" x="15" y="2" width="250" height="44"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="KMK-X0-EaI" secondAttribute="bottom" constant="2" id="3cd-29-VOe"/>
+                                <constraint firstAttribute="trailing" secondItem="KMK-X0-EaI" secondAttribute="trailing" constant="15" id="9vh-WN-am2"/>
+                                <constraint firstItem="KMK-X0-EaI" firstAttribute="top" secondItem="3y4-VN-0Hy" secondAttribute="top" constant="2" id="PLe-nb-qoX"/>
+                                <constraint firstItem="KMK-X0-EaI" firstAttribute="leading" secondItem="3y4-VN-0Hy" secondAttribute="leading" constant="15" id="iVt-vQ-pOb"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NBa-5q-yPu">
+                            <rect key="frame" x="10" y="258.5" width="260" height="139"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-FJ-AzZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="260" height="50"/>
+                                    <subviews>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJ5-JC-kfY">
+                                            <rect key="frame" x="8" y="10" width="244" height="0.0"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="13"/>
+                                            <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-    OR    -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIC-bT-AyE">
+                                            <rect key="frame" x="8" y="10" width="244" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="v7X-LK-sEc"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="19"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="TIC-bT-AyE" firstAttribute="leading" secondItem="0gl-FJ-AzZ" secondAttribute="leading" constant="8" id="3pb-xv-Y1O"/>
+                                        <constraint firstItem="TIC-bT-AyE" firstAttribute="top" secondItem="fJ5-JC-kfY" secondAttribute="bottom" id="7nD-Ml-94O"/>
+                                        <constraint firstItem="fJ5-JC-kfY" firstAttribute="leading" secondItem="0gl-FJ-AzZ" secondAttribute="leading" constant="8" id="OAP-k7-ud1"/>
+                                        <constraint firstAttribute="trailing" secondItem="TIC-bT-AyE" secondAttribute="trailing" constant="8" id="hw5-ZU-rNY"/>
+                                        <constraint firstItem="fJ5-JC-kfY" firstAttribute="top" secondItem="0gl-FJ-AzZ" secondAttribute="top" constant="10" id="j5E-w0-6F2"/>
+                                        <constraint firstAttribute="trailing" secondItem="fJ5-JC-kfY" secondAttribute="trailing" constant="8" id="ueq-VV-KUr"/>
+                                        <constraint firstAttribute="bottom" secondItem="TIC-bT-AyE" secondAttribute="bottom" constant="15" id="zrv-gC-icd"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIY-JU-3PP">
+                                    <rect key="frame" x="0.0" y="50" width="260" height="89"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem Your Rental!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cx-pt-qTw">
+                                            <rect key="frame" x="8" y="2" width="244" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="PMo-K3-vPz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="21"/>
+                                            <color key="textColor" red="0.023529411760000001" green="0.82352941180000006" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did someone refer you? Click &quot;Redeem&quot; to get your free rental!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="uVR-hs-Mot">
+                                            <rect key="frame" x="8" y="42" width="244" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="dGu-pP-Vf6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="uVR-hs-Mot" secondAttribute="trailing" constant="8" id="6GD-0f-9v6"/>
+                                        <constraint firstAttribute="trailing" secondItem="4Cx-pt-qTw" secondAttribute="trailing" constant="8" id="H1L-Q0-bbp"/>
+                                        <constraint firstItem="uVR-hs-Mot" firstAttribute="top" secondItem="4Cx-pt-qTw" secondAttribute="bottom" constant="10" id="Yfr-UT-obO"/>
+                                        <constraint firstItem="4Cx-pt-qTw" firstAttribute="leading" secondItem="xIY-JU-3PP" secondAttribute="leading" constant="8" id="fdc-zY-gEH"/>
+                                        <constraint firstAttribute="bottom" secondItem="uVR-hs-Mot" secondAttribute="bottom" constant="2" id="gr4-2o-Y1j"/>
+                                        <constraint firstItem="4Cx-pt-qTw" firstAttribute="top" secondItem="xIY-JU-3PP" secondAttribute="top" constant="2" id="oyu-cO-Lmu"/>
+                                        <constraint firstItem="uVR-hs-Mot" firstAttribute="leading" secondItem="xIY-JU-3PP" secondAttribute="leading" constant="8" id="vIU-L2-kdi"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="155" id="RrZ-At-3ei"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKf-lW-MpF">
+                            <rect key="frame" x="232" y="8" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="B5m-X7-Gfo"/>
+                                <constraint firstAttribute="height" constant="40" id="IAD-Eb-kP4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Kolonishare" family="Kolonishare" pointSize="18"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickOnButtons:" destination="iN0-l3-epB" eventType="touchUpInside" id="RLi-E4-IT8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="3y4-VN-0Hy" firstAttribute="leading" secondItem="puW-Ba-imU" secondAttribute="leading" id="0NB-6Q-ESr"/>
+                        <constraint firstItem="3lF-A7-BB0" firstAttribute="top" secondItem="9ME-R4-PPN" secondAttribute="bottom" constant="15" id="2Iv-jS-hVe"/>
+                        <constraint firstItem="NBa-5q-yPu" firstAttribute="centerX" secondItem="puW-Ba-imU" secondAttribute="centerX" id="6SB-Rg-Ujn"/>
+                        <constraint firstItem="s6o-jc-CLC" firstAttribute="centerY" secondItem="3lF-A7-BB0" secondAttribute="centerY" multiplier="0.9" id="B1a-rm-NmR"/>
+                        <constraint firstItem="3y4-VN-0Hy" firstAttribute="top" secondItem="3lF-A7-BB0" secondAttribute="bottom" constant="20" id="DBF-kO-5gH"/>
+                        <constraint firstItem="NBa-5q-yPu" firstAttribute="leading" secondItem="puW-Ba-imU" secondAttribute="leading" constant="10" id="Eag-yt-2wa"/>
+                        <constraint firstAttribute="trailing" secondItem="rKf-lW-MpF" secondAttribute="trailing" constant="8" id="ExL-nv-NuB"/>
+                        <constraint firstAttribute="trailing" secondItem="9ME-R4-PPN" secondAttribute="trailing" constant="20" id="HS3-QX-JN5"/>
+                        <constraint firstItem="rKf-lW-MpF" firstAttribute="top" secondItem="puW-Ba-imU" secondAttribute="top" constant="8" id="IrE-aV-KaJ"/>
+                        <constraint firstItem="s6o-jc-CLC" firstAttribute="trailing" secondItem="3lF-A7-BB0" secondAttribute="trailing" id="LKW-Z6-Y0Y"/>
+                        <constraint firstItem="NBa-5q-yPu" firstAttribute="top" secondItem="3y4-VN-0Hy" secondAttribute="bottom" constant="25" id="Mm3-XM-sus"/>
+                        <constraint firstItem="1Kv-Ib-3JN" firstAttribute="centerX" secondItem="s6o-jc-CLC" secondAttribute="centerX" id="NMH-vR-qba"/>
+                        <constraint firstItem="9ME-R4-PPN" firstAttribute="top" secondItem="puW-Ba-imU" secondAttribute="top" constant="50" id="QCj-ox-fxY"/>
+                        <constraint firstItem="3lF-A7-BB0" firstAttribute="centerX" secondItem="puW-Ba-imU" secondAttribute="centerX" id="YHz-ym-IUF"/>
+                        <constraint firstAttribute="trailing" secondItem="3y4-VN-0Hy" secondAttribute="trailing" id="caV-Df-6UL"/>
+                        <constraint firstAttribute="trailing" secondItem="NBa-5q-yPu" secondAttribute="trailing" constant="10" id="dbA-0A-utJ"/>
+                        <constraint firstItem="1Kv-Ib-3JN" firstAttribute="top" secondItem="s6o-jc-CLC" secondAttribute="bottom" constant="8" id="lap-pq-5QY"/>
+                        <constraint firstAttribute="bottom" secondItem="NBa-5q-yPu" secondAttribute="bottom" constant="40" id="luG-5L-TBP"/>
+                        <constraint firstItem="3lF-A7-BB0" firstAttribute="width" secondItem="puW-Ba-imU" secondAttribute="width" multiplier="0.5" id="pnm-Ni-bmc"/>
+                        <constraint firstItem="s6o-jc-CLC" firstAttribute="leading" secondItem="3lF-A7-BB0" secondAttribute="leading" id="qpO-1C-bmg"/>
+                        <constraint firstItem="9ME-R4-PPN" firstAttribute="leading" secondItem="puW-Ba-imU" secondAttribute="leading" constant="30" id="xiK-wg-MV6"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-Yf-Mzi">
+                    <rect key="frame" x="41" y="483" width="238" height="35"/>
+                    <subviews>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jh-nm-22K" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="115.5" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="115.5" id="z6M-0M-5DM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                            <state key="normal" title="Share Code">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickOnButtons:" destination="iN0-l3-epB" eventType="touchUpInside" id="elP-iV-6DZ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Gb-m2-2Ws" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="122.5" y="0.0" width="115.5" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="Ohu-XE-YVf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                            <state key="normal" title="Redeem">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickOnButtons:" destination="iN0-l3-epB" eventType="touchUpInside" id="j8b-6M-VeS"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owY-Nk-ukW" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="120" y="25.5" width="80" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W5c-iI-Swf">
+                            <rect key="frame" x="2" y="2" width="76" height="76"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="2Vl-3F-hbP"/>
+                        <constraint firstAttribute="trailing" secondItem="W5c-iI-Swf" secondAttribute="trailing" constant="2" id="ADN-tr-Fyp"/>
+                        <constraint firstItem="W5c-iI-Swf" firstAttribute="top" secondItem="owY-Nk-ukW" secondAttribute="top" constant="2" id="Ta4-cd-D9a"/>
+                        <constraint firstItem="W5c-iI-Swf" firstAttribute="leading" secondItem="owY-Nk-ukW" secondAttribute="leading" constant="2" id="ecu-ga-Js3"/>
+                        <constraint firstAttribute="bottom" secondItem="W5c-iI-Swf" secondAttribute="bottom" constant="2" id="j1s-eE-VbV"/>
+                        <constraint firstAttribute="height" constant="80" id="mjw-fT-Ngj"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="40"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.90351027390000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9ID-Yf-Mzi" firstAttribute="bottom" secondItem="puW-Ba-imU" secondAttribute="bottom" constant="15" id="2Cg-fk-f5J"/>
+                <constraint firstItem="puW-Ba-imU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BUU-WY-vzY"/>
+                <constraint firstItem="9ID-Yf-Mzi" firstAttribute="centerX" secondItem="puW-Ba-imU" secondAttribute="centerX" id="Oq3-77-IuX"/>
+                <constraint firstItem="puW-Ba-imU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z17-LE-fk3"/>
+                <constraint firstItem="owY-Nk-ukW" firstAttribute="centerX" secondItem="puW-Ba-imU" secondAttribute="centerX" id="fcE-X4-cT2"/>
+                <constraint firstItem="puW-Ba-imU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="gdp-G1-Cem"/>
+                <constraint firstItem="owY-Nk-ukW" firstAttribute="top" secondItem="puW-Ba-imU" secondAttribute="top" constant="-40" id="qKe-nf-Gxt"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="close_btn" destination="rKf-lW-MpF" id="hQb-NR-TCu"/>
+                <outlet property="codeBg_imageView" destination="3lF-A7-BB0" id="nfN-77-3Dx"/>
+                <outlet property="containerView" destination="puW-Ba-imU" id="2Yc-Am-EoK"/>
+                <outlet property="redeemStackView" destination="NBa-5q-yPu" id="v7P-4n-RKV"/>
+                <outlet property="redeemStack_height" destination="RrZ-At-3ei" id="lhP-iC-Cq5"/>
+                <outlet property="redeem_btn" destination="2Gb-m2-2Ws" id="tdT-rE-ytW"/>
+                <outlet property="redemRentalTitle_lbl" destination="4Cx-pt-qTw" id="UGb-Vd-bom"/>
+                <outlet property="referralCode_lbl" destination="s6o-jc-CLC" id="dUn-h9-MH8"/>
+                <outlet property="shareCode_btn" destination="6Jh-nm-22K" id="vWg-Rw-0dS"/>
+                <outlet property="tapToCopy_btn" destination="1Kv-Ib-3JN" id="VQU-pu-Oro"/>
+                <outlet property="titleImage" destination="W5c-iI-Swf" id="ffg-NX-kV0"/>
+                <outlet property="title_lbl" destination="9ME-R4-PPN" id="Xpq-nc-3cq"/>
+                <outlet property="userName_lbl" destination="KMK-X0-EaI" id="ywX-n5-k9e"/>
+                <outlet property="youReceiveText_lbl" destination="uVR-hs-Mot" id="osd-0I-7np"/>
+                <outlet property="youReceiveView" destination="xIY-JU-3PP" id="8l0-C1-Xzd"/>
+                <outlet property="yourReferalView" destination="0gl-FJ-AzZ" id="d15-ZS-OkH"/>
+                <outlet property="yourReferralGetText_lbl" destination="TIC-bT-AyE" id="Fnk-WN-cVv"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="154.43349753694582"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="2Gb-m2-2Ws">
+            <size key="intrinsicContentSize" width="61" height="33"/>
+        </designable>
+        <designable name="6Jh-nm-22K">
+            <size key="intrinsicContentSize" width="84" height="33"/>
+        </designable>
+    </designables>
+</document>

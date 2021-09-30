@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "12eeb8fa-42d5-a64f-b69f-2feea388cc3d",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "12eeb8fa-42d5-a64f-b69f-2feea388cc3d" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "12eeb8fa-42d5-a64f-b69f-2feea388cc3d" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EC136B56-1CFA-4AA1-A803-D3062EC18F41",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "12eeb8fa-42d5-a64f-b69f-2feea388cc3d" : "KoloniKube_Swift_iOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KoloniKube_Swift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Linka_Koloni\/KoloniKube_Swift.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/192.168.0.100:8443\/svn\/KoloniKube_Swift_iOS",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "12eeb8fa-42d5-a64f-b69f-2feea388cc3d"
+    }
+  ]
+}

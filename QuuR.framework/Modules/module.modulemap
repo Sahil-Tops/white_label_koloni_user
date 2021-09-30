@@ -1,0 +1,11 @@
+framework module QuuR {
+  umbrella header "QuuR.h"
+
+  export *
+  module * { export * }
+}
+
+module QuuR.Swift {
+    header "QuuR-Swift.h"
+    requires objc
+}

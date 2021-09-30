@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomAlertView" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoM-At-N00" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="8" y="19.999999999999996" width="359" height="54.666666666666657"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Alert message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJo-uF-XEF">
+                            <rect key="frame" x="15" y="15.000000000000002" width="329" height="24.666666666666671"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYs-zu-2xK">
+                            <rect key="frame" x="0.0" y="0.0" width="359" height="54.666666666666664"/>
+                            <connections>
+                                <action selector="tapOnView:" destination="iN0-l3-epB" eventType="touchUpInside" id="ltl-cp-5eq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.74509803919999995" green="0.027450980390000001" blue="0.043137254899999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="yJo-uF-XEF" firstAttribute="leading" secondItem="qoM-At-N00" secondAttribute="leading" constant="15" id="TcZ-cG-aQp"/>
+                        <constraint firstAttribute="trailing" secondItem="yJo-uF-XEF" secondAttribute="trailing" constant="15" id="UVP-Sd-1hL"/>
+                        <constraint firstItem="XYs-zu-2xK" firstAttribute="top" secondItem="qoM-At-N00" secondAttribute="top" id="WFB-63-7WH"/>
+                        <constraint firstAttribute="bottom" secondItem="yJo-uF-XEF" secondAttribute="bottom" constant="15" id="ZFr-q2-c60"/>
+                        <constraint firstAttribute="bottom" secondItem="XYs-zu-2xK" secondAttribute="bottom" id="aCA-1s-5C6"/>
+                        <constraint firstItem="yJo-uF-XEF" firstAttribute="top" secondItem="qoM-At-N00" secondAttribute="top" constant="15" id="aEq-Z4-VtC"/>
+                        <constraint firstAttribute="trailing" secondItem="XYs-zu-2xK" secondAttribute="trailing" id="h8u-wH-deO"/>
+                        <constraint firstItem="XYs-zu-2xK" firstAttribute="leading" secondItem="qoM-At-N00" secondAttribute="leading" id="i16-fh-goR"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qoM-At-N00" secondAttribute="trailing" constant="8" id="0q7-a7-SyX"/>
+                <constraint firstItem="qoM-At-N00" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="7Zk-bd-BO0"/>
+                <constraint firstItem="qoM-At-N00" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="7zY-Ok-chc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="containerView" destination="qoM-At-N00" id="FE4-yZ-eY1"/>
+                <outlet property="containerView_top" destination="7Zk-bd-BO0" id="vfm-gN-0aE"/>
+                <outlet property="message_lbl" destination="yJo-uF-XEF" id="38W-vN-053"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="-164.77832512315271"/>
+        </view>
+    </objects>
+</document>

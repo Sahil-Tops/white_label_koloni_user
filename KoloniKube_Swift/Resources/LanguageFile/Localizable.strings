@@ -1,0 +1,174 @@
+/* 
+  Localizable.strings
+  Club_Mobile
+
+  Created by Tops on 12/8/16.
+  Copyright © 2016 Self. All rights reserved.
+*/
+/*                      Club Mobile Application                 */
+
+// GENERAL MESSAGES
+Norecords                            = "No data found!";
+
+ERROR_CALL                           = "Oops, we can’t reach server.Please Check your connection and try again.";
+SearchPlaceholder                    = "Search...";
+"KeyVLSearchLocation"                = "Search by Location";
+"KeyVLSearchAddress"                 = "Search by Address";
+
+
+"KeyVLContactNo"                         = "Please enter contact number.";
+"KeyVLIssueDisc"                         = "Please enter issue description.";
+"KeyVLContactZeroValidataion"                    = "Phone number should not have all characters as zero.";
+
+"KeyVLContactInvalid"                    = "Invalid contact number.";
+"KeyVLIssueType"                         = "Please select issue type.";
+"KeyVLImageLimitOver"                    = "Image limit over.";
+
+
+/*                      LOGIN SCREEN                */
+
+
+"KeyEmail"                           = "Please enter email address.";
+"KeyVLEmail"                         = "Please enter user name.";
+"KeyVVLEmail"                        = "Please enter valid email address.";
+"keyVPassword"                       = "Please enter password.";
+Error_credentil                      = "Incorrect email-id or password";
+"keyVPassword6"                      = "Password must be atleast 6 character";
+"KeyVPasswordValid"                  = "Password must contain atleast one lowercase, one uppercase letter, one number and one symbol.";
+"keyVConfirmPassword"                = "New password and confirm new password should be same.";
+
+"KeyVEmail"                          = "Email";
+"KeyVPass"                           = "Password";
+"KeyVbtnLogin"                       = "READY TO GO";
+"KeyVbtnForgot"                      = "Forgot Password?";
+"KeyVbtnCreate"                      = "Don't Have An Account?";
+
+
+                    // Registration Screen
+"KeybtnBack"                         = " SIGN IN";
+"KeybtnCreateAcc"                    = "CREATE YOUR ACCOUNT";
+"KeyFirstName"                       = "First Name";
+"KeyLastName"                        = "Last Name";
+"KeyEmailAddress"                    = "Your Email Address";
+"KeyPhoneNumber"                     = "Your Mobile Number";
+"KeyReferralCode"                     = "Referral Code";
+
+"KeyUserName"                        = "User Name";
+"KeyPassword"                        = "Password";
+"KeyPasswordCon"                     = "Confirm Password";
+"KeyDateOfBirth"                     = "Date Of Birth";
+"KeySelectGender"                    = "Select Gender";
+"KeyTerms"                           = "Terms and Conditions";
+"KeylblTerms"                        = "I have read and agree to the terms and conditions";
+
+"KeyVMFirstName"                     = "Please enter first name.";
+"KeyVMLastName"                      = "Please enter last name.";
+"KeyVMEmailAddress"                       = "Please enter email address.";
+"KeyVPhoneNumber"                         = "Please enter phone number.";
+"KeyVMUserName"                           = "Please enter user name.";
+"KeyVMPassword"                           = "Please enter password.";
+"KeyVMDateOfBirth"                        = "Please select date of birth.";
+"KeyVMSelectGender"                       = "Please select gender.";
+"KeyAgreeTerms"                           = "Please agree to the terms and licensing conditions.";
+"KeyVMCPassword"                          = "Please enter confirm password.";
+"KeyVM2VPassword"                         = "Password and confirm password does not match.";
+                    //OTP Screen
+"KeyVMOTP"                          = "Please enter OTP.";
+"KeyVMVOTP"                         = "Please enter valid OTP.";
+
+
+                    // Home Screen
+"KeyVMSearchText"                    = "search location near by me";
+
+                    // forgot screen
+"KeylblForgot"                       = "Forgot Password?";
+"KeyFbtnForgot"                      = "SUBMIT";
+
+
+                    //Booking payment screen
+
+                    //Booking trip screen
+"KeybtnLock"                         = "Lock";
+"KeybtnUnLock"                       = "Unlock";
+"KeybtnConnect"                      = "Reconnect";
+"KeybtnPriceB"                       = "Price/Hour";
+"KeybtnPriceT"                       = "Price";
+"KeybtnStart"                        = "STAR YOUR RIDE";
+"KeybtnFinish"                       = "FINISH TRIP";
+"KeybtnFinishRental"                 = "FINISH RENTAL";
+
+                    //Change password screen
+
+"KeybtnSaveChanges"                  = "SAVE YOUR CHANGES"; //
+"KeyVMPasswordOld"                   = "Please enter old password";
+"KeyVMPasswordNew"                   = "Please enter new password";
+"KeyVMPasswordConfirm"               = "Please enter confirm password";
+
+                    // SellVC
+"KeySCErrorPrice"                    = "Price Not Available !!";
+"KeyVMLEmail"                        = "Please enter Email-id";
+"KeyFlblSellTitle"                   = "Your Current Card Balance";
+"KeyFbtnNext"                        = "NEXT";
+"KeyFbtnCancel"                      = "CANCEL"; //"RESET";
+"KeySVEmail"                         = "Customer Email Address";
+"KeySVAmount"                        = "Select Amount";
+"KeySVVAmount"                       = "Please select amount";
+"Keys1Confirm"                       = "CONFIRM";
+"KeyS2FINISH"                        = "FINISH";
+"KeyS2lblSuccess"                    = "Credit Purchase Successful";
+"KeyS2lblCredit"                     = " has been credited to your account";
+"KeyS2lblConfirm"                    = "An SMS Confirmation of this purchase has been sent";
+                    // Statment
+"KeySTlblTitle"                      = "Card Statement";
+"KeySTbtnSTitle"                     = "Start Date";
+"KeySTbtnETitle"                     = "End Date";
+
+//Agent screen
+"lblKeyTitle"                        = "Available Agents";
+
+                    //CALL CENTER SCREEN
+"KeyCSReset"                         = "CANCEL";
+"KeyCSSend"                          = "SEND";
+"KeyCSSub"                           = "Subject";
+"KeyCSbtnMsg"                        = "Select Option";
+"KeyCSbtnRegard"                     = "Select Option";
+"KeyCSbtnMoroe"                      = "Select Option";
+"KeyCSbtnLae"                        = "Select Option";
+"KeyCSSubV"                          = "Please enter subject";
+"KeyCSSubTxtV"                       = "Please enter your message";
+
+"KeyCSbtnMsgV"                       = "Please select province";
+"KeyCSbtnRegardV"                    = "Please select reason";
+"KeyCSbtnMoroeV"                     = "Please select district";
+"KeyCSbtnLaeV"                       = "Please select Lae field";
+
+
+"KeyCSbtnSMS"                        = "Receive SMS Notification";
+"KeyCSlblMSG"                        = "Message or enquiry";
+"KeyCSlblMsgTo"                      = "Message To";
+"KeyCSlblReg"                        = "Regarding";
+"KeyCSlblMoro"                       = "Morobe";
+"KeyCSlblLae"                        = "Lae";
+"KeyCSlblTitle"                      = "Customer Care Form";
+
+
+                //CALL CENTER FORM FINISHE
+"KeyCSFlblThanks"                    = "Thank You";
+"KeyCSFlblDisc"                      = "Your message has been sent to the Call Center, Please check your club membership messages for updates.";
+"KeyCSFbtnAnother"                   = "ANOTHER";
+"KeyCSFbtnClose"                     = "CLOSE";
+
+                // Statment
+"KeyASTlblTitle"                     = "Agent Statement";
+"KeylblASTitle"                      = "Your Current Credit Balance";
+
+
+/*                   LOGIN SCREEN                */
+
+"KeyVLMobile"                        = "Please enter contact number.";
+"KeyVLVMobile"                       = "Please enter valid contact number.";
+"KeyVLMsg"                           = "Please enter message";
+
+
+
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EndRentalPopUpView" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSh-8z-OsD" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="41.5" y="403" width="331" height="90"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frR-ad-T9U">
+                            <rect key="frame" x="15" y="20" width="301" height="0.0"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
+                            <color key="textColor" red="0.2901960784" green="0.25882352939999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-Z7-WHJ">
+                            <rect key="frame" x="15" y="30" width="301" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="NYo-gY-7oR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="Nxq-Z7-WHJ" firstAttribute="top" secondItem="frR-ad-T9U" secondAttribute="bottom" constant="10" id="9HI-kF-e1R"/>
+                        <constraint firstAttribute="trailing" secondItem="Nxq-Z7-WHJ" secondAttribute="trailing" constant="15" id="DhI-0W-Ld7"/>
+                        <constraint firstItem="frR-ad-T9U" firstAttribute="top" secondItem="YSh-8z-OsD" secondAttribute="top" constant="20" id="FjT-Xu-JhD"/>
+                        <constraint firstItem="frR-ad-T9U" firstAttribute="leading" secondItem="YSh-8z-OsD" secondAttribute="leading" constant="15" id="ies-IP-0xX"/>
+                        <constraint firstItem="Nxq-Z7-WHJ" firstAttribute="leading" secondItem="YSh-8z-OsD" secondAttribute="leading" constant="15" id="sQT-kV-aef"/>
+                        <constraint firstAttribute="trailing" secondItem="frR-ad-T9U" secondAttribute="trailing" constant="15" id="wGI-1a-O8f"/>
+                        <constraint firstAttribute="bottom" secondItem="Nxq-Z7-WHJ" secondAttribute="bottom" constant="40" id="zHE-2t-PIt"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bty-UB-79g">
+                    <rect key="frame" x="58" y="475" width="298" height="35"/>
+                    <subviews>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6e-fJ-hWJ" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="144" height="35"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="LFo-ZK-1fL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                            <state key="normal" title="Continue">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickOnBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="fRs-zO-jxV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6y-zl-0nQ" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="154" y="0.0" width="144" height="35"/>
+                            <color key="backgroundColor" red="0.98431372549019602" green="0.27450980392156865" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="npd-oB-bR1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                            <state key="normal" title="End">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clickOnBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Bss-0Y-GtH"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.90351027390000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="YSh-8z-OsD" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5Qd-86-0Fk"/>
+                <constraint firstItem="Bty-UB-79g" firstAttribute="width" secondItem="YSh-8z-OsD" secondAttribute="width" multiplier="0.9" id="9Yc-QH-DNu"/>
+                <constraint firstItem="Bty-UB-79g" firstAttribute="bottom" secondItem="YSh-8z-OsD" secondAttribute="bottom" constant="17" id="U9O-t3-yE2"/>
+                <constraint firstItem="Bty-UB-79g" firstAttribute="centerX" secondItem="YSh-8z-OsD" secondAttribute="centerX" id="edA-DI-Qge"/>
+                <constraint firstItem="YSh-8z-OsD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fsx-ke-cM5"/>
+                <constraint firstItem="YSh-8z-OsD" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="iCU-Qv-T2i"/>
+            </constraints>
+            <connections>
+                <outlet property="cancel_btn" destination="Q6e-fJ-hWJ" id="fhZ-wp-efC"/>
+                <outlet property="description_lbl" destination="Nxq-Z7-WHJ" id="o1I-4H-eSg"/>
+                <outlet property="end_btn" destination="E6y-zl-0nQ" id="3t4-2H-LLH"/>
+                <outlet property="title_lbl" destination="frR-ad-T9U" id="yQj-ui-FLT"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="58"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="E6y-zl-0nQ">
+            <size key="intrinsicContentSize" width="72" height="24"/>
+        </designable>
+        <designable name="Q6e-fJ-hWJ">
+            <size key="intrinsicContentSize" width="116" height="24"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

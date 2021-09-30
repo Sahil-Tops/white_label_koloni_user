@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LinkaLockingView" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okM-U4-9Op">
+                    <rect key="frame" x="20" y="272" width="374" height="352"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait while yor locking process completed." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5m-lT-z62">
+                            <rect key="frame" x="20" y="287" width="334" height="55"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Linka-lock-final.gif" translatesAutoresizingMaskIntoConstraints="NO" id="Kgg-hw-ww4">
+                            <rect key="frame" x="56" y="10" width="262" height="262"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Kgg-hw-ww4" secondAttribute="height" multiplier="112:112" id="ini-OG-C2e"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Kgg-hw-ww4" firstAttribute="width" secondItem="okM-U4-9Op" secondAttribute="width" multiplier="0.7" id="53R-P1-hSm"/>
+                        <constraint firstItem="z5m-lT-z62" firstAttribute="top" secondItem="Kgg-hw-ww4" secondAttribute="bottom" constant="15" id="AY5-Qr-V0z"/>
+                        <constraint firstAttribute="bottom" secondItem="z5m-lT-z62" secondAttribute="bottom" constant="10" id="DU1-uY-RUs"/>
+                        <constraint firstAttribute="trailing" secondItem="z5m-lT-z62" secondAttribute="trailing" constant="20" id="OVT-IR-czB"/>
+                        <constraint firstItem="Kgg-hw-ww4" firstAttribute="centerX" secondItem="okM-U4-9Op" secondAttribute="centerX" id="XvH-Ry-fhg"/>
+                        <constraint firstItem="Kgg-hw-ww4" firstAttribute="top" secondItem="okM-U4-9Op" secondAttribute="top" constant="10" id="knA-6K-4ax"/>
+                        <constraint firstItem="z5m-lT-z62" firstAttribute="leading" secondItem="okM-U4-9Op" secondAttribute="leading" constant="20" id="ljl-ua-qa6"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.90351027390000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="okM-U4-9Op" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="51t-tK-0A7"/>
+                <constraint firstItem="okM-U4-9Op" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wf7-nl-Hdl"/>
+                <constraint firstAttribute="trailing" secondItem="okM-U4-9Op" secondAttribute="trailing" constant="20" id="d0g-wQ-e2h"/>
+                <constraint firstItem="okM-U4-9Op" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="sSE-ss-qMo"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionMsg_lbl" destination="z5m-lT-z62" id="MMA-3n-9SH"/>
+            </connections>
+            <point key="canvasLocation" x="-146" y="80"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Linka-lock-final.gif" width="350" height="494"/>
+    </resources>
+</document>

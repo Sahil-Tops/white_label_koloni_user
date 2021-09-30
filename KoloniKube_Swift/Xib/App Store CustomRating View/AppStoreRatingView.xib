@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="kolonishare-phase2-ttf.ttf">
+            <string>Kolonishare</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AppStoreRatingView" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7uA-rK-TIF" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="37.666666666666657" y="222.33333333333334" width="300" height="286.33333333333326"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTB-XX-mAd">
+                            <rect key="frame" x="262" y="6" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="5gA-5f-HHG"/>
+                                <constraint firstAttribute="height" constant="30" id="hd4-cp-q3i"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Kolonishare" family="Kolonishare" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
+                            </state>
+                            <connections>
+                                <action selector="clickOnBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="EE4-Le-g3O"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy the koloni app?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g8-is-y0C">
+                            <rect key="frame" x="20" y="30" width="260" height="30.333333333333329"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
+                            <color key="textColor" red="0.23529411759999999" green="0.81568627449999997" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell others by rating us in the App Store!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T4-jQ-oZl">
+                            <rect key="frame" x="20" y="75.333333333333343" width="260" height="41"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6y-oq-kQs">
+                            <rect key="frame" x="77.333333333333343" y="201.33333333333334" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="AO8-sc-ERz"/>
+                                <constraint firstAttribute="height" constant="25" id="dzN-8G-LSN"/>
+                            </constraints>
+                            <state key="normal" image="unchecked_gray"/>
+                            <connections>
+                                <action selector="clickOnBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="f4Q-8A-uvv"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't show again" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWM-9I-tox">
+                            <rect key="frame" x="108.33333333333334" y="203.99999999999997" width="112.33333333333334" height="19.333333333333343"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBK-by-TOK" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="75" y="141.33333333333334" width="150" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="kgC-Be-xAY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                            <state key="normal" title="Rate Us">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="clickOnBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="ka7-9C-VW3"/>
+                            </connections>
+                        </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PqQ-e5-NO1">
+                            <rect key="frame" x="21" y="226.33333333333334" width="258" height="50.000000000000028"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="kPY-3t-LmJ"/>
+                            </constraints>
+                            <attributedString key="attributedText">
+                                <fragment content="Didn't like your experience? ">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="13" name="AvenirNext-Medium"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Report Issue">
+                                    <attributes>
+                                        <color key="NSColor" red="0.2901960784" green="0.25882352939999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="13" name="AvenirNext-Medium"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        <integer key="NSUnderline" value="1"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content=" how we can improve!">
+                                    <attributes>
+                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" size="13" name="AvenirNext-Medium"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="zTB-XX-mAd" firstAttribute="top" secondItem="7uA-rK-TIF" secondAttribute="top" constant="6" id="0gx-e4-dNJ"/>
+                        <constraint firstItem="1g8-is-y0C" firstAttribute="leading" secondItem="7uA-rK-TIF" secondAttribute="leading" constant="20" id="3Kn-Qk-o0s"/>
+                        <constraint firstItem="vWM-9I-tox" firstAttribute="leading" secondItem="S6y-oq-kQs" secondAttribute="trailing" constant="6" id="83v-5t-Xqs"/>
+                        <constraint firstItem="PqQ-e5-NO1" firstAttribute="width" secondItem="7uA-rK-TIF" secondAttribute="width" multiplier="0.86" id="BVm-T3-e3w"/>
+                        <constraint firstItem="1g8-is-y0C" firstAttribute="top" secondItem="7uA-rK-TIF" secondAttribute="top" constant="30" id="CSb-Pf-iwv"/>
+                        <constraint firstItem="S6y-oq-kQs" firstAttribute="top" secondItem="VBK-by-TOK" secondAttribute="bottom" constant="25" id="CkQ-zP-xkh"/>
+                        <constraint firstAttribute="trailing" secondItem="zTB-XX-mAd" secondAttribute="trailing" constant="8" id="CwC-ZJ-Okg"/>
+                        <constraint firstAttribute="bottom" secondItem="PqQ-e5-NO1" secondAttribute="bottom" constant="10" id="GFa-On-bUb"/>
+                        <constraint firstItem="PqQ-e5-NO1" firstAttribute="top" secondItem="S6y-oq-kQs" secondAttribute="bottom" id="NtI-ay-7xn"/>
+                        <constraint firstItem="PqQ-e5-NO1" firstAttribute="centerX" secondItem="7uA-rK-TIF" secondAttribute="centerX" id="Twb-wG-hFY"/>
+                        <constraint firstItem="4T4-jQ-oZl" firstAttribute="top" secondItem="1g8-is-y0C" secondAttribute="bottom" constant="15" id="VMo-7O-ch3"/>
+                        <constraint firstItem="4T4-jQ-oZl" firstAttribute="leading" secondItem="7uA-rK-TIF" secondAttribute="leading" constant="20" id="Vgy-eF-FV9"/>
+                        <constraint firstAttribute="trailing" secondItem="1g8-is-y0C" secondAttribute="trailing" constant="20" id="XRK-HA-0z6"/>
+                        <constraint firstItem="VBK-by-TOK" firstAttribute="centerX" secondItem="7uA-rK-TIF" secondAttribute="centerX" id="Ycy-lw-e4P"/>
+                        <constraint firstItem="S6y-oq-kQs" firstAttribute="centerX" secondItem="7uA-rK-TIF" secondAttribute="centerX" multiplier="0.6" id="faM-2G-TiL"/>
+                        <constraint firstItem="VBK-by-TOK" firstAttribute="width" secondItem="7uA-rK-TIF" secondAttribute="width" multiplier="0.5" id="nCt-W8-VH0"/>
+                        <constraint firstItem="vWM-9I-tox" firstAttribute="centerY" secondItem="S6y-oq-kQs" secondAttribute="centerY" id="qai-dB-D3r"/>
+                        <constraint firstAttribute="trailing" secondItem="4T4-jQ-oZl" secondAttribute="trailing" constant="20" id="ttg-9C-b3i"/>
+                        <constraint firstItem="VBK-by-TOK" firstAttribute="top" secondItem="4T4-jQ-oZl" secondAttribute="bottom" constant="25" id="zl5-xH-dUm"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.90351027390000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7uA-rK-TIF" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="ZEZ-Uh-9wf"/>
+                <constraint firstItem="7uA-rK-TIF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g4y-ML-S0w"/>
+                <constraint firstItem="7uA-rK-TIF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.9" id="hJP-ji-aVa"/>
+            </constraints>
+            <connections>
+                <outlet property="checkBox_btn" destination="S6y-oq-kQs" id="OXR-PE-CuD"/>
+                <outlet property="close_btn" destination="zTB-XX-mAd" id="laf-Kk-n30"/>
+                <outlet property="description_lbl" destination="4T4-jQ-oZl" id="goW-vj-U59"/>
+                <outlet property="didNotLike_textView" destination="PqQ-e5-NO1" id="zSK-Zr-WZZ"/>
+                <outlet property="rateUs_btn" destination="VBK-by-TOK" id="SvW-x4-0z7"/>
+                <outlet property="title_lbl" destination="1g8-is-y0C" id="ljx-Lw-4rJ"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="125.61576354679804"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="VBK-by-TOK">
+            <size key="intrinsicContentSize" width="62" height="36"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="unchecked_gray" width="30" height="30"/>
+        <systemColor name="viewFlipsideBackgroundColor">
+            <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
