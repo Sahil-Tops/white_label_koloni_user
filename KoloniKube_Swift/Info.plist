@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AccountKitClientToken</key>
+	<string>dcd045cbea35cb15a7d8dde2d66077fe</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Koloni</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Koloni</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.kolonishare</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.168688252397-278f4bgtd2hqfei7rqtj8dchs0jo5n71</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.applePay.koloniDemo.payments</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.venmo.touch.v2</string>
+		<string>googlegmail</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Allow us to access Bluetooth as we are using a bluetooth based lock device and connect it to the application.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Allow us to access Bluetooth as we are using a bluetooth based lock device and connect it to the application.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Camera access for upload the photo in your profile.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We track your location in order to check whether the object you are using is within the range or not</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We track your location in order to check whether the object you are using is within the range or not</string>
+	<key>NSLocationUsageDescription</key>
+	<string>We track your location in order to check whether the object you are using is within the range or not</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We track your location in order to check whether the object you are using is within the range or not</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow Photo Library access for upload the photo in your profile.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Koloni.ttf</string>
+		<string>koloni_icon.ttf</string>
+		<string>Muli-Bold.ttf</string>
+		<string>Muli-SemiBold.ttf</string>
+		<string>Muli-Regular.ttf</string>
+		<string>Kolonishare-v3.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>fetch</string>
+		<string>location</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDarkContent</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>MediaLibrary Usage</string>
+</dict>
+</plist>

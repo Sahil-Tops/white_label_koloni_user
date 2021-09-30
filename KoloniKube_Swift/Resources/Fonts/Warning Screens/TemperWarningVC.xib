@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TemperWarningVC" customModule="koloni1" customModuleProvider="target">
+            <connections>
+                <outlet property="btnClose" destination="aNC-Hu-Hzc" id="ROi-Oo-nfa"/>
+                <outlet property="view" destination="Fkx-0U-4kj" id="zQE-Sg-x5y"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Fkx-0U-4kj">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warning!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVF-9I-Wlg">
+                    <rect key="frame" x="0.0" y="61" width="375" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                    <color key="textColor" red="0.88824248309999998" green="0.1184099391" blue="0.14420184489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temper warning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kG-Ti-7nc">
+                    <rect key="frame" x="0.0" y="96.5" width="375" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="Zyo-MF-aFN">
+                    <rect key="frame" x="62.5" y="180" width="250" height="271"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Zyo-MF-aFN" secondAttribute="height" multiplier="49:53" id="O20-sB-Edm"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNC-Hu-Hzc">
+                    <rect key="frame" x="132.5" y="610" width="110" height="32"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="KQr-Mm-VCt"/>
+                        <constraint firstAttribute="height" constant="32" id="O4b-6o-MQ3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="CLOSE">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="btnCloseAction:" destination="-1" eventType="touchUpInside" id="cd3-Ka-jgS"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="SVF-9I-Wlg" firstAttribute="top" secondItem="p1v-Vz-J1c" secondAttribute="top" constant="41" id="4wD-EN-38I"/>
+                <constraint firstItem="1kG-Ti-7nc" firstAttribute="centerX" secondItem="Fkx-0U-4kj" secondAttribute="centerX" id="BJL-Fo-YRu"/>
+                <constraint firstItem="SVF-9I-Wlg" firstAttribute="leading" secondItem="Fkx-0U-4kj" secondAttribute="leading" id="GbJ-kj-H85"/>
+                <constraint firstItem="aNC-Hu-Hzc" firstAttribute="centerX" secondItem="Fkx-0U-4kj" secondAttribute="centerX" id="OFL-2A-Aai"/>
+                <constraint firstItem="1kG-Ti-7nc" firstAttribute="leading" secondItem="Fkx-0U-4kj" secondAttribute="leading" id="Z5N-eS-P6C"/>
+                <constraint firstItem="Zyo-MF-aFN" firstAttribute="centerX" secondItem="Fkx-0U-4kj" secondAttribute="centerX" id="abq-l6-swR"/>
+                <constraint firstItem="Zyo-MF-aFN" firstAttribute="width" secondItem="Fkx-0U-4kj" secondAttribute="width" multiplier="245:367" id="bTN-Sq-qyP"/>
+                <constraint firstAttribute="bottom" secondItem="aNC-Hu-Hzc" secondAttribute="bottom" constant="25" id="dju-aF-x8k"/>
+                <constraint firstItem="SVF-9I-Wlg" firstAttribute="centerX" secondItem="Fkx-0U-4kj" secondAttribute="centerX" id="gnA-Pk-Znt"/>
+                <constraint firstItem="1kG-Ti-7nc" firstAttribute="top" secondItem="SVF-9I-Wlg" secondAttribute="bottom" constant="10" id="hQS-2s-tmy"/>
+                <constraint firstItem="Zyo-MF-aFN" firstAttribute="top" secondItem="1kG-Ti-7nc" secondAttribute="bottom" constant="65.5" id="s1c-wB-oWL"/>
+                <constraint firstAttribute="trailing" secondItem="1kG-Ti-7nc" secondAttribute="trailing" id="yCO-Yx-fmf"/>
+                <constraint firstAttribute="trailing" secondItem="SVF-9I-Wlg" secondAttribute="trailing" id="yFC-mX-Dq3"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="p1v-Vz-J1c"/>
+            <point key="canvasLocation" x="51" y="-101"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="lock" width="395" height="456"/>
+    </resources>
+</document>

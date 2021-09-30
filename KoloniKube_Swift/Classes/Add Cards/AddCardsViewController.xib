@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCardsViewController" customModule="koloni1" customModuleProvider="target">
+            <connections>
+                <outlet property="addCard_btn" destination="ESY-YP-QWt" id="N4C-0S-Fad"/>
+                <outlet property="headerView" destination="Xzy-8e-Rod" id="ik7-re-wNh"/>
+                <outlet property="skip_btn" destination="bIs-tU-7P5" id="iWl-Ga-ZIa"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="cZd-xd-eAY">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xzy-8e-Rod">
+                    <rect key="frame" x="0.0" y="44" width="375" height="54"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="du6-9B-mCd"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add_card" translatesAutoresizingMaskIntoConstraints="NO" id="zYV-G3-O8Z">
+                    <rect key="frame" x="56.333333333333343" y="152" width="262.33333333333326" height="224"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="zYV-G3-O8Z" secondAttribute="height" multiplier="150:128" id="Bn2-yO-iNh"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify payment info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbF-3X-A6t">
+                    <rect key="frame" x="20" y="386" width="335" height="29"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="21"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To enjoy koloni, add a credit or debit card to your account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTa-jY-Lip">
+                    <rect key="frame" x="20" y="425" width="335" height="52"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="19"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESY-YP-QWt" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="30" y="512" width="315" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="OyV-M4-gkh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                    <state key="normal" title="Add Credit/Debit Card" backgroundImage="side_menu">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="tapAddCardBtn:" destination="-1" eventType="touchUpInside" id="2QA-gq-dsS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIs-tU-7P5">
+                    <rect key="frame" x="139" y="567" width="97" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Hh7-A9-WyI"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="  Skip  ">
+                                <attributes>
+                                    <color key="NSColor" red="0.32941176470588235" green="0.29803921568627451" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="18" name="AvenirNext-Bold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <connections>
+                        <action selector="tapSkipBtn:" destination="-1" eventType="touchUpInside" id="256-rd-8qp"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="zYV-G3-O8Z" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.65" id="4jc-Il-BjX"/>
+                <constraint firstItem="cZd-xd-eAY" firstAttribute="leading" secondItem="Xzy-8e-Rod" secondAttribute="leading" id="5tm-V3-WPM"/>
+                <constraint firstItem="GbF-3X-A6t" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="9BF-Wf-mRJ"/>
+                <constraint firstItem="GbF-3X-A6t" firstAttribute="top" secondItem="zYV-G3-O8Z" secondAttribute="bottom" constant="10" id="C34-NU-5an"/>
+                <constraint firstItem="bIs-tU-7P5" firstAttribute="centerX" secondItem="ESY-YP-QWt" secondAttribute="centerX" id="CMr-bd-zod"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ESY-YP-QWt" secondAttribute="trailing" constant="30" id="P7G-NL-MCL"/>
+                <constraint firstItem="cZd-xd-eAY" firstAttribute="trailing" secondItem="Xzy-8e-Rod" secondAttribute="trailing" id="S5t-l6-rl7"/>
+                <constraint firstItem="zYV-G3-O8Z" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="SJg-Ma-Bil"/>
+                <constraint firstItem="ZTa-jY-Lip" firstAttribute="top" secondItem="GbF-3X-A6t" secondAttribute="bottom" constant="10" id="VWF-iz-2h6"/>
+                <constraint firstItem="ESY-YP-QWt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="aVH-Vv-EAB"/>
+                <constraint firstItem="ZTa-jY-Lip" firstAttribute="trailing" secondItem="GbF-3X-A6t" secondAttribute="trailing" id="bKu-my-SgM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GbF-3X-A6t" secondAttribute="trailing" constant="20" id="eGR-xW-BKM"/>
+                <constraint firstItem="zYV-G3-O8Z" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gKP-vW-gS1"/>
+                <constraint firstItem="cZd-xd-eAY" firstAttribute="bottom" secondItem="Xzy-8e-Rod" secondAttribute="bottom" id="iu5-gx-aZK"/>
+                <constraint firstItem="Xzy-8e-Rod" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ixw-O1-e7x"/>
+                <constraint firstItem="cZd-xd-eAY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tPn-Y6-smc"/>
+                <constraint firstItem="Xzy-8e-Rod" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vBe-6f-Quh"/>
+                <constraint firstItem="ZTa-jY-Lip" firstAttribute="leading" secondItem="GbF-3X-A6t" secondAttribute="leading" id="vSf-za-8HD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xzy-8e-Rod" secondAttribute="trailing" id="vmY-B0-z15"/>
+                <constraint firstItem="ESY-YP-QWt" firstAttribute="top" secondItem="ZTa-jY-Lip" secondAttribute="bottom" constant="35" id="w1p-LX-E0a"/>
+                <constraint firstItem="bIs-tU-7P5" firstAttribute="top" secondItem="ESY-YP-QWt" secondAttribute="bottom" constant="10" id="z6N-hw-1sq"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="153.69458128078819"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="ESY-YP-QWt">
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="add_card" width="997" height="742"/>
+        <image name="side_menu" width="1242" height="2208"/>
+    </resources>
+</document>

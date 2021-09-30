@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuyMembershipTblCell" rowHeight="70" id="e7c-HS-xw5" customClass="BuyMembershipTblCell" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e7c-HS-xw5" id="14N-7E-Kz5">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7R-Pr-zeL" customClass="IPAutoScalingLabel" customModule="koloni1" customModuleProvider="target">
+                        <rect key="frame" x="90" y="40" width="220" height="0.0"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qs6-ir-adE" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                        <rect key="frame" x="20" y="12.5" width="55" height="55"/>
+                        <color key="backgroundColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="X4S-UV-EWd"/>
+                            <constraint firstAttribute="height" constant="55" id="xrt-k5-AER"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCircular" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="27.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qs-Js-DbY">
+                        <rect key="frame" x="10" y="79" width="310" height="1"/>
+                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="lRv-Py-cpQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="5qs-Js-DbY" secondAttribute="trailing" id="4PX-NR-etM"/>
+                    <constraint firstItem="p7R-Pr-zeL" firstAttribute="centerY" secondItem="14N-7E-Kz5" secondAttribute="centerY" id="8ox-aN-6IB"/>
+                    <constraint firstItem="5qs-Js-DbY" firstAttribute="leading" secondItem="14N-7E-Kz5" secondAttribute="leading" constant="10" id="IX5-jM-EwF"/>
+                    <constraint firstItem="Qs6-ir-adE" firstAttribute="centerY" secondItem="14N-7E-Kz5" secondAttribute="centerY" id="N9J-5n-HQ6"/>
+                    <constraint firstAttribute="bottom" secondItem="5qs-Js-DbY" secondAttribute="bottom" id="SBD-Ro-cXd"/>
+                    <constraint firstAttribute="trailing" secondItem="p7R-Pr-zeL" secondAttribute="trailing" constant="10" id="SHn-or-nUJ"/>
+                    <constraint firstItem="Qs6-ir-adE" firstAttribute="leading" secondItem="14N-7E-Kz5" secondAttribute="leading" constant="20" id="gh2-ek-LkW"/>
+                    <constraint firstItem="p7R-Pr-zeL" firstAttribute="leading" secondItem="Qs6-ir-adE" secondAttribute="trailing" constant="15" id="mDc-8v-FSK"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
+            </tableViewCellContentView>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="imgProfile" destination="Qs6-ir-adE" id="bxD-ma-NQp"/>
+                <outlet property="lblUserName" destination="p7R-Pr-zeL" id="Hys-Y6-UfL"/>
+                <outlet property="seperator" destination="5qs-Js-DbY" id="qoe-z6-Ziy"/>
+            </connections>
+            <point key="canvasLocation" x="-3" y="-77"/>
+        </tableViewCell>
+    </objects>
+</document>

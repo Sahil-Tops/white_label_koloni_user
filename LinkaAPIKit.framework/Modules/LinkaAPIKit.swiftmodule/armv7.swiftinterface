@@ -1,0 +1,1738 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LinkaAPIKit
+import CoreBluetooth
+import CoreFoundation
+import CoreLocation
+import Darwin
+import Dispatch
+import Foundation
+@_exported import LinkaAPIKit
+import MobileCoreServices
+import ObjectiveC
+import Security
+import Swift
+import SystemConfiguration
+import UIKit
+extension Rabbit {
+  convenience public init(key: Swift.String) throws
+  convenience public init(key: Swift.String, iv: Swift.String) throws
+}
+public func <- <T>(left: inout T, right: LinkaAPIKit.Map) where T : Swift.SignedInteger
+public func <- <T>(left: inout T?, right: LinkaAPIKit.Map) where T : Swift.SignedInteger
+public func <- <T>(left: inout T, right: LinkaAPIKit.Map) where T : Swift.UnsignedInteger
+public func <- <T>(left: inout T?, right: LinkaAPIKit.Map) where T : Swift.UnsignedInteger
+open class TransformOf<ObjectType, JSONType> : LinkaAPIKit.TransformType {
+  public typealias Object = ObjectType
+  public typealias JSON = JSONType
+  public init(fromJSON: @escaping (JSONType?) -> ObjectType?, toJSON: @escaping (ObjectType?) -> JSONType?)
+  open func transformFromJSON(_ value: Any?) -> ObjectType?
+  open func transformToJSON(_ value: ObjectType?) -> JSONType?
+  @objc deinit
+}
+final public class HMAC : LinkaAPIKit.Authenticator {
+  public enum Error : Swift.Error {
+    case authenticateError
+    case invalidInput
+    public static func == (a: LinkaAPIKit.HMAC.Error, b: LinkaAPIKit.HMAC.Error) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum Variant {
+    case sha1, sha256, sha384, sha512, md5
+    public static func == (a: LinkaAPIKit.HMAC.Variant, b: LinkaAPIKit.HMAC.Variant) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public init(key: Swift.Array<Swift.UInt8>, variant: LinkaAPIKit.HMAC.Variant = .md5)
+  final public func authenticate(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class Request {
+  @objc deinit
+}
+extension Request : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension Request : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+open class DateTransform : LinkaAPIKit.TransformType {
+  public typealias Object = Foundation.Date
+  public typealias JSON = Swift.Double
+  public init()
+  open func transformFromJSON(_ value: Any?) -> Foundation.Date?
+  open func transformToJSON(_ value: Foundation.Date?) -> Swift.Double?
+  @objc deinit
+}
+extension Array where Element == Swift.UInt8 {
+  public func toBase64() -> Swift.String?
+  public init(base64: Swift.String)
+}
+public enum PairingUpState : Swift.Int {
+  case idle
+  case connect
+  case discover_SERVICES
+  case discover_CHARACTERISTICS
+  case disconnect
+  case done
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension Data {
+  public func checksum() -> Swift.UInt16
+  public func md5() -> Foundation.Data
+  public func sha1() -> Foundation.Data
+  public func sha224() -> Foundation.Data
+  public func sha256() -> Foundation.Data
+  public func sha384() -> Foundation.Data
+  public func sha512() -> Foundation.Data
+  public func sha3(_ variant: LinkaAPIKit.SHA3.Variant) -> Foundation.Data
+  public func crc32(seed: Swift.UInt32? = nil, reflect: Swift.Bool = true) -> Foundation.Data
+  public func crc16(seed: Swift.UInt16? = nil) -> Foundation.Data
+  public func encrypt(cipher: LinkaAPIKit.Cipher) throws -> Foundation.Data
+  public func decrypt(cipher: LinkaAPIKit.Cipher) throws -> Foundation.Data
+  public func authenticate(with authenticator: LinkaAPIKit.Authenticator) throws -> Foundation.Data
+}
+extension Data {
+  public var bytes: Swift.Array<Swift.UInt8> {
+    get
+  }
+  public func toHexString() -> Swift.String
+}
+@objc @_inheritsConvenienceInitializers open class StateTransitionReason : ObjectiveC.NSObject {
+  public static let REASON_NONE: LinkaAPIKit.Byte
+  public static let REASON_KEYPRESS: LinkaAPIKit.Byte
+  public static let REASON_TIMEOUT: LinkaAPIKit.Byte
+  public static let REASON_LIMIT_SW: LinkaAPIKit.Byte
+  public static let REASON_AUTH_REQ: LinkaAPIKit.Byte
+  public static let REASON_PAC_ENTRY: LinkaAPIKit.Byte
+  public static let REASON_PAC_FAIL: LinkaAPIKit.Byte
+  public static let REASON_STARTUP_UNKNOWN: LinkaAPIKit.Byte
+  public static let REASON_TEST_MODE: LinkaAPIKit.Byte
+  public static let REASON_HW_ERR: LinkaAPIKit.Byte
+  public static let REASON_TIMEOUT_EXIT_LOCKED_LIM: LinkaAPIKit.Byte
+  public static let REASON_TIMEOUT_EXIT_UNLOCKED_LIM: LinkaAPIKit.Byte
+  public static let REASON_FAULT: LinkaAPIKit.Byte
+  public static let REASON_STALL: LinkaAPIKit.Byte
+  public static let REASON_BLE_CMD: LinkaAPIKit.Byte
+  public static let REASON_IDLE_TIMEOUT: LinkaAPIKit.Byte
+  public static let REASON_STARTUP_BUTTONPRESS: LinkaAPIKit.Byte
+  public static let REASON_STARTUP_ACCEL1: LinkaAPIKit.Byte
+  public static let REASON_STARTUP_ACCEL2: LinkaAPIKit.Byte
+  public static let REASON_STARTUP_USB: LinkaAPIKit.Byte
+  open class func getTransitionReason(_ reason: LinkaAPIKit.Byte) -> Swift.String
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension String {
+  public func decryptBase64ToString(cipher: LinkaAPIKit.Cipher) throws -> Swift.String
+  public func decryptBase64(cipher: LinkaAPIKit.Cipher) throws -> Swift.Array<Swift.UInt8>
+}
+public typealias Long = Swift.UInt32
+public typealias Byte = Swift.UInt8
+@objc public class LockAdV1 : ObjectiveC.NSObject {
+  public static let ACCEL_RESOLUTION_G_16BIT: (Swift.Double)
+  public static let ACCEL_RESOLUTION_G_8BIT: Swift.Double
+  public static let TEMP_RESOLUTION_C: Swift.Double
+  public static let VLS_FLAG_ALARM_TIP: (Swift.UInt)
+  public static let VLT_TEST_EEPROM: (Swift.UInt)
+  public static let VLT_TEST_ACCEL: (Swift.UInt)
+  public static let VLT_TEST_MOTOR_DRIVER: (Swift.UInt)
+  public static let VLT_TEST_I2CBUSS: (Swift.UInt)
+  public static let VLT_TEST_RADIO: (Swift.UInt)
+  public static let VLT_TEST_ENCRYP: (Swift.UInt)
+  public static let VLT_TEST_CRC: (Swift.UInt)
+  public static let VLT_TEST_BOOTLOADER_PRESENT: (Swift.UInt)
+  public static let VLT_TEST_SETTINGS: (Swift.UInt)
+  public func GetStatusFlags() -> LinkaAPIKit.Long
+  public func GetLockState() -> LinkaAPIKit.LockState
+  public func GetAuthState() -> LinkaAPIKit.AuthState
+  public func GetBatteryVoltage() -> Swift.Double
+  public func GetAccelX() -> Swift.Int
+  public func GetAccelY() -> Swift.Int
+  public func GetAccelZ() -> Swift.Int
+  public func GetAccelX_g() -> Swift.Double
+  public func GetAccelY_g() -> Swift.Double
+  public func GetAccelZ_g() -> Swift.Double
+  public func GetMACAddr_str() -> Swift.String
+  public init(data: [LinkaAPIKit.Byte], offset: Swift.Int)
+  @objc deinit
+  @objc override dynamic public init()
+}
+public protocol _UInt8Type {
+}
+extension UInt8 : LinkaAPIKit._UInt8Type {
+}
+extension UInt8 {
+  public func bits() -> [LinkaAPIKit.Bit]
+  public func bits() -> Swift.String
+}
+final public class MD5 {
+  public init()
+  final public func calculate(for bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  @objc deinit
+}
+extension MD5 : LinkaAPIKit.Updatable {
+  final public func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+}
+public protocol MapContext {
+}
+final public class Map {
+  final public let mappingType: LinkaAPIKit.MappingType
+  final public var JSON: [Swift.String : Any] {
+    get
+  }
+  final public var isKeyPresent: Swift.Bool {
+    get
+  }
+  final public var currentValue: Any? {
+    get
+  }
+  final public var currentKey: Swift.String? {
+    get
+  }
+  final public var nestedKeyDelimiter: Swift.String {
+    get
+  }
+  final public var context: LinkaAPIKit.MapContext?
+  final public var shouldIncludeNilValues: Swift.Bool
+  final public let toObject: Swift.Bool
+  public init(mappingType: LinkaAPIKit.MappingType, JSON: [Swift.String : Any], toObject: Swift.Bool = false, context: LinkaAPIKit.MapContext? = nil, shouldIncludeNilValues: Swift.Bool = false)
+  final public subscript(key: Swift.String) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, delimiter delimiter: Swift.String) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, nested nested: Swift.Bool) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, nested nested: Swift.Bool, delimiter delimiter: Swift.String) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, ignoreNil ignoreNil: Swift.Bool) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, delimiter delimiter: Swift.String, ignoreNil ignoreNil: Swift.Bool) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, nested nested: Swift.Bool, ignoreNil ignoreNil: Swift.Bool) -> LinkaAPIKit.Map {
+    get
+  }
+  final public subscript(key: Swift.String, nested nested: Swift.Bool?, delimiter delimiter: Swift.String, ignoreNil ignoreNil: Swift.Bool) -> LinkaAPIKit.Map {
+    get
+  }
+  final public func value<T>() -> T?
+  @objc deinit
+}
+extension PKCS5 {
+  public struct PBKDF2 {
+    public enum Error : Swift.Error {
+      case invalidInput
+      case derivedKeyTooLong
+      public static func == (a: LinkaAPIKit.PKCS5.PBKDF2.Error, b: LinkaAPIKit.PKCS5.PBKDF2.Error) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    public init(password: Swift.Array<Swift.UInt8>, salt: Swift.Array<Swift.UInt8>, iterations: Swift.Int = 4096, keyLength: Swift.Int? = nil, variant: LinkaAPIKit.HMAC.Variant = .sha256) throws
+    public func calculate() throws -> Swift.Array<Swift.UInt8>
+  }
+}
+open class DateFormatterTransform : LinkaAPIKit.TransformType {
+  public typealias Object = Foundation.Date
+  public typealias JSON = Swift.String
+  final public let dateFormatter: Foundation.DateFormatter
+  public init(dateFormatter: Foundation.DateFormatter)
+  open func transformFromJSON(_ value: Any?) -> Foundation.Date?
+  open func transformToJSON(_ value: Foundation.Date?) -> Swift.String?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class KeychainService : ObjectiveC.NSObject {
+  public class func saveUUID(token: Foundation.NSString)
+  public class func loadUUID() -> Foundation.NSString?
+  @objc deinit
+  @objc override dynamic public init()
+}
+public typealias Callback = ((CoreBluetooth.CBPeripheral, Foundation.NSError?) -> Swift.Void)
+public typealias CallbackRSSI = ((CoreBluetooth.CBPeripheral, Foundation.NSNumber?) -> Swift.Void)
+@objc @_inheritsConvenienceInitializers @objcMembers public class LinkaBLEConnectManager : ObjectiveC.NSObject, LinkaAPIKit.LinkaBLECentralManagerDelegate {
+  @objc public var peripheral: CoreBluetooth.CBPeripheral!
+  @objc public var manager: LinkaAPIKit.LinkaBLECentralManager!
+  public var state: LinkaAPIKit.PairingUpState
+  @objc public var callback_API: LinkaAPIKit.Callback!
+  @objc public var callbackOnLostConnection_API: LinkaAPIKit.Callback!
+  @objc public var callbackOnReadRSSI_API: LinkaAPIKit.CallbackRSSI!
+  @objc public var callbackOnLostConnection: LinkaAPIKit.Callback!
+  @objc public var callbackOnReadRSSI: LinkaAPIKit.CallbackRSSI!
+  @objc public var callback: LinkaAPIKit.Callback!
+  @objc public func startConnect(peripheral: CoreBluetooth.CBPeripheral, callback: LinkaAPIKit.Callback!, callbackOnLostConnection: LinkaAPIKit.Callback!, callbackOnReadRSSI: LinkaAPIKit.CallbackRSSI!)
+  @objc public func startDisconnect(peripheral: CoreBluetooth.CBPeripheral, callback: @escaping (CoreBluetooth.CBPeripheral, Foundation.NSError?) -> Swift.Void)
+  @objc public func stopCommunication()
+  @objc public func kill()
+  @objc public func startRoutine()
+  @objc public func nextRoutine()
+  public func nextRoutine(state: LinkaAPIKit.PairingUpState!)
+  @objc public func connect() -> Swift.Bool
+  @objc public func discoverServices() -> Swift.Bool
+  @objc public func discoverCharacteristics() -> Swift.Bool
+  @objc public func readRSSI() -> Swift.Bool
+  @objc public func disconnect() -> Swift.Bool
+  @objc public func done()
+  @objc public func linka_delegate_instance() -> Swift.AnyObject
+  @objc public func onBLEPoweredOn()
+  @objc public func onBLEPoweredOff()
+  @objc public func onConnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral)
+  @objc public func onDisconnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  @objc public func onFailToConnectPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  @objc public func onRefreshPeripheralObject(peripheral: CoreBluetooth.CBPeripheral, RSSI: Foundation.NSNumber!, error: Foundation.NSError?)
+  @objc public func onRefreshPeripheralServices(peripheral: CoreBluetooth.CBPeripheral)
+  @objc public func onCreateNotificationForPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic, isConnected: Swift.Bool)
+  @objc public func onRefreshPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic)
+  @objc deinit
+  @objc override dynamic public init()
+}
+final public class SHA2 {
+  public enum Variant : Swift.RawRepresentable {
+    case sha224, sha256, sha384, sha512
+    public var digestLength: Swift.Int {
+      get
+    }
+    public var blockSize: Swift.Int {
+      get
+    }
+    public typealias RawValue = Swift.Int
+    public var rawValue: LinkaAPIKit.SHA2.Variant.RawValue {
+      get
+    }
+    public init?(rawValue: LinkaAPIKit.SHA2.Variant.RawValue)
+  }
+  public init(variant: LinkaAPIKit.SHA2.Variant)
+  final public func calculate(for bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  @objc deinit
+}
+extension SHA2 : LinkaAPIKit.Updatable {
+  final public func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+}
+extension Array {
+  public func chunks(size chunksize: Swift.Int) -> Swift.Array<Swift.Array<Element>>
+}
+extension Array where Element == Swift.UInt8 {
+  public init(hex: Swift.String)
+}
+final public class Blowfish {
+  public enum Error : Swift.Error {
+    case dataPaddingRequired
+    case invalidKeyOrInitializationVector
+    case invalidInitializationVector
+    public static func == (a: LinkaAPIKit.Blowfish.Error, b: LinkaAPIKit.Blowfish.Error) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public static let blockSize: Swift.Int
+  public init(key: Swift.Array<Swift.UInt8>, iv: Swift.Array<Swift.UInt8>? = nil, blockMode: LinkaAPIKit.BlockMode = .CBC, padding: LinkaAPIKit.Padding) throws
+  @objc deinit
+}
+extension Blowfish : LinkaAPIKit.Cipher {
+  final public func encrypt<C>(_ bytes: C) throws -> Swift.Array<Swift.UInt8> where C : Swift.Collection, C.Element == Swift.UInt8, C.Index == Swift.Int
+  final public func decrypt<C>(_ bytes: C) throws -> Swift.Array<Swift.UInt8> where C : Swift.Collection, C.Element == Swift.UInt8, C.Index == Swift.Int
+}
+open class DataTransform : LinkaAPIKit.TransformType {
+  public typealias Object = Foundation.Data
+  public typealias JSON = Swift.String
+  public init()
+  open func transformFromJSON(_ value: Any?) -> Foundation.Data?
+  open func transformToJSON(_ value: Foundation.Data?) -> Swift.String?
+  @objc deinit
+}
+public protocol PaddingProtocol {
+  func add(to: Swift.Array<Swift.UInt8>, blockSize: Swift.Int) -> Swift.Array<Swift.UInt8>
+  func remove(from: Swift.Array<Swift.UInt8>, blockSize: Swift.Int?) -> Swift.Array<Swift.UInt8>
+}
+public enum Padding : LinkaAPIKit.PaddingProtocol {
+  case noPadding, zeroPadding, pkcs7, pkcs5
+  public func add(to: Swift.Array<Swift.UInt8>, blockSize: Swift.Int) -> Swift.Array<Swift.UInt8>
+  public func remove(from: Swift.Array<Swift.UInt8>, blockSize: Swift.Int?) -> Swift.Array<Swift.UInt8>
+  public static func == (a: LinkaAPIKit.Padding, b: LinkaAPIKit.Padding) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers public class LinkaBLEPairingUpManager : ObjectiveC.NSObject, LinkaAPIKit.LinkaBLECentralManagerDelegate {
+  public var peripheral: CoreBluetooth.CBPeripheral!
+  public var manager: LinkaAPIKit.LinkaBLECentralManager!
+  public var state: LinkaAPIKit.PairingUpState
+  public var callback: ((CoreBluetooth.CBPeripheral, Foundation.NSError?) -> Swift.Void)!
+  public func startPairingUp(peripheral: CoreBluetooth.CBPeripheral, callback: @escaping (CoreBluetooth.CBPeripheral, Foundation.NSError?) -> Swift.Void)
+  public func connect()
+  public func discoverServices()
+  public func disconnect()
+  public func done()
+  public func linka_delegate_instance() -> Swift.AnyObject
+  public func onBLEPoweredOn()
+  public func onBLEPoweredOff()
+  public func onConnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral)
+  public func onDisconnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  public func onFailToConnectPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  public func onRefreshPeripheralObject(peripheral: CoreBluetooth.CBPeripheral, RSSI: Foundation.NSNumber!, error: Foundation.NSError?)
+  public func onRefreshPeripheralServices(peripheral: CoreBluetooth.CBPeripheral)
+  public func onCreateNotificationForPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic, isConnected: Swift.Bool)
+  public func onRefreshPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic)
+  @objc deinit
+  @objc override dynamic public init()
+}
+public enum BlockMode {
+  case ECB, CBC, PCBC, CFB, OFB, CTR
+  public static func == (a: LinkaAPIKit.BlockMode, b: LinkaAPIKit.BlockMode) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct MapError : Swift.Error {
+  public var key: Swift.String?
+  public var currentValue: Any?
+  public var reason: Swift.String?
+  public var file: Swift.StaticString?
+  public var function: Swift.StaticString?
+  public var line: Swift.UInt?
+  public init(key: Swift.String?, currentValue: Any?, reason: Swift.String?, file: Swift.StaticString? = nil, function: Swift.StaticString? = nil, line: Swift.UInt? = nil)
+}
+extension MapError : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public protocol ImmutableMappable : LinkaAPIKit.BaseMappable {
+  init(map: LinkaAPIKit.Map) throws
+}
+extension ImmutableMappable {
+  public func mapping(map: LinkaAPIKit.Map)
+  public init(JSONString: Swift.String, context: LinkaAPIKit.MapContext? = nil) throws
+  public init(JSON: [Swift.String : Any], context: LinkaAPIKit.MapContext? = nil) throws
+  public init(JSONObject: Any, context: LinkaAPIKit.MapContext? = nil) throws
+}
+extension Map {
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> T
+  final public func value<Transform>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", using transform: Transform, file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> Transform.Object where Transform : LinkaAPIKit.TransformType
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> T where T : Swift.RawRepresentable
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [T] where T : Swift.RawRepresentable
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> T where T : LinkaAPIKit.BaseMappable
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [T] where T : LinkaAPIKit.BaseMappable
+  final public func value<Transform>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", using transform: Transform, file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [Transform.Object] where Transform : LinkaAPIKit.TransformType
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [Swift.String : T] where T : LinkaAPIKit.BaseMappable
+  final public func value<Transform>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", using transform: Transform, file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [Swift.String : Transform.Object] where Transform : LinkaAPIKit.TransformType
+  final public func value<T>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [[T]] where T : LinkaAPIKit.BaseMappable
+  final public func value<Transform>(_ key: Swift.String, nested: Swift.Bool? = nil, delimiter: Swift.String = ".", using transform: Transform, file: Swift.StaticString = #file, function: Swift.StaticString = #function, line: Swift.UInt = #line) throws -> [[Transform.Object]] where Transform : LinkaAPIKit.TransformType
+}
+extension Mapper where N : LinkaAPIKit.ImmutableMappable {
+  final public func map(JSON: [Swift.String : Any]) throws -> N
+  final public func map(JSONString: Swift.String) throws -> N
+  final public func map(JSONObject: Any) throws -> N
+  final public func mapArray(JSONArray: [[Swift.String : Any]]) throws -> [N]
+  final public func mapArray(JSONString: Swift.String) throws -> [N]
+  final public func mapArray(JSONObject: Any) throws -> [N]
+  final public func mapDictionary(JSONString: Swift.String) throws -> [Swift.String : N]
+  final public func mapDictionary(JSONObject: Any?) throws -> [Swift.String : N]
+  final public func mapDictionary(JSON: [Swift.String : [Swift.String : Any]]) throws -> [Swift.String : N]
+  final public func mapDictionaryOfArrays(JSONObject: Any?) throws -> [Swift.String : [N]]
+  final public func mapDictionaryOfArrays(JSON: [Swift.String : [[Swift.String : Any]]]) throws -> [Swift.String : [N]]
+  final public func mapArrayOfArrays(JSONObject: Any?) throws -> [[N]]
+}
+extension String {
+  public func md5() -> Swift.String
+  public func sha1() -> Swift.String
+  public func sha224() -> Swift.String
+  public func sha256() -> Swift.String
+  public func sha384() -> Swift.String
+  public func sha512() -> Swift.String
+  public func sha3(_ variant: LinkaAPIKit.SHA3.Variant) -> Swift.String
+  public func crc32(seed: Swift.UInt32? = nil, reflect: Swift.Bool = true) -> Swift.String
+  public func crc16(seed: Swift.UInt16? = nil) -> Swift.String
+  public func encrypt(cipher: LinkaAPIKit.Cipher) throws -> Swift.String
+  public func encryptToBase64(cipher: LinkaAPIKit.Cipher) throws -> Swift.String?
+  public func authenticate<A>(with authenticator: A) throws -> Swift.String where A : LinkaAPIKit.Authenticator
+}
+public protocol TransformType {
+  associatedtype Object
+  associatedtype JSON
+  func transformFromJSON(_ value: Any?) -> Self.Object?
+  func transformToJSON(_ value: Self.Object?) -> Self.JSON?
+}
+public protocol BaseMappable {
+  mutating func mapping(map: LinkaAPIKit.Map)
+}
+public protocol Mappable : LinkaAPIKit.BaseMappable {
+  init?(map: LinkaAPIKit.Map)
+}
+public protocol StaticMappable : LinkaAPIKit.BaseMappable {
+  static func objectForMapping(map: LinkaAPIKit.Map) -> LinkaAPIKit.BaseMappable?
+}
+extension BaseMappable {
+  public init?(JSONString: Swift.String, context: LinkaAPIKit.MapContext? = nil)
+  public init?(JSON: [Swift.String : Any], context: LinkaAPIKit.MapContext? = nil)
+  public func toJSON() -> [Swift.String : Any]
+  public func toJSONString(prettyPrint: Swift.Bool = false) -> Swift.String?
+}
+extension Array where Element : LinkaAPIKit.BaseMappable {
+  public init?(JSONString: Swift.String, context: LinkaAPIKit.MapContext? = nil)
+  public init(JSONArray: [[Swift.String : Any]], context: LinkaAPIKit.MapContext? = nil)
+  public func toJSON() -> [[Swift.String : Any]]
+  public func toJSONString(prettyPrint: Swift.Bool = false) -> Swift.String?
+}
+extension Set where Element : LinkaAPIKit.BaseMappable {
+  public init?(JSONString: Swift.String, context: LinkaAPIKit.MapContext? = nil)
+  public init?(JSONArray: [[Swift.String : Any]], context: LinkaAPIKit.MapContext? = nil)
+  public func toJSON() -> [[Swift.String : Any]]
+  public func toJSONString(prettyPrint: Swift.Bool = false) -> Swift.String?
+}
+public enum PKCS5 {
+}
+extension DateFormatter {
+  convenience public init(withFormat format: Swift.String, locale: Swift.String)
+}
+open class ISO8601DateTransform : LinkaAPIKit.DateFormatterTransform {
+  public init()
+  @objc deinit
+  override public init(dateFormatter: Foundation.DateFormatter)
+}
+@_inheritsConvenienceInitializers @objcMembers public class LinkaMerchantlockAPIResponseMapping : LinkaAPIKit.LinkaAPIResponse {
+  public var data: LinkaAPIKit.LinkaMerchantlockAPIResponseDataMapping?
+  override public func mapping(map: LinkaAPIKit.Map)
+  @objc deinit
+  required public init?(map: LinkaAPIKit.Map)
+}
+@_inheritsConvenienceInitializers @objcMembers public class LinkaMerchantlockListAPIResponseMapping : LinkaAPIKit.LinkaAPIResponse {
+  public var data: [LinkaAPIKit.LinkaMerchantlockAPIResponseDataMapping]?
+  override public func mapping(map: LinkaAPIKit.Map)
+  @objc deinit
+  required public init?(map: LinkaAPIKit.Map)
+}
+@objcMembers public class LinkaMerchantlockAPIResponseDataMapping : LinkaAPIKit.Mappable {
+  @objc public var _id: Swift.String?
+  @objc public var merchant_id: Swift.String?
+  @objc public var lock_serial_no: Swift.String?
+  public var is_locked: Swift.Bool?
+  public var is_suspended: Swift.Bool?
+  public var is_key_registered: Swift.Bool?
+  public var is_key_revoked: Swift.Bool?
+  @objc public var createdAt: Swift.String?
+  @objc public var modifiedAt: Swift.String?
+  public var removed: Swift.Bool?
+  @objc public var name: Swift.String?
+  public var latitude: Swift.Double?
+  public var longitude: Swift.Double?
+  @objc public var configuration_Settings: [Swift.String : Swift.Int]
+  @objc public var lock_type: Swift.String?
+  @objc public var lastCellPing: Swift.String?
+  @objc public var deploy_state: Swift.String?
+  public var active: Swift.Bool?
+  public var maintenance_required: Swift.Bool?
+  required public init?(map: LinkaAPIKit.Map)
+  public func mapping(map: LinkaAPIKit.Map)
+  @objc deinit
+}
+final public class Rabbit {
+  public enum Error : Swift.Error {
+    case invalidKeyOrInitializationVector
+    public static func == (a: LinkaAPIKit.Rabbit.Error, b: LinkaAPIKit.Rabbit.Error) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public static let ivSize: Swift.Int
+  public static let keySize: Swift.Int
+  public static let blockSize: Swift.Int
+  convenience public init(key: Swift.Array<Swift.UInt8>) throws
+  public init(key: Swift.Array<Swift.UInt8>, iv: Swift.Array<Swift.UInt8>?) throws
+  @objc deinit
+}
+extension Rabbit : LinkaAPIKit.Cipher {
+  final public func encrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  final public func decrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+}
+@objc @_hasMissingDesignatedInitializers public class LockInfoPacket : LinkaAPIKit.LockDataPacket {
+  public var mLockState: LinkaAPIKit.LockState
+  public var m_RSSI: Swift.Int
+  public var mUptime_s: Swift.UInt
+  public var m_nAccel_x: Swift.UInt
+  public var m_nAccel_y: Swift.UInt
+  public var m_nAccel_z: Swift.UInt
+  public var mAccel_x: Swift.Double
+  public var mAccel_y: Swift.Double
+  public var mAccel_z: Swift.Double
+  public var mActivityFlags: Swift.UInt
+  public var mBootloaderVersion: Swift.UInt
+  public var mSpare: Swift.UInt
+  public var m_usCRC: Swift.UInt
+  public func GetLockStateRepresentation() -> Swift.String
+  public func GetLockState() -> LinkaAPIKit.LockState
+  @objc deinit
+}
+public typealias Hash = LinkaAPIKit.Digest
+public struct Digest {
+  public static func md5(_ bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  public static func sha1(_ bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  public static func sha224(_ bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  public static func sha256(_ bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  public static func sha384(_ bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  public static func sha512(_ bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  public static func sha2(_ bytes: Swift.Array<Swift.UInt8>, variant: LinkaAPIKit.SHA2.Variant) -> Swift.Array<Swift.UInt8>
+  public static func sha3(_ bytes: Swift.Array<Swift.UInt8>, variant: LinkaAPIKit.SHA3.Variant) -> Swift.Array<Swift.UInt8>
+}
+public enum PKCS7 {
+}
+public protocol RandomAccessCryptor : LinkaAPIKit.Updatable {
+  @discardableResult
+  mutating func seek(to: Swift.Int) -> Swift.Bool
+}
+final public class Poly1305 : LinkaAPIKit.Authenticator {
+  public enum Error : Swift.Error {
+    case authenticateError
+    public static func == (a: LinkaAPIKit.Poly1305.Error, b: LinkaAPIKit.Poly1305.Error) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public static let blockSize: Swift.Int
+  public init(key: Swift.Array<Swift.UInt8>)
+  final public func authenticate(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers open class SystemFlags : ObjectiveC.NSObject {
+  public static let VLS_FLAG_RADIO_EV: (Swift.UInt)
+  public static let VLS_FLAG_DEVMODE1: (Swift.UInt)
+  public static let VLS_FLAG_CHARGING: (Swift.UInt)
+  public static let VLS_FLAG_CHARGED: (Swift.UInt)
+  public static let VLS_FLAG_BATT_LO: (Swift.UInt)
+  public static let VLS_FLAG_STALL: (Swift.UInt)
+  public static let VLS_FLAG_ALARM_BUMP: (Swift.UInt)
+  public static let VLS_FLAG_ALARM_TEMP: (Swift.UInt)
+  public static let VLS_FLAG_ALERT: (Swift.UInt)
+  public static let VLS_FLAG_ALARM_TIP: (Swift.UInt)
+  public static let VLS_FLAG_CONNECTED: (Swift.UInt)
+  public static let VLS_FLAG_HFCLK: (Swift.UInt)
+  public static let VLS_FLAG_CYCLE_TEST_MODE: (Swift.UInt)
+  public static let VLS_FLAG_1S_ACCEL_LO_ACTIVITY: (Swift.UInt)
+  public static let VLS_FLAG_HALL_ANOMALY: (Swift.UInt)
+  public static let VLS_FLAG_ALARM_HAMMER: (Swift.UInt)
+  public static let VLS_FLAG_ALARM_JOSTLE: (Swift.UInt)
+  public static let VLS_FLAG_SIREN_ACTIVE: (Swift.UInt)
+  public static let VLS_FLAG_INVALID_PAC: (Swift.UInt)
+  public static let VLS_FLAG_BAD_PAC_ENTRY: (Swift.UInt)
+  public static let VLS_FLAG_BEEPER_ACTIVE: (Swift.UInt)
+  public static let VLS_FLAG_ACCEL_SUPPRESS: (Swift.UInt)
+  public static let VLS_FLAG_LOW_TEMP: (Swift.UInt)
+  public static let VLS_FLAG_BOND_REQ: (Swift.UInt)
+  public static let VLS_FLAG_ENC_V2: (Swift.UInt)
+  public static let VLS_FLAG_ENC_V3: (Swift.UInt)
+  public static let VLS_FLAG_PENDING_SLEEP: (Swift.UInt)
+  public static let VLS_FLAG_IGNORE_HALL: (Swift.UInt)
+  public static let VLS_FLAG_ES_BRIDGE: (Swift.UInt)
+  public static let VLS_FLAG_RFIDMODE: (Swift.UInt)
+  public static let VLS_FLAG_48VCONV: (Swift.UInt)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_hasMissingDesignatedInitializers public class LockDataPacket : ObjectiveC.NSObject {
+  public class func updatePacketCrc(packet: [LinkaAPIKit.Byte]!) -> [LinkaAPIKit.Byte]
+  public func setPacketCrc(crc: Swift.UInt)
+  public func getPacketCrc() -> Swift.UInt
+  public class func getPacketCrc(packet: [LinkaAPIKit.Byte]!) -> Swift.UInt
+  public class func checkPacketCRC(packet: [LinkaAPIKit.Byte]!) -> Swift.Bool
+  public func getPayload() -> [LinkaAPIKit.Byte]
+  public static func sBytesToULONG(lsb: LinkaAPIKit.Byte, _b1: LinkaAPIKit.Byte, _b2: LinkaAPIKit.Byte, msb: LinkaAPIKit.Byte) -> Swift.UInt32
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension AES {
+  convenience public init(key: Swift.String, iv: Swift.String, blockMode: LinkaAPIKit.BlockMode = .CBC, padding: LinkaAPIKit.Padding = .pkcs7) throws
+}
+extension HMAC {
+  convenience public init(key: Swift.String, variant: LinkaAPIKit.HMAC.Variant = .md5) throws
+}
+public enum MappingType {
+  case fromJSON
+  case toJSON
+  public static func == (a: LinkaAPIKit.MappingType, b: LinkaAPIKit.MappingType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+final public class Mapper<N> where N : LinkaAPIKit.BaseMappable {
+  final public var context: LinkaAPIKit.MapContext?
+  final public var shouldIncludeNilValues: Swift.Bool
+  public init(context: LinkaAPIKit.MapContext? = nil, shouldIncludeNilValues: Swift.Bool = false)
+  final public func map(JSONObject: Any?, toObject object: N) -> N
+  final public func map(JSONString: Swift.String, toObject object: N) -> N
+  final public func map(JSON: [Swift.String : Any], toObject object: N) -> N
+  final public func map(JSONString: Swift.String) -> N?
+  final public func map(JSONObject: Any?) -> N?
+  final public func map(JSON: [Swift.String : Any]) -> N?
+  final public func mapArray(JSONString: Swift.String) -> [N]?
+  final public func mapArray(JSONObject: Any?) -> [N]?
+  final public func mapArray(JSONArray: [[Swift.String : Any]]) -> [N]
+  final public func mapDictionary(JSONString: Swift.String) -> [Swift.String : N]?
+  final public func mapDictionary(JSONObject: Any?) -> [Swift.String : N]?
+  final public func mapDictionary(JSON: [Swift.String : [Swift.String : Any]]) -> [Swift.String : N]?
+  final public func mapDictionary(JSONObject: Any?, toDictionary dictionary: [Swift.String : N]) -> [Swift.String : N]
+  final public func mapDictionary(JSON: [Swift.String : [Swift.String : Any]], toDictionary dictionary: [Swift.String : N]) -> [Swift.String : N]
+  final public func mapDictionaryOfArrays(JSONObject: Any?) -> [Swift.String : [N]]?
+  final public func mapDictionaryOfArrays(JSON: [Swift.String : [[Swift.String : Any]]]) -> [Swift.String : [N]]?
+  final public func mapArrayOfArrays(JSONObject: Any?) -> [[N]]?
+  public static func parseJSONStringIntoDictionary(JSONString: Swift.String) -> [Swift.String : Any]?
+  public static func parseJSONString(JSONString: Swift.String) -> Any?
+  @objc deinit
+}
+extension Mapper {
+  final public func map(JSONfile: Swift.String) -> N?
+  final public func mapArray(JSONfile: Swift.String) -> [N]?
+}
+extension Mapper {
+  final public func toJSON(_ object: N) -> [Swift.String : Any]
+  final public func toJSONArray(_ array: [N]) -> [[Swift.String : Any]]
+  final public func toJSONDictionary(_ dictionary: [Swift.String : N]) -> [Swift.String : [Swift.String : Any]]
+  final public func toJSONDictionaryOfArrays(_ dictionary: [Swift.String : [N]]) -> [Swift.String : [[Swift.String : Any]]]
+  final public func toJSONString(_ object: N, prettyPrint: Swift.Bool = false) -> Swift.String?
+  final public func toJSONString(_ array: [N], prettyPrint: Swift.Bool = false) -> Swift.String?
+  public static func toJSONString(_ JSONObject: Any, prettyPrint: Swift.Bool) -> Swift.String?
+  public static func toJSONData(_ JSONObject: Any, options: Foundation.JSONSerialization.WritingOptions) -> Foundation.Data?
+}
+extension Mapper where N : Swift.Hashable {
+  final public func mapSet(JSONString: Swift.String) -> Swift.Set<N>?
+  final public func mapSet(JSONObject: Any?) -> Swift.Set<N>?
+  final public func mapSet(JSONArray: [[Swift.String : Any]]) -> Swift.Set<N>
+  final public func toJSONSet(_ set: Swift.Set<N>) -> [[Swift.String : Any]]
+  final public func toJSONString(_ set: Swift.Set<N>, prettyPrint: Swift.Bool = false) -> Swift.String?
+}
+@objcMembers public class LinkaAPIResponse : LinkaAPIKit.Mappable {
+  @objc public var status: Swift.String?
+  @objc public var message: Swift.String?
+  @objc public var statusCode: Swift.Int
+  required public init?(map: LinkaAPIKit.Map)
+  public func mapping(map: LinkaAPIKit.Map)
+  @objc deinit
+}
+public enum PRIV_LEVEL : Swift.UInt8 {
+  case priv_NONE
+  case priv_ADMIN
+  case priv_USER
+  public typealias RawValue = Swift.UInt8
+  public init?(rawValue: Swift.UInt8)
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+final public class AES {
+  public enum Error : Swift.Error {
+    case dataPaddingRequired
+    case invalidKeyOrInitializationVector
+    case invalidInitializationVector
+    case invalidData
+    public static func == (a: LinkaAPIKit.AES.Error, b: LinkaAPIKit.AES.Error) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public enum Variant : Swift.Int {
+    case aes128, aes192, aes256
+    public typealias RawValue = Swift.Int
+    public init?(rawValue: Swift.Int)
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public static let blockSize: Swift.Int
+  final public var variant: LinkaAPIKit.AES.Variant {
+    get
+  }
+  public init(key: Swift.Array<Swift.UInt8>, iv: Swift.Array<Swift.UInt8>? = nil, blockMode: LinkaAPIKit.BlockMode = .CBC, padding: LinkaAPIKit.Padding = .pkcs7) throws
+  @objc deinit
+}
+extension AES {
+  public struct Encryptor : LinkaAPIKit.Updatable {
+    public mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+  }
+}
+extension AES {
+  public struct Decryptor : LinkaAPIKit.RandomAccessCryptor {
+    public mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+    @discardableResult
+    public mutating func seek(to position: Swift.Int) -> Swift.Bool
+  }
+}
+extension AES : LinkaAPIKit.Cryptors {
+  final public func makeEncryptor() -> LinkaAPIKit.AES.Encryptor
+  final public func makeDecryptor() -> LinkaAPIKit.AES.Decryptor
+  public typealias EncryptorType = LinkaAPIKit.AES.Encryptor
+  public typealias DecryptorType = LinkaAPIKit.AES.Decryptor
+}
+extension AES : LinkaAPIKit.Cipher {
+  final public func encrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  final public func decrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+}
+open class CustomDateFormatTransform : LinkaAPIKit.DateFormatterTransform {
+  public init(formatString: Swift.String)
+  @objc deinit
+  override public init(dateFormatter: Foundation.DateFormatter)
+}
+public typealias OnFetchLockStatusPacket_API = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockStatusPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchLockSettingPacket_API = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockSettingPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchLockContextPacket_API = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockContextPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchLockInfoPacket_API = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockInfoPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchFirmwareVersion_API = (Swift.String) -> (Swift.Void)
+public typealias OnFetchLockStatusPacket = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockStatusPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchLockSettingPacket = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockSettingPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchLockContextPacket = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockContextPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnFetchLockInfoPacket = (CoreBluetooth.CBPeripheral, LinkaAPIKit.LockInfoPacket?, Foundation.NSError?) -> (Swift.Void)
+public typealias OnLockSettled = () -> (Swift.Void)
+public typealias OnLockBlocked = (CoreBluetooth.CBPeripheral) -> Swift.Void
+@_hasMissingDesignatedInitializers public class AccelerometerSensitivitySetting {
+  public static let ACCEL_SENSITIVITY_EXTRA_SENSITIVE: Swift.Int
+  public static let ACCEL_SENSITIVITY_OFF: Swift.Int
+  public static let ACCEL_SENSITIVITY_LEO_NEW_FIRMWARE: Swift.Int
+  public static let ACCEL_SENSITIVITY_NORMAL: Swift.Int
+  @objc deinit
+}
+@objc @objcMembers public class LinkaBLECommunicationManager : ObjectiveC.NSObject, LinkaAPIKit.LinkaBLECentralManagerDelegate, CoreLocation.CLLocationManagerDelegate {
+  @objc public func getFwVersionNumber() -> Swift.Double
+  @objc public var peripheral: CoreBluetooth.CBPeripheral!
+  @objc public var onFetchLockStatusPacket_API: LinkaAPIKit.OnFetchLockStatusPacket_API!
+  @objc public var onFetchLockSettingPacket_API: LinkaAPIKit.OnFetchLockSettingPacket_API!
+  @objc public var onFetchLockContextPacket_API: LinkaAPIKit.OnFetchLockContextPacket_API!
+  @objc public var onFetchLockInfoPacket_API: LinkaAPIKit.OnFetchLockInfoPacket_API!
+  @objc public var onFetchLockTamperWarning_API: LinkaAPIKit.OnFetchLockStatusPacket_API!
+  @objc public var onFetchLockBatteryLowWarning_API: LinkaAPIKit.OnFetchLockStatusPacket_API!
+  @objc public var onFetchLockBatteryCriticallyLowWarning_API: LinkaAPIKit.OnFetchLockStatusPacket_API!
+  @objc public var onFetchFirmwareVersion_API: LinkaAPIKit.OnFetchFirmwareVersion_API!
+  @objc public var onLockBlocked_API: LinkaAPIKit.OnLockBlocked?
+  @objc public var onFetchLockStatusPacket: LinkaAPIKit.OnFetchLockStatusPacket!
+  @objc public var onFetchLockSettingPacket: LinkaAPIKit.OnFetchLockSettingPacket!
+  @objc public var onFetchLockContextPacket: LinkaAPIKit.OnFetchLockContextPacket!
+  @objc public var onFetchLockInfoPacket: LinkaAPIKit.OnFetchLockInfoPacket!
+  @objc public var onFetchLockTamperWarning: LinkaAPIKit.OnFetchLockStatusPacket!
+  @objc public var onFetchLockBatteryLowWarning: LinkaAPIKit.OnFetchLockStatusPacket!
+  @objc public var onFetchLockBatteryCriticallyLowWarning: LinkaAPIKit.OnFetchLockStatusPacket!
+  @objc public var onLockSettled: LinkaAPIKit.OnLockSettled!
+  @objc public var output: Swift.String
+  @objc public var isButtonUsedForLocking: Swift.Bool
+  @objc public var isEncryptionCounterValid: Swift.Bool
+  public enum AlarmSensitivity {
+    case GARAGE
+    case SUBURBAN
+    case METRO
+    public static func == (a: LinkaAPIKit.LinkaBLECommunicationManager.AlarmSensitivity, b: LinkaAPIKit.LinkaBLECommunicationManager.AlarmSensitivity) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  @objc public init(isDebug: Swift.Bool, view: UIKit.UIView!)
+  @objc public init(isDebug: Swift.Bool, view: UIKit.UIView!, masterKey: [LinkaAPIKit.Byte]!, keyIndex: Swift.UInt)
+  public init(isDebug: Swift.Bool, view: UIKit.UIView!, subKey: [LinkaAPIKit.Byte]!, keyIndex: Swift.UInt, priv_level: LinkaAPIKit.PRIV_LEVEL)
+  @objc public func startCommunication(peripheral: CoreBluetooth.CBPeripheral, onFetchLockStatusPacket_API: LinkaAPIKit.OnFetchLockStatusPacket_API!, onFetchLockSettingPacket_API: LinkaAPIKit.OnFetchLockSettingPacket_API!, onFetchLockContextPacket_API: LinkaAPIKit.OnFetchLockContextPacket_API!, onFetchLockInfoPacket_API: LinkaAPIKit.OnFetchLockInfoPacket_API!, onFetchLockTamperWarning_API: LinkaAPIKit.OnFetchLockStatusPacket_API!, onFetchLockBatteryLowWarning_API: LinkaAPIKit.OnFetchLockStatusPacket_API!, onFetchLockBatteryCriticallyLowWarning_API: LinkaAPIKit.OnFetchLockStatusPacket_API!, onFetchFirmwareVersion_API: LinkaAPIKit.OnFetchFirmwareVersion_API!, onFetchLockStatusPacket: LinkaAPIKit.OnFetchLockStatusPacket!, onFetchLockSettingPacket: LinkaAPIKit.OnFetchLockSettingPacket!, onFetchLockContextPacket: LinkaAPIKit.OnFetchLockContextPacket!, onFetchLockInfoPacket: LinkaAPIKit.OnFetchLockInfoPacket!, onFetchLockTamperWarning: LinkaAPIKit.OnFetchLockStatusPacket!, onFetchLockBatteryLowWarning: LinkaAPIKit.OnFetchLockStatusPacket!, onFetchLockBatteryCriticallyLowWarning: LinkaAPIKit.OnFetchLockStatusPacket!, onLockSettled: LinkaAPIKit.OnLockSettled!)
+  @objc public func stopCommunication()
+  @objc public func doAction_SetUnlockedBumpThreshold(shouldAllowLockingMovement: Swift.Int) -> Swift.Bool
+  public func doSetAlarmSensitivity(sensitivity: LinkaAPIKit.LinkaBLECommunicationManager.AlarmSensitivity) -> Swift.Bool
+  @objc public func doAction_Bond() -> Swift.Bool
+  @objc public func doAction_Lock() -> Swift.Bool
+  @objc public func doAction_Unlock() -> Swift.Bool
+  @objc public func clearEncryptedPacketQueue()
+  @objc public func doAction_setTrackDuration(duration: Swift.Int) -> Swift.Bool
+  @objc public func doAction_StartTracking() -> Swift.Bool
+  @objc public func doAction_StopTracking() -> Swift.Bool
+  @objc public func doAction_FwUpg() -> Swift.Bool
+  @objc public func doAction_Authenticate() -> Swift.Bool
+  @objc public func doAction_ReadAudioSetting() -> Swift.Bool
+  @objc public func doRead_GpsOffSetting() -> Swift.Bool
+  @objc public func doAction_ReadKeyfob() -> Swift.Bool
+  @objc public func doAction_WriteKeyfob(keyfob: Swift.UInt64, uuid0: Swift.UInt64, uuid1: Swift.UInt64, major: Swift.Int, minor: Swift.Int)
+  @objc public func doAction_WriteAudioSetting(setting: Swift.Int) -> Swift.Bool
+  @objc public func doAction_Tune() -> Swift.Bool
+  @objc public func doAction_Sleep() -> Swift.Bool
+  @objc public func doAction_GetPasscode() -> Swift.Bool
+  @objc public func doAction_SetPasscode(passcode: Swift.String) -> Swift.Bool
+  @objc public func doAction_GetLockSleep() -> Swift.Bool
+  @objc public func doAction_SetLockSleep(sleepSeconds: Swift.String) -> Swift.Bool
+  @objc public func doAction_GetUnlockedDisconnectedSleep() -> Swift.Bool
+  @objc public func doAction_SetUnlockedDisconnectedSleep(sleepSeconds: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetTheftInterval(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetTheftDuration(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetUnlockInterval(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetLockInterval(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetLoopControl(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetGnssMode(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetGnssFilter(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetStatePing(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetFullGps(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetUnlockBattery(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetLockBattery(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetDisconnectedLock(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetNetworkCode(setting: Swift.Int) -> Swift.Bool
+  @objc public func doAction_SetMotorSpeed(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetModemType(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetVolume(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetGpsOffBatteryPercent(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetAssistNow(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetPeriodAInterval(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetPeriodBInterval(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetPeriodAStart(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetPeriodBStart(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetSleepBattery(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetAutolock(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_SetGeoblock(setting: Swift.String) -> Swift.Bool
+  @objc public func doAction_GetActuations() -> Swift.Bool
+  @objc public func doAction_deleteAllBonds(callback: ((Swift.Bool) -> (Swift.Bool))! = nil) -> Swift.Bool
+  @objc public func doAction_stop() -> Swift.Bool
+  @objc public func doAction_siren() -> Swift.Bool
+  @objc public func doAction_activate() -> Swift.Bool
+  @objc public func emptyEncryptedSettingsQueue()
+  @objc public func processEncryptionSettingsQueue()
+  @objc public func linka_delegate_instance() -> Swift.AnyObject
+  @objc public func onBLEPoweredOn()
+  @objc public func onBLEPoweredOff()
+  @objc public func onConnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral)
+  @objc public func onDisconnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  @objc public func onFailToConnectPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  @objc public func onRefreshPeripheralObject(peripheral: CoreBluetooth.CBPeripheral, RSSI: Foundation.NSNumber!, error: Foundation.NSError?)
+  @objc public func onRefreshPeripheralServices(peripheral: CoreBluetooth.CBPeripheral)
+  @objc public func onCreateNotificationForPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic, isConnected: Swift.Bool)
+  @objc public func onRefreshPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum UserCommand : Swift.Int, Swift.Codable {
+  case lock, unLock, none
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum AudioSetting : Swift.Int {
+  case off = 0
+  case on = 3
+  case siren_only = 1
+  case tones_only = 2
+  case none = -1
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol LockConnectionServiceDelegate : AnyObject {
+  @objc func onPairingUp()
+  @objc func onPairingSuccess()
+  @objc func onScanFound()
+  @objc func onConnected()
+  @objc func onBatteryPercent(batteryPercent: Swift.Int)
+  @objc func onUnlockStarted()
+  @objc func onLockStarted()
+  @objc func onLock()
+  @objc func onUnlock()
+  @objc func errorInternetOff()
+  @objc func errorBluetoothOff()
+  @objc func errorAppNotInForeground()
+  @objc func errorInvalidAccessToken()
+  @objc func errorMacAddress(errorMsg: Swift.String)
+  @objc func errorConnectionTimeout()
+  @objc func errorScanningTimeout()
+  @objc func errorLockMoving(tryAgainCompletion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc func errorLockStall(tryAgainCompletion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc func errorLockJam()
+  @objc func errorUnexpectedDisconnect()
+  @objc func errorLockingTimeout(tryAgainCompletion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc func errorUnlockingTimeout(tryAgainCompletion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc func onQueryLocked(completionHandler: @escaping (Swift.Bool) -> Swift.Void)
+  @objc func onQueryUnlocked(completionHandler: @escaping (Swift.Bool) -> Swift.Void)
+}
+@objc @_inheritsConvenienceInitializers public class LockConnectionService : ObjectiveC.NSObject, LinkaAPIKit.LinkaBLECentralManagerDiscoverDelegate {
+  public var lockController: LinkaAPIKit.LockController?
+  public var timeoutInterval: Swift.Double
+  public static let sharedInstance: LinkaAPIKit.LockConnectionService
+  public static var lockInfoPacket: LinkaAPIKit.LockInfoPacket!
+  public static var lockContextPacket: LinkaAPIKit.LockContextPacket!
+  public var command: LinkaAPIKit.UserCommand
+  public var lockLocked: Swift.Bool
+  public var lockUnlocked: Swift.Bool
+  public var hasFoundDevice: Swift.Bool
+  public var alreadyHasLockController: Swift.Bool
+  public var write_setting_unlocked_sleep: Swift.Int
+  public var write_setting_locked_sleep: Swift.Int
+  public var write_setting_audio: LinkaAPIKit.AudioSetting
+  public var linka: LinkaAPIKit.Linka
+  public func intialize()
+  public class func tryDeclareOwnerShip(_ p: LinkaAPIKit.DiscoveredPeripherals, completion: @escaping ((Swift.String, Swift.Bool) -> Swift.Void))
+  public func doLockWithNumber(lockNum: Swift.String, delegate: LinkaAPIKit.LockConnectionServiceDelegate? = nil) -> Swift.Bool
+  public func doUnlockWithNumber(lockNum: Swift.String, delegate: LinkaAPIKit.LockConnectionServiceDelegate? = nil) -> Swift.Bool
+  public func doQueryWithNumber(lockNum: Swift.String, delegate: LinkaAPIKit.LockConnectionServiceDelegate? = nil) -> Swift.Bool
+  public func doLock(macAddress: Swift.String, delegate: LinkaAPIKit.LockConnectionServiceDelegate? = nil) -> Swift.Bool
+  public func doUnLock(macAddress: Swift.String, delegate: LinkaAPIKit.LockConnectionServiceDelegate? = nil) -> Swift.Bool
+  public func doQuery(macAddress: Swift.String, delegate: LinkaAPIKit.LockConnectionServiceDelegate? = nil) -> Swift.Bool
+  public func linka_discover_delegate_instance() -> Swift.AnyObject
+  public func onDiscoverNewPeripheral(discoveredPeripheral: LinkaAPIKit.DiscoveredPeripherals)
+  public func disconnectWithExistingController()
+  @objc deinit
+  @objc override dynamic public init()
+}
+@_hasMissingDesignatedInitializers @objcMembers public class DiscoveredPeripherals {
+  @objc public var peripheral: CoreBluetooth.CBPeripheral!
+  @objc public var advertisementData: [Swift.String : Swift.AnyObject]
+  @objc public var RSSI: Foundation.NSNumber!
+  @objc public var lockAd: LinkaAPIKit.LockAdV1!
+  @objc public func getName() -> Swift.String
+  @objc deinit
+}
+public protocol LinkaBLECentralManagerDiscoverDelegate : AnyObject {
+  func linka_discover_delegate_instance() -> Swift.AnyObject
+  func onDiscoverNewPeripheral(discoveredPeripheral: LinkaAPIKit.DiscoveredPeripherals)
+}
+public protocol LinkaBLECentralManagerDelegate : AnyObject {
+  func linka_delegate_instance() -> Swift.AnyObject
+  func onBLEPoweredOn()
+  func onBLEPoweredOff()
+  func onConnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral)
+  func onDisconnectToPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  func onFailToConnectPeripheral(peripheral: CoreBluetooth.CBPeripheral, error: Foundation.NSError?)
+  func onRefreshPeripheralObject(peripheral: CoreBluetooth.CBPeripheral, RSSI: Foundation.NSNumber!, error: Foundation.NSError?)
+  func onRefreshPeripheralServices(peripheral: CoreBluetooth.CBPeripheral)
+  func onCreateNotificationForPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic, isConnected: Swift.Bool)
+  func onRefreshPeripheralCharacteristic(peripheral: CoreBluetooth.CBPeripheral, characteristic: CoreBluetooth.CBCharacteristic)
+}
+@objc @_inheritsConvenienceInitializers public class LinkaBLECentralManager : ObjectiveC.NSObject, CoreBluetooth.CBCentralManagerDelegate, CoreBluetooth.CBPeripheralDelegate {
+  public func migrateDatabase()
+  public class func sharedInstance() -> LinkaAPIKit.LinkaBLECentralManager
+  public class func newInstance() -> LinkaAPIKit.LinkaBLECentralManager
+  public var showDebugLog: Swift.Bool
+  public var centralManager: CoreBluetooth.CBCentralManager!
+  public var isPoweredOn: Swift.Bool
+  public var scannedPeripherals: [LinkaAPIKit.DiscoveredPeripherals]
+  public var delegates: [LinkaAPIKit.LinkaBLECentralManagerDelegate]
+  public var discover_delegates: [LinkaAPIKit.LinkaBLECentralManagerDiscoverDelegate]
+  public func addDelegate(delegate: LinkaAPIKit.LinkaBLECentralManagerDelegate)
+  public func removeDelegate(delegate: LinkaAPIKit.LinkaBLECentralManagerDelegate)
+  public func addDiscoverDelegate(delegate: LinkaAPIKit.LinkaBLECentralManagerDiscoverDelegate)
+  public func removeDiscoverDelegate(delegate: LinkaAPIKit.LinkaBLECentralManagerDiscoverDelegate)
+  public func isBluetoothAuthorized() -> Swift.Bool
+  public func retrieveFromUUIDs(UUIDS: [Foundation.NSUUID]) -> [CoreBluetooth.CBPeripheral]
+  public func retrieve() -> [CoreBluetooth.CBPeripheral]
+  public func retrieveConnectedPeripherals() -> [CoreBluetooth.CBPeripheral]
+  public func startScan()
+  public func stopScan()
+  public func connect(peripheral: CoreBluetooth.CBPeripheral)
+  public func disconnect(peripheral: CoreBluetooth.CBPeripheral)
+  public func discoverServices(peripheral: CoreBluetooth.CBPeripheral)
+  public func discoverAllCharacteristics(peripheral: CoreBluetooth.CBPeripheral)
+  public func readRSSI(peripheral: CoreBluetooth.CBPeripheral)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didWriteValueFor characteristic: CoreBluetooth.CBCharacteristic, error: Swift.Error?)
+  @objc public func centralManager(_ central: CoreBluetooth.CBCentralManager, willRestoreState dict: [Swift.String : Any])
+  @objc public func centralManagerDidUpdateState(_ central: CoreBluetooth.CBCentralManager)
+  @objc public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDiscover peripheral: CoreBluetooth.CBPeripheral, advertisementData: [Swift.String : Any], rssi RSSI: Foundation.NSNumber)
+  @objc public func centralManager(_ central: CoreBluetooth.CBCentralManager, didConnect peripheral: CoreBluetooth.CBPeripheral)
+  @objc public func centralManager(_ central: CoreBluetooth.CBCentralManager, didDisconnectPeripheral peripheral: CoreBluetooth.CBPeripheral, error: Swift.Error?)
+  @objc public func centralManager(_ central: CoreBluetooth.CBCentralManager, didFailToConnect peripheral: CoreBluetooth.CBPeripheral, error: Swift.Error?)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverServices error: Swift.Error?)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverCharacteristicsFor service: CoreBluetooth.CBService, error: Swift.Error?)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didDiscoverDescriptorsFor characteristic: CoreBluetooth.CBCharacteristic, error: Swift.Error?)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateNotificationStateFor characteristic: CoreBluetooth.CBCharacteristic, error: Swift.Error?)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didUpdateValueFor characteristic: CoreBluetooth.CBCharacteristic, error: Swift.Error?)
+  @objc public func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, didReadRSSI RSSI: Foundation.NSNumber, error: Swift.Error?)
+  @objc deinit
+  @objc override dynamic public init()
+}
+public protocol LinkaAPIProtocol : AnyObject {
+  func Linka_locationManager() -> CoreLocation.CLLocationManager!
+  func LinkaMerchantAPI_getAPIKey() -> Swift.String!
+  func LinkaMerchantAPI_getSecretKey() -> Swift.String!
+  func LinkaMerchantAPI_UserEmail() -> Swift.String?
+  func LinkaMerchantAPI_getIsButtonUsed() -> Swift.Bool
+}
+extension LinkaAPIProtocol {
+  public func LinkaMerchantAPI_UserEmail() -> Swift.String?
+}
+public protocol Authenticator {
+  func authenticate(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+}
+infix operator <- : DefaultPrecedence
+infix operator >>> : DefaultPrecedence
+public func <- <T>(left: inout T, right: LinkaAPIKit.Map)
+public func >>> <T>(left: T, right: LinkaAPIKit.Map)
+public func <- <T>(left: inout T?, right: LinkaAPIKit.Map)
+public func >>> <T>(left: T?, right: LinkaAPIKit.Map)
+public func <- <T>(left: inout T, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: T, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout T?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: T?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Dictionary<Swift.String, T>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Dictionary<Swift.String, T>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Dictionary<Swift.String, T>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Dictionary<Swift.String, T>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Dictionary<Swift.String, [T]>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Dictionary<Swift.String, [T]>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Dictionary<Swift.String, [T]>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Dictionary<Swift.String, [T]>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Array<T>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Array<T>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Array<T>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Array<T>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Array<Swift.Array<T>>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Array<Swift.Array<T>>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Array<Swift.Array<T>>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func >>> <T>(left: Swift.Array<Swift.Array<T>>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable
+public func <- <T>(left: inout Swift.Set<T>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable, T : Swift.Hashable
+public func >>> <T>(left: Swift.Set<T>, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable, T : Swift.Hashable
+public func <- <T>(left: inout Swift.Set<T>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable, T : Swift.Hashable
+public func >>> <T>(left: Swift.Set<T>?, right: LinkaAPIKit.Map) where T : LinkaAPIKit.BaseMappable, T : Swift.Hashable
+@objc @_inheritsConvenienceInitializers public class ConfigurationSettings : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct CRC16 {
+  public typealias CRCType = Swift.UInt16
+  public var crc: LinkaAPIKit.CRC16.CRCType! {
+    get
+  }
+  public init()
+  public static func accumulate(_ buffer: Swift.UnsafeBufferPointer<Swift.UInt8>, crc: LinkaAPIKit.CRC16.CRCType = 0xFFFF) -> LinkaAPIKit.CRC16.CRCType
+  public mutating func accumulate(_ buffer: Swift.UnsafeBufferPointer<Swift.UInt8>)
+}
+extension CRC16 {
+  public mutating func accumulate(_ bytes: [Swift.UInt8])
+  public mutating func accumulate(_ string: Swift.String)
+}
+@objc @_hasMissingDesignatedInitializers public class LockStatusPacket : LinkaAPIKit.LockDataPacket {
+  public func GetLockStateRepresentation() -> Swift.String
+  public func GetAuthStateRepresentation() -> Swift.String
+  public func GetTransitionReason() -> LinkaAPIKit.Byte
+  public func GetTransitionReasonLocalized() -> Swift.String
+  public func GetTransitionReasonPrev() -> LinkaAPIKit.Byte
+  public func GetTransitionReasonPrevLocalized() -> Swift.String
+  public func GetBatteryVoltage() -> Swift.Double
+  public func GetBatteryPercent() -> LinkaAPIKit.Byte
+  public func GetBatteryPercentRaw() -> Swift.Double
+  public func GetStateFlags() -> Swift.UInt
+  public func GetStateFlagsRepresentation() -> Swift.String
+  public func GetStatusFlags() -> Swift.UInt
+  public func GetCurrent_mA() -> LinkaAPIKit.Byte
+  public func GetLockState() -> LinkaAPIKit.LockState
+  public func GetTamperState() -> Swift.UInt
+  public func GetHvBoard() -> Swift.UInt
+  public func GetAuthState() -> LinkaAPIKit.AuthState
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers public class LockSettingPacket : LinkaAPIKit.LockDataPacket {
+  public static let VLSO_SETTING_LOCK_ID: Swift.Int
+  public static let VLSO_SETTING_LOCK_PAC_CODE: Swift.Int
+  public static let VLSO_SETTING_LOCK_ACTUATIONS: Swift.Int
+  public static let VLSO_SETTING_LOCK_ERRORS: Swift.Int
+  public static let VLSO_SETTING_LOCK_MODE: Swift.Int
+  public static let VLSO_SETTING_STALL_MA: Swift.Int
+  public static let VLSO_SETTING_ACCEL_LOCK_TH: Swift.Int
+  public static let VLSO_SETTING_ALARM_DELAY_S: Swift.Int
+  public static let VLSO_SETTING_ALARM_TIMEOUT_S: Swift.Int
+  public static let VLSO_SETTING_LAST_STATE: Swift.Int
+  public static let VLSO_SETTING_BUMP_TH_MG: Swift.Int
+  public static let VLSO_SETTING_RSSI_UNLOCK_MIN: Swift.Int
+  public static let VLSO_SETTING_AUDIO: Swift.Int
+  public static let VLSO_SETTING_PULSE_TH_MG: Swift.Int
+  public static let VLSO_SETTING_JOSTLE_100MS: Swift.Int
+  public static let VLSO_SETTING_LOCKED_SLEEP_S: Swift.Int
+  public static let VLSO_SETTING_MK1_0: Swift.Int
+  public static let VLSO_SETTING_MK1_1: Swift.Int
+  public static let VLSO_SETTING_MK2_0: Swift.Int
+  public static let VLSO_SETTING_MK2_1: Swift.Int
+  public static let VLSO_SETTING_ROLL_ALRM_DEG: Swift.Int
+  public static let VLSO_SETTING_PITCH_ALRM_DEG: Swift.Int
+  public static let VLSO_SETTING_BL_ENB_FLAGS: Swift.Int
+  public static let VLSO_SETTING_ALARM_DURATION_S: Swift.Int
+  public static let VLSO_SETTING_ACT_BLOCK_LOCK_S: Swift.Int
+  public static let VLSO_SETTING_SIREN_BLOCK_ACT: Swift.Int
+  public static let VLSO_SET_ACC_POST_LOCK_DELAY_S: Swift.Int
+  public static let VLSO_SET_STALL_IGNORE_TIME_100MS: Swift.Int
+  public static let VLSO_SET_MAX_UNLOCKING_TIME_250MS: Swift.Int
+  public static let VLSO_SET_LOW_TEMP_C: Swift.Int
+  public static let VLSO_SET_TEMP_OFS_C: Swift.Int
+  public static let VLSO_SET_STALL_DELAY_100MS: Swift.Int
+  public static let VLSO_SET_BONDING_REQUIRED: Swift.Int
+  public static let VLSO_SETTING_UNLOCKED_BUMP_TH_MG: Swift.Int
+  public static let VLSO_SETTING_MIN_BATT_PCT_LOCK: Swift.Int
+  public static let VLSO_SETTING_MIN_BATT_PCT_SLEEP: Swift.Int
+  public static let VLSO_SETTING_UNLOCKED_UNCONN_SLEEP_S: Swift.Int
+  public static let VLSO_SETTING_SLOW_DELAY_100MS: Swift.Int
+  public static let VLSO_SETTING_MOTOR_SPD_INITIAL: Swift.Int
+  public static let VLSO_SETTING_MOTOR_SPD_SLOW: Swift.Int
+  public static let VLSO_SETTING_MOTOR_LOCK_CODE: Swift.Int
+  public static let VLSO_SETTING_ALLOW_UNCONN_LOCK: Swift.Int
+  public static let VLSO_SETTING_ALARM_FREQ_HZ: Swift.Int
+  public static let VLSO_SETTING_ALARM_DUTY_PCT: Swift.Int
+  public static let VLSO_SETTING_BEEP_FREQ_HZ: Swift.Int
+  public static let VLSO_SETTING_BEEP_DUTY_PCT: Swift.Int
+  public static let VLSO_SETTING_STALL_RETRACT: Swift.Int
+  public static let VLSO_SETTING_BLE_LOG: Swift.Int
+  public static let VLSO_SETTING_MODEM_TYPE: Swift.Int
+  public static let VLSO_SETTING_GNSS_ACCURACY: Swift.Int
+  public static let VLSO_SETTING_GNSS_TIMEOUT: Swift.Int
+  public static let VLSO_SETTING_GNSS_INTERVAL_A: Swift.Int
+  public static let VLSO_SETTING_GNSS_INTERVAL_B: Swift.Int
+  public static let VLSO_SETTING_GNSS_INTERVAL_THEFT: Swift.Int
+  public static let VLSO_SETTING_GNSS_THEFT_DURATION: Swift.Int
+  public static let VLSO_SETTING_RESET_TIMES: Swift.Int
+  public static let VLSO_SETTING_GNSS_MODE: Swift.Int
+  public static let VLSO_SETTING_GNSS_FILTER: Swift.Int
+  public static let VLSO_SETTING_IP_ADDR: Swift.Int
+  public static let VLSO_SETTING_SERVER_CONN_TIME_LIM: Swift.Int
+  public static let VLSO_SETTING_STATE_CHANGE_PING: Swift.Int
+  public static let VLSO_SETTING_PWR_BUTTON_PING: Swift.Int
+  public static let VLSO_SETTING_GNSS_INTERVAL_UNLOCK: Swift.Int
+  public static let VLSO_SETTING_GNSS_INTERVAL_LOCK: Swift.Int
+  public static let VLSO_SETTING_USER_ID: Swift.Int
+  public static let VLSO_SETTING_LOOP_CONTROL: Swift.Int
+  public static let VLSO_SETTING_RESET_TIMER_S: Swift.Int
+  public static let VLSO_SETTING_FULL_GPS: Swift.Int
+  public static let VLSO_SETTING_MIN_BATT_PCT_UNLOCK: Swift.Int
+  public static let VLSO_SETTING_BATT_PCT_GPS_OFF: Swift.Int
+  public static let VLSO_SETTING_ASSIST_NOW: Swift.Int
+  public static let VLSO_SETTING_PERIOD_A_START: Swift.Int
+  public static let VLSO_SETTING_PERIOD_B_START: Swift.Int
+  public static let VLSO_SETTING_LOW_BATT_SLEEP: Swift.Int
+  public static let VLSO_SET_MAX_LOCKING_TIME_250MS: Swift.Int
+  public static let VLSO_SETTING_NETWORK_CODE: Swift.Int
+  public static let VLSO_SETTING_OPERATOR_MODE: Swift.Int
+  public static let VLSO_SETTING_REMOTE_COMMANDS: Swift.Int
+  public static let VLSO_SETTING_OTA_FIRMWARE: Swift.Int
+  public static let VLSO_SETTING_GEOBLOCK: Swift.Int
+  public static let VLSO_SETTING_CHARGING: Swift.Int
+  public static let VLSO_SETTING_CHAIN_STATE: Swift.Int
+  public static let VLSO_SETTING_AT_ERRORS: Swift.Int
+  public static let VLSO_SETTING_KEYFOB_MAC: Swift.Int
+  public static let VLSO_SETTING_KEYFOB_UUID_0: Swift.Int
+  public static let VLSO_SETTING_KEYFOB_UUID_1: Swift.Int
+  public static let VLSO_SETTING_KEYFOB_MAJOR: Swift.Int
+  public static let VLSO_SETTING_KEYFOB_MINOR: Swift.Int
+  public static let VLSO_SETTING_AUTO_LOCK: Swift.Int
+  public static let VLSO_SETTING_MAX: Swift.Int
+  public func settingIndex() -> Swift.UInt
+  public func settingLong() -> Swift.UInt64
+  public func value() -> Swift.UInt
+  public init(command: LinkaAPIKit.Byte, settingIndex: LinkaAPIKit.Byte, settingValue: Swift.UInt, settingValue2: Swift.UInt)
+  public init(command: LinkaAPIKit.Byte, settingIndex: LinkaAPIKit.Byte, longValue: Swift.UInt64)
+  public init(command: LinkaAPIKit.Byte, settingIndex: LinkaAPIKit.Byte, data: [LinkaAPIKit.Byte])
+  @objc deinit
+}
+public enum CipherError : Swift.Error {
+  case encrypt
+  case decrypt
+  public static func == (a: LinkaAPIKit.CipherError, b: LinkaAPIKit.CipherError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public protocol Cipher : AnyObject {
+  func encrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  func encrypt(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  func decrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  func decrypt(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+}
+extension Cipher {
+  public func encrypt(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  public func decrypt(_ bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+}
+open class URLTransform : LinkaAPIKit.TransformType {
+  public typealias Object = Foundation.URL
+  public typealias JSON = Swift.String
+  public init(shouldEncodeURLString: Swift.Bool = false, allowedCharacterSet: Foundation.CharacterSet = .urlQueryAllowed)
+  open func transformFromJSON(_ value: Any?) -> Foundation.URL?
+  open func transformToJSON(_ value: Foundation.URL?) -> Swift.String?
+  @objc deinit
+}
+final public class SHA3 {
+  final public let blockSize: Swift.Int
+  final public let digestLength: Swift.Int
+  public enum Variant : Swift.RawRepresentable {
+    case sha224, sha256, sha384, sha512
+    public typealias RawValue = Swift.Int
+    public var rawValue: LinkaAPIKit.SHA3.Variant.RawValue {
+      get
+    }
+    public init?(rawValue: LinkaAPIKit.SHA3.Variant.RawValue)
+  }
+  public init(variant: LinkaAPIKit.SHA3.Variant)
+  final public func calculate(for bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  @objc deinit
+}
+extension SHA3 : LinkaAPIKit.Updatable {
+  final public func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+}
+public enum LeoMode : Swift.UInt8 {
+  case MODE_OFF
+  case MODE_THEFT
+  case MODE_PERIOD_PING
+  case MODE_PERIOD_PING_WAITING_GPS
+  case MODE_MANUAL
+  case MODE_THEFT_PENDING
+  case MODE_SETUP_LTE
+  case MODE_STATE_PING
+  case MODE_THEFT_WAITING_GPS
+  case MODE_UNLOCKED
+  case MODE_LOCKED
+  case MODE_TURNING_OFF
+  case MODE_DONE
+  case MODE_STATE_PING_WAITING_GPS
+  case MODE_UNLOCKED_PENDING
+  case MODE_LOCKED_PENDING
+  case MODE_RESET
+  case MODE_FULL_GPS
+  case MODE_CAPTURE_GPS
+  case MODE_CONFIRM_OFF
+  case MODE_CHECK_TIME
+  case MODE_SEND_GPS_PING
+  case MODE_SEND_GPS_THEFT
+  case MODE_CELL_LOCATE
+  case MODE_SEND_GPS_CELL_LOCATE
+  case MODE_FULL_GPS_PENDING
+  case MODE_OTA_UPDATE
+  case MODE_REMOTE_COMMAND
+  case MODE_REMOTE_COMMAND_PENDING
+  case MODE_RESET_PING
+  case MODE_POWER_BUTTON_CONNECT
+  case MODE_GEOBLOCK
+  case MODE_GEOBLOCK_WAITING_GPS
+  case MODE_GEOBLOCK_WAIT_COMMAND
+  case MODE_REMOTE_COMMAND_CONNECTED
+  public typealias RawValue = Swift.UInt8
+  public init?(rawValue: Swift.UInt8)
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objcMembers public class Linka {
+  @objc dynamic public var peripheral: CoreBluetooth.CBPeripheral!
+  @objc open func getPeripheral() -> CoreBluetooth.CBPeripheral!
+  @objc open func getMACAddress() -> Swift.String
+  @objc open func isBonded() -> Swift.Bool
+  @objc open func getBatteryRemainingRepresentation() -> Swift.String
+  @objc open func getName() -> Swift.String
+  open class func getName(_ mac_address: Swift.String, peripheral: LinkaAPIKit.DiscoveredPeripherals) -> Swift.String
+  open class func makeLinka(_ peripheral: LinkaAPIKit.DiscoveredPeripherals) -> LinkaAPIKit.Linka
+  open class func makeLinka(_ macAddress: Swift.String) -> LinkaAPIKit.Linka
+  @objc public func updateLocation()
+  @objc public func isLeoLock() -> Swift.Bool
+  @objc public func updateRSSI(_ discoverable: Swift.Bool, rssi: Swift.Int) -> Swift.Bool
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class LocksController {
+  public static func initialize()
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers public class LockContextPacket : LinkaAPIKit.LockDataPacket {
+  public func getEncVer() -> Swift.UInt
+  public func getVoltage() -> Swift.UInt
+  public func getAtMode() -> Swift.UInt
+  public func getCounter() -> Swift.Int
+  public func updateCounter(newCounter: Swift.Int) -> Swift.Bool
+  public func getBondsRemaining() -> Swift.UInt
+  public func getCurrentBondIndex() -> Swift.UInt
+  public func isBondingRequired() -> Swift.Bool
+  public init(data: [LinkaAPIKit.Byte])
+  public static func atModeToString(mode: Swift.UInt8) -> Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class Checksum {
+  @objc deinit
+}
+extension Checksum {
+  public static func crc32(_ message: Swift.Array<Swift.UInt8>, seed: Swift.UInt32? = nil, reflect: Swift.Bool = true) -> Swift.UInt32
+  public static func crc16(_ message: Swift.Array<Swift.UInt8>, seed: Swift.UInt16? = nil) -> Swift.UInt16
+}
+public protocol Updatable {
+  mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool) throws -> Swift.Array<Swift.UInt8>
+  mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool, output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+  mutating func finish(withBytes bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  mutating func finish(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+}
+extension Updatable {
+  public mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false, output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+  public mutating func finish(withBytes bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  public mutating func finish() throws -> Swift.Array<Swift.UInt8>
+  public mutating func finish(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+  public mutating func finish(output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+}
+extension Updatable {
+  public mutating func update(withBytes bytes: Swift.Array<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+  public mutating func update(withBytes bytes: Swift.Array<Swift.UInt8>, isLast: Swift.Bool = false, output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+  public mutating func finish(withBytes bytes: Swift.Array<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  public mutating func finish(withBytes bytes: Swift.Array<Swift.UInt8>, output: (Swift.Array<Swift.UInt8>) -> Swift.Void) throws
+}
+public struct DictionaryTransform<Key, Value> : LinkaAPIKit.TransformType where Key : Swift.Hashable, Key : Swift.RawRepresentable, Value : LinkaAPIKit.Mappable, Key.RawValue == Swift.String {
+  public init()
+  public func transformFromJSON(_ value: Any?) -> [Key : Value]?
+  public func transformToJSON(_ value: [Key : Value]?) -> Any?
+  public typealias Object = Swift.Dictionary<Key, Value>
+  public typealias JSON = Any
+}
+@_inheritsConvenienceInitializers @objcMembers public class LinkaMerchantAPIResponseMapping : LinkaAPIKit.LinkaAPIResponse {
+  public var data: LinkaAPIKit.LinkaMerchantAPIResponseDataMapping?
+  override public func mapping(map: LinkaAPIKit.Map)
+  @objc deinit
+  required public init?(map: LinkaAPIKit.Map)
+}
+@objcMembers public class LinkaMerchantAPIResponseDataMapping : LinkaAPIKit.Mappable {
+  required public init?(map: LinkaAPIKit.Map)
+  public func mapping(map: LinkaAPIKit.Map)
+  @objc deinit
+}
+public enum AuthState : Swift.UInt8 {
+  case auth_NONE
+  case auth_PAIRING
+  case auth_COMPLETE
+  case auth_ERROR
+  case auth_PAIRED
+  public typealias RawValue = Swift.UInt8
+  public init?(rawValue: Swift.UInt8)
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class LinkaMerchantAPIService : ObjectiveC.NSObject {
+  @objc public class func clearAccessToken()
+  @objc public class func hasAccessToken() -> Swift.Bool
+  @objc public class func getAccessToken() -> Swift.String!
+  public class func fetch_access_token(_ completion: @escaping ((LinkaAPIKit.LinkaMerchantAPIResponseMapping?, LinkaAPIKit.LinkaAPIResponse?) -> Swift.Void)) -> LinkaAPIKit.Request
+  public class func view_merchant(_ completion: @escaping ((Swift.String?, LinkaAPIKit.LinkaAPIResponse?) -> Swift.Void)) -> LinkaAPIKit.Request
+  public class func test_access_token(_ completion: @escaping ((Swift.String?, LinkaAPIKit.LinkaAPIResponse?) -> Swift.Void)) -> LinkaAPIKit.Request
+  public class func fetch_all_locks(_ completion: @escaping ((LinkaAPIKit.LinkaMerchantlockListAPIResponseMapping?, LinkaAPIKit.LinkaAPIResponse?) -> Swift.Void)) -> LinkaAPIKit.Request
+  public class func fetch_lock(_ linka: LinkaAPIKit.Linka, lock_number: Swift.String?, completion: @escaping ((LinkaAPIKit.LinkaMerchantlockAPIResponseMapping?, LinkaAPIKit.LinkaAPIResponse?) -> Swift.Void)) -> LinkaAPIKit.Request
+  public class func tryDeclareLockOwnership(_ p: LinkaAPIKit.DiscoveredPeripherals, callback: ((LinkaAPIKit.Linka?, Swift.Bool, Swift.Bool, Swift.Int) -> Swift.Void)!)
+  public class func tryPreparePairingUp(_ macAddress: Swift.String, lock_number: Swift.String?, progressCallback: ((Swift.Bool, Swift.Int) -> Swift.Void)!, callback: ((LinkaAPIKit.Linka?, Swift.Bool, Swift.Bool, Swift.Int) -> Swift.Void)!, successCallback: ((LinkaAPIKit.LinkaBLEConnectManager?, LinkaAPIKit.LinkaBLECommunicationManager?, LinkaAPIKit.LockController) -> Swift.Void)!)
+  @objc public static var lockController: LinkaAPIKit.LockController!
+  public class func tryPreparePairingUp(_ p: LinkaAPIKit.DiscoveredPeripherals, progressCallback: ((Swift.Bool, Swift.Int) -> Swift.Void)!, callback: ((LinkaAPIKit.Linka?, Swift.Bool, Swift.Bool, Swift.Int) -> Swift.Void)!, successCallback: ((LinkaAPIKit.LinkaBLEConnectManager?, LinkaAPIKit.LinkaBLECommunicationManager?) -> Swift.Void)!)
+  @objc open class func makeLocationManager() -> CoreLocation.CLLocationManager!
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension Blowfish {
+  convenience public init(key: Swift.String, iv: Swift.String, blockMode: LinkaAPIKit.BlockMode = .CBC, padding: LinkaAPIKit.Padding = .pkcs7) throws
+}
+@objc @_hasMissingDesignatedInitializers public class LockController : ObjectiveC.NSObject, UIKit.UIAlertViewDelegate {
+  public var operatorAppCode: Swift.String
+  public static var PostLockDelaySeconds: Swift.Double
+  public var linka: LinkaAPIKit.Linka!
+  public var connectManager: LinkaAPIKit.LinkaBLEConnectManager!
+  public var communicationManager: LinkaAPIKit.LinkaBLECommunicationManager!
+  public func doDisconnectDevice()
+  public func deinitialize()
+  @objc override dynamic public init()
+  @objc deinit
+}
+public func <- <T>(left: inout T, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func >>> <T>(left: T, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func <- <T>(left: inout T?, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func >>> <T>(left: T?, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func <- <T>(left: inout [T], right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func >>> <T>(left: [T], right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func <- <T>(left: inout [T]?, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func >>> <T>(left: [T]?, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func <- <T>(left: inout [Swift.String : T], right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func >>> <T>(left: [Swift.String : T], right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func <- <T>(left: inout [Swift.String : T]?, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public func >>> <T>(left: [Swift.String : T]?, right: LinkaAPIKit.Map) where T : Swift.RawRepresentable
+public protocol Cryptors : AnyObject {
+  associatedtype EncryptorType : LinkaAPIKit.Updatable
+  associatedtype DecryptorType : LinkaAPIKit.Updatable
+  func makeEncryptor() -> Self.EncryptorType
+  func makeDecryptor() -> Self.DecryptorType
+  static func randomIV(_ blockSize: Swift.Int) -> Swift.Array<Swift.UInt8>
+}
+extension Cryptors {
+  public static func randomIV(_ blockSize: Swift.Int) -> Swift.Array<Swift.UInt8>
+}
+public enum LockState : Swift.UInt8 {
+  case lock_STARTUP
+  case lock_LOCKING
+  case lock_UNLOCKING
+  case lock_LOCKED
+  case lock_UNLOCKED
+  case lock_ERROR
+  case lock_STALLED
+  case lock_LOCKED_PAC
+  case lock_UNLOCKED_PAC
+  case lock_POWERUP
+  case lock_FAULT_LOCKING
+  case lock_FAULT_UNLOCKING
+  case lock_UNKNOWN_STATE
+  public typealias RawValue = Swift.UInt8
+  public init?(rawValue: Swift.UInt8)
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+extension UIDevice {
+  public var modelName: Swift.String {
+    get
+  }
+}
+open class HexColorTransform : LinkaAPIKit.TransformType {
+  public typealias Object = UIKit.UIColor
+  public typealias JSON = Swift.String
+  public init(prefixToJSON: Swift.Bool = false, alphaToJSON: Swift.Bool = false)
+  open func transformFromJSON(_ value: Any?) -> LinkaAPIKit.HexColorTransform.Object?
+  open func transformToJSON(_ value: LinkaAPIKit.HexColorTransform.Object?) -> LinkaAPIKit.HexColorTransform.JSON?
+  @objc deinit
+}
+final public class SHA1 {
+  public init()
+  final public func calculate(for bytes: Swift.Array<Swift.UInt8>) -> Swift.Array<Swift.UInt8>
+  @objc deinit
+}
+extension SHA1 : LinkaAPIKit.Updatable {
+  final public func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+}
+public enum Bit : Swift.Int {
+  case zero
+  case one
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public func <- <Transform>(left: inout Transform.Object, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: Transform.Object, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout Transform.Object?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: Transform.Object?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout [Transform.Object], right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: [Transform.Object], right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout [Transform.Object]?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: [Transform.Object]?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout [Swift.String : Transform.Object], right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: [Swift.String : Transform.Object], right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout [Swift.String : Transform.Object]?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: [Swift.String : Transform.Object]?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout Transform.Object, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Transform.Object, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Transform.Object?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Transform.Object?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Swift.Dictionary<Swift.String, Transform.Object>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Swift.Dictionary<Swift.String, Transform.Object>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Swift.Dictionary<Swift.String, Transform.Object>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Swift.Dictionary<Swift.String, Transform.Object>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Swift.Dictionary<Swift.String, [Transform.Object]>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Swift.Dictionary<Swift.String, [Transform.Object]>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Swift.Dictionary<Swift.String, [Transform.Object]>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Swift.Dictionary<Swift.String, [Transform.Object]>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Swift.Array<Transform.Object>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Swift.Array<Transform.Object>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout Swift.Array<Transform.Object>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func >>> <Transform>(left: Swift.Array<Transform.Object>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable
+public func <- <Transform>(left: inout [[Transform.Object]], right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: [[Transform.Object]], right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout [[Transform.Object]]?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func >>> <Transform>(left: [[Transform.Object]]?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType
+public func <- <Transform>(left: inout Swift.Set<Transform.Object>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable, Transform.Object : Swift.Hashable
+public func >>> <Transform>(left: Swift.Set<Transform.Object>, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable, Transform.Object : Swift.Hashable
+public func <- <Transform>(left: inout Swift.Set<Transform.Object>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable, Transform.Object : Swift.Hashable
+public func >>> <Transform>(left: Swift.Set<Transform.Object>?, right: (LinkaAPIKit.Map, Transform)) where Transform : LinkaAPIKit.TransformType, Transform.Object : LinkaAPIKit.BaseMappable, Transform.Object : Swift.Hashable
+open class EnumTransform<T> : LinkaAPIKit.TransformType where T : Swift.RawRepresentable {
+  public typealias Object = T
+  public typealias JSON = T.RawValue
+  public init()
+  open func transformFromJSON(_ value: Any?) -> T?
+  open func transformToJSON(_ value: T?) -> T.RawValue?
+  @objc deinit
+}
+open class NSDecimalNumberTransform : LinkaAPIKit.TransformType {
+  public typealias Object = Foundation.NSDecimalNumber
+  public typealias JSON = Swift.String
+  public init()
+  open func transformFromJSON(_ value: Any?) -> Foundation.NSDecimalNumber?
+  open func transformToJSON(_ value: Foundation.NSDecimalNumber?) -> Swift.String?
+  @objc deinit
+}
+extension Array where Element == Swift.UInt8 {
+  public func toHexString() -> Swift.String
+}
+extension Array where Element == Swift.UInt8 {
+  public func md5() -> [Element]
+  public func sha1() -> [Element]
+  public func sha224() -> [Element]
+  public func sha256() -> [Element]
+  public func sha384() -> [Element]
+  public func sha512() -> [Element]
+  public func sha2(_ variant: LinkaAPIKit.SHA2.Variant) -> [Element]
+  public func sha3(_ variant: LinkaAPIKit.SHA3.Variant) -> [Element]
+  public func crc32(seed: Swift.UInt32? = nil, reflect: Swift.Bool = true) -> Swift.UInt32
+  public func crc16(seed: Swift.UInt16? = nil) -> Swift.UInt16
+  public func encrypt(cipher: LinkaAPIKit.Cipher) throws -> [Element]
+  public func decrypt(cipher: LinkaAPIKit.Cipher) throws -> [Element]
+  public func authenticate<A>(with authenticator: A) throws -> [Element] where A : LinkaAPIKit.Authenticator
+}
+@objc @_inheritsConvenienceInitializers public class Helpers : ObjectiveC.NSObject {
+  public enum LogLevel : Swift.UInt8 {
+    case OFF
+    case DEBUG
+    case SAVE_TO_STRING
+    case DEBUG_AND_SAVE_TO_STRING
+    public typealias RawValue = Swift.UInt8
+    public init?(rawValue: Swift.UInt8)
+    public var rawValue: Swift.UInt8 {
+      get
+    }
+  }
+  public class func setLogLevel(_ ll: LinkaAPIKit.Helpers.LogLevel)
+  public class func getDebugString() -> Swift.String
+  public class func clearDebugString()
+  @objc deinit
+  @objc override dynamic public init()
+}
+public typealias COMPLETION = ((Any?, Any?) -> Swift.Void)
+@objc @_inheritsConvenienceInitializers @objcMembers public class LinkaAPIService : ObjectiveC.NSObject {
+  public class func getAPIProtocol() -> LinkaAPIKit.LinkaAPIProtocol!
+  public class func setAPIProtocol(_protocol: LinkaAPIKit.LinkaAPIProtocol)
+  @objc deinit
+  @objc override dynamic public init()
+}
+final public class ChaCha20 {
+  public enum Error : Swift.Error {
+    case invalidKeyOrInitializationVector
+    public static func == (a: LinkaAPIKit.ChaCha20.Error, b: LinkaAPIKit.ChaCha20.Error) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public static let blockSize: Swift.Int
+  public init(key: Swift.Array<Swift.UInt8>, iv nonce: Swift.Array<Swift.UInt8>) throws
+  @objc deinit
+}
+extension ChaCha20 : LinkaAPIKit.Cipher {
+  final public func encrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+  final public func decrypt(_ bytes: Swift.ArraySlice<Swift.UInt8>) throws -> Swift.Array<Swift.UInt8>
+}
+extension ChaCha20 {
+  public struct Encryptor : LinkaAPIKit.Updatable {
+    public mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = false) throws -> Swift.Array<Swift.UInt8>
+  }
+}
+extension ChaCha20 {
+  public struct Decryptor : LinkaAPIKit.Updatable {
+    public mutating func update(withBytes bytes: Swift.ArraySlice<Swift.UInt8>, isLast: Swift.Bool = true) throws -> Swift.Array<Swift.UInt8>
+  }
+}
+extension ChaCha20 : LinkaAPIKit.Cryptors {
+  final public func makeEncryptor() -> LinkaAPIKit.ChaCha20.Encryptor
+  final public func makeDecryptor() -> LinkaAPIKit.ChaCha20.Decryptor
+  public typealias EncryptorType = LinkaAPIKit.ChaCha20.Encryptor
+  public typealias DecryptorType = LinkaAPIKit.ChaCha20.Decryptor
+}
+extension ChaCha20 {
+  convenience public init(key: Swift.String, iv: Swift.String) throws
+}
+extension PKCS5 {
+  public struct PBKDF1 {
+    public enum Error : Swift.Error {
+      case invalidInput
+      case derivedKeyTooLong
+      public static func == (a: LinkaAPIKit.PKCS5.PBKDF1.Error, b: LinkaAPIKit.PKCS5.PBKDF1.Error) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    public enum Variant {
+      case md5, sha1
+      public static func == (a: LinkaAPIKit.PKCS5.PBKDF1.Variant, b: LinkaAPIKit.PKCS5.PBKDF1.Variant) -> Swift.Bool
+      public var hashValue: Swift.Int {
+        get
+      }
+      public func hash(into hasher: inout Swift.Hasher)
+    }
+    public init(password: Swift.Array<Swift.UInt8>, salt: Swift.Array<Swift.UInt8>, variant: LinkaAPIKit.PKCS5.PBKDF1.Variant = .sha1, iterations: Swift.Int = 4096, keyLength: Swift.Int? = nil) throws
+    public func calculate() -> Swift.Array<Swift.UInt8>
+  }
+}
+extension LinkaAPIKit.HMAC.Error : Swift.Equatable {}
+extension LinkaAPIKit.HMAC.Error : Swift.Hashable {}
+extension LinkaAPIKit.HMAC.Variant : Swift.Equatable {}
+extension LinkaAPIKit.HMAC.Variant : Swift.Hashable {}
+extension LinkaAPIKit.PairingUpState : Swift.Equatable {}
+extension LinkaAPIKit.PairingUpState : Swift.Hashable {}
+extension LinkaAPIKit.PairingUpState : Swift.RawRepresentable {}
+extension LinkaAPIKit.PKCS5.PBKDF2.Error : Swift.Equatable {}
+extension LinkaAPIKit.PKCS5.PBKDF2.Error : Swift.Hashable {}
+extension LinkaAPIKit.SHA2.Variant : Swift.Equatable {}
+extension LinkaAPIKit.SHA2.Variant : Swift.Hashable {}
+extension LinkaAPIKit.Blowfish.Error : Swift.Equatable {}
+extension LinkaAPIKit.Blowfish.Error : Swift.Hashable {}
+extension LinkaAPIKit.Padding : Swift.Equatable {}
+extension LinkaAPIKit.Padding : Swift.Hashable {}
+extension LinkaAPIKit.BlockMode : Swift.Equatable {}
+extension LinkaAPIKit.BlockMode : Swift.Hashable {}
+extension LinkaAPIKit.Rabbit.Error : Swift.Equatable {}
+extension LinkaAPIKit.Rabbit.Error : Swift.Hashable {}
+extension LinkaAPIKit.Poly1305.Error : Swift.Equatable {}
+extension LinkaAPIKit.Poly1305.Error : Swift.Hashable {}
+extension LinkaAPIKit.MappingType : Swift.Equatable {}
+extension LinkaAPIKit.MappingType : Swift.Hashable {}
+extension LinkaAPIKit.PRIV_LEVEL : Swift.Equatable {}
+extension LinkaAPIKit.PRIV_LEVEL : Swift.Hashable {}
+extension LinkaAPIKit.PRIV_LEVEL : Swift.RawRepresentable {}
+extension LinkaAPIKit.AES.Error : Swift.Equatable {}
+extension LinkaAPIKit.AES.Error : Swift.Hashable {}
+extension LinkaAPIKit.AES.Variant : Swift.Equatable {}
+extension LinkaAPIKit.AES.Variant : Swift.Hashable {}
+extension LinkaAPIKit.AES.Variant : Swift.RawRepresentable {}
+extension LinkaAPIKit.LinkaBLECommunicationManager.AlarmSensitivity : Swift.Equatable {}
+extension LinkaAPIKit.LinkaBLECommunicationManager.AlarmSensitivity : Swift.Hashable {}
+extension LinkaAPIKit.UserCommand : Swift.Equatable {}
+extension LinkaAPIKit.UserCommand : Swift.Hashable {}
+extension LinkaAPIKit.UserCommand : Swift.RawRepresentable {}
+extension LinkaAPIKit.AudioSetting : Swift.Equatable {}
+extension LinkaAPIKit.AudioSetting : Swift.Hashable {}
+extension LinkaAPIKit.AudioSetting : Swift.RawRepresentable {}
+extension LinkaAPIKit.CipherError : Swift.Equatable {}
+extension LinkaAPIKit.CipherError : Swift.Hashable {}
+extension LinkaAPIKit.SHA3.Variant : Swift.Equatable {}
+extension LinkaAPIKit.SHA3.Variant : Swift.Hashable {}
+extension LinkaAPIKit.LeoMode : Swift.Equatable {}
+extension LinkaAPIKit.LeoMode : Swift.Hashable {}
+extension LinkaAPIKit.LeoMode : Swift.RawRepresentable {}
+extension LinkaAPIKit.AuthState : Swift.Equatable {}
+extension LinkaAPIKit.AuthState : Swift.Hashable {}
+extension LinkaAPIKit.AuthState : Swift.RawRepresentable {}
+extension LinkaAPIKit.LockState : Swift.Equatable {}
+extension LinkaAPIKit.LockState : Swift.Hashable {}
+extension LinkaAPIKit.LockState : Swift.RawRepresentable {}
+extension LinkaAPIKit.Bit : Swift.Equatable {}
+extension LinkaAPIKit.Bit : Swift.Hashable {}
+extension LinkaAPIKit.Bit : Swift.RawRepresentable {}
+extension LinkaAPIKit.Helpers.LogLevel : Swift.Equatable {}
+extension LinkaAPIKit.Helpers.LogLevel : Swift.Hashable {}
+extension LinkaAPIKit.Helpers.LogLevel : Swift.RawRepresentable {}
+extension LinkaAPIKit.ChaCha20.Error : Swift.Equatable {}
+extension LinkaAPIKit.ChaCha20.Error : Swift.Hashable {}
+extension LinkaAPIKit.PKCS5.PBKDF1.Error : Swift.Equatable {}
+extension LinkaAPIKit.PKCS5.PBKDF1.Error : Swift.Hashable {}
+extension LinkaAPIKit.PKCS5.PBKDF1.Variant : Swift.Equatable {}
+extension LinkaAPIKit.PKCS5.PBKDF1.Variant : Swift.Hashable {}

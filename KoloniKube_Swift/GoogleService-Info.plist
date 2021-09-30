@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>168688252397-278f4bgtd2hqfei7rqtj8dchs0jo5n71.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.168688252397-278f4bgtd2hqfei7rqtj8dchs0jo5n71</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>168688252397-2r597lvgq1i17flh59csme91lratgtm5.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB53SxlyjXldFZL7okIcXW8RBvtCmauUTc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>168688252397</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.app.kolonishare</string>
+	<key>PROJECT_ID</key>
+	<string>kolonishare-b1bcf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kolonishare-b1bcf.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:168688252397:ios:700a86ade874f8088763e4</string>
+	<key>DATABASE_URL</key>
+	<string>https://kolonishare-b1bcf.firebaseio.com</string>
+</dict>
+</plist>

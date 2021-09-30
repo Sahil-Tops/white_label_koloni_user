@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ProfileCompletionPopUp" customModule="koloni1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Wy-md-q6k" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="41.5" y="377" width="331" height="142"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYm-Y4-4OA">
+                            <rect key="frame" x="20" y="10" width="291" height="30.5"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
+                            <color key="textColor" red="0.2901960784" green="0.25882352939999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please complete your profile to ac more rentals" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBC-Z8-NfE">
+                            <rect key="frame" x="20" y="55.5" width="291" height="46.5"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="tYm-Y4-4OA" firstAttribute="leading" secondItem="8Wy-md-q6k" secondAttribute="leading" constant="20" id="0n6-Qc-SOY"/>
+                        <constraint firstAttribute="trailing" secondItem="tYm-Y4-4OA" secondAttribute="trailing" constant="20" id="2cH-Jf-0kn"/>
+                        <constraint firstItem="gBC-Z8-NfE" firstAttribute="top" secondItem="tYm-Y4-4OA" secondAttribute="bottom" constant="15" id="8Io-R4-gAC"/>
+                        <constraint firstAttribute="bottom" secondItem="gBC-Z8-NfE" secondAttribute="bottom" constant="40" id="OhN-e9-woi"/>
+                        <constraint firstAttribute="trailing" secondItem="gBC-Z8-NfE" secondAttribute="trailing" constant="20" id="Vm0-fy-ZDw"/>
+                        <constraint firstItem="tYm-Y4-4OA" firstAttribute="top" secondItem="8Wy-md-q6k" secondAttribute="top" constant="10" id="fvI-99-uCb"/>
+                        <constraint firstItem="gBC-Z8-NfE" firstAttribute="leading" secondItem="8Wy-md-q6k" secondAttribute="leading" constant="20" id="gOh-OI-huo"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRk-v0-qCR" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="141" y="499" width="132" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="JJo-kZ-yvO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                    <state key="normal" title="Ok">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapOkBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="6hs-2z-koP"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.90351027390000005" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="8Wy-md-q6k" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2JH-Yf-SWg"/>
+                <constraint firstItem="8Wy-md-q6k" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="8Aq-aM-Qag"/>
+                <constraint firstItem="8Wy-md-q6k" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.8" id="CHi-Tj-eoY"/>
+                <constraint firstItem="pRk-v0-qCR" firstAttribute="centerX" secondItem="8Wy-md-q6k" secondAttribute="centerX" id="Kzz-zv-lhL"/>
+                <constraint firstItem="pRk-v0-qCR" firstAttribute="bottom" secondItem="8Wy-md-q6k" secondAttribute="bottom" constant="20" id="Vjq-Ly-uhT"/>
+                <constraint firstItem="pRk-v0-qCR" firstAttribute="width" secondItem="8Wy-md-q6k" secondAttribute="width" multiplier="0.4" id="aqz-IJ-eYr"/>
+            </constraints>
+            <connections>
+                <outlet property="description_lbl" destination="gBC-Z8-NfE" id="2Eb-gd-VSV"/>
+                <outlet property="ok_btn" destination="pRk-v0-qCR" id="tLw-6u-nNI"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="46"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="pRk-v0-qCR">
+            <size key="intrinsicContentSize" width="30" height="36"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Koloni.ttf">
+            <string>Koloni</string>
+        </array>
+        <array key="Muli-SemiBold.ttf">
+            <string>Muli-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyMemberShipVC" customModule="koloni1" customModuleProvider="target">
+            <connections>
+                <outlet property="btnBack" destination="dU2-rg-maR" id="14k-kZ-LnN"/>
+                <outlet property="headerView" destination="ADA-xt-Qui" id="3hS-LI-qqE"/>
+                <outlet property="lblNoresultFound" destination="gJY-eL-kG7" id="Lhn-S0-JsQ"/>
+                <outlet property="navigationImg" destination="9Vb-DM-sBC" id="Xpo-6w-zgo"/>
+                <outlet property="skeltonView" destination="LXQ-4z-9mL" id="RLg-JI-dhI"/>
+                <outlet property="tblMembership" destination="AtN-rv-dOI" id="hHP-On-tZn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AtN-rv-dOI">
+                    <rect key="frame" x="0.0" y="98" width="375" height="714"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="1qx-e3-Jwk"/>
+                        <outlet property="delegate" destination="-1" id="Avg-mT-Lqt"/>
+                    </connections>
+                </tableView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No record found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJY-eL-kG7" customClass="IPAutoScalingLabel" customModule="koloni1" customModuleProvider="target">
+                    <rect key="frame" x="104.33333333333333" y="392" width="166.33333333333337" height="28"/>
+                    <fontDescription key="fontDescription" name="Muli-SemiBold" family="Muli" pointSize="22"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Vb-DM-sBC">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADA-xt-Qui">
+                    <rect key="frame" x="0.0" y="44" width="375" height="54"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dU2-rg-maR" customClass="IPAutoScalingButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="4" y="4" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="dna-eC-T2y"/>
+                                <constraint firstAttribute="height" constant="40" id="tS2-qP-0eC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Koloni" family="Koloni" pointSize="20"/>
+                            <state key="normal" title="">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="tapBackBtn:" destination="-1" eventType="touchUpInside" id="Gsl-L3-cl7"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My memberships" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBF-Br-3bM">
+                            <rect key="frame" x="52" y="11.666666666666666" width="144" height="24.666666666666671"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="zBF-Br-3bM" firstAttribute="leading" secondItem="dU2-rg-maR" secondAttribute="trailing" constant="8" id="IZp-ft-vzX"/>
+                        <constraint firstItem="zBF-Br-3bM" firstAttribute="centerY" secondItem="dU2-rg-maR" secondAttribute="centerY" id="LRY-r0-3tt"/>
+                        <constraint firstAttribute="bottom" secondItem="dU2-rg-maR" secondAttribute="bottom" constant="10" id="RNE-G4-LII"/>
+                        <constraint firstItem="dU2-rg-maR" firstAttribute="leading" secondItem="ADA-xt-Qui" secondAttribute="leading" constant="4" id="dKv-Os-isZ"/>
+                        <constraint firstAttribute="height" constant="54" id="vxA-ER-Kqm"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXQ-4z-9mL">
+                    <rect key="frame" x="0.0" y="98" width="375" height="714"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenWhenSkeletonIsActive" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="arZ-d1-ihC"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gJY-eL-kG7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7GR-du-gc4"/>
+                <constraint firstItem="9Vb-DM-sBC" firstAttribute="trailing" secondItem="ADA-xt-Qui" secondAttribute="trailing" id="8hZ-C1-lev"/>
+                <constraint firstItem="9Vb-DM-sBC" firstAttribute="bottom" secondItem="ADA-xt-Qui" secondAttribute="bottom" id="AKu-zc-6Y3"/>
+                <constraint firstItem="LXQ-4z-9mL" firstAttribute="trailing" secondItem="AtN-rv-dOI" secondAttribute="trailing" id="Eo5-Re-OsC"/>
+                <constraint firstItem="AtN-rv-dOI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jwd-TL-vVr"/>
+                <constraint firstItem="LXQ-4z-9mL" firstAttribute="top" secondItem="AtN-rv-dOI" secondAttribute="top" id="LEp-rJ-Az3"/>
+                <constraint firstAttribute="bottom" secondItem="AtN-rv-dOI" secondAttribute="bottom" id="LiS-oj-aM2"/>
+                <constraint firstItem="LXQ-4z-9mL" firstAttribute="bottom" secondItem="AtN-rv-dOI" secondAttribute="bottom" id="Smc-8K-o4T"/>
+                <constraint firstAttribute="trailing" secondItem="ADA-xt-Qui" secondAttribute="trailing" id="Ssy-Su-YZ0"/>
+                <constraint firstItem="9Vb-DM-sBC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xqx-5J-eLU"/>
+                <constraint firstItem="ADA-xt-Qui" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="f1r-Nw-NxM"/>
+                <constraint firstItem="gJY-eL-kG7" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="gWR-Mc-anR"/>
+                <constraint firstItem="9Vb-DM-sBC" firstAttribute="leading" secondItem="ADA-xt-Qui" secondAttribute="leading" id="m2K-Y3-yDi"/>
+                <constraint firstItem="ADA-xt-Qui" firstAttribute="top" secondItem="arZ-d1-ihC" secondAttribute="top" id="mfI-if-rel"/>
+                <constraint firstItem="LXQ-4z-9mL" firstAttribute="leading" secondItem="AtN-rv-dOI" secondAttribute="leading" id="nA0-l6-YWd"/>
+                <constraint firstItem="AtN-rv-dOI" firstAttribute="top" secondItem="ADA-xt-Qui" secondAttribute="bottom" id="obW-70-pck"/>
+                <constraint firstAttribute="trailing" secondItem="AtN-rv-dOI" secondAttribute="trailing" id="wKC-6e-z3J"/>
+            </constraints>
+            <point key="canvasLocation" x="11.5" y="-72.5"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
