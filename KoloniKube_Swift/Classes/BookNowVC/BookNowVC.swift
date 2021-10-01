@@ -467,8 +467,7 @@
     func loadContent(){
         self.navigationController?.navigationBar.isHidden = true
         self.appGroupDefaults = UserDefaults(suiteName:"group.com.koloni.kolonikube")!
-        Singleton.smRippleView = nil
-        self.btnGift.isHidden = true
+        Singleton.smRippleView = nil        
         self.centerLatLong_current = CLLocationCoordinate2D(latitude: CLLocationDegrees(StaticClass.sharedInstance.latitude), longitude: CLLocationDegrees(StaticClass.sharedInstance.longitude))
         self.shareParameters.strUser_id = StaticClass.sharedInstance.strUserId
         self.shareParameters.doubleLat = Double(StaticClass.sharedInstance.latitude)

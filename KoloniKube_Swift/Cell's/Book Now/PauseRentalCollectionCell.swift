@@ -106,6 +106,8 @@ class PauseRentalCollectionCell: UICollectionViewCell {
                 self.bookNowVc.pauseRentalCollectionView_height.constant = CGFloat(self.bookNowVc.layout.itemSize.height + 115)
                 self.bookNowVc.view.layoutIfNeeded()
             }
+            self.pauseOrStartBtn_img.circleObject()
+            self.endBtn_img.circleObject()
             self.cardListTableView.reloadData()
             self.bookNowVc.loadUI()
         }

@@ -83,7 +83,7 @@ class LeftMenuViewController: UIViewController {
                     if let firstName = userData["first_name"]as? String, firstName != ""{
                         self.userName_lbl.text = firstName
                     }else{
-                        self.userName_lbl.text = userData["username"]as? String ?? "Koloni User"
+                        self.userName_lbl.text = userData["username"]as? String ?? ""
                     }
                     print("\(self.userName_lbl.text!)")
                     if let userProfileImage = userData["profile_image"]as? String{

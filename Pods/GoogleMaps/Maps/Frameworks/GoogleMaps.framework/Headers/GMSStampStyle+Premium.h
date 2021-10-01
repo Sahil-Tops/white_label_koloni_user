@@ -31,7 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-/** A polyline style that draws a repeating image over a @c GMSStyleSpan. */
+/**
+ * A polyline style that draws a repeating image over a @c GMSStyleSpan.
+ *
+ * @note that if this is set with a gradient stroke, the stroke will only show up as a solid-color
+ * stroke. A workaround would be to a set a clear stroke on this line (with the
+ * stamp), and then make a separate polyline with the gradient stroke and without the stamp, with
+ * the same path as this polyline at a lower z-index.
+ *
+ * on behalf of the user.
+ */
 @interface GMSTextureStyle : GMSStampStyle
 
 /**
