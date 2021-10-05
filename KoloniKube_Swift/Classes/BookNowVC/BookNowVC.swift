@@ -218,6 +218,7 @@
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         Singleton.isCalledDidFinishLaunch = false
         self.loadContent()
         self.getlockInstructionList_Web()
@@ -226,7 +227,6 @@
         Global().startInternetCheckTimer()
         self.setAdsImageScrollFunctionality()
         self.registerCollectionCell()
-//        self.showReferralPopup()
         Global.getUserProfile_Web(vc: self) { (response, data) in
             
         }
@@ -465,7 +465,6 @@
     }
     
     func loadContent(){
-        self.navigationController?.navigationBar.isHidden = true
         self.appGroupDefaults = UserDefaults(suiteName:"group.com.koloni.kolonikube")!
         Singleton.smRippleView = nil        
         self.centerLatLong_current = CLLocationCoordinate2D(latitude: CLLocationDegrees(StaticClass.sharedInstance.latitude), longitude: CLLocationDegrees(StaticClass.sharedInstance.longitude))
@@ -2280,7 +2279,7 @@
                         }
                     }
                     if array.count > 0{
-                        self.loadAssestListView(assetList: array)
+                        self.loadAssestListView(vc: self, assetList: array)
                     }else{
                         self.showTopPop(message: "No asset available on this location", response: false)
                     }
@@ -2352,9 +2351,9 @@
             }
         }
         if bikesArray.count > 0{
-            self.loadAssestListView(assetList: bikesArray)
+            self.loadAssestListView(vc: self, assetList: bikesArray)
         }else{
-            self.loadAssestListView(assetList: [data])
+            self.loadAssestListView(vc: self, assetList: [data])
         }
     }
  }

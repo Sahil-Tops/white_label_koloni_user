@@ -645,9 +645,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func pushToSideMenuVC(){
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let bookNowVController = BookNowVC(nibName: "BookNowVC", bundle: nil)
+//            let bookNowVController = BookNowVC(nibName: "BookNowVC", bundle: nil)
+            let locationListingVc = LocationListingViewController(nibName: "LocationListingViewController", bundle: nil)
             let leftMenu = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
-            let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: bookNowVController, leftMenuViewController: leftMenu, rightMenuViewController: nil)
+            let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: locationListingVc, leftMenuViewController: leftMenu, rightMenuViewController: nil)
             sideMenuViewController.bouncesHorizontally = false
             sideMenuViewController.contentViewScaleValue = 0.65
             sideMenuViewController.scaleContentView = true
