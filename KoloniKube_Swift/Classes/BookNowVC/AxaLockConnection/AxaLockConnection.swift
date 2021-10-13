@@ -197,6 +197,7 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         if self.peripheralDevice != nil{
             self.centralMannager?.cancelPeripheralConnection(self.peripheralDevice!)
             self.centralMannager = nil
+            self.peripheralDevice = nil
         }
     }
     

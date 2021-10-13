@@ -17,6 +17,8 @@ protocol RunningRentalDelegate {
 
 class RunningRentalView: UIView {
     
+    @IBOutlet weak var blackBgView: UIView!
+    @IBOutlet weak var blurRentalView: UIView!
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var runningRentalContainerView: CustomView!
     @IBOutlet weak var runningRentalContainerBg_imageView: UIImageView!    
@@ -130,7 +132,10 @@ class RunningRentalView: UIView {
         swipeUp.direction = .up
         self.runningRentalContainerView.addGestureRecognizer(swipeDown)
         self.runningRentalContainerView.addGestureRecognizer(swipeUp)
-
+        
+        self.blurRentalView.cornerRadius(cornerValue: 15)
+        self.blurRentalView.alpha = 0
+        
     }
     
     func loadUI(){
@@ -176,6 +181,8 @@ class RunningRentalView: UIView {
                     }else{
                         self.runningRentalContainerView_bottom.constant = -((280 + cell.outOfDtextLabel_height.constant) + CGFloat(((Singleton.numberOfCards.count - 1)) * 40))
                     }
+                    self.blackBgView.alpha = 0
+                    self.blurRentalView.alpha = 0.5
                     self.layoutIfNeeded()
                 })
             }
@@ -183,6 +190,8 @@ class RunningRentalView: UIView {
         }else if sender.direction == .up{
             UIView.animate(withDuration: 0.3, animations: {
                 self.runningRentalContainerView_bottom.constant = -15
+                self.blackBgView.alpha = 1
+                self.blurRentalView.alpha = 0
                 self.layoutIfNeeded()
             })
             self.isRentalViewDown = false
@@ -589,15 +598,15 @@ extension RunningRentalView{
         dictParameter.setValue(selectedRentalDic["object_id"]as? String ?? "", forKey: "object_id")
         dictParameter.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
         print("Calculate Params: ", dictParameter)
-        APICall.shared.postWeb("calculate_price", parameters: dictParameter, showLoder: false, successBlock: { (responseObj) in
+        self.hideLoader()
+        APICall.shared.postWeb("calculate_price", parameters: dictParameter, showLoder: true, successBlock: { (responseObj) in
             print("calculate_price response: ", responseObj)
             if let Dict = responseObj as? NSDictionary {
                 if Dict.object(forKey: "FLAG") as! Bool {
                     
                     self.totalCalulationPrice = String(StaticClass.sharedInstance.getDouble(value:Dict.object(forKey: "total_price") ?? "0.0"))
                     self.totalCalulationMinute = String(StaticClass.sharedInstance.getDouble(value:Dict.object(forKey: "total_min") ?? "0"))
-                    //
-                    //                    self.hideLockLoader()
+                                        
                     if isNearBy == true {
                         self.finishBooking_Web(strLocation_ID: self.locationId)
                     } else {
@@ -607,11 +616,10 @@ extension RunningRentalView{
                             let popup = PopupController
                                 .create(self.vc)
                             let container = PaneltyPopupVC.instance()
-                            //                            container.data = self.shareDeviceObj
                             container.partnerId = Singleton.runningRentalArray[self.selectedRentalIndex]["partner_id"]as? String ?? ""
                             container.shareCraditCardOBJ = Singleton.shared.cardListsArray[self.selectedRentalIndex]
                             if self.locationVc?.bikeSharedDataArray.count ?? 0 > 0{
-                                container.bikeDataObj = self.locationVc?.bikeSharedDataArray[self.selectedRentalIndex] ?? ShareBikeData()//self.BikeSharedData
+                                container.bikeDataObj = self.locationVc?.bikeSharedDataArray[self.selectedRentalIndex] ?? ShareBikeData()
                             }
                             container.strPenaltyPrice = self.locationVc?.shareDeviceObj.strPenaltyAmount ?? ""
                             container.strLocationID = self.locationId

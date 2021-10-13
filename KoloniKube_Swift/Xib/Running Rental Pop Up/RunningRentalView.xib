@@ -20,6 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-a9-tZW">
+                    <rect key="frame" x="0.0" y="104" width="414" height="792"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gi-Zw-gKk" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                     <rect key="frame" x="15" y="503" width="68" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -275,6 +279,10 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iIa-jq-l74">
+                    <rect key="frame" x="0.0" y="499" width="414" height="412"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdh-am-ICb">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.804943246" colorSpace="custom" customColorSpace="sRGB"/>
@@ -283,15 +291,23 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.804943246" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="iIa-jq-l74" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="2RF-Yl-ssE"/>
+                <constraint firstItem="Df9-Fr-V6M" firstAttribute="bottom" secondItem="iIa-jq-l74" secondAttribute="bottom" id="2vU-7a-j4g"/>
                 <constraint firstItem="pOd-Ks-RvC" firstAttribute="centerY" secondItem="Csf-TJ-PY6" secondAttribute="centerY" id="6AZ-Ln-sYB"/>
+                <constraint firstItem="kDR-a9-tZW" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="6iF-7d-86M"/>
                 <constraint firstItem="Df9-Fr-V6M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="864-St-pg5"/>
+                <constraint firstItem="kDR-a9-tZW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8YX-gy-bnU"/>
+                <constraint firstItem="kDR-a9-tZW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="60" id="DT8-gz-x3L"/>
+                <constraint firstItem="pOd-Ks-RvC" firstAttribute="top" secondItem="iIa-jq-l74" secondAttribute="top" constant="4" id="ITY-gE-Z23"/>
                 <constraint firstItem="pOd-Ks-RvC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="M98-P7-RCu"/>
                 <constraint firstItem="mdh-am-ICb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RcD-7x-GE6"/>
+                <constraint firstItem="iIa-jq-l74" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Rjc-8H-klt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Df9-Fr-V6M" secondAttribute="trailing" id="WWe-vz-coK"/>
                 <constraint firstItem="mdh-am-ICb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Wkj-IT-Iz2"/>
                 <constraint firstItem="9gi-Zw-gKk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="XNL-Dd-mbU"/>
                 <constraint firstAttribute="bottom" secondItem="Df9-Fr-V6M" secondAttribute="bottom" constant="-15" id="XoO-gV-wcE"/>
                 <constraint firstItem="mdh-am-ICb" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="YHJ-sd-Zdq"/>
+                <constraint firstAttribute="bottom" secondItem="kDR-a9-tZW" secondAttribute="bottom" id="cL9-AW-Nk2"/>
                 <constraint firstItem="9gi-Zw-gKk" firstAttribute="centerY" secondItem="Csf-TJ-PY6" secondAttribute="centerY" id="cT7-Mn-Yga"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Csf-TJ-PY6" secondAttribute="trailing" constant="15" id="e86-89-1fz"/>
                 <constraint firstItem="Df9-Fr-V6M" firstAttribute="top" secondItem="Csf-TJ-PY6" secondAttribute="bottom" constant="10" id="o2j-Hb-Mqz"/>
@@ -299,6 +315,8 @@
             </constraints>
             <connections>
                 <outlet property="addNewRental_btn" destination="bOn-GM-ooB" id="c9b-fi-drQ"/>
+                <outlet property="blackBgView" destination="kDR-a9-tZW" id="LJM-xC-hYm"/>
+                <outlet property="blurRentalView" destination="iIa-jq-l74" id="xMj-12-kLw"/>
                 <outlet property="collectionView" destination="Vq6-P5-Agu" id="3q5-g2-4En"/>
                 <outlet property="collectionView_height" destination="yzN-Cx-rmo" id="sDq-5w-pcm"/>
                 <outlet property="hide_btn" destination="9gi-Zw-gKk" id="nwv-3B-7ZY"/>
@@ -310,7 +328,7 @@
                 <outlet property="shadowView" destination="mdh-am-ICb" id="Bse-4b-dhk"/>
                 <outlet property="totalAmount_lbl" destination="e7e-EF-W1Y" id="Ljy-4W-WIM"/>
             </connections>
-            <point key="canvasLocation" x="139" y="53"/>
+            <point key="canvasLocation" x="137.68115942028987" y="52.901785714285715"/>
         </view>
     </objects>
     <designables>

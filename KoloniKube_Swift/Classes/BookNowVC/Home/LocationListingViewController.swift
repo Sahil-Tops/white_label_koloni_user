@@ -25,7 +25,7 @@ class LocationListingViewController: UIViewController {
     @IBOutlet weak var btnCancel: UIButton!
     
     
-    
+    var refreshController = UIRefreshControl()
     var locationModelArray: [LOCATION_DATA] = []
     var assetsModelArray: [ASSETS_LIST] = []
     var axaLockConnection: AXALOCK_CONNECTION?
@@ -52,16 +52,17 @@ class LocationListingViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         self.registerTableCell()
-        self.axaLockConnection = AXALOCK_CONNECTION.init(vc: self)
+        self.loadContent()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.searchHome_Web(lat: "\(StaticClass.sharedInstance.latitude)", long: "\(StaticClass.sharedInstance.longitude)")
         Singleton.shared.getCardsList_Web()
+        self.axaLockConnection = AXALOCK_CONNECTION.init(vc: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.axaLockConnection?.dissconnectDevice()
+        self.axaLockConnection?.dissconnectDevice()        
         if !self.imagePickerVcPresent{
             for i in 0..<Singleton.timerArray.count{
                 (Singleton.timerArray[i]).invalidate()
@@ -117,9 +118,14 @@ class LocationListingViewController: UIViewController {
         
     }
     
+    func loadContent(){
+        self.refreshController.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshController.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
+        self.tableView.addSubview(refreshController)
+    }
+    
     func loadUI(){
         self.startRental_btn.isHidden = true
-//        self.runningRental_btn.isHidden = true
         AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
             self.logoImg.image = image
         }
@@ -135,8 +141,12 @@ class LocationListingViewController: UIViewController {
         self.startRental_btn.circleObject()
         self.runningRental_btn.circleObject()
         self.view.layoutIfNeeded()
-        
         self.startRental_btn.isHidden = false
+    }
+    
+    @objc func refreshTable(){
+        self.searchHome_Web(lat: "\(StaticClass.sharedInstance.latitude)", long: "\(StaticClass.sharedInstance.longitude)")
+        self.refreshController.endRefreshing()
     }
     
     func addDataToUserDefaultForWidget(){
@@ -185,14 +195,6 @@ class LocationListingViewController: UIViewController {
                 
                 Global.appdel.strIsUserType = currentRetalObj["user_type"] as? String ?? "0"
                 self.addDataToUserDefaultForWidget()
-//                if UserDefaults.standard.value(forKey: "isRentalPause") != nil{
-//                    let pause = UserDefaults.standard.value(forKey: "isRentalPause")
-//                    if "\(pause!)" == "1"{
-//                        self.isPause = false
-//                    }else{
-//                        self.isPause = true
-//                    }
-//                }
             }
             if currentRental.count > 0{
                 self.locationId = currentRental[0]["location_id"] as? String ?? ""
@@ -201,6 +203,7 @@ class LocationListingViewController: UIViewController {
         }
         
     }
+    
     
 }
 

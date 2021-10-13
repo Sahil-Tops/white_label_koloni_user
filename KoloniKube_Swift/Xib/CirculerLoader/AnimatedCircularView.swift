@@ -11,8 +11,6 @@ import GradientCircularProgress
 
 class AnimatedCircularView: UIView {
     
-    //    @IBOutlet weak var description_lbl: UILabel!
-    
     var progressBar = GradientCircularProgress()
     var shareDevice = ShareDevice()
     let logoImg = UIImageView(frame: CGRect(x: 0, y: 0, width: 68, height: 68))
@@ -42,8 +40,10 @@ class AnimatedCircularView: UIView {
     func hideSpinner() -> Void {
         DispatchQueue.main.async {
             self.progressBar.dismiss()
-            self.logoImg.removeFromSuperview()
-            self.description_lbl.removeFromSuperview()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.logoImg.removeFromSuperview()
+                self.description_lbl.removeFromSuperview()
+            }
         }
     }
 }

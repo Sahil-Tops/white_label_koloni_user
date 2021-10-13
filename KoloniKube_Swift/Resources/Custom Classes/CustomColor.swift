@@ -22,6 +22,6 @@ class CustomColor{
     static var customAppRed =  UIColor(red: 251/255, green: 70/255, blue: 113/255, alpha: 1.0)
     static var customRed = UIColor(red: 255/255, green: 3/255, blue: 3/255, alpha: 1.0)
     static var selectedMenu = AppLocalStorage.sharedInstance.secondary_color
-    static var transparentDarkGray = UIColor(red: 33/255, green: 33/255, blue: 3/255, alpha: 0.9)
+    static var transparentDarkGray = UIColor(red: 33/255, green: 33/255, blue: 3/255, alpha: 0.7)
     
 }
