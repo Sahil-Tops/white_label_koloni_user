@@ -732,6 +732,7 @@
                 <constraint firstItem="nad-1Q-q1O" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sa8-tt-kss"/>
             </constraints>
             <connections>
+                <outlet property="amountIcon2_lbl" destination="EpY-c5-1hN" id="oeK-a4-LDV"/>
                 <outlet property="amountIcon_lbl" destination="raz-kI-6fr" id="jC8-8q-dbY"/>
                 <outlet property="amount_2_lbl" destination="uCL-oB-cuE" id="fs9-FJ-psa"/>
                 <outlet property="amount_lbl" destination="YSj-2l-0Sh" id="cmn-uN-bKD"/>
@@ -757,9 +758,11 @@
                 <outlet property="seeMore_lbl" destination="JxY-qk-yuf" id="H7i-pq-JPO"/>
                 <outlet property="submit_btn" destination="BCw-lg-mnf" id="EWv-Nw-LE4"/>
                 <outlet property="summaryContainerView" destination="1jK-yJ-n6D" id="L26-jV-J03"/>
+                <outlet property="timeIcon2_lbl" destination="Ie6-Z5-HnK" id="djM-Kh-67a"/>
                 <outlet property="timeIcon_lbl" destination="Uup-3Z-WYR" id="OmS-0A-mTT"/>
                 <outlet property="time_2_lbl" destination="euK-ga-l11" id="ujM-Fy-WaJ"/>
                 <outlet property="time_lbl" destination="G0g-Wx-hRf" id="3Gn-I3-Bxh"/>
+                <outlet property="title2_lbl" destination="IDP-S3-BdX" id="kXs-hV-hYd"/>
                 <outlet property="title_lbl" destination="C8f-pR-KrI" id="eG4-JE-rdW"/>
             </connections>
             <point key="canvasLocation" x="52" y="49.50738916256158"/>

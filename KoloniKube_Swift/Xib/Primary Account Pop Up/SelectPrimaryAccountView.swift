@@ -20,7 +20,8 @@ class SelectPrimaryAccountView: UIView {
     @IBOutlet weak var submit_btn: CustomButton!
     
     var selectedAccount = ""
-    var bookNowVc: BookNowVC!
+    var bookNowVc: BookNowVC?
+    var locationVc: LocationListingViewController?
     
     @IBAction func clickOnBtn(_ sender: UIButton) {
         
@@ -81,7 +82,7 @@ class SelectPrimaryAccountView: UIView {
         APICall.shared.postWeb("update_primary_login", parameters: params, showLoder: true) { (response) in
             if let message = response["MESSAGE"]as? String{
                 if let status = response["FLAG"]as? Int, status == 1{
-                    self.bookNowVc.reloadVc()
+                    self.bookNowVc?.reloadVc()
                     AppDelegate.shared.window?.showBottomAlert(message: message)
                     self.removeView()
                 }else{
@@ -95,12 +96,12 @@ class SelectPrimaryAccountView: UIView {
     }
 }
 
-extension BookNowVC{
+extension UIViewController{
     
     func loadPrimaryAccountView(data: [String:Any]){
         if let view = Bundle.main.loadNibNamed("SelectPrimaryAccountView", owner: nil, options: [:])?.first as? SelectPrimaryAccountView{
             view.frame = AppDelegate.shared.window?.bounds ?? self.view.bounds
-            view.bookNowVc = self
+            view.bookNowVc = self as? BookNowVC
             view.loadContent(data: data)
             AppDelegate.shared.window?.addSubview(view)
             view.frame.origin.y += view.frame.height

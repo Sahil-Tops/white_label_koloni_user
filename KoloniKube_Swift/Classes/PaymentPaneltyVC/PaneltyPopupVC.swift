@@ -22,11 +22,12 @@ class PaneltyPopupVC: UIViewController,PopupContentViewController {
     var strPenaltyPrice = String()
     var shareCraditCardOBJ = shareCraditCard()
     var data = ShareDevice()
-    var bikeDataObj = ShareBikeKube()
+    var bikeDataObj = ShareBikeData()
     var shareRentalObj = shareRental()
     var isMyRental = Bool()
     var strLocationID = String()
-    var bookNowVc: BookNowVC!
+    var bookNowVc: BookNowVC?    
+    var runningRentalView: RunningRentalView?
     var partnerId = ""
     
     
@@ -64,13 +65,22 @@ class PaneltyPopupVC: UIViewController,PopupContentViewController {
     
     //MARK: @IBAction's
     @IBAction func tapPayPenaltyBtn(_ sender: Any) {
-        self.bookNowVc.finishBooking_Web(strLocation_ID: self.bookNowVc.strLocationID)
+        if self.bookNowVc != nil{
+            self.bookNowVc?.finishBooking_Web(strLocation_ID: self.bookNowVc?.strLocationID ?? "")
+        }else if self.runningRentalView != nil{
+            self.runningRentalView?.finishBooking_Web(strLocation_ID: self.runningRentalView?.strLocationID ?? "")
+        }
         self.closeHandler()
     }
     
     @IBAction func tapImAtHubBtn(_ sender: Any) {
-        self.bookNowVc.iamAtHub = true        
-        self.bookNowVc.pickLockImageToFinishRide(cameraType: "hub")
+        if self.bookNowVc != nil{
+            self.bookNowVc?.iamAtHub = true
+            self.bookNowVc?.pickLockImageToFinishRide(cameraType: "hub")
+        }else if self.runningRentalView != nil{
+            self.runningRentalView?.iamAtHub = true
+            self.runningRentalView?.pickLockImageToFinishRide(cameraType: "hub")
+        }
         self.closeHandler()
     }
     

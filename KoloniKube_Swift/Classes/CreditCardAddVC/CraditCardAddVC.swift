@@ -45,7 +45,7 @@ class CraditCardAddVC: UIViewController {
     var indexPathSelection : Int = 0
     var isStatusCardEdit = Bool()
     let shareDevice = ShareDevice()
-    let bike = ShareBikeKube()
+    let bike = ShareBikeData()
     let shareCreditCardOBJ = shareCraditCard()
     var isFromFinishRental = Bool()
     var isFromProfileView = Bool()

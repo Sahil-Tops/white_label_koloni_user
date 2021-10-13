@@ -107,7 +107,6 @@
     @IBOutlet weak var rentalBgImageView: UIImageView!
     @IBOutlet weak var pauseRentalCollectionView_height: NSLayoutConstraint!
     @IBOutlet weak var pauseRentalCollection_bottom: NSLayoutConstraint!
-    @IBOutlet weak var numberOfRentalRunningTop_lbl: UILabel!
     @IBOutlet weak var numberOfRentalsRunning_lbl: UILabel!
     @IBOutlet weak var currentRentalAmount_lbl: UILabel!
     @IBOutlet weak var axaLoaderMsg_lbl: UILabel!
@@ -139,8 +138,8 @@
     
     var shareDeviceObj = ShareDevice()
     var sharedCreditCardObj = shareCraditCard()
-    var BikeSharedData = ShareBikeKube()
-    var bikeSharedDataArray: [ShareBikeKube] = []
+    var bikeSharedData = ShareBikeData()
+    var bikeSharedDataArray: [ShareBikeData] = []
     var endingRentalData: [String:Any] = [:]
     var isMyRental = Bool()
     var currentLat: CGFloat = 0.0;
@@ -899,21 +898,21 @@
         self.appGroupDefaults.setValue(dict, forKey: "ride")
     }
     
-    func setUPSlider(dict:NSDictionary,param:NSMutableDictionary){
+    func setUPSlider(dict:NSDictionary){
         if let currentRental = dict["CURRENT_RENTAL"] as? [[String:Any]],currentRental.count > 0 {
             for currentRetalObj in currentRental {
                 if self.shareDeviceObj.arrBikes.count > 0 {
                     
                 } else {
-                    self.BikeSharedData.strId = currentRetalObj["object_id"] as? String ?? ""
-                    self.BikeSharedData.is_outof_dropzone = Int(String(describing: currentRetalObj["is_outof_dropzone"]!)) ?? -1
-                    self.BikeSharedData.outOfDropzoneMsg = currentRetalObj["outof_dropzone_message"]as? String ?? ""
-                    self.BikeSharedData.strName = currentRetalObj["name"] as? String ?? ""
-                    self.BikeSharedData.strAddress = currentRetalObj["address"] as? String ?? ""
-                    self.BikeSharedData.doublePrice = StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_price"] as? String ?? "" )
-                    StaticClass.sharedInstance.saveToUserDefaultsString(value:self.BikeSharedData.strId, forKey: Global.g_UserData.ObjectID)
-                    self.BikeSharedData.intType = Int(StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_type"] as? String ?? "0"))
-                    self.bikeSharedDataArray.append(BikeSharedData)
+                    self.bikeSharedData.strId = currentRetalObj["object_id"] as? String ?? ""
+                    self.bikeSharedData.is_outof_dropzone = Int(String(describing: currentRetalObj["is_outof_dropzone"]!)) ?? -1
+                    self.bikeSharedData.outOfDropzoneMsg = currentRetalObj["outof_dropzone_message"]as? String ?? ""
+                    self.bikeSharedData.strName = currentRetalObj["name"] as? String ?? ""
+                    self.bikeSharedData.strAddress = currentRetalObj["address"] as? String ?? ""
+                    self.bikeSharedData.doublePrice = StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_price"] as? String ?? "" )
+                    StaticClass.sharedInstance.saveToUserDefaultsString(value:self.bikeSharedData.strId, forKey: Global.g_UserData.ObjectID)
+                    self.bikeSharedData.intType = Int(StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_type"] as? String ?? "0"))
+                    self.bikeSharedDataArray.append(bikeSharedData)
                 }
                 
                 if let strObjectType = currentRetalObj["object_type"] as? String  {
@@ -945,7 +944,6 @@
                 }
             }
             if currentRental.count > 0{
-                
                 self.strLocationID = currentRental[0]["location_id"] as? String ?? ""
                 self.strBikeKubeID = currentRental[0]["object_id"] as? String ?? ""
                 
@@ -1396,7 +1394,7 @@
                                     })
                                 })
                                 self.numberOfRentalsRunning_lbl.text = "\(self.selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
-                                self.numberOfRentalRunningTop_lbl.text = "\(self.selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
+//                                self.numberOfRentalRunningTop_lbl.text = "\(self.selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
                                 if self.selectedRentalIndex < Singleton.runningRentalArray.count{
                                     self.currentRentalAmount_lbl.text = "$\(Singleton.runningRentalArray[self.selectedRentalIndex]["total_price"]as? Double ?? 0.0)"
                                 }
@@ -1437,7 +1435,7 @@
                             }
                         }
                         if let cr = currentRental[0] as? NSDictionary{
-                            self.setUPSlider(dict:cr,param: params)
+                            self.setUPSlider(dict:cr)
                         }
                         self.pauseRentalCollectionView.alpha = 1.0
                         self.pauseRentalCollectionView.isUserInteractionEnabled = true
@@ -1446,8 +1444,7 @@
                         self.hideRunningRentalItems()
                     }
                     Global.appdel.checkLocationMangereMethod()
-                    if let payment_id = dict["payment_id"]as? String, payment_id != "0"
-                    {
+                    if let payment_id = dict["payment_id"]as? String, payment_id != "0"{
                         StaticClass.sharedInstance.saveToUserDefaultsString(value: payment_id , forKey: Global.g_UserData.BookingID)
                     }
                     if !self.isMapDraggin{
@@ -2463,7 +2460,7 @@
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.pauseRentalCollectionView{
             let cell = self.pauseRentalCollectionView.dequeueReusableCell(withReuseIdentifier: "PauseRentalCollectionCell", for: indexPath)as! PauseRentalCollectionCell
-            cell.bookNowVc = self
+            cell.vc = self
             cell.tag = indexPath.row
             cell.setDataOnCell(dataDictionary: Singleton.runningRentalArray[indexPath.row])
             cell.report_btn.tag = indexPath.row
@@ -2594,7 +2591,7 @@
             self.lastSelectedIndex = self.selectedRentalIndex
             self.isRentalCellChagned = false
             self.numberOfRentalsRunning_lbl.text = "\(selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
-            self.numberOfRentalRunningTop_lbl.text = "\(selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
+//            self.numberOfRentalRunningTop_lbl.text = "\(selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
             if self.selectedRentalIndex < Singleton.trackLocationRentalArray.count{
                 self.currentRentalAmount_lbl.text = "$\(Singleton.trackLocationRentalArray[selectedRentalIndex]["total_price"]as? Double ?? 0.0)"
             }

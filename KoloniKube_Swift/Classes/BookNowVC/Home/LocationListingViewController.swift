@@ -13,22 +13,98 @@ class LocationListingViewController: UIViewController {
     @IBOutlet weak var navigationImage: UIImageView!
     @IBOutlet weak var menu_btn: UIButton!
     @IBOutlet weak var logoImg: UIImageView!
+    @IBOutlet weak var locationTitle_lbl: UILabel!
+    @IBOutlet weak var description_lbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var startRental_btn: UIButton!
+    @IBOutlet weak var runningRental_btn: UIButton!
+    
+    //Slide to finish rental
+    @IBOutlet weak var btnSlideToFinish: VHSlideButton!
+    @IBOutlet weak var finishRentalsView: UIView!
+    @IBOutlet weak var btnCancel: UIButton!
+    
+    
     
     var locationModelArray: [LOCATION_DATA] = []
     var assetsModelArray: [ASSETS_LIST] = []
-
+    var axaLockConnection: AXALOCK_CONNECTION?
+    var runningRentalView: RunningRentalView?
+    var selectedCardDetail: shareCraditCard!
+    var shareDeviceObj = ShareDevice()
+    var bikeSharedData = ShareBikeData()
+    var bikeSharedDataArray: [ShareBikeData] = []
+    var endingRentalData: [String:Any] = [:]
+    var appGroupDefaults = UserDefaults.standard
+    var selectedRentalIndex = 0
+    
+    var locationId = ""
+    var bikeId = ""
+    var paymentId = ""
+    var isEndingRentalManual = ""
+    var batteryPercentage = ""
+    
+    var imagePickerVcPresent = false
+    
+    
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        self.searchHome_Web(lat: "\(StaticClass.sharedInstance.latitude)", long: "\(StaticClass.sharedInstance.longitude)")
         self.registerTableCell()
+        self.axaLockConnection = AXALOCK_CONNECTION.init(vc: self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.searchHome_Web(lat: "\(StaticClass.sharedInstance.latitude)", long: "\(StaticClass.sharedInstance.longitude)")
+        Singleton.shared.getCardsList_Web()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.axaLockConnection?.dissconnectDevice()
+        if !self.imagePickerVcPresent{
+            for i in 0..<Singleton.timerArray.count{
+                (Singleton.timerArray[i]).invalidate()
+            }
+            Singleton.timerArray.removeAll()
+        }else{
+            self.imagePickerVcPresent = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.loadUI()
+    }
+    
+    //MARK: - @IBAction
+    @IBAction func clickOnBtn(_ sender: UIButton) {
+        
+        switch sender {
+        case menu_btn:
+            self.sideMenuViewController?.presentLeftMenuViewController()
+            break
+        case startRental_btn:
+            if Singleton.shared.cardListsArray.count > 0{
+                self.loadSelectPaymentView()
+            }else{
+                let bookingPayment = BookingPaymentVC(nibName: "BookingPaymentVC", bundle: nil)
+                let strCustID = StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.Customer_ID)as? String ?? ""
+                bookingPayment.strCustomerID = strCustID
+                bookingPayment.referralSelected = 0//self.referralSelected
+                bookingPayment.numberOfReferral = 0//self.numberOfReferralRentals
+                bookingPayment.selectedObjectId = ""
+                self.navigationController?.pushViewController(bookingPayment, completion: {
+                })
+            }
+            break
+        case runningRental_btn:
+            self.runningRentalView = self.loadRunningRentalView()
+            break
+        default:
+            break
+        }
+        
     }
     
     //MARK: - Custom Function's
@@ -42,27 +118,105 @@ class LocationListingViewController: UIViewController {
     }
     
     func loadUI(){
+        self.startRental_btn.isHidden = true
+//        self.runningRental_btn.isHidden = true
         AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
             self.logoImg.image = image
         }
-        self.navigationImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.navigationImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.startRental_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.runningRental_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.navigationImage.backgroundColor = CustomColor.primaryColor
+            self.startRental_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            self.startRental_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        self.startRental_btn.circleObject()
+        self.runningRental_btn.circleObject()
         self.view.layoutIfNeeded()
+        
+        self.startRental_btn.isHidden = false
     }
     
-    //MARK: - @IBAction
-    @IBAction func clickOnBtn(_ sender: UIButton) {
+    func addDataToUserDefaultForWidget(){
+        var dict : [String:String] = [:]
+        dict["user_id"] = StaticClass.sharedInstance.strUserId
+        dict["ios_version"] = "\(appDelegate.getCurrentAppVersion)"
+        dict["object_id"] = StaticClass.sharedInstance.strObjectId
+        dict["booking_id"] = StaticClass.sharedInstance.strBookingId
+        self.appGroupDefaults.setValue(dict, forKey: "ride")
+    }
+    
+    func setUpData(dict: [String:Any]){
         
-        switch sender {
-        case menu_btn:
-            self.sideMenuViewController?.presentLeftMenuViewController()
-            break
-        default:
-            break
+        if let currentRental = dict["CURRENT_RENTAL"] as? [[String:Any]],currentRental.count > 0 {
+            for currentRetalObj in currentRental {
+                if self.shareDeviceObj.arrBikes.count > 0 {
+                    
+                } else {
+                    self.bikeSharedData.strId = currentRetalObj["object_id"] as? String ?? ""
+                    self.bikeSharedData.is_outof_dropzone = Int(String(describing: currentRetalObj["is_outof_dropzone"]!)) ?? -1
+                    self.bikeSharedData.outOfDropzoneMsg = currentRetalObj["outof_dropzone_message"]as? String ?? ""
+                    self.bikeSharedData.strName = currentRetalObj["name"] as? String ?? ""
+                    self.bikeSharedData.strAddress = currentRetalObj["address"] as? String ?? ""
+                    self.bikeSharedData.doublePrice = StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_price"] as? String ?? "" )
+                    StaticClass.sharedInstance.saveToUserDefaultsString(value:self.bikeSharedData.strId, forKey: Global.g_UserData.ObjectID)
+                    self.bikeSharedData.intType = Int(StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_type"] as? String ?? "0"))
+                    self.bikeSharedDataArray.append(bikeSharedData)
+                }
+                
+                if let strObjectType = currentRetalObj["object_type"] as? String  {
+                    if strObjectType == "2" {
+                        
+                    } else  {
+//                        self.btnGift.isHidden = false
+//                        self.referralCount_lbl.isHidden = false
+                    }
+                }
+                if let intObjectType = currentRetalObj["object_type"] as? Int {
+                    if intObjectType == 2 {
+                        
+                    } else {
+//                        self.btnGift.isHidden = false
+//                        self.referralCount_lbl.isHidden = false
+                    }
+                }
+                
+                Global.appdel.strIsUserType = currentRetalObj["user_type"] as? String ?? "0"
+                self.addDataToUserDefaultForWidget()
+//                if UserDefaults.standard.value(forKey: "isRentalPause") != nil{
+//                    let pause = UserDefaults.standard.value(forKey: "isRentalPause")
+//                    if "\(pause!)" == "1"{
+//                        self.isPause = false
+//                    }else{
+//                        self.isPause = true
+//                    }
+//                }
+            }
+            if currentRental.count > 0{
+                self.locationId = currentRental[0]["location_id"] as? String ?? ""
+                self.bikeId = currentRental[0]["object_id"] as? String ?? ""                
+            }
         }
         
     }
     
+}
 
+
+//MARK: - Select Payment Delegate's
+extension LocationListingViewController: SelectedPaymentDelegate{
+    
+    func selectCard(cardDetail: shareCraditCard, referralSelected: Int ) {
+        self.selectedCardDetail = cardDetail
+        let QrCodeVController = QRCodeScaneVC(nibName: "QRCodeScaneVC", bundle: nil)
+        QrCodeVController.sharedCreditCardObj = self.selectedCardDetail
+        QrCodeVController.isReferralApply = referralSelected
+        QrCodeVController.selectedObjectId = ""
+        self.navigationController?.pushViewController(QrCodeVController, animated: true)
+    }
+    
 }
 
 //MARK: - TableView Delegate's
@@ -92,6 +246,23 @@ extension LocationListingViewController: UITableViewDelegate, UITableViewDataSou
     
 }
 
+//MARK: - CoreBluetooth Delegate's
+extension LocationListingViewController: CheckBluetoothStatusDelegate{
+   func response(status: Bool) {
+       if status{
+        if self.runningRentalView?.rentalActionPerformed == 1{
+            self.runningRentalView?.showSlideDown()
+           }else{
+            self.runningRentalView?.performLockUnlock()
+           }
+       }else{
+           let alert = UIAlertController(title: "Alert", message: "Please turn on bluetooth to perform pause, resume or end rental.", preferredStyle: UIAlertController.Style.alert)
+           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+           self.present(alert, animated: true, completion: nil)
+       }
+   }
+}
+
 //MARK: - Web API
 extension LocationListingViewController{
     
@@ -117,6 +288,59 @@ extension LocationListingViewController{
                         self.assetsModelArray = ASSETS_LIST.parseData(data: assets)
                     }
                     self.tableView.reloadData()
+                    
+                    if let rentals = data["user_running_rental_detail"]as? [[String:Any]], rentals.count > 0{
+                        Singleton.runningRentalArray = rentals[0]["CURRENT_RENTAL"]as? [[String:Any]] ?? []
+                        if Singleton.runningRentalArray.count > 0{
+                            self.startRental_btn.setTitle("Add new rental", for: .normal)
+                            self.runningRental_btn.isHidden = false
+                            Singleton.track_location_timer.invalidate()
+                            Singleton.track_location_timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: { (_) in
+                                DispatchQueue.main.async(execute: {
+                                    Global.appdel.locationUpdatesCall(vc: self)
+                                })
+                            })
+                            Global.appdel.checkLocationMangereMethod()
+                            StaticClass.sharedInstance.saveToUserDefaults(Singleton.runningRentalArray as AnyObject, forKey: "running_rental")
+                            Singleton.numberOfCards = Singleton.runningRentalArray[0]["credit_cards_list"]as? [[String:Any]] ?? []
+                        }else{
+                            self.runningRental_btn.isHidden = true
+                            self.startRental_btn.setTitle("Start", for: .normal)
+                        }
+                        if Singleton.timerArray.count > 0 {
+                            for t in Singleton.timerArray {
+                                t.invalidate()
+                            }
+                        }
+                        Singleton.timerArray.removeAll()
+                        for _ in 0..<Singleton.runningRentalArray.count{
+                            let timer = Timer()
+                            Singleton.timerArray.append(timer)
+                        }
+                        if rentals.count > 0{
+                            self.setUpData(dict: rentals[0])
+                        }
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if Singleton.isOpeningAppFromNotification{
+                            if !Singleton.notificationRunningRentalDetail.isEmpty{
+                                self.selectedRentalIndex = Singleton.runningRentalArray.firstIndex(where: {$0["obj_unique_id"]as? String ?? "" == Singleton.notificationRunningRentalDetail["obj_unique_id"]as? String ?? ""}) ?? -1
+                                if self.selectedRentalIndex != -1{
+                                    self.loadEndRentalPopUpView(titleMsg: "Alert!", descriptionMsg: Singleton.notificationRunningRentalDetail["popup_msg"]as? String ?? "")
+                                }
+                            }
+                        }
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if let data = response as? [String:Any]{
+                            if let show_contact_popup = data["show_contact_popup"]as? Int, show_contact_popup == 1{
+                                self.loadPrimaryAccountView(data: data)
+                            }
+                        }
+                    }
+                    self.view.layoutIfNeeded()
                 }
             }
         }) { (error) in

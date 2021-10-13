@@ -18,19 +18,31 @@ class RentalAlertView: UIView {
     
     
     var bookNowVc: BookNowVC?
+    var locationVc: LocationListingViewController?
+    var vc: UIViewController?
     
     //MARK: - @IBAction's
     @IBAction func clickOnBtn(_ sender: UIButton) {
         
         switch sender {
         case lock_btn:
-            self.bookNowVc?.rentalActionPerformed = 0
-            self.bookNowVc?.permissionAlertToPause()
+            if self.vc is BookNowVC{
+                self.bookNowVc?.rentalActionPerformed = 0
+                self.bookNowVc?.permissionAlertToPause()
+            }else{
+                self.locationVc?.runningRentalView?.rentalActionPerformed = 0
+                self.locationVc?.runningRentalView?.pauseResumeEndAlert(action: "pause")
+            }
             self.removeView()
             break
         case endRental_btn:
-            self.bookNowVc?.rentalActionPerformed = 1
-            self.bookNowVc?.permissionAlertToEnd()
+            if self.vc is BookNowVC{
+                self.bookNowVc?.rentalActionPerformed = 1
+                self.bookNowVc?.permissionAlertToEnd()
+            }else{
+                self.locationVc?.runningRentalView?.rentalActionPerformed = 1
+                self.locationVc?.runningRentalView?.pauseResumeEndAlert(action: "end")
+            }
             self.removeView()
             break
         case checkBox_btn:
@@ -64,6 +76,11 @@ class RentalAlertView: UIView {
     }
     
     func loadContent(){
+        if let viewController = self.vc as? BookNowVC{
+            self.bookNowVc = viewController
+        }else if let viewController = self.vc as? LocationListingViewController{
+            self.locationVc = viewController
+        }
         self.title_lbl.textColor = CustomColor.primaryColor
         if AppLocalStorage.sharedInstance.application_gradient{
             self.lock_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
@@ -79,7 +96,7 @@ extension UIViewController{
     func loadRentalAlertView(){
         let view = Bundle.main.loadNibNamed("RentalAlertView", owner: nil, options: [:])?.first as! RentalAlertView
         view.frame = self.view.bounds
-        view.bookNowVc = self as? BookNowVC
+        view.vc = self
         view.frame.origin.y += view.frame.height
         view.loadContent()
         self.view.addSubview(view)

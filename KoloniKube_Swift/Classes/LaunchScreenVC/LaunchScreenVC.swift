@@ -64,7 +64,20 @@ extension LaunchScreenVC {
                     if let app_setting = data["application_setting"]as? [String:Any]{
                         StaticClass.sharedInstance.saveToUserDefaults(app_setting as AnyObject, forKey: "application_setting")
                         _ = AppLocalStorage.init()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        if StaticClass.sharedInstance.retriveFromUserDefaultsBool(key: "is_images_loading_first_time"){
+                            StaticClass.sharedInstance.saveToUserDefaultBool(forkey: "is_images_loading_first_time", value: false)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
+                                    if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
+                                        self.callAPiForVersionCheck()
+                                    }else {
+                                        AppDelegate.shared.setNavigationFlow()
+                                    }
+                                }else{
+                                    AppDelegate.shared.setNavigationFlow()
+                                }
+                            }
+                        }else{
                             if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
                                 if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
                                     self.callAPiForVersionCheck()
