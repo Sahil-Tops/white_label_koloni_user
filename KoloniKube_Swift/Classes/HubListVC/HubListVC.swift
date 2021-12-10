@@ -34,8 +34,8 @@ class HubListVC: UIViewController {
         self.loadContent()        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func viewDidLayoutSubviews() {
+        self.loadUI()
     }
     
     //MARK: - @IBAction's

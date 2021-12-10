@@ -18,7 +18,7 @@ class Global {
     static var objectAddress = ""
     static var Booking_ID = ""
     static var asset_type = ""
-    static var sharedBikeData = ShareBikeKube()
+    static var sharedBikeData = ShareBikeData()
     
     static var PauseColor = UIColor(red: 240.0/255, green: 195.0/255, blue: 50.0/255, alpha: 1.0)
     static var PlayColor = UIColor(red: 0.0/255, green: 163.0/255, blue: 90.0/255, alpha: 1.0)
@@ -355,12 +355,6 @@ class Global {
 }
 
 extension Global{
-    ///To check that user mobile number verified or not.
-    //    func checkIsMobileVerified()-> Bool{
-    //
-    //        return StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.isUserMobileNumberVerified)as? String ?? "" == "0" ? false:true
-    //
-    //    }
     
     static func storeLoginData(dicResult: NSDictionary){
         

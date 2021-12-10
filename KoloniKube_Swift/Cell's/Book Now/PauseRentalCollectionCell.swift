@@ -32,7 +32,10 @@ class PauseRentalCollectionCell: UICollectionViewCell {
     
     var arrayOfshareCraditCard = [shareCraditCard]()
     var timer: Timer?
-    var bookNowVc: BookNowVC!
+    var vc: UIViewController?
+    var runningRentalView: RunningRentalView!
+//    var bookNowVc: BookNowVC!
+//    var locationListingVc: LocationListingViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,6 +81,7 @@ class PauseRentalCollectionCell: UICollectionViewCell {
                     self.pauseOrStartBtn_img.image = image
                 }
                 self.pause_btn.backgroundColor = AppLocalStorage.sharedInstance.pause_button_color
+//                self.pause_btn.contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
             }
             
             self.orderNum_lbl.text = dataDictionary["obj_unique_id"]as? String ?? ""
@@ -91,23 +95,43 @@ class PauseRentalCollectionCell: UICollectionViewCell {
             self.cardListTable_height.constant = 0
             self.startTimer(dataDictionary: dataDictionary)
                         
-            if let is_out_of_dropzone = dataDictionary["is_outof_dropzone"]as? String, is_out_of_dropzone == "1"{
+            if let is_out_of_dropzone = dataDictionary["is_outof_dropzone"]as? String, is_out_of_dropzone == "0"{
                 self.outOfDropZoneText_lbl.isHidden = false
-                self.outOfDropZoneText_lbl.text = (dataDictionary["outof_dropzone_message"]as? String ?? "").html2String
+                self.outOfDropZoneText_lbl.text = "If you end your rental at a designated hub, you get 30 minutes free, followed by hourly rates."//(dataDictionary["outof_dropzone_message"]as? String ?? "").html2String
             }else{
                 self.outOfDropZoneText_lbl.isHidden = true
                 self.outOfDtextLabel_height.constant = 0
             }
-            if self.bookNowVc.loadingCollectionFirstTime{
-                self.bookNowVc.loadingCollectionFirstTime = false
+            if let bookNowVc = self.vc as? BookNowVC{
+                if bookNowVc.loadingCollectionFirstTime{
+                    bookNowVc.loadingCollectionFirstTime = false
+                    let count = self.outOfDropZoneText_lbl.getNumberofLines()
+                    self.outOfDtextLabel_height.constant = CGFloat(count * 25)
+                    bookNowVc.layout.itemSize = CGSize(width: bookNowVc.pauseRentalCollectionView.frame.width - 40, height: 265 + self.outOfDtextLabel_height.constant)
+                    bookNowVc.pauseRentalCollectionView_height.constant = CGFloat(bookNowVc.layout.itemSize.height + 115)
+                    bookNowVc.view.layoutIfNeeded()
+                }
+                bookNowVc.loadUI()
+            }else if self.vc is LocationListingViewController{
                 let count = self.outOfDropZoneText_lbl.getNumberofLines()
-                self.outOfDtextLabel_height.constant = CGFloat(count * 25)
-                self.bookNowVc.layout.itemSize = CGSize(width: self.bookNowVc.pauseRentalCollectionView.frame.width - 40, height: 265 + self.outOfDtextLabel_height.constant)
-                self.bookNowVc.pauseRentalCollectionView_height.constant = CGFloat(self.bookNowVc.layout.itemSize.height + 115)
-                self.bookNowVc.view.layoutIfNeeded()
+                self.outOfDtextLabel_height.constant = CGFloat(count * 30)
+                self.runningRentalView.layout.itemSize = CGSize(width: self.runningRentalView.collectionView.frame.width - 40, height: 265 + self.outOfDtextLabel_height.constant)
+                self.runningRentalView.collectionView_height.constant = CGFloat(self.runningRentalView.layout.itemSize.height)
+                self.runningRentalView.runningRentalContainerView_bottom.constant = -15 //self.runningRentalView.runningRentalContainerView.frame.size.height
+                self.runningRentalView.runningRentalContainerView.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.runningRentalView.loadUI()
+                    UIView.animate(withDuration: 0.5) {
+                        self.runningRentalView.frame.origin.y = 0
+                        self.runningRentalView.layoutIfNeeded()
+                    } completion: { (_) in
+                    }
+                }
             }
+            
+            self.pauseOrStartBtn_img.circleObject()
+            self.endBtn_img.circleObject()
             self.cardListTableView.reloadData()
-            self.bookNowVc.loadUI()
         }
         
     }
@@ -189,11 +213,11 @@ extension PauseRentalCollectionCell: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if self.cardListTableView.contentSize.height < 150{
+        if self.cardListTableView.contentSize.height < 100{
             self.cardListTableView.frame.size.height = self.cardListTableView.contentSize.height
             self.cardListTableView.isScrollEnabled = false
         }else{
-            self.cardListTableView.frame.size.height = 150
+            self.cardListTableView.frame.size.height = 100
             self.cardListTableView.isScrollEnabled = true
         }
     }
@@ -223,16 +247,27 @@ extension PauseRentalCollectionCell: UITableViewDelegate, UITableViewDataSource{
         }else{
             cell.cardImg.image = UIImage(named: CardTypeValue.Master.strImg)
         }
-        cell.containerView.backgroundColor = UIColor.white
-        cell.cardNumber_lbl.textColor = UIColor.darkGray
-        cell.cardNumber_lbl.text = "xxxx    xxxx    xxxx    \(cardDetail["card_number"] as? String ?? "")"
-        
+        cell.cardNumber_lbl.text = "xxxx    xxxx    xxxx    \((cardDetail["card_number"] as? String ?? "").suffix(4))"
+        if indexPath.row == 0{
+            self.runningRentalView.selectedCard = cardDetail
+            self.runningRentalView.cardSelected = 1
+            cell.containerView.backgroundColor = CustomColor.primaryColor
+            cell.cardNumber_lbl.textColor = UIColor.white
+        }else{
+            cell.containerView.backgroundColor = UIColor.white
+            cell.cardNumber_lbl.textColor = UIColor.darkGray
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        self.bookNowVc.changeCard_Web(payment_id: Singleton.runningRentalArray[0]["id"]as? String ?? "", cardToken: Singleton.numberOfCards[(indexPath.row + 1)]["token_id"]as? String ?? "", index: (indexPath.row))
+        if let bookNowVc = self.vc as? BookNowVC{
+            bookNowVc.changeCard_Web(payment_id: Singleton.runningRentalArray[0]["id"]as? String ?? "", cardToken: Singleton.numberOfCards[(indexPath.row + 1)]["token_id"]as? String ?? "", index: (indexPath.row))
+        }else if self.vc is LocationListingViewController{
+            self.runningRentalView.changeCard_Web(payment_id: Singleton.runningRentalArray[0]["id"]as? String ?? "", cardToken: Singleton.numberOfCards[indexPath.row + 1]["token_id"]as? String ?? "", index: (indexPath.row))
+        }
+        
         let temp = Singleton.numberOfCards[0]
         let item2 = Singleton.numberOfCards[indexPath.row + 1]
          
@@ -249,7 +284,7 @@ extension PauseRentalCollectionCell: UITableViewDelegate, UITableViewDataSource{
         }
         
         let cardDetail = Singleton.numberOfCards[0]
-        self.cardNum_lbl.text = "xxxx    xxxx    xxxx    \(cardDetail["card_number"] as? String ?? "")"
+        self.cardNum_lbl.text = "xxxx    xxxx    xxxx    \((cardDetail["card_number"] as? String ?? "").suffix(4))"
         self.cardListTableView.reloadData()
     }
     

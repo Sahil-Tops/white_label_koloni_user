@@ -18,7 +18,6 @@ class AppLocalStorage{
         type(of: self).sharedInstance = self
         if let data = StaticClass.sharedInstance.retriveFromUserDefaults("application_setting")as? [String:Any]{
             self.data = data
-            
             for (key, value) in data{
                 if key.contains("_img"){
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -117,10 +116,6 @@ class AppLocalStorage{
         return self.data["splash_img"]as? String ?? ""
     }
     
-    var tertiary_color: String{
-        return self.data["tertiary_color"]as? String ?? ""
-    }
-    
     var fonts: String{
         return self.data["fonts"]as? String ?? ""
     }
@@ -193,16 +188,28 @@ class AppLocalStorage{
         return self.data["resume_button_text"]as? String ?? ""
     }
     
+    var use_tertiary_text_color: String{
+        return self.data["use_tertiary_text_color"]as? String ?? ""
+    }
+    
+    var tertiary_color_str: String{
+        return self.data["tertiary_color"]as? String ?? ""
+    }
+    
+    var tertiary_color: UIColor{
+        return self.tertiary_color_str != "" ? UIColor(hex: tertiary_color_str)!:CustomColor.customYellow
+    }
     
     func storeToFileManager(imgUrl: String, imageName: String){
         DispatchQueue.main.async {
-            print(imgUrl)
+//            print(imgUrl)
             if imgUrl != ""{
                 if let filePath = self.filePath(forKey: imageName){
                     do{
                         let imageData = try Data(contentsOf: URL(string: imgUrl)!)
                         try imageData.write(to: filePath, options: .atomic)
-                        print("Image Stored on path: ", filePath)
+//                        print("Image Stored on path: ", filePath)
+                        StaticClass.sharedInstance.saveToUserDefaultsString(value: imgUrl, forKey: imageName)
                     }catch let err{
                         print("Error while writing file path: ", err)
                     }

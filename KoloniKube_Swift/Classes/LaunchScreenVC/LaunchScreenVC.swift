@@ -62,17 +62,62 @@ extension LaunchScreenVC {
             if let data = response as? [String:Any]{
                 if let status = data["FLAG"]as? Int, status == 1{
                     if let app_setting = data["application_setting"]as? [String:Any]{
+                        var newImg = false
                         StaticClass.sharedInstance.saveToUserDefaults(app_setting as AnyObject, forKey: "application_setting")
-                        _ = AppLocalStorage.init()
-                        if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
-                            if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
-                                self.callAPiForVersionCheck()
-                            }else {
+                        for (key, value) in app_setting{
+                            if key.contains("_img"){
+                                let storedImg = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: key)
+                                print(storedImg ?? "")
+                                print(value as? String ?? "")
+                                if (value as? String ?? "" != storedImg ?? ""){
+                                    print("New image found")
+                                    newImg = true
+                                    break
+                                }else if value as? String ?? "" == ""{
+                                    print("No image found")
+                                }else{
+                                    print("Image exist")
+                                }
+                            }
+                        }
+                        if newImg{
+                            _ = AppLocalStorage.init()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
+                                if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
+                                    self.callAPiForVersionCheck()
+                                }else {
+                                    AppDelegate.shared.setNavigationFlow()
+                                }
+                            }else{
                                 AppDelegate.shared.setNavigationFlow()
                             }
-                        }else{
-                            AppDelegate.shared.setNavigationFlow()
                         }
+//                        if !StaticClass.sharedInstance.retriveFromUserDefaultsBool(key: "is_images_loaded"){
+//                            StaticClass.sharedInstance.saveToUserDefaultBool(forkey: "is_images_loaded", value: true)
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                                if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
+//                                    if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
+//                                        self.callAPiForVersionCheck()
+//                                    }else {
+//                                        AppDelegate.shared.setNavigationFlow()
+//                                    }
+//                                }else{
+//                                    AppDelegate.shared.setNavigationFlow()
+//                                }
+//                            }
+//                        }else{
+//                            if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
+//                                if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
+//                                    self.callAPiForVersionCheck()
+//                                }else {
+//                                    AppDelegate.shared.setNavigationFlow()
+//                                }
+//                            }else{
+//                                AppDelegate.shared.setNavigationFlow()
+//                            }
+//                        }
                     }
                 }
             }

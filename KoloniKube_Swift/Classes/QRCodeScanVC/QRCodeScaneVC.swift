@@ -46,7 +46,7 @@ class QRCodeScaneVC: UIViewController{
     var promoId = ""
     
     let device = ShareDevice()
-    let objectDetail = ShareBikeKube()
+    let objectDetail = ShareBikeData()
     var sharedCreditCardObj = shareCraditCard()
     let lockConnectionService : LockConnectionService = LockConnectionService.sharedInstance
     var batteryPercentage = 0

@@ -32,11 +32,13 @@ class FitBoundsViewController: UIViewController {
     let sydneyMarker = GMSMarker(position: .sydney)
     sydneyMarker.title = "Sydney!"
     sydneyMarker.icon = UIImage(named: markerImageName)
+    sydneyMarker.map = mapView
 
     let anotherSydneyMarker = GMSMarker()
     anotherSydneyMarker.title = "Sydney 2!"
     anotherSydneyMarker.icon = UIImage(named: markerImageName)
     anotherSydneyMarker.position = anotherSydneyLocation
+    anotherSydneyMarker.map = mapView
     return [sydneyMarker, anotherSydneyMarker]
   }()
 
@@ -47,14 +49,6 @@ class FitBoundsViewController: UIViewController {
     // Creates a button that, when pressed, updates the camera to fit the bounds.
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: "Fit Bounds", style: .plain, target: self, action: #selector(fitBounds))
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    markers.forEach { marker in
-      marker.map = mapView
-    }
   }
 
   @objc func fitBounds() {

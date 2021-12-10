@@ -96,6 +96,9 @@ class MyRentalVC: UIViewController {
     }
     
     func loadUI(){
+        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
+            self.logoImg.image = image
+        }
         if AppLocalStorage.sharedInstance.application_gradient{
             self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
         }else{

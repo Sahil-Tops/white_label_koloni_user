@@ -26,9 +26,9 @@ class AssetsListCollectionCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setDataOnCell(data: AvailabelBike){
+    func setAvailableBikeDataOnCell(data: AvailabelBike){
+    
         self.assetType_lbl.text = data.type_name
-        
         DispatchQueue.main.async {
             if AppLocalStorage.sharedInstance.application_gradient{
                 self.book_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
@@ -84,38 +84,124 @@ class AssetsListCollectionCell: UICollectionViewCell {
         self.book_btn.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
-    //MARK: - @IBAction
-    @IBAction func clickOnBtn(_ sender: UIButton) {
-        let data = self.assetsListView.assetsListArray[self.tag]
-        if sender == book_btn{
-            UIView.animate(withDuration: 0.2, animations: {
-                self.assetsListView.containerView.alpha = 0
-            }) { (_) in
-                self.assetsListView.removeFromSuperview()
-                self.assetsListView.vc.selectedObjectId = data.strObjUniqueId
-                if self.book_btn.currentTitle == "Book"{
-                    self.assetsListView.delegate?.selectedAsset(buttonPressed: "book", assetId: data.strObjUniqueId)
-                }else{
-                    self.assetsListView.delegate?.selectedAsset(buttonPressed: "private", assetId: data.strObjUniqueId)
-                }
+    func setAssetListDataOnCell(data: ASSETS_LIST){
+        self.assetType_lbl.text = data.type_name
+        DispatchQueue.main.async {
+            if AppLocalStorage.sharedInstance.application_gradient{
+                self.book_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            }else{
+                self.book_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
             }
-        }else if sender == seePlans_btn{
-            UIView.animate(withDuration: 0.2, animations: {
-                self.assetsListView.containerView.alpha = 0
-            }) { (_) in
-                self.assetsListView.removeFromSuperview()
-                if self.seePlans_btn.currentTitle == "See plans"{
-                    let HubListVCController = HubListVC(nibName: "HubListVC", bundle: nil)
-                    HubListVCController.strPartnerName = data.partner_name
-                    HubListVCController.strPartnerID = data.plan_partner_id
-                    self.assetsListView.vc.navigationController?.pushViewController(HubListVCController, animated: true)
+            if data.assets_img_url != ""{
+                if data.type == "2"{
+                    if let url = URL(string: data.assets_img_url){
+                        self.assetImage.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder")) { (image, error, cache, url) in
+                            self.imageContainerView.backgroundColor = UIColor.init(hex: data.assets_color_code)
+                            self.imageContainerView.circleObject()
+                        }
+                    }
                 }else{
-                    self.assetsListView.delegate?.selectedAsset(buttonPressed: "nearly_koloni", assetId: data.strObjUniqueId)
+                    self.assetImage.image = UIImage(named: "locker_white")
+                    self.imageContainerView.backgroundColor = CustomColor.secondaryColor
                 }
-                
             }
         }
+        self.initialPrice_lbl.text = "$\(data.assets_initial_price)"
+        self.hourlyRate_lbl.text = "$\(data.assets_average_price)"
+        self.assetTitle_lbl.text = "ID - \(data.unique_id)"
         
+        if data.is_assets_active == 0{
+            self.book_btn.isHidden = true
+            self.seePlans_btn.setTitle("Show nearly koloni", for: .normal)
+        }else{
+            self.book_btn.isHidden = false
+            if data.is_accessible_user == 0{
+                self.seePlans_btn.setTitle("Show nearly koloni", for: .normal)
+                self.book_btn.setTitle("Private", for: .normal)
+                if data.is_outof_dropzone == 1{
+                    self.seePlans_btn.isHidden = true
+                }else{
+                    self.seePlans_btn.isHidden = false
+                }
+            }else{
+                self.seePlans_btn.setTitle("See plans", for: .normal)
+                self.book_btn.setTitle("Book", for: .normal)
+                if data.is_plan_purchase == "1"{
+                    self.seePlans_btn.isHidden = true
+                }else{
+                    if data.is_outof_dropzone == 1{
+                        self.seePlans_btn.isHidden = true
+                    }else{
+                        self.seePlans_btn.isHidden = false
+                    }
+                }
+            }
+        }
+        self.seePlans_btn.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.book_btn.titleLabel?.adjustsFontSizeToFitWidth = true
+    }
+    
+    //MARK: - @IBAction
+    @IBAction func clickOnBtn(_ sender: UIButton) {
+        if self.assetsListView.popUpType == "list"{
+            let data = self.assetsListView.availabelBikeArray[self.tag]
+            if sender == book_btn{
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.assetsListView.containerView.alpha = 0
+                }) { (_) in
+                    self.assetsListView.removeFromSuperview()
+                    self.assetsListView.bookNowVc.selectedObjectId = data.strObjUniqueId
+                    if self.book_btn.currentTitle == "Book"{
+                        self.assetsListView.delegate?.selectedAsset(buttonPressed: "book", assetId: data.strObjUniqueId)
+                    }else{
+                        self.assetsListView.delegate?.selectedAsset(buttonPressed: "private", assetId: data.strObjUniqueId)
+                    }
+                }
+            }else if sender == seePlans_btn{
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.assetsListView.containerView.alpha = 0
+                }) { (_) in
+                    self.assetsListView.removeFromSuperview()
+                    if self.seePlans_btn.currentTitle == "See plans"{
+                        let HubListVCController = HubListVC(nibName: "HubListVC", bundle: nil)
+                        HubListVCController.strPartnerName = data.partner_name
+                        HubListVCController.strPartnerID = data.plan_partner_id
+                        self.assetsListView.bookNowVc.navigationController?.pushViewController(HubListVCController, animated: true)
+                    }else{
+                        self.assetsListView.delegate?.selectedAsset(buttonPressed: "nearly_koloni", assetId: data.strObjUniqueId)
+                    }
+                    
+                }
+            }
+        }else{
+            let data = self.assetsListView.assetListArray[self.tag]
+            if sender == book_btn{
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.assetsListView.containerView.alpha = 0
+                }) { (_) in
+                    self.assetsListView.removeFromSuperview()
+                    if self.book_btn.currentTitle == "Book"{
+                        self.assetsListView.delegate?.selectedAsset(buttonPressed: "book", assetId: data.unique_id)
+                    }else{
+                        self.assetsListView.delegate?.selectedAsset(buttonPressed: "private", assetId: data.unique_id)
+                    }
+                }
+            }else if sender == seePlans_btn{
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.assetsListView.containerView.alpha = 0
+                }) { (_) in
+                    self.assetsListView.removeFromSuperview()
+                    if self.seePlans_btn.currentTitle == "See plans"{
+                        let HubListVCController = HubListVC(nibName: "HubListVC", bundle: nil)
+                        HubListVCController.strPartnerName = data.partner_name
+                        HubListVCController.strPartnerID = data.plan_partner_id
+                        self.assetsListView.assetListingVc.navigationController?.pushViewController(HubListVCController, animated: true)
+                    }else{
+                        self.assetsListView.delegate?.selectedAsset(buttonPressed: "nearly_koloni", assetId: data.unique_id)
+                    }                    
+                }
+            }
+        }
     }
     
     

@@ -23,9 +23,12 @@ class AssetsListView: UIView {
     @IBOutlet weak var right_arrow_btn: UIButton!
     
     
-    var assetsListArray: [AvailabelBike] = []
+    var availabelBikeArray: [AvailabelBike] = []
+    var assetListArray: [ASSETS_LIST] = []
+    var popUpType = ""          //single for one asset, list for listing.
     var delegate: AssetsListViewDelegate?
-    var vc: BookNowVC!
+    var bookNowVc: BookNowVC!
+    var assetListingVc: AssetsListingViewController!
     
     //MARK: Custom Function's
     
@@ -43,10 +46,10 @@ class AssetsListView: UIView {
     func rightButtonClicked() {
         let index = self.collectionView.indexPathsForVisibleItems.first
         if let i = index{
-            if i.item < self.assetsListArray.count - 1{
+            if i.item < self.availabelBikeArray.count - 1{
                 let indexPath = IndexPath(item: i.item + 1, section: 0)
                 collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-                if i.item + 1 == self.assetsListArray.count - 1{
+                if i.item + 1 == self.availabelBikeArray.count - 1{
                     self.right_arrow_btn.alpha = 0.2
                 }
                 self.left_arrow_btn.alpha = 1
@@ -91,14 +94,18 @@ class AssetsListView: UIView {
 extension AssetsListView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.assetsListArray.count
+        return self.popUpType == "list" ? self.availabelBikeArray.count:self.assetListArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: "AssetsListCollectionCell", for: indexPath)as! AssetsListCollectionCell
         cell.tag = indexPath.item
         cell.assetsListView = self
-        cell.setDataOnCell(data: self.assetsListArray[indexPath.row])
+        if popUpType == "list"{
+            cell.setAvailableBikeDataOnCell(data: self.availabelBikeArray[indexPath.row])
+        }else{
+            cell.setAssetListDataOnCell(data: self.assetListArray[indexPath.row])
+        }
         return cell
     }
     
@@ -108,23 +115,49 @@ extension AssetsListView: UICollectionViewDelegate, UICollectionViewDataSource, 
     
 }
 
-extension BookNowVC{
+extension UIViewController{
     
-    func loadAssestListView(assetList: [AvailabelBike]){
+    func loadAssestListView(vc: BookNowVC, assetList: [AvailabelBike]){
         if let assetsView = Bundle.main.loadNibNamed("AssetsListView", owner: nil, options: [:])?.first as? AssetsListView{
+            assetsView.popUpType = "list"
             assetsView.frame = self.view.bounds
-            assetsView.delegate = self as AssetsListViewDelegate
-            assetsView.vc = self
+            assetsView.delegate = vc as AssetsListViewDelegate
+            assetsView.bookNowVc = vc
             if AppLocalStorage.sharedInstance.application_gradient{
                 assetsView.titleBacgkground_imgView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
             }else{
                 assetsView.titleBacgkground_imgView.backgroundColor = CustomColor.primaryColor
             }
-            assetsView.assetsListArray = assetList
+            assetsView.availabelBikeArray = assetList
             if assetList.count < 2{
                 assetsView.left_arrow_btn.isHidden = true
                 assetsView.right_arrow_btn.isHidden = true
             }
+            assetsView.registerCollectionCell()
+            assetsView.addTapGesture()
+            assetsView.containerView.alpha = 0
+            self.view.addSubview(assetsView)
+            UIView.animate(withDuration: 0.2) {
+                assetsView.containerView.alpha += 1
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    func loadAssetInfo(vc: AssetsListingViewController, assetList: [ASSETS_LIST]){
+        if let assetsView = Bundle.main.loadNibNamed("AssetsListView", owner: nil, options: [:])?.first as? AssetsListView{
+            assetsView.popUpType = "single"
+            assetsView.frame = self.view.bounds
+            assetsView.delegate = vc as AssetsListViewDelegate
+            assetsView.assetListingVc = vc
+            if AppLocalStorage.sharedInstance.application_gradient{
+                assetsView.titleBacgkground_imgView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            }else{
+                assetsView.titleBacgkground_imgView.backgroundColor = CustomColor.primaryColor
+            }
+            assetsView.assetListArray = assetList
+            assetsView.left_arrow_btn.isHidden = true
+            assetsView.right_arrow_btn.isHidden = true
             assetsView.registerCollectionCell()
             assetsView.addTapGesture()
             assetsView.containerView.alpha = 0

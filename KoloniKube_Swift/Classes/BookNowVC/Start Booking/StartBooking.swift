@@ -17,7 +17,7 @@ class StartBooking: UIViewController{
     var spinnerView = UIView()
     var assetId = ""
     var viewController: UIViewController?
-    let objectDetail = ShareBikeKube()
+    let objectDetail = ShareBikeData()
     var sharedCreditCardDetail = shareCraditCard()
     let device = ShareDevice()
     var lockType: LockType?
@@ -39,6 +39,7 @@ class StartBooking: UIViewController{
     //Linka Lock
     let lockConnectionService : LockConnectionService = LockConnectionService.sharedInstance
     var isLinkaConnected = false
+    var locationVc: LocationListingViewController?
     
     
     //MARK: - Custom Function's
@@ -148,9 +149,12 @@ class StartBooking: UIViewController{
             })
         }else{
             self.hideSpinner()
-            if let bookNowVc = self.viewController as? BookNowVC{
-                bookNowVc.loadPriceContainerView(self)
-            }
+//            if let bookNowVc = self.viewController as? BookNowVC{
+//                self.loadPriceContainerView(self)
+//            }else if let vc = self.viewController as? LocationListingViewController{
+//                self.loadPriceContainerView(self)
+//            }
+            self.loadPriceContainerView(self)
         }
     }
     
@@ -310,6 +314,8 @@ extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
                 self.hideSpinner()                
                 if let bookNowVc = self.viewController as? BookNowVC{
                     bookNowVc.loadPriceContainerView(self)
+                }else if let assetListVc = self.viewController as? AssetsListingViewController{
+                    assetListVc.loadPriceContainerView(self)
                 }
             }
         }
@@ -336,6 +342,8 @@ extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
                                 if let bookNowVc = self.viewController as? BookNowVC{
                                     bookNowVc.isViewDidCall = true
                                     bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
+                                }else if self.viewController is AssetsListingViewController{
+                                    Global.appdel.setUpSlideMenuController()
                                 }
                             }
                         }
@@ -682,6 +690,8 @@ extension StartBooking{
                                 if let bookNowVc = self.viewController as? BookNowVC{
                                     bookNowVc.isViewDidCall = true
                                     bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
+                                }else if self.viewController is LocationListingViewController{
+                                    Global.appdel.setUpSlideMenuController()
                                 }
                             }
                         }

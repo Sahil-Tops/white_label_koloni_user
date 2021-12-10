@@ -61,7 +61,11 @@ class AppStoreRatingView: UIView {
         }else{
             self.rateUs_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
         }
-        self.title_lbl.textColor = CustomColor.secondaryColor
+        if AppLocalStorage.sharedInstance.use_tertiary_text_color == "1"{
+            self.title_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
+        }else{
+            self.title_lbl.textColor = CustomColor.secondaryColor
+        }
         self.title_lbl.text = "Enjoy the \(AppLocalStorage.sharedInstance.sitename) app?"
         
         let string = "Didn't like your experience? Report Issue how we can improve!"

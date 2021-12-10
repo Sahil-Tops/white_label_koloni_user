@@ -17,16 +17,28 @@ class RentalEndedView: UIView {
     
     var message = ""
     var bookNowVc: BookNowVC?
+    var locationVc: LocationListingViewController?
+    var vc: UIViewController?
     
     //MARK: - @IBActions
     @IBAction func tapGotItBtn(_ sender: UIButton) {
         if Singleton.runningRentalArray.count == 0{
             // Pass static "2" to show locker rental summary for bike also. //Previous param passed self.endingRentalData["object_type"] as? String ?? "0"
-            self.bookNowVc?.loadSummaryView(summaryType: self.bookNowVc?.endingRentalData["object_type"] as? String ?? "0")
+            if self.vc is BookNowVC{
+                self.bookNowVc?.loadSummaryView(summaryType: self.bookNowVc?.endingRentalData["object_type"] as? String ?? "0")
+            }else{
+                self.locationVc?.loadSummaryView(summaryType: self.locationVc?.endingRentalData["object_type"]as? String ?? "0")
+            }
         }else{
             let msg = Singleton.runningRentalArray.count == 1 ? "You have \(Singleton.runningRentalArray.count) ongoing rental":"You have \(Singleton.runningRentalArray.count) ongoing rentals"
-            self.bookNowVc?.loadCustomAlertWithGradientButtonView(title: "One rental ended!", messageStr: msg, buttonTitle: "Got It")
-            self.bookNowVc?.searchHome_Web(lat: String(describing: self.bookNowVc?.shareParameters.doubleLat), long: String(describing: self.bookNowVc?.shareParameters.doubleLong))
+            if self.vc is BookNowVC{
+                self.bookNowVc?.loadCustomAlertWithGradientButtonView(title: "One rental ended!", messageStr: msg, buttonTitle: "Got It")
+                self.bookNowVc?.searchHome_Web(lat: String(describing: self.bookNowVc?.shareParameters.doubleLat), long: String(describing: self.bookNowVc?.shareParameters.doubleLong))
+            }else{
+                self.locationVc?.loadCustomAlertWithGradientButtonView(title: "One rental ended!", messageStr: msg, buttonTitle: "Got It")
+                self.locationVc?.searchHome_Web(lat: String(describing: StaticClass.sharedInstance.latitude), long: String(describing: StaticClass.sharedInstance.longitude))
+            }
+            
         }
         
         UIView.animate(withDuration: 0.5) {
@@ -60,7 +72,11 @@ class RentalEndedView: UIView {
         if gesture.didTapAttributedTextInLabel(label: self.faqText_lbl, inRange: range){
             let vc = FAQViewController(nibName: "FAQViewController", bundle: nil)
             vc.type = "1"
-            self.bookNowVc?.navigationController?.pushViewController(vc, animated: true)
+            if self.vc is BookNowVC{
+                self.bookNowVc?.navigationController?.pushViewController(vc, animated: true)
+            }else{
+                self.locationVc?.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
@@ -72,6 +88,8 @@ extension UIViewController{
         if let view = Bundle.main.loadNibNamed("RentalEndedView", owner: nil, options: [:])?.first as? RentalEndedView{
             view.frame = self.view.bounds
             view.message = message
+            view.vc = self
+            view.locationVc = self as? LocationListingViewController
             view.bookNowVc = self as? BookNowVC
             view.loadContent()
             view.frame.origin.y += view.frame.height

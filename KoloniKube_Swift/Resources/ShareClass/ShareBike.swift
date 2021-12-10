@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShareBikeKube: NSObject {
+class ShareBikeData: NSObject {
     var strId:String = ""
     var strObjUniqueId = ""
     var strName:String = ""
