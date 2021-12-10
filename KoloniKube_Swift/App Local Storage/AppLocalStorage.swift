@@ -202,13 +202,14 @@ class AppLocalStorage{
     
     func storeToFileManager(imgUrl: String, imageName: String){
         DispatchQueue.main.async {
-            print(imgUrl)
+//            print(imgUrl)
             if imgUrl != ""{
                 if let filePath = self.filePath(forKey: imageName){
                     do{
                         let imageData = try Data(contentsOf: URL(string: imgUrl)!)
                         try imageData.write(to: filePath, options: .atomic)
-                        print("Image Stored on path: ", filePath)
+//                        print("Image Stored on path: ", filePath)
+                        StaticClass.sharedInstance.saveToUserDefaultsString(value: imgUrl, forKey: imageName)
                     }catch let err{
                         print("Error while writing file path: ", err)
                     }

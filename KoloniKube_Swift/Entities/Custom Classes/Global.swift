@@ -355,12 +355,6 @@ class Global {
 }
 
 extension Global{
-    ///To check that user mobile number verified or not.
-    //    func checkIsMobileVerified()-> Bool{
-    //
-    //        return StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.isUserMobileNumberVerified)as? String ?? "" == "0" ? false:true
-    //
-    //    }
     
     static func storeLoginData(dicResult: NSDictionary){
         

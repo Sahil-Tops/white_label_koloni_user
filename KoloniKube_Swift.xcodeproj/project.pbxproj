@@ -1932,8 +1932,8 @@
 		E7A5C3612390DF3700E2A6CC /* RefferView */ = {
 			isa = PBXGroup;
 			children = (
-				E7650250238FD4E000575285 /* RefferView.xib */,
 				E7A5C3622390DF5400E2A6CC /* RefferView.swift */,
+				E7650250238FD4E000575285 /* RefferView.xib */,
 			);
 			path = RefferView;
 			sourceTree = "<group>";
@@ -2963,7 +2963,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.1;
+				CURRENT_PROJECT_VERSION = 2.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -3002,7 +3002,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.1;
+				CURRENT_PROJECT_VERSION = 2.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -3043,7 +3043,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.1;
+				CURRENT_PROJECT_VERSION = 2.2;
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = koloniKube/Info.plist;
@@ -3074,7 +3074,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.1;
+				CURRENT_PROJECT_VERSION = 2.2;
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = koloniKube/Info.plist;

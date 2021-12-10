@@ -54,7 +54,7 @@ class Singleton: NSObject {
     static var isOpeningAppFromNotification = false
     static var notificationRunningRentalDetail: [String:Any] = [:]
     static var isCalledDidFinishLaunch = true
-    static var partnerIdWhiteLabel = "58"
+    static var partnerIdWhiteLabel = "62"
     var socialMediaUserData: ShareUser = ShareUser()
     var cardListsArray: [shareCraditCard] = []
     var referalCount = ""
