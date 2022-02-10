@@ -138,7 +138,7 @@ class LeftMenuViewController: UIViewController {
         switch menuController {
         
         case .map:            
-            self.sideMenuViewController?.setContentViewController(self.LocationListingController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.BookNowVController, animated: true)
         case .MyMembership:
             self.sideMenuViewController?.setContentViewController(self.BuyMembershipVController, animated: true)
         case .MyBooking:
