@@ -23,6 +23,16 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>CFBundleURLName</key>
+			<string>auth0</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleIdentifier</key>
 			<string></string>
 			<key>CFBundleTypeRole</key>
@@ -51,6 +61,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ClientId</key>
+	<string>vYCUKqPE3nquXBBf0LylgjOTbyvw0PL7</string>
+	<key>Domain</key>
+	<string>koloni.us.auth0.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>com.venmo.touch.v2</string>

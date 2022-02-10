@@ -10,16 +10,13 @@ import UIKit
 
 class RefferView: UIView {
     
-    @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var containerView: CustomView!
-    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var codeBg_imageView: UIImageView!
     @IBOutlet weak var referralCode_lbl: UILabel!
     @IBOutlet weak var tapToCopy_btn: UIButton!
     @IBOutlet weak var userName_lbl: UILabel!
     @IBOutlet weak var yourReferralGetText_lbl: UILabel!
     @IBOutlet weak var youReceiveText_lbl: UILabel!
-    @IBOutlet weak var redemRentalTitle_lbl: UILabel!
     @IBOutlet weak var shareCode_btn: CustomButton!
     @IBOutlet weak var redeem_btn: CustomButton!
     @IBOutlet weak var close_btn: UIButton!
@@ -80,19 +77,6 @@ class RefferView: UIView {
     }
     
     func loadContent(){
-        
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "flag_logo_img") { (image) in
-            self.titleImage.image = image
-        }
-        
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.shareCode_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.redeem_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.shareCode_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.redeem_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        
         if UserDefaults.standard.bool(forKey: "isShowEnterRefBtn") {
             self.redeem_btn.isHidden = false
             self.redeemStackView.isHidden = false
@@ -102,11 +86,7 @@ class RefferView: UIView {
             self.redeemStackView.isHidden = true
             self.redeemStack_height.constant = 20
         }
-        
-        self.titleImage.circleObject()
-        self.title_lbl.textColor = CustomColor.secondaryColor
-        self.redemRentalTitle_lbl.textColor = CustomColor.secondaryColor
-        self.codeBg_imageView.setBorder(border_width: 2, border_color: CustomColor.primaryColor)
+        self.codeBg_imageView.setBorder(border_width: 2, border_color: CustomColor.customBlue)
         self.codeBg_imageView.cornerRadius(cornerValue: 10)
         self.layoutIfNeeded()
     }

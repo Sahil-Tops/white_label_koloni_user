@@ -20,11 +20,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puW-Ba-imU" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="20" y="65.5" width="280" height="437.5"/>
+                    <rect key="frame" x="20" y="66" width="280" height="436"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refer a Friend!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ME-R4-PPN">
-                            <rect key="frame" x="30" y="50" width="230" height="30.5"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
+                            <rect key="frame" x="30" y="50" width="230" height="29"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="21"/>
                             <color key="textColor" red="0.32941176470588235" green="0.29803921568627451" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
@@ -32,7 +32,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-A7-BB0">
-                            <rect key="frame" x="70" y="95.5" width="140" height="70"/>
+                            <rect key="frame" x="70" y="94" width="140" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="3lF-A7-BB0" secondAttribute="height" multiplier="200:100" id="y4h-qc-EZk"/>
                             </constraints>
@@ -41,7 +41,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A B C 1 2 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6o-jc-CLC">
-                            <rect key="frame" x="70" y="103.5" width="140" height="27.5"/>
+                            <rect key="frame" x="70" y="102.5" width="140" height="27.5"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -50,7 +50,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Kv-Ib-3JN">
-                            <rect key="frame" x="95" y="139" width="90" height="25"/>
+                            <rect key="frame" x="95" y="138" width="90" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="7fk-jG-ZqI"/>
                             </constraints>
@@ -67,7 +67,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-VN-0Hy">
-                            <rect key="frame" x="0.0" y="185.5" width="280" height="48"/>
+                            <rect key="frame" x="0.0" y="184" width="280" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex Freasda, get your friends on koloni!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMK-X0-EaI">
                                     <rect key="frame" x="15" y="2" width="250" height="44"/>
@@ -88,7 +88,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NBa-5q-yPu">
-                            <rect key="frame" x="10" y="258.5" width="260" height="139"/>
+                            <rect key="frame" x="10" y="257" width="260" height="139"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-FJ-AzZ">
                                     <rect key="frame" x="0.0" y="0.0" width="260" height="50"/>
@@ -217,15 +217,16 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-Yf-Mzi">
-                    <rect key="frame" x="41" y="483" width="238" height="35"/>
+                    <rect key="frame" x="41" y="482" width="238" height="35"/>
                     <subviews>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Jh-nm-22K" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="115.5" height="35"/>
+                            <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="115.5" id="z6M-0M-5DM"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                            <state key="normal" title="Share Code">
+                            <state key="normal" title="Share Code" backgroundImage="side_menu">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -240,11 +241,12 @@
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Gb-m2-2Ws" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="122.5" y="0.0" width="115.5" height="35"/>
+                            <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="Ohu-XE-YVf"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                            <state key="normal" title="Redeem">
+                            <state key="normal" title="Redeem" backgroundImage="side_menu">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -260,19 +262,19 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owY-Nk-ukW" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="120" y="25.5" width="80" height="80"/>
+                    <rect key="frame" x="120" y="26" width="80" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W5c-iI-Swf">
-                            <rect key="frame" x="2" y="2" width="76" height="76"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gift_1" translatesAutoresizingMaskIntoConstraints="NO" id="W5c-iI-Swf">
+                            <rect key="frame" x="10" y="10" width="60" height="60"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="2Vl-3F-hbP"/>
-                        <constraint firstAttribute="trailing" secondItem="W5c-iI-Swf" secondAttribute="trailing" constant="2" id="ADN-tr-Fyp"/>
-                        <constraint firstItem="W5c-iI-Swf" firstAttribute="top" secondItem="owY-Nk-ukW" secondAttribute="top" constant="2" id="Ta4-cd-D9a"/>
-                        <constraint firstItem="W5c-iI-Swf" firstAttribute="leading" secondItem="owY-Nk-ukW" secondAttribute="leading" constant="2" id="ecu-ga-Js3"/>
-                        <constraint firstAttribute="bottom" secondItem="W5c-iI-Swf" secondAttribute="bottom" constant="2" id="j1s-eE-VbV"/>
+                        <constraint firstAttribute="trailing" secondItem="W5c-iI-Swf" secondAttribute="trailing" constant="10" id="ADN-tr-Fyp"/>
+                        <constraint firstItem="W5c-iI-Swf" firstAttribute="top" secondItem="owY-Nk-ukW" secondAttribute="top" constant="10" id="Ta4-cd-D9a"/>
+                        <constraint firstItem="W5c-iI-Swf" firstAttribute="leading" secondItem="owY-Nk-ukW" secondAttribute="leading" constant="10" id="ecu-ga-Js3"/>
+                        <constraint firstAttribute="bottom" secondItem="W5c-iI-Swf" secondAttribute="bottom" constant="10" id="j1s-eE-VbV"/>
                         <constraint firstAttribute="height" constant="80" id="mjw-fT-Ngj"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -304,12 +306,9 @@
                 <outlet property="redeemStackView" destination="NBa-5q-yPu" id="v7P-4n-RKV"/>
                 <outlet property="redeemStack_height" destination="RrZ-At-3ei" id="lhP-iC-Cq5"/>
                 <outlet property="redeem_btn" destination="2Gb-m2-2Ws" id="tdT-rE-ytW"/>
-                <outlet property="redemRentalTitle_lbl" destination="4Cx-pt-qTw" id="UGb-Vd-bom"/>
                 <outlet property="referralCode_lbl" destination="s6o-jc-CLC" id="dUn-h9-MH8"/>
                 <outlet property="shareCode_btn" destination="6Jh-nm-22K" id="vWg-Rw-0dS"/>
                 <outlet property="tapToCopy_btn" destination="1Kv-Ib-3JN" id="VQU-pu-Oro"/>
-                <outlet property="titleImage" destination="W5c-iI-Swf" id="ffg-NX-kV0"/>
-                <outlet property="title_lbl" destination="9ME-R4-PPN" id="Xpq-nc-3cq"/>
                 <outlet property="userName_lbl" destination="KMK-X0-EaI" id="ywX-n5-k9e"/>
                 <outlet property="youReceiveText_lbl" destination="uVR-hs-Mot" id="osd-0I-7np"/>
                 <outlet property="youReceiveView" destination="xIY-JU-3PP" id="8l0-C1-Xzd"/>
@@ -321,10 +320,14 @@
     </objects>
     <designables>
         <designable name="2Gb-m2-2Ws">
-            <size key="intrinsicContentSize" width="61" height="33"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
         <designable name="6Jh-nm-22K">
-            <size key="intrinsicContentSize" width="84" height="33"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
+    <resources>
+        <image name="gift_1" width="256" height="256"/>
+        <image name="side_menu" width="1242" height="2208"/>
+    </resources>
 </document>

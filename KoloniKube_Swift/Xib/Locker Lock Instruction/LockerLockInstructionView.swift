@@ -44,17 +44,6 @@ class LockerLockInstructionView: UIView {
         
     }
     
-    func loadContent(){
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "locker_alert_img", outputBlock: { (image) in
-            self.locker_imgView.image = image
-        })
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.ok_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.ok_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-    }
-    
 }
 
 extension UIViewController{
@@ -65,7 +54,6 @@ extension UIViewController{
         view.frame = self.view.bounds
         view.bookNowVc = self as? BookNowVC
         view.description_lbl.text = "Please remove items and close the door to end your rental."
-        view.loadContent()
         view.frame.origin.y = (view.frame.origin.y + view.frame.height)
         self.view.addSubview(view)
         

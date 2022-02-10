@@ -9,6 +9,7 @@
 import Foundation
 import LinkaAPIKit
 import CoreBluetooth
+import OcsSmartLibrary
 
 class StartBooking: UIViewController{
     
@@ -17,7 +18,7 @@ class StartBooking: UIViewController{
     var spinnerView = UIView()
     var assetId = ""
     var viewController: UIViewController?
-    let objectDetail = ShareBikeData()
+    let objectDetail = ShareBikeKube()
     var sharedCreditCardDetail = shareCraditCard()
     let device = ShareDevice()
     var lockType: LockType?
@@ -39,7 +40,13 @@ class StartBooking: UIViewController{
     //Linka Lock
     let lockConnectionService : LockConnectionService = LockConnectionService.sharedInstance
     var isLinkaConnected = false
-    var locationVc: LocationListingViewController?
+    //OCS Lock
+    var lock: OcsLock!
+    var license: License!
+    var extendedLicense: ExtendedLicense!
+    var extendedLicenseFrame = ""
+    var userCode = ""
+    var isConfiguring = false
     
     
     //MARK: - Custom Function's
@@ -47,7 +54,7 @@ class StartBooking: UIViewController{
         type(of: self).sharedInstance = self
         self.viewController = vc
         self.isReferralApply = refferalApply
-        self.assetId = asset_id
+        self.assetId = asset_id        
         self.sharedCreditCardDetail = shareCraditCard
         self.getBikeQrDetail()
         self.startSpinner()
@@ -93,6 +100,69 @@ class StartBooking: UIViewController{
         }
     }
     
+    func loadOcsLock(){
+        OcsSmartManager.sharedInstance.startScanMaintenance(timeoutSec: 3, scanDelegate: self, scanType: .MAINTENANCE)
+    }
+    
+    func generateExtenedLicense(code: String){
+        self.userCode = code
+        DispatchQueue.main.async {
+            do{
+                let asset = NSDataAsset(name: "ocs_license", bundle: Bundle.main)
+                let bytes = [UInt8](asset!.data)
+                self.extendedLicense = try ExtendedLicense.getLicense(license: Array(bytes).data.hexEncodedString())
+                
+                if self.objectDetail.ocs_master_code != ""{
+                    try self.extendedLicense.setMasterCode(masterCode: self.objectDetail.ocs_master_code)
+                }else{
+                    self.showTopPop(message: "No master code found for this lcoker, try other locker", response: false)
+                    return
+                }
+                print(self.objectDetail.ocs_master_code, self.userCode)
+                self.extendedLicenseFrame = try self.extendedLicense.generateConfigForDedicatedLock(
+                    lockNumber: Int(self.lock.getLockNumber()),
+                    newMasterCode: self.objectDetail.ocs_master_code,
+                    userCode: self.userCode,
+                    blockKeypad: true,
+                    buzzerOn: true,
+                    ledType: Led.LED_ON_TYPE,
+                    expirationDate: Calendar.current.date(byAdding: .day, value: 2, to: Date()),
+                    automaticClosing: false)
+                self.configureLock()
+            }catch let err{
+                print("Error catch block: ", err)
+            }
+        }
+    }
+    
+    func configureLock(){
+        self.isConfiguring = true
+        OcsSmartManager.sharedInstance.stopScan()
+        OcsSmartManager.sharedInstance.connectAndSend(ocsLock: self.lock, connectionTimeoutSec: 6, communicationTimeoutSec: 10, frame: self.extendedLicenseFrame, callback: self)
+    }
+    
+    func configured(){
+        DispatchQueue.main.async {
+            do{
+                let licenseString = try self.extendedLicense.getUserFrameDedicatedLocksString(dedicatedlocks: [Int(self.lock.getLockNumber())], userCode: self.userCode)
+                self.license = try License.getLicense(license: licenseString)
+                self.lockOcsLock()
+            }catch let err{
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    func lockOcsLock(){
+        if self.lock.getLockStatus() == LockStatus.OPEN{
+            self.objectBookingAPI_Called()
+        }else{
+            self.startSpinner()
+            self.isConfiguring = false
+            OcsSmartManager.sharedInstance.reconnectAndSendToNode(withTag: self.lock.getTag(), connectionTimeoutSec: 6, communicationTimeoutSec: 10, frame: self.license.getFrame(), callback: self)
+        }
+    }
+    
     func parseJsonData(detail:[String:Any], outputBlock: @escaping(_ response: Bool) -> Void) {
         
         StartBooking.sharedInstance.objectDetail.strId = detail["id"] as? String ?? ""
@@ -130,13 +200,23 @@ class StartBooking: UIViewController{
         StartBooking.sharedInstance.objectDetail.partner_name = detail["partner_name"]as? String ?? ""
         StartBooking.sharedInstance.objectDetail.lock_id = detail["lock_id"]as? String ?? ""
         StartBooking.sharedInstance.objectDetail.device_name = detail["axa_device_name"]as? String ?? ""
+        StartBooking.sharedInstance.objectDetail.axa_identifier = detail["axa_identifier"]as? String ?? ""
+        StartBooking.sharedInstance.objectDetail.ocs_lock_number = detail["ocs_lock_number"]as? String ?? ""
+        StartBooking.sharedInstance.objectDetail.ocs_master_code = detail["ocs_master_code"]as? String ?? ""
         StartBooking.sharedInstance.device.arrBikes.add(StartBooking.sharedInstance.objectDetail)
         outputBlock(true)
         
     }
     
     func loadContent(){
-        StartBooking.sharedInstance.lockType = StartBooking.sharedInstance.objectDetail.lock_id == "6" ? .axa:.linka
+        
+        if StartBooking.sharedInstance.objectDetail.lock_id == "6"{
+            StartBooking.sharedInstance.lockType = .axa
+        }else if StartBooking.sharedInstance.objectDetail.lock_id == "7"{
+            StartBooking.sharedInstance.lockType = .ocs
+        }else{
+            StartBooking.sharedInstance.lockType = .linka
+        }
         if StartBooking.sharedInstance.lockType == LockType.axa{
             StartBooking.sharedInstance.centralMannager = CBCentralManager(delegate: self, queue: nil)
             _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
@@ -147,14 +227,13 @@ class StartBooking: UIViewController{
                     self.deinitialize()
                 }
             })
+        }else if StartBooking.sharedInstance.lockType == LockType.ocs{
+            self.loadOcsLock()
         }else{
             self.hideSpinner()
-//            if let bookNowVc = self.viewController as? BookNowVC{
-//                self.loadPriceContainerView(self)
-//            }else if let vc = self.viewController as? LocationListingViewController{
-//                self.loadPriceContainerView(self)
-//            }
-            self.loadPriceContainerView(self)
+            if let bookNowVc = self.viewController as? BookNowVC{
+                bookNowVc.loadPriceContainerView(self)
+            }
         }
     }
     
@@ -214,6 +293,68 @@ class StartBooking: UIViewController{
         }
     }
     
+}
+
+//MARK: - OCS Lock Delegate's
+extension StartBooking: ScanDelegate, ProcessDelegate{
+    func onCompletion() {
+        print("onCompletion")
+        self.hideSpinner()
+        OcsSmartManager.sharedInstance.stopScan()
+    }
+
+    func onError(error: OcsSmartManagerError) {
+        print("Error while scanning: ", error)
+        self.hideSpinner()
+        OcsSmartManager.sharedInstance.stopScan()
+    }
+
+    func onSearchResult(lock: OcsLock) {
+        OcsSmartManager.sharedInstance.stopScan()
+        if "\(lock.getLockNumber())" == StartBooking.sharedInstance.objectDetail.ocs_lock_number{
+            self.lock = lock
+            self.hideSpinner()
+            if self.lock != nil{
+                if let bookNowVc = self.viewController as? BookNowVC{
+                    bookNowVc.loadPriceContainerView(self)
+                }
+            }
+        }
+    }
+    
+    func onSuccess(response: String) {
+        print("onSuccess: ", response)
+        self.hideSpinner()
+        OcsSmartManager.sharedInstance.stopScan()
+        do{
+            let event = try Event.getEventFromFrame(frame: response)
+            print(event.isSuccessEvent())
+            if event.isSuccessEvent(){
+                if self.isConfiguring{
+                    self.configured()
+                }else{
+                    self.objectBookingAPI_Called()
+                }
+            }
+        }catch let err{
+            print("Error catch block: ", err)
+        }
+    }
+    
+    func onErrorProcessDelegate(error: OcsSmartManagerError) {
+        print("onErrorProcessDelegate: ", error)
+        OcsSmartManager.sharedInstance.stopScan()
+        self.hideSpinner()
+        self.showAlertWithAction(actionTitle: "Try again", cancelTitle: "Cancel", title: "Alert", msg: "Lock is not connected, Please Try again", completion: { (response) in
+            if response{
+                if self.isConfiguring{
+                    self.configureLock()
+                }else{
+                    self.configured()
+                }
+            }
+        })
+    }
 }
 
 //MARK: - CBCentralManager & CBPeripheralManager Delegate's
@@ -314,8 +455,6 @@ extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
                 self.hideSpinner()                
                 if let bookNowVc = self.viewController as? BookNowVC{
                     bookNowVc.loadPriceContainerView(self)
-                }else if let assetListVc = self.viewController as? AssetsListingViewController{
-                    assetListVc.loadPriceContainerView(self)
                 }
             }
         }
@@ -327,7 +466,7 @@ extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
         
         if characteristic.uuid == stateCharUUID{
             if let bytes = characteristic.value{
-                let data = characteristic.value?.bytes ?? []
+                let data = characteristic.value?.byteArray ?? []
                 print("Bytes -", bytes)
                 if data.count > 0{
                     print(data[0])
@@ -342,8 +481,6 @@ extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
                                 if let bookNowVc = self.viewController as? BookNowVC{
                                     bookNowVc.isViewDidCall = true
                                     bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
-                                }else if self.viewController is AssetsListingViewController{
-                                    Global.appdel.setUpSlideMenuController()
                                 }
                             }
                         }
@@ -602,9 +739,13 @@ extension StartBooking{
                         Global.appdel.strIsUserType = dict["user_type"] as? String ?? "0"
                         if self.lockType == LockType.axa{
                             self.objectBookingAPI_Called()
+                        }else if self.lockType == LockType.ocs{
+                            self.hideSpinner()
+                            if let bookNowVc = self.viewController as? BookNowVC{
+                                bookNowVc.loadPinCodePopUp(type: "start_booking")
+                            }
                         }else{
                             self.fetchAccessToken { (_) in
-//                                StaticClass.sharedInstance.ShowSpiner()
                                 _ = self.lockConnectionService.doQuery(macAddress: Singleton.shared.bikeData.strDeviceID, delegate: self)
                             }
                         }
@@ -632,6 +773,7 @@ extension StartBooking{
         
         dictParameter.setValue(strUserId ,forKey:"user_id")
         dictParameter.setValue(objectDetail.strId, forKey: "object_id")
+        dictParameter.setValue(self.userCode, forKey: "ocs_code")
         dictParameter.setValue(objectDetail.booking_object_type, forKey: "object_type")
         dictParameter.setValue(objectDetail.booking_object_sub_type, forKey: "object_sub_type")
         dictParameter.setValue(sharedCreditCardDetail.token_id ,forKey:"card_token")
@@ -683,16 +825,24 @@ extension StartBooking{
                                 }
                             }
                         }else{
-                            self.startSpinner()
+//                            self.startSpinner()
                             self.lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
-                                self.hideSpinner()
+//                                self.hideSpinner()
                                 self.deinitialize()
                                 if let bookNowVc = self.viewController as? BookNowVC{
                                     bookNowVc.isViewDidCall = true
                                     bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
-                                }else if self.viewController is LocationListingViewController{
-                                    Global.appdel.setUpSlideMenuController()
                                 }
+                            }
+                        }
+                    }else if self.lockType == LockType.ocs{
+//                        self.startSpinner()
+                        self.lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
+//                            self.hideSpinner()
+                            self.deinitialize()
+                            if let bookNowVc = self.viewController as? BookNowVC{
+                                bookNowVc.isViewDidCall = true
+                                bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
                             }
                         }
                     }else{
@@ -744,6 +894,7 @@ extension StartBooking{
     }
     
 }
+
 
 //MARK: - Check Bluetooth Delegate's
 extension StartBooking: CheckBluetoothStatusDelegate{

@@ -10,7 +10,6 @@ import UIKit
 
 class SelectPrimaryAccountView: UIView {
 
-    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var description_lbl: UILabel!
     @IBOutlet weak var email_lbl: UILabel!
     @IBOutlet weak var mobileNumber_lbl: UILabel!
@@ -20,8 +19,7 @@ class SelectPrimaryAccountView: UIView {
     @IBOutlet weak var submit_btn: CustomButton!
     
     var selectedAccount = ""
-    var bookNowVc: BookNowVC?
-    var locationVc: LocationListingViewController?
+    var bookNowVc: BookNowVC!
     
     @IBAction func clickOnBtn(_ sender: UIButton) {
         
@@ -65,12 +63,6 @@ class SelectPrimaryAccountView: UIView {
         self.email_lbl.text = "Email ID (\(data["popup_email_id"]as? String ?? ""))"
         self.mobileNumber_lbl.text = "Mobile Number (\(data["popup_mobile_number"]as? String ?? ""))"
         self.description_lbl.text = data["popup_msg"]as? String ?? ""
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.submit_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{            
-            self.submit_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        self.title_lbl.textColor = CustomColor.primaryColor
     }
     
     func updatePrimaryAccount_Web(){
@@ -82,7 +74,7 @@ class SelectPrimaryAccountView: UIView {
         APICall.shared.postWeb("update_primary_login", parameters: params, showLoder: true) { (response) in
             if let message = response["MESSAGE"]as? String{
                 if let status = response["FLAG"]as? Int, status == 1{
-                    self.bookNowVc?.reloadVc()
+                    self.bookNowVc.reloadVc()
                     AppDelegate.shared.window?.showBottomAlert(message: message)
                     self.removeView()
                 }else{
@@ -96,12 +88,12 @@ class SelectPrimaryAccountView: UIView {
     }
 }
 
-extension UIViewController{
+extension BookNowVC{
     
     func loadPrimaryAccountView(data: [String:Any]){
         if let view = Bundle.main.loadNibNamed("SelectPrimaryAccountView", owner: nil, options: [:])?.first as? SelectPrimaryAccountView{
             view.frame = AppDelegate.shared.window?.bounds ?? self.view.bounds
-            view.bookNowVc = self as? BookNowVC
+            view.bookNowVc = self
             view.loadContent(data: data)
             AppDelegate.shared.window?.addSubview(view)
             view.frame.origin.y += view.frame.height

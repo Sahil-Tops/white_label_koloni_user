@@ -17,8 +17,6 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
     
     static var sharedInstance:AXALOCK_CONNECTION?
     var bookNowVc: BookNowVC?
-    var locationVc: LocationListingViewController?
-    var vc: UIViewController?
     var centralMannager: CBCentralManager?
     var peripheralDevice: CBPeripheral?
     var ctrCharacteristic: CBCharacteristic?
@@ -29,15 +27,10 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
     var writeCommandArray: [Int] = []
     var connectedWithDevice = ""
     
-    init(vc: UIViewController) {
+    init(vc: BookNowVC) {
         super.init()
         type(of: self).sharedInstance = self
-        self.vc = vc
-        if let viewController = vc as? BookNowVC{
-            self.bookNowVc = viewController
-        }else if let viewController = vc as? LocationListingViewController{
-            self.locationVc = viewController
-        }
+        self.bookNowVc = vc
         self.centralMannager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -54,50 +47,26 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
             if strArray.count > currentIndex{
                 if self.peripheralDevice?.state ?? .disconnected == .connected{
                     self.sendingCommand = true
-                    if self.vc is BookNowVC{
-                        if self.bookNowVc?.rentalActionPerformed == 1{
-                            self.lockDevice()
-                        }else{
-                            Global().delay(delay: 0.3) {
-                                self.bookNowVc?.paseLockUnlock()
-                            }
-                        }
-                    }else if self.vc is LocationListingViewController{
-                        if self.locationVc?.runningRentalView?.rentalActionPerformed == 1{
-                            self.lockDevice()
-                        }else{
-                            self.locationVc?.runningRentalView?.performLockUnlock()
+                    if self.bookNowVc?.rentalActionPerformed == 1{
+                        self.lockDevice()
+                    }else{
+                        Global().delay(delay: 0.3) {
+                            self.bookNowVc?.paseLockUnlock()
                         }
                     }
                 }else{
-                    if self.vc is BookNowVC{
-                        self.bookNowVc?.getAxaEkeyPasskeyForBookNow_Web(assetId: Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", outputBlock: { (response) in
-                            if response{
-                                self.centralMannager?.connect(self.peripheralDevice!, options: [:])
-                            }
-                        })
-                    }else{
-                        self.locationVc?.runningRentalView?.getAxaEkeyPasskey_Web(assetId: Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", outputBlock: { (response) in
-                            if response{
-                                self.centralMannager?.connect(self.peripheralDevice!, options: [:])
-                            }
-                        })
-                    }
-                }
-            }else{
-                if self.vc is BookNowVC{
                     self.bookNowVc?.getAxaEkeyPasskeyForBookNow_Web(assetId: Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", outputBlock: { (response) in
                         if response{
-                            self.loadAxaFunctionality()
-                        }
-                    })
-                }else{
-                    self.locationVc?.runningRentalView?.getAxaEkeyPasskey_Web(assetId: Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", outputBlock: { (response) in
-                        if response{
-                            self.loadAxaFunctionality()
+                            self.centralMannager?.connect(self.peripheralDevice!, options: [:])
                         }
                     })
                 }
+            }else{
+                self.bookNowVc?.getAxaEkeyPasskeyForBookNow_Web(assetId: Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", outputBlock: { (response) in
+                    if response{
+                        self.loadAxaFunctionality()
+                    }
+                })
             }
         }
     }
@@ -108,7 +77,7 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         for item in eKeyArray{
             if self.ctrCharacteristic != nil{
                 self.writeCommandArray.append(1)
-                let bytes = self.vc is BookNowVC ? self.bookNowVc?.stringToBytes(item)! ?? []:self.locationVc?.stringToBytes(item)! ?? []
+                let bytes = self.bookNowVc?.stringToBytes(item)! ?? []
                 let data = Data(bytes: bytes, count: bytes.count)
                 self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
             }
@@ -117,78 +86,42 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
     
     func lockDevice(){
         if self.lockStatus == "opened"{
-            if self.vc is BookNowVC{
-                if self.ctrCharacteristic != nil && self.bookNowVc != nil{
-                    let strArray = (Singleton.axa_ekey_dictionary["axa_passkey"]as? String ?? "").components(separatedBy: "-")
-                    let currentIndex = Singleton.axa_ekey_dictionary["current_index"]as? Int ?? -1
-                    if currentIndex != -1{
-                        let bytes = self.bookNowVc?.stringToBytes(strArray[currentIndex])! ?? []
-                        let data = Data(bytes: bytes, count: bytes.count)
-                        self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
-                        Singleton.axa_ekey_dictionary["current_index"] = currentIndex + 1
-                    }
-                }
-            }else{
-                if self.ctrCharacteristic != nil && self.locationVc != nil{
-                    let strArray = (Singleton.axa_ekey_dictionary["axa_passkey"]as? String ?? "").components(separatedBy: "-")
-                    let currentIndex = Singleton.axa_ekey_dictionary["current_index"]as? Int ?? -1
-                    if currentIndex != -1{
-                        let bytes = self.locationVc?.stringToBytes(strArray[currentIndex])! ?? []
-                        let data = Data(bytes: bytes, count: bytes.count)
-                        self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
-                        Singleton.axa_ekey_dictionary["current_index"] = currentIndex + 1
-                    }
+            if self.ctrCharacteristic != nil && self.bookNowVc != nil{
+                let strArray = (Singleton.axa_ekey_dictionary["axa_passkey"]as? String ?? "").components(separatedBy: "-")
+                let currentIndex = Singleton.axa_ekey_dictionary["current_index"]as? Int ?? -1
+                if currentIndex != -1{
+                    let bytes = self.bookNowVc?.stringToBytes(strArray[currentIndex])! ?? []
+                    let data = Data(bytes: bytes, count: bytes.count)
+                    self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
+                    Singleton.axa_ekey_dictionary["current_index"] = currentIndex + 1
                 }
             }
         }else{
             if self.sendingCommand{
                 self.sendingCommand = false
-                if self.vc is BookNowVC{
-                    self.bookNowVc?.deviceLockedSuccessfully()
-                    self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["id"]as? String ?? "", "command_sent": "0", "command_status": "0", "error_message": "", "device_type": "1"])
-                }else{
-                    self.locationVc?.runningRentalView?.deviceLockedSuccessfully()
-                    self.locationVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["id"]as? String ?? "", "command_sent": "0", "command_status": "0", "error_message": "", "device_type": "1"])
-                }
+                self.bookNowVc?.deviceLockedSuccessfully()
+                self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["id"]as? String ?? "", "command_sent": "0", "command_status": "0", "error_message": "", "device_type": "1"])
             }
         }
     }
     
     func unlockDevice(){
         if self.lockStatus == "closed"{
-            if self.vc is BookNowVC{
-                if self.ctrCharacteristic != nil && self.bookNowVc != nil{
-                    let strArray = (Singleton.axa_ekey_dictionary["axa_passkey"]as? String ?? "").components(separatedBy: "-")
-                    let currentIndex = Singleton.axa_ekey_dictionary["current_index"]as? Int ?? -1
-                    if currentIndex != -1{
-                        let bytes = self.bookNowVc?.stringToBytes(strArray[currentIndex])! ?? []
-                        let data = Data(bytes: bytes, count: bytes.count)
-                        self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
-                        Singleton.axa_ekey_dictionary["current_index"] = currentIndex + 1
-                    }
-                }
-            }else{
-                if self.ctrCharacteristic != nil && self.locationVc != nil{
-                    let strArray = (Singleton.axa_ekey_dictionary["axa_passkey"]as? String ?? "").components(separatedBy: "-")
-                    let currentIndex = Singleton.axa_ekey_dictionary["current_index"]as? Int ?? -1
-                    if currentIndex != -1{
-                        let bytes = self.locationVc?.stringToBytes(strArray[currentIndex])! ?? []
-                        let data = Data(bytes: bytes, count: bytes.count)
-                        self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
-                        Singleton.axa_ekey_dictionary["current_index"] = currentIndex + 1
-                    }
+            if self.ctrCharacteristic != nil && self.bookNowVc != nil{
+                let strArray = (Singleton.axa_ekey_dictionary["axa_passkey"]as? String ?? "").components(separatedBy: "-")
+                let currentIndex = Singleton.axa_ekey_dictionary["current_index"]as? Int ?? -1
+                if currentIndex != -1{
+                    let bytes = self.bookNowVc?.stringToBytes(strArray[currentIndex])! ?? []
+                    let data = Data(bytes: bytes, count: bytes.count)
+                    self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
+                    Singleton.axa_ekey_dictionary["current_index"] = currentIndex + 1
                 }
             }
         }else{
             if self.sendingCommand{
                 self.sendingCommand = false
-                if self.vc is BookNowVC{
-                    self.bookNowVc?.deviceUnlockedSuccessfully()
-                    self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
-                }else{
-                    self.locationVc?.runningRentalView?.deviceUnlockedSuccessfully()
-                    self.locationVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
-                }
+                self.bookNowVc?.deviceUnlockedSuccessfully()
+                self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
             }
         }
     }
@@ -197,11 +130,11 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         if self.peripheralDevice != nil{
             self.centralMannager?.cancelPeripheralConnection(self.peripheralDevice!)
             self.centralMannager = nil
-            self.peripheralDevice = nil
         }
     }
     
     //MARK: - CBCentralDelegate's & CBPeriheralDelegate's
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .unknown:
@@ -226,13 +159,7 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         if Singleton.runningRentalArray.count > 0{
             let device_name_array = peripheral.name?.components(separatedBy: ":") ?? []
             if device_name_array.count > 1{
-                var device_name = ""
-                if self.vc is BookNowVC{
-                    device_name = Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["assets_device_name"]as? String ?? ""
-                }else{
-                    device_name = Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["assets_device_name"]as? String ?? ""
-                }
-                if device_name_array[1] == device_name{
+                if device_name_array[1] == Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["assets_device_name"]as? String ?? ""{
                     self.centralMannager?.stopScan()
                     if self.peripheralDevice != nil{
                         self.centralMannager?.cancelPeripheralConnection(self.peripheralDevice!)
@@ -288,24 +215,14 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
         if self.writingEkeyCommand{
             self.writeCommandArray.removeLast()
             if self.writeCommandArray.count == 0{
+                self.connectedWithDevice = Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["assets_device_name"]as? String ?? ""
                 self.writingEkeyCommand = false
                 self.sendingCommand = true
-                if self.vc is BookNowVC{
-                    self.connectedWithDevice = Singleton.runningRentalArray[self.bookNowVc?.selectedRentalIndex ?? 0]["assets_device_name"]as? String ?? ""
-                    if self.bookNowVc?.rentalActionPerformed == 1{
-                        self.lockDevice()
-                    }else{
-                        self.bookNowVc?.paseLockUnlock()
-                    }
+                if self.bookNowVc?.rentalActionPerformed == 1{
+                    self.lockDevice()
                 }else{
-                    self.connectedWithDevice = Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["assets_device_name"]as? String ?? ""
-                    if self.locationVc?.runningRentalView?.rentalActionPerformed == 1{
-                        self.lockDevice()
-                    }else{
-                        self.locationVc?.runningRentalView?.performLockUnlock()
-                    }
+                    self.bookNowVc?.paseLockUnlock()
                 }
-                
             }
         }
         self.peripheralDevice?.setNotifyValue(true, for: characteristic)
@@ -325,20 +242,11 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
                         print("Unlocked")
                         if self.sendingCommand && self.lockStatus == "closed"{
                             self.sendingCommand = false
-                            if self.vc is BookNowVC{
-                                self.bookNowVc?.deviceUnlockedSuccessfully()
-                                self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
-                            }else{
-                                self.locationVc?.runningRentalView?.deviceUnlockedSuccessfully()
-                                self.locationVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
-                            }
+                            self.bookNowVc?.deviceUnlockedSuccessfully()
+                            self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
                         }else{
                             if self.sendingCommand{
-                                if self.vc is BookNowVC{
-                                    self.bookNowVc?.hideLockLoader()
-                                }else{
-                                    self.locationVc?.runningRentalView?.hideLoader()
-                                }
+                                self.bookNowVc?.hideLockLoader()
                             }
                         }
                         self.lockStatus = "opened"
@@ -351,13 +259,8 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
                         if self.sendingCommand{
                             self.sendingCommand = false
                             self.counter_timer.invalidate()
-                            if self.vc is BookNowVC{
-                                self.bookNowVc?.deviceLockedSuccessfully()
-                                self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
-                            }else{
-                                self.locationVc?.runningRentalView?.deviceLockedSuccessfully()
-                                self.locationVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.locationVc?.runningRentalView?.selectedRentalIndex ?? 0]["id"]as? String ?? "", "command_sent": "1", "command_status": "0", "error_message": "", "device_type": "1"])
-                            }
+                            self.bookNowVc?.deviceLockedSuccessfully()
+                            self.bookNowVc?.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[self.bookNowVc!.selectedRentalIndex]["id"]as? String ?? "", "command_sent": "0", "command_status": "0", "error_message": "", "device_type": "1"])
                         }
                         self.lockStatus = "closed"
                         break
@@ -367,23 +270,12 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
                     case 0x08:
                         print("Waiting for lock")
                         self.lockStatus = "opened"
-                        if self.vc is BookNowVC{
-                            self.bookNowVc?.hideLockLoader()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                if self.bookNowVc?.rentalActionPerformed == 1{
-                                    self.bookNowVc?.showAxaLockLoaderPopUp(msg: "Pull lock lever down to end rental...")
-                                }else{
-                                    self.bookNowVc?.showAxaLockLoaderPopUp(msg: "Close lock by pulling lever down...")
-                                }
-                            }
-                        }else{
-                            self.locationVc?.runningRentalView?.hideLoader()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                if self.locationVc?.runningRentalView?.rentalActionPerformed == 1{
-                                    self.locationVc?.runningRentalView?.showLoader(withMsg: "Pull lock lever down to end rental...")
-                                }else{
-                                    self.locationVc?.runningRentalView?.showLoader(withMsg: "Close lock by pulling lever down...")
-                                }
+                        self.bookNowVc?.hideLockLoader()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            if self.bookNowVc?.rentalActionPerformed == 1{
+                                self.bookNowVc?.showAxaLockLoaderPopUp(msg: "Pull lock lever down to end rental...")
+                            }else{
+                                self.bookNowVc?.showAxaLockLoaderPopUp(msg: "Close lock by pulling lever down...")
                             }
                         }
                         break

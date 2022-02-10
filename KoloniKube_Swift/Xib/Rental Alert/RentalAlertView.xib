@@ -96,7 +96,7 @@
                                     <rect key="frame" x="129" y="0.0" width="119" height="35"/>
                                     <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                    <state key="normal" title="Lock">
+                                    <state key="normal" title="Lock" backgroundImage="side_menu">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -152,7 +152,6 @@
                 <outlet property="checkBox_btn" destination="oG3-A3-dQ9" id="BnV-9T-sZQ"/>
                 <outlet property="endRental_btn" destination="PwF-Fa-NBB" id="QEj-L4-1kd"/>
                 <outlet property="lock_btn" destination="Zol-9e-u2a" id="dZQ-f1-e1A"/>
-                <outlet property="title_lbl" destination="UuP-z0-vhX" id="8Z3-cd-q3v"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="59.598214285714285"/>
         </view>
@@ -162,10 +161,11 @@
             <size key="intrinsicContentSize" width="89" height="36"/>
         </designable>
         <designable name="Zol-9e-u2a">
-            <size key="intrinsicContentSize" width="39" height="36"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
     <resources>
+        <image name="side_menu" width="1242" height="2208"/>
         <image name="unchecked_gray" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

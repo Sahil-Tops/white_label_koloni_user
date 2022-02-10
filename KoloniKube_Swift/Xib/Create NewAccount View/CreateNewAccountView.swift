@@ -48,16 +48,6 @@ class CreateNewAccountView: UIView {
         }
     }
     
-    func loadContent(){
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.yes_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.no_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.yes_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.no_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-    }
-    
 }
 
 extension UIViewController{
@@ -66,7 +56,6 @@ extension UIViewController{
             view.frame = self.view.bounds
             view.vc = self
             view.description_lbl.text = desc
-            view.loadContent()
             self.view.addSubview(view)
             view.frame.origin.y += view.frame.height
             UIView.animate(withDuration: 0.5) {

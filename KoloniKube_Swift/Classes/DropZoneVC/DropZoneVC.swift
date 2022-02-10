@@ -13,13 +13,11 @@ import GooglePlaces
 class DropZoneVC: UIViewController {
     
     //MARK: - Outlet's
-    @IBOutlet weak var headerBgImage: UIImageView!
-    @IBOutlet weak var logo_img: UIImageView!
-    @IBOutlet weak var icon_lbl: UILabel!
     @IBOutlet weak var btnCurrentLocation: UIButton!
     @IBOutlet weak var headerView: ShadowView!
     @IBOutlet weak var containerView: ShadowView!
     @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var logo_img: UIImageView!
     @IBOutlet weak var lblMeters: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     
@@ -46,10 +44,6 @@ class DropZoneVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.mapGoogle?.frame = CGRect(x: 0, y: 0, width: self.mapView.frame.size.width, height: self.mapView.frame.size.height)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.loadUI()
     }
     
     //MARK :- @IBAction's
@@ -82,24 +76,6 @@ class DropZoneVC: UIViewController {
     }
     
     //MARK: - Custom Function's
-    
-    func loadUI(){
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
-            self.logo_img.image = image
-        }
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.headerBgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.btnCurrentLocation.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.headerBgImage.backgroundColor = CustomColor.primaryColor
-            self.btnCurrentLocation.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        self.icon_lbl.textColor = CustomColor.primaryColor
-        self.lblAddress.textColor = CustomColor.primaryColor
-        self.lblMeters.textColor = CustomColor.primaryColor
-        self.btnCurrentLocation.circleObject()
-    }
-    
     func googleMapSetup() {
         self.placesClient = GMSPlacesClient()
         self.mapMarker = GMSMarker()
@@ -126,29 +102,31 @@ class DropZoneVC: UIViewController {
         var index = 0
         for data in arrPlaces as! [SharePlaces] {
             DispatchQueue.main.async
-            {
-                let marker = GMSMarker()
-                marker.position = CLLocationCoordinate2DMake(Double(data.strLat), Double(data.strLong))
-                marker.isTappable = true
-                AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "map_flag_img") { (image) in
-                    let iconView = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 50))
-                    iconView.backgroundColor = .clear
-                    let imageView = UIImageView(frame: CGRect(x: 3, y: 3, width: 38, height: 38))
-                    let layer = CAShapeLayer()
-                    layer.path = UIBezierPath(roundedRect: CGRect(x: iconView
-                                                                    .center.x - 3, y: iconView.center.y, width: 6, height: 20), cornerRadius: 20).cgPath
-                    layer.fillColor = CustomColor.primaryColor.cgColor
-                    iconView.layer.addSublayer(layer)
-                    imageView.image = image
-                    imageView.circleObject()
-                    iconView.addSubview(imageView)
-                    iconView.cornerRadius(cornerValue: 25)
-                    iconView.shadow(color: .gray, radius: 1.0, opacity: 0.5)
-                    marker.iconView = iconView
-                }
-                marker.map = self.mapGoogle
-                marker.userData = index
-                index = index + 1
+                {
+                    let marker = GMSMarker()
+                    marker.position = CLLocationCoordinate2DMake(Double(data.strLat)
+                        , Double(data.strLong))
+                    marker.isTappable = true
+                    if index == 0 {
+                        if data.strType == "1"{
+                            marker.icon = UIImage(named: "location_bike")
+                        }else if data.strType == "2"{
+                            marker.icon = UIImage(named: "location_kube")
+                        }else {
+                            marker.icon = UIImage(named: "location_both_green")//location_kube
+                        }
+                    }else{
+                        if data.strType == "1"{
+                            marker.icon = UIImage(named: "location_bike")
+                        }else if data.strType == "2"{
+                            marker.icon = UIImage(named: "location_kube")
+                        }else {
+                            marker.icon = UIImage(named: "location_both_green")//location_kube
+                        }
+                    }
+                    marker.map = self.mapGoogle
+                    marker.userData = index
+                    index = index + 1
             }
         }
         if self.arrPlaces.count > 0 {
@@ -172,8 +150,8 @@ class DropZoneVC: UIViewController {
             let polyline = GMSPolygon(path: path)
             polyline.isTappable = true
             polyline.zIndex = Int32(count)
-            polyline.strokeColor = AppLocalStorage.sharedInstance.geofence_affiliate_color
-            polyline.fillColor = AppLocalStorage.sharedInstance.geofence_affiliate_color.withAlphaComponent(0.3)
+            polyline.strokeColor = Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 1.0)
+            polyline.fillColor = Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 0.3)
             polyline.strokeWidth = 1.0
             polyline.map = self.mapGoogle
             count += 1

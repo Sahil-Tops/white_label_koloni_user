@@ -11,8 +11,6 @@ import UIKit
 class FAQViewController: UIViewController {
     
     //MARK: Outlets
-    @IBOutlet weak var logoImg: UIImageView!
-    @IBOutlet weak var navigationBgImage: UIImageView!
     @IBOutlet weak var menuOrBack_btn: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var search_txtField: UITextField!
@@ -47,7 +45,6 @@ class FAQViewController: UIViewController {
         super.viewDidLayoutSubviews()
         self.headerView.addUnderLine(color: .lightGray)
         self.referralCount_lbl.circleObject()
-        self.loadUI()
     }
     
     //MARK: - @IBAction's
@@ -78,17 +75,6 @@ class FAQViewController: UIViewController {
     }
     
     //MARK: - Custom Function's
-    
-    func loadUI(){
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
-            self.logoImg.image = image
-        }
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.navigationBgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.navigationBgImage.backgroundColor = CustomColor.primaryColor
-        }
-    }
     
     func loadContent(){
         self.search_txtField.delegate = self

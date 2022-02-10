@@ -14,7 +14,6 @@ import CoreBluetooth
 class StaticClass {
     
     static let sharedInstance = StaticClass()
-    var loadBgView = UIView()
     
     var arrGender : NSMutableArray = NSMutableArray()
     var arrAmenities : NSMutableArray = NSMutableArray()
@@ -169,31 +168,21 @@ class StaticClass {
     func ShowSpiner(_ msg: String = "", _ showBackgroundColor: Bool = false) -> Void {
         DispatchQueue.main.async {
             print("Starting loader")
-            
-            AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "loader_img") { (image) in
-                self.window = UIApplication.shared.keyWindow
-                self.loadBgView.frame = self.window!.bounds
-                self.loadBgView.backgroundColor = CustomColor.transparentDarkGray
-                self.progressBar.show(message: msg, style: MyStyle())
-                self.logoImg.image = image
-                self.logoImg.contentMode = .scaleAspectFit
-                self.logoImg.center = (self.window?.center)!
-                self.logoImg.circleObject()
-                self.window?.backgroundColor = .clear
-                self.window?.addSubview(self.loadBgView)
-                self.window!.addSubview(self.logoImg)
-            }
-            
+            self.window = UIApplication.shared.keyWindow
+            self.progressBar.show(message: msg, style: MyStyle())
+            self.logoImg.image = UIImage(named: "logo")
+            self.logoImg.contentMode = .scaleAspectFit
+            self.logoImg.center = (self.window?.center)!
+            self.logoImg.circleObject()
+            self.window?.backgroundColor = .clear
+            self.window!.addSubview(self.logoImg)
         }
     }
     func HideSpinner() -> Void {
         DispatchQueue.main.async {
             print("Stoping loader")
             self.progressBar.dismiss()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.loadBgView.removeFromSuperview()
-                self.logoImg.removeFromSuperview()
-            }
+            self.logoImg.removeFromSuperview()
         }
     }
     

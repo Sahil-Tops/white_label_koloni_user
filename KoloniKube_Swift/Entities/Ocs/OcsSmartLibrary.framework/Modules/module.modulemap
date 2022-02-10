@@ -1,0 +1,11 @@
+framework module OcsSmartLibrary {
+  umbrella header "OcsSmartLibrary.h"
+
+  export *
+  module * { export * }
+}
+
+module OcsSmartLibrary.Swift {
+    header "OcsSmartLibrary-Swift.h"
+    requires objc
+}

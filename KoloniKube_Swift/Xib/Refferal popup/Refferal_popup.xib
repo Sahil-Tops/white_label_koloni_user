@@ -65,8 +65,9 @@ RG8geW91IGhhdmUgYSByZWZlcnJhbCAQY29kZT8
                                 <constraint firstAttribute="trailing" secondItem="CHR-TF-Vdp" secondAttribute="trailing" id="uBq-gZ-Vu7"/>
                             </constraints>
                         </view>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="TQM-0f-EuO">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="referral_popUp_image" translatesAutoresizingMaskIntoConstraints="NO" id="TQM-0f-EuO">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="141"/>
+                            <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="TQM-0f-EuO" secondAttribute="height" multiplier="53:20" id="xWt-kf-C1m"/>
                             </constraints>
@@ -114,7 +115,7 @@ RG8geW91IGhhdmUgYSByZWZlcnJhbCAQY29kZT8
                         <constraint firstAttribute="height" constant="40" id="1qt-O8-JQB"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
-                    <state key="normal" title="Submit"/>
+                    <state key="normal" title="Submit" backgroundImage="side_menu"/>
                     <connections>
                         <action selector="btnOk_Click:" destination="iN0-l3-epB" eventType="touchUpInside" id="xiB-Jl-aYr"/>
                     </connections>
@@ -132,7 +133,6 @@ RG8geW91IGhhdmUgYSByZWZlcnJhbCAQY29kZT8
             </constraints>
             <connections>
                 <outlet property="cancel_btn" destination="ZSg-k2-ZVb" id="LNm-y4-eHU"/>
-                <outlet property="imageView" destination="TQM-0f-EuO" id="bh8-Bq-EHH"/>
                 <outlet property="submit_btn" destination="UFY-RJ-jFg" id="d63-P9-sbD"/>
                 <outlet property="txtReferralCode" destination="CHR-TF-Vdp" id="JoN-I9-elv"/>
                 <outlet property="view_center" destination="C7C-NP-pgH" id="gGA-Pd-GHm"/>
@@ -142,12 +142,13 @@ RG8geW91IGhhdmUgYSByZWZlcnJhbCAQY29kZT8
     </objects>
     <designables>
         <designable name="UFY-RJ-jFg">
-            <size key="intrinsicContentSize" width="63" height="37"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
     <resources>
         <image name="cross_white" width="30" height="30"/>
-        <image name="placeholder" width="750" height="750"/>
+        <image name="referral_popUp_image" width="1062" height="400"/>
+        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

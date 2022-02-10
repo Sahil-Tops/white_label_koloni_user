@@ -16,7 +16,6 @@
                 <outlet property="date_lbl" destination="7sg-Et-gUr" id="8Yu-gv-spV"/>
                 <outlet property="downloadReceipt_btn" destination="ke6-iZ-mJI" id="dc5-hq-2CM"/>
                 <outlet property="endTime_lbl" destination="CCe-Et-epW" id="kd0-MO-1kb"/>
-                <outlet property="headerBg_img" destination="qYf-c9-PQG" id="QDt-bY-Hez"/>
                 <outlet property="headerView" destination="ma7-xI-gyc" id="YIm-4q-e8i"/>
                 <outlet property="mainStackView" destination="w6R-9D-6UM" id="dXL-5t-aCU"/>
                 <outlet property="mapImage" destination="goo-Fn-NlO" id="2Vg-lr-nfO"/>
@@ -34,7 +33,6 @@
                 <outlet property="startTime_lbl" destination="IUn-Ca-aHb" id="AfP-UI-dr9"/>
                 <outlet property="totalAmountPaid_lbl" destination="31a-Rz-jv6" id="MKf-Xe-pNw"/>
                 <outlet property="totalTime_lbl" destination="Da3-ZV-aeI" id="szO-JC-DYk"/>
-                <outlet property="underLine_lbl" destination="Meh-Fe-yJc" id="E0X-mC-D9C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -43,7 +41,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qYf-c9-PQG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="qYf-c9-PQG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ma7-xI-gyc">
@@ -76,6 +74,7 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ke6-iZ-mJI" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                                     <rect key="frame" x="332" y="545.66666666666674" width="35" height="35"/>
+                                    <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="20X-sz-GkL"/>
                                         <constraint firstAttribute="width" constant="35" id="Bzo-W6-7aj"/>
@@ -370,6 +369,7 @@
     </designables>
     <resources>
         <image name="document" width="30" height="30"/>
+        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

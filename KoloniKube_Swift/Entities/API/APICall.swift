@@ -46,75 +46,11 @@ class APICall {
     }
     
     //MARK: Get Api
-    
-    func getAppData(withUrl: String, successBlock: @escaping(_ response: AnyObject)-> Void, failure: @escaping (_ response: String)-> Void){
-        StaticClass.sharedInstance.ShowSpiner()
-        let url = withUrl
-        print("Request URL: ", url)
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForResource = 20
-        configuration.timeoutIntervalForRequest = 20
-        configuration.httpMaximumConnectionsPerHost = 10
-        
-        let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
-        manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
-        let header = ["\(Global.g_Username)":"\(Global.g_Password)"]        
-        manager.get(url, parameters: nil, headers: header, progress: nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
-            StaticClass.sharedInstance.HideSpinner()
-            print("Json Response is",responseObject as Any)
-            if let jsonResponse = responseObject as? NSDictionary {
-                
-                if jsonResponse["FORCE_TO_UPDATE"] != nil{
-                    
-                    let isActive = "\(jsonResponse["FORCE_TO_UPDATE"] ?? "0")"
-                    
-                    print("force update ",isActive)
-                    
-                    if (isActive  == "1") {
-                        let alert = GlobalAlert(nibName: "GlobalAlert", bundle: nil)
-                        alert.modalPresentationStyle = .overFullScreen
-                        alert.message = jsonResponse["MESSAGE"] as? String ?? ""
-                        alert.isMaintainance = false
-                        Global.appdel.window?.rootViewController?.present(alert, animated: true, completion: nil)
-                        return
-                    }else{
-                        self.appInMaintanance(message: jsonResponse["MESSAGE"] as? String ?? "")
-                        return
-                    }
-                }
-                
-                if  let isActive = jsonResponse["IS_ACTIVE"] as? Bool {
-                    if (!isActive  == true) {
-                        Global.appdel.forceLogout()
-                        StaticClass.sharedInstance.ShowNotification(false, strmsg: jsonResponse["MESSAGE"] as? String ?? "")
-                        
-                        let viewControllers: [UIViewController] = (Global.appdel.navigation?.viewControllers)!
-                        for(_,element) in viewControllers.enumerated() {
-                            if(element is LoginWithGoogleAppleVC){
-                                Global.appdel.navigation?.popToViewController(element, animated: false)
-                                break
-                            }
-                        }
-                        return
-                    }
-                }
-                successBlock(jsonResponse)
-            }else{
-                successBlock(responseObject as AnyObject)
-            }
-        }) { (task: URLSessionDataTask?, error: Error) in
-            StaticClass.sharedInstance.ShowNotification(false, strmsg:LocalizeHelper().localizedString(forKey: "ERROR_CALL") )
-            StaticClass.sharedInstance.HideSpinner()
-            failure(error.localizedDescription)
-        }
-
-    }
-    
-    func getWeb(_ withUrl:String, withLoader showLoder:Bool, successBlock:@escaping (_ responce:AnyObject) -> Void, failure:@escaping (_ responce:AnyObject) -> Void) {
+    func getWeb(_ withUrl:String, bearerToken: Bool, withLoader showLoder:Bool, successBlock:@escaping (_ responce:AnyObject) -> Void, failure:@escaping (_ responce:AnyObject) -> Void) {
         if(showLoder){
             StaticClass.sharedInstance.ShowSpiner()
         }
-        let urlPath1 = Global.g_APIBaseURL + (withUrl as String) + "?ios_version=\(appDelegate.getCurrentAppVersion)&partner_id_white_label=\(Singleton.partnerIdWhiteLabel)"
+        let urlPath1 = Global.g_APIBaseURL + (withUrl as String) 
         
         print("Request URL:",urlPath1)
         
@@ -129,7 +65,10 @@ class APICall {
         manager.responseSerializer = AFJSONResponseSerializer()
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
         manager.responseSerializer.acceptableStatusCodes = NSIndexSet(indexSet:[500,200]) as IndexSet
-        let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
+        var header = ["\(Global.g_Username)":"\(Global.g_Password)"]
+        if bearerToken{
+//            header["Bearer-Authorization"] = "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"
+        }
         manager.get(urlPath1, parameters: nil, headers: header, progress: nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
             if(showLoder){
                 StaticClass.sharedInstance.HideSpinner()
@@ -194,7 +133,6 @@ class APICall {
             StaticClass.sharedInstance.ShowSpiner("", true)
         }
         let urlPath1 = Global.g_APIBaseURL + (withUrl as String)
-        parameters.setValue(Singleton.partnerIdWhiteLabel, forKey: "partner_id_white_label")
         if withUrl != "track_location"{
             print("Request URL:",urlPath1)
             print("Post: Param  is",parameters)
@@ -208,6 +146,7 @@ class APICall {
         configuration.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
+//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
         manager.post(urlPath1, parameters: parameters, headers: header, progress: nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
@@ -216,7 +155,7 @@ class APICall {
             }
             self.endBackgroundTask()
             if let jsonResponse = responseObject as? NSDictionary {
-                print("Response is",jsonResponse)
+//                print("Response is",jsonResponse)
                 if let bookingArray = jsonResponse.object(forKey: "BOOKING")as? [[String:Any]], bookingArray.count > 0{
                     Singleton.endTime = bookingArray[0]["end_time"]as? String ?? ""
                 }
@@ -272,7 +211,7 @@ class APICall {
         }
         
         let urlPath1 = Global.g_APIBaseURL + (urlPath as String)
-        parameters.setValue(Singleton.partnerIdWhiteLabel, forKey: "partner_id_white_label")
+        
         print("Request URL:",urlPath1)
         print("Post: Param  is",parameters)
         
@@ -284,6 +223,7 @@ class APICall {
         self.registerBackgroundTask()
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
+//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
@@ -359,13 +299,14 @@ class APICall {
         }
         
         let urlPath1 = Global.g_APIBaseURL + (urlPath as String)
-        dictData.setValue(Singleton.partnerIdWhiteLabel, forKey: "partner_id_white_label")
+        
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForResource = 60
         configuration.timeoutIntervalForRequest = 60
         configuration.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
+//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
@@ -399,7 +340,7 @@ class APICall {
         }
         
         let urlPath1 = Global.g_APIBaseURL + (urlPath as String) 
-        parameters.setValue(Singleton.partnerIdWhiteLabel, forKey: "partner_id_white_label")
+        
         print("Request URL:",urlPath1)
         print("Post: Param  is",parameters)
         
@@ -409,6 +350,7 @@ class APICall {
         configuration.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
+//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
         var Timestamp: String {

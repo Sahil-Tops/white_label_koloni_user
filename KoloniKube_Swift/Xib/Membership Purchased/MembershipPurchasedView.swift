@@ -36,7 +36,7 @@ class MembershipPurchasedView: UIView {
         let str = "See the membership details here"
         let range = (str as NSString).range(of: "here")
         let attributedStr = NSMutableAttributedString(string: str)
-        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.primaryColor, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         self.seeMembershipDetail_lbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapHere(_:))))
         self.seeMembershipDetail_lbl.isUserInteractionEnabled = true
         self.seeMembershipDetail_lbl.attributedText = attributedStr

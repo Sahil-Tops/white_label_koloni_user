@@ -11,7 +11,6 @@ import UIKit
 class PaneltyPopupVC: UIViewController,PopupContentViewController {
     
     //MARK:- Outlet's
-    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var description_lbl: IPAutoScalingLabel!
     @IBOutlet weak var nearBy_btn: UIButton!
     @IBOutlet weak var acceptPenalty_btn: UIButton!
@@ -22,12 +21,11 @@ class PaneltyPopupVC: UIViewController,PopupContentViewController {
     var strPenaltyPrice = String()
     var shareCraditCardOBJ = shareCraditCard()
     var data = ShareDevice()
-    var bikeDataObj = ShareBikeData()
+    var bikeDataObj = ShareBikeKube()
     var shareRentalObj = shareRental()
     var isMyRental = Bool()
     var strLocationID = String()
-    var bookNowVc: BookNowVC?    
-    var runningRentalView: RunningRentalView?
+    var bookNowVc: BookNowVC!
     var partnerId = ""
     
     
@@ -49,12 +47,6 @@ class PaneltyPopupVC: UIViewController,PopupContentViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.nearBy_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.nearBy_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        self.title_lbl.textColor = CustomColor.secondaryColor
         self.nearBy_btn.layer.cornerRadius  = self.nearBy_btn.layer.frame.height / 2
         self.acceptPenalty_btn.layer.cornerRadius  = self.acceptPenalty_btn.layer.frame.height / 2
     }
@@ -65,22 +57,13 @@ class PaneltyPopupVC: UIViewController,PopupContentViewController {
     
     //MARK: @IBAction's
     @IBAction func tapPayPenaltyBtn(_ sender: Any) {
-        if self.bookNowVc != nil{
-            self.bookNowVc?.finishBooking_Web(strLocation_ID: self.bookNowVc?.strLocationID ?? "")
-        }else if self.runningRentalView != nil{
-            self.runningRentalView?.finishBooking_Web(strLocation_ID: self.runningRentalView?.strLocationID ?? "")
-        }
+        self.bookNowVc.finishBooking_Web(strLocation_ID: self.bookNowVc.strLocationID)
         self.closeHandler()
     }
     
     @IBAction func tapImAtHubBtn(_ sender: Any) {
-        if self.bookNowVc != nil{
-            self.bookNowVc?.iamAtHub = true
-            self.bookNowVc?.pickLockImageToFinishRide(cameraType: "hub")
-        }else if self.runningRentalView != nil{
-            self.runningRentalView?.iamAtHub = true
-            self.runningRentalView?.pickLockImageToFinishRide(cameraType: "hub")
-        }
+        self.bookNowVc.iamAtHub = true        
+        self.bookNowVc.pickLockImageToFinishRide(cameraType: "hub")
         self.closeHandler()
     }
     

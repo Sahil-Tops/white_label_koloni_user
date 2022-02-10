@@ -29,15 +29,10 @@ class AlreadyPurchasedMembershipView: UIView {
         let str = "See My Memberships for the details, or start a rental to use."
         let range = (str as NSString).range(of: "My Memberships")
         let attributtedString = NSMutableAttributedString(string: str)
-        attributtedString.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.primaryColor, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+        attributtedString.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         self.seeDetail_lbl.isUserInteractionEnabled = true
         self.seeDetail_lbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapHere(_:))))
         self.seeDetail_lbl.attributedText = attributtedString
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.gotIt_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.gotIt_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
     }
     
     @objc func tapHere(_ gesture: UITapGestureRecognizer){

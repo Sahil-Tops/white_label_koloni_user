@@ -12,7 +12,7 @@
         <array key="Koloni.ttf">
             <string>Koloni</string>
         </array>
-        <array key="kolonishare-phase2-ttf.ttf">
+        <array key="Kolonishare.ttf">
             <string>Kolonishare</string>
         </array>
     </customFonts>
@@ -489,13 +489,33 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGI-Sm-LCp">
-                            <rect key="frame" x="150" y="0.0" width="75" height="75"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGI-Sm-LCp" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="147.66666666666666" y="0.0" width="80" height="80"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="75" id="s82-xc-5jU"/>
-                                <constraint firstAttribute="height" constant="75" id="sjk-2z-L2w"/>
+                                <constraint firstAttribute="width" constant="80" id="s82-xc-5jU"/>
+                                <constraint firstAttribute="height" constant="80" id="sjk-2z-L2w"/>
                             </constraints>
+                            <color key="tintColor" red="0.23529411759999999" green="0.81568627449999997" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <state key="normal" image="flag_new"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="40"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                    <size key="value" width="0.0" height="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVS-Pu-ogP" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="122.66666666666669" y="374.66666666666674" width="130" height="40"/>
@@ -505,7 +525,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                            <state key="normal" title="Got It">
+                            <state key="normal" title="Got It" backgroundImage="side_menu">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -691,7 +711,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                            <state key="normal" title="Got It">
+                            <state key="normal" title="Got It" backgroundImage="side_menu">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -732,21 +752,17 @@
                 <constraint firstItem="nad-1Q-q1O" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sa8-tt-kss"/>
             </constraints>
             <connections>
-                <outlet property="amountIcon2_lbl" destination="EpY-c5-1hN" id="oeK-a4-LDV"/>
-                <outlet property="amountIcon_lbl" destination="raz-kI-6fr" id="jC8-8q-dbY"/>
                 <outlet property="amount_2_lbl" destination="uCL-oB-cuE" id="fs9-FJ-psa"/>
                 <outlet property="amount_lbl" destination="YSj-2l-0Sh" id="cmn-uN-bKD"/>
                 <outlet property="bikeSummaryView" destination="wC6-bm-PA5" id="y3R-Dx-Lu7"/>
                 <outlet property="calories_lbl" destination="7Do-JJ-Sac" id="2Tt-hF-69d"/>
                 <outlet property="commentTextView_height" destination="uzV-7i-yHZ" id="4ZJ-Ly-00S"/>
                 <outlet property="comment_textView" destination="duL-x1-4DT" id="4SN-PB-wGF"/>
-                <outlet property="distanceIcon_lbl" destination="Re7-e6-ZA2" id="7fT-l3-mYw"/>
                 <outlet property="distance_lbl" destination="irx-xz-0VN" id="JIw-l6-iHZ"/>
-                <outlet property="engryIcon_lbl" destination="T73-RN-cXM" id="0hd-Ae-cLu"/>
                 <outlet property="gotIt_2_btn" destination="Lrd-WP-Z4G" id="GMD-Ec-ha9"/>
                 <outlet property="gotIt_btn" destination="UVS-Pu-ogP" id="OMn-WO-0I5"/>
                 <outlet property="lockerSummaryView" destination="Mwt-gh-iXq" id="biF-UA-rWr"/>
-                <outlet property="logo_btn" destination="zGI-Sm-LCp" id="O8W-cq-dQh"/>
+                <outlet property="logo_btn" destination="zGI-Sm-LCp" id="X7c-xH-m6b"/>
                 <outlet property="logo_lbl" destination="BDO-98-OzF" id="MTQ-rc-RcE"/>
                 <outlet property="rating1_btn" destination="ZnB-OG-va9" id="FmT-l1-chv"/>
                 <outlet property="rating2_btn" destination="TQa-KP-3s5" id="me1-Zs-N8g"/>
@@ -758,12 +774,8 @@
                 <outlet property="seeMore_lbl" destination="JxY-qk-yuf" id="H7i-pq-JPO"/>
                 <outlet property="submit_btn" destination="BCw-lg-mnf" id="EWv-Nw-LE4"/>
                 <outlet property="summaryContainerView" destination="1jK-yJ-n6D" id="L26-jV-J03"/>
-                <outlet property="timeIcon2_lbl" destination="Ie6-Z5-HnK" id="djM-Kh-67a"/>
-                <outlet property="timeIcon_lbl" destination="Uup-3Z-WYR" id="OmS-0A-mTT"/>
                 <outlet property="time_2_lbl" destination="euK-ga-l11" id="ujM-Fy-WaJ"/>
                 <outlet property="time_lbl" destination="G0g-Wx-hRf" id="3Gn-I3-Bxh"/>
-                <outlet property="title2_lbl" destination="IDP-S3-BdX" id="kXs-hV-hYd"/>
-                <outlet property="title_lbl" destination="C8f-pR-KrI" id="eG4-JE-rdW"/>
             </connections>
             <point key="canvasLocation" x="52" y="49.50738916256158"/>
         </view>
@@ -776,13 +788,17 @@
             <size key="intrinsicContentSize" width="63.333333333333336" height="64.333333333333329"/>
         </designable>
         <designable name="Lrd-WP-Z4G">
-            <size key="intrinsicContentSize" width="69" height="25"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
         <designable name="UVS-Pu-ogP">
-            <size key="intrinsicContentSize" width="69" height="25"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
+        </designable>
+        <designable name="zGI-Sm-LCp">
+            <size key="intrinsicContentSize" width="498" height="508"/>
         </designable>
     </designables>
     <resources>
+        <image name="flag_new" width="478" height="488"/>
         <image name="side_menu" width="1242" height="2208"/>
         <image name="smily_unselected_1" width="138" height="138"/>
         <image name="smily_unselected_2" width="138" height="138"/>

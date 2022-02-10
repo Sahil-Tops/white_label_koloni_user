@@ -13,11 +13,9 @@ import AuthenticationServices
 class LoginWithGoogleAppleVC: UIViewController {
     
 //    @IBOutlet's
-    @IBOutlet weak var bgImage: UIImageView!
-    @IBOutlet weak var posterImage: CustomView!
-    @IBOutlet weak var koloniLogoImage: UIImageView!
-    @IBOutlet weak var buttonsContainerView: CustomView!
     @IBOutlet weak var description_textView: UITextView!
+    @IBOutlet weak var signInWithAuthView: CustomView!
+    @IBOutlet weak var signInWithAuth_btn: UIButton!
     @IBOutlet weak var signInWithAppleView: CustomView!
     @IBOutlet weak var signInWithApple_btn: UIButton!
     @IBOutlet weak var signInWithGoogleView: CustomView!
@@ -35,17 +33,23 @@ class LoginWithGoogleAppleVC: UIViewController {
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 //        if UserDefaults.standard.value(forKey: "is_app_loaded") == nil{
 //            let vc = InstructionSlidesVC(nibName: "InstructionSlidesVC", bundle: nil)
 //            vc.modalPresentationStyle = .overFullScreen
 //            self.present(vc, animated: true, completion: nil)
+//        }
+        
+//        LoginWithAuth0(vc: self).checkLoginStatus { (status) in
+//            if status{
+//                //User Already Login
+//            }
 //        }
         self.loadContent()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.loadUI()
         if #available(iOS 13.0, *) {
             self.signInWithAppleView.isHidden = false
         }else{
@@ -57,6 +61,13 @@ class LoginWithGoogleAppleVC: UIViewController {
     @IBAction func clickOnBtn(_ sender: UIButton) {
         
         switch sender {
+        case signInWithAuth_btn:
+            if self.checkBox_btn.tag == 0{
+                self.showWarningMessage()
+            }else{
+//                LoginWithAuth0(vc: self).loginWithAuth0()
+            }
+            break
         case signInWithApple_btn:
             self.signInWithAppleView.animateView()
             if self.checkBox_btn.tag == 0{
@@ -84,10 +95,10 @@ class LoginWithGoogleAppleVC: UIViewController {
         case checkBox_btn:
             if self.checkBox_btn.tag == 0{
                 self.checkBox_btn.tag = 1
-                self.checkBox_btn.backgroundColor = AppLocalStorage.sharedInstance.primary_color
+                self.checkBox_btn.setImage(UIImage(named: "checked_blue"), for: .normal)
             }else{
+                self.checkBox_btn.setImage(UIImage(named: "unchecked_gray"), for: .normal)
                 self.checkBox_btn.tag = 0
-                self.checkBox_btn.backgroundColor = .white
             }
             break
         default:
@@ -97,37 +108,6 @@ class LoginWithGoogleAppleVC: UIViewController {
     }
     
     //MARK: - Custom Function's
-    
-    func loadUI(){
-        
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "background_img", outputBlock: { (image) in
-            self.bgImage.image = image
-        })
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "main_img", outputBlock: { (image) in
-            self.posterImage.image = image
-        })
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img", outputBlock: { (image) in
-            self.koloniLogoImage.image = image
-            self.koloniLogoImage.tintColor = .white
-        })
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "flag_logo_img", outputBlock: { (image) in
-            self.flagImg.image = image
-        })
-        
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.signInWithAppleView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.signInWithGoogleView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.signInWithAppleView.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.signInWithGoogleView.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }        
-        self.flagLogoView.shadow(color: CustomColor.primaryColor, radius: 4, opacity: 0.5)
-        self.buttonsContainerView.backgroundColor = AppLocalStorage.sharedInstance.login_popup_color
-        self.flagImg.circleObject()
-        self.flagLogoView.circleObject()
-        
-    }
-    
     func showWarningMessage(){
         self.showTopPop(message: "Please accept the Terms and Conditions and User Agreement.", response: false)
     }
@@ -143,12 +123,12 @@ class LoginWithGoogleAppleVC: UIViewController {
         let rangeOfterms = (string as NSString).range(of: termConStr)
         let rangeOfuserAgree = (string as NSString).range(of: userAgreeStr)
         let attributedString = NSMutableAttributedString.init(string: string)
-        attributedString.addAttributes([NSAttributedString.Key.link: URL(string: "http://www.terms.com")!, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: rangeOfterms)
-        attributedString.addAttributes([NSAttributedString.Key.link: URL(string: "http://www.useragreement.com")!, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: rangeOfuserAgree)
+        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.link: URL(string: "http://www.terms.com")!, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: rangeOfterms)
+        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.link: URL(string: "http://www.useragreement.com")!, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: rangeOfuserAgree)
         
         self.description_textView.attributedText = attributedString
         self.description_textView.font = UIFont(name: "Avenir Next", size: 15.0)
-        self.description_textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor]
+        self.description_textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor.customBlue]
         self.description_textView.delegate = self
         self.description_textView.isEditable = false
         
@@ -185,14 +165,13 @@ extension LoginWithGoogleAppleVC: UITextViewDelegate{
         switch URL.absoluteString{
         case "http://www.terms.com":
             let vc = TermsConditionsViewController(nibName: "TermsConditionsViewController", bundle: nil)
-            vc.urlString = "\(String(describing: AppLocalStorage.sharedInstance.terms_condition))"
+            vc.urlString = "http://kolonishare.com/app/term_and_condition"
             vc.titleStr = "Terms and Conditions"
             self.navigationController?.pushViewController(vc, animated: true)
             break
         case "http://www.useragreement.com":
             let vc = TermsConditionsViewController(nibName: "TermsConditionsViewController", bundle: nil)
-        
-            vc.urlString = "\(String(describing: AppLocalStorage.sharedInstance.user_agreement))"
+            vc.urlString = "http://kolonishare.com/app/software_license"
             vc.titleStr = "User Agreement"
             self.navigationController?.pushViewController(vc, animated: true)
             break
@@ -266,7 +245,7 @@ extension LoginWithGoogleAppleVC {
     func socialLogin(user:ShareUser) -> Void {
         Singleton.shared.socialMediaUserData = user
         let params: NSMutableDictionary = NSMutableDictionary()
-        params.setValue(self.check_secondary_contact, forKey: "check_secondary_contact")        
+        params.setValue(self.check_secondary_contact, forKey: "check_secondary_contact")
         params.setValue(user.strFname, forKey: "first_name")
         params.setValue(user.strLname, forKey: "last_name")
         params.setValue(user.strEmailId, forKey: "email_id")

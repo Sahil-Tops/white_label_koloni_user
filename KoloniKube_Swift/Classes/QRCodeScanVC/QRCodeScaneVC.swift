@@ -11,8 +11,10 @@ import IQKeyboardManagerSwift
 import LinkaAPIKit
 import AKSideMenu
 import CoreBluetooth
+import OcsSmartLibrary
 import UPCarouselFlowLayout
 import AVFoundation
+import CoreLocation
 
 class QRCodeScaneVC: UIViewController{
     
@@ -46,7 +48,7 @@ class QRCodeScaneVC: UIViewController{
     var promoId = ""
     
     let device = ShareDevice()
-    let objectDetail = ShareBikeData()
+    let objectDetail = ShareBikeKube()
     var sharedCreditCardObj = shareCraditCard()
     let lockConnectionService : LockConnectionService = LockConnectionService.sharedInstance
     var batteryPercentage = 0
@@ -64,6 +66,14 @@ class QRCodeScaneVC: UIViewController{
     var writeCommandArray: [Int] = []
     var doQueryCallBack: (()->()) = {}
     var tryUnlockAgain = false
+    
+    //OCS Lock
+    var lock: OcsLock!
+    var license: License!
+    var extendedLicense: ExtendedLicense!
+    var extendedLicenseFrame = ""
+    var userCode = ""
+    var isConfiguring = false
     
     var lockCollectionlayout = UPCarouselFlowLayout()
     fileprivate var cellSize: CGSize {
@@ -91,14 +101,6 @@ class QRCodeScaneVC: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.registerCollectionCell()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.tourch_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.tourch_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -243,9 +245,18 @@ class QRCodeScaneVC: UIViewController{
     }
     
     func loadContent(){
-        self.lockType = self.objectDetail.lock_id == "6" ? .axa:.linka
+        if self.objectDetail.lock_id == "6"{
+            self.lockType = .axa
+        }else if self.objectDetail.lock_id == "7"{
+            self.lockType = .ocs
+        }else{
+            self.lockType = .linka
+        }
+        
         if self.lockType == LockType.axa{
             self.centralMannager = CBCentralManager(delegate: self, queue: nil)
+        }else if self.lockType == LockType.ocs{
+            self.loadOcsLock()
         }else{
             self.loadPriceContainerView(self)
         }
@@ -344,9 +355,76 @@ class QRCodeScaneVC: UIViewController{
         objectDetail.partner_name = detail["partner_name"]as? String ?? ""
         objectDetail.lock_id = detail["lock_id"]as? String ?? ""
         objectDetail.device_name = detail["axa_device_name"]as? String ?? ""
+        objectDetail.ocs_lock_number = detail["ocs_lock_number"]as? String ?? ""
+        objectDetail.ocs_master_code = detail["ocs_master_code"]as? String ?? ""
         self.device.arrBikes.add(objectDetail)
         outputBlock(true)
         
+    }
+    
+    func loadOcsLock(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            StaticClass.sharedInstance.ShowSpiner()
+            OcsSmartManager.sharedInstance.startScanMaintenance(timeoutSec: 3, scanDelegate: self, scanType: .MAINTENANCE)
+        }
+    }
+    
+    func generateExtenedLicense(code: String){
+        self.userCode = code
+        DispatchQueue.main.async {
+            do{
+                let asset = NSDataAsset(name: "ocs_license", bundle: Bundle.main)
+                let bytes = [UInt8](asset!.data)
+                self.extendedLicense = try ExtendedLicense.getLicense(license: Array(bytes).data.hexEncodedString())
+                               
+                if self.objectDetail.ocs_master_code != ""{
+                    try self.extendedLicense.setMasterCode(masterCode: self.objectDetail.ocs_master_code)
+                }else{
+                    self.showTopPop(message: "No master code found for this lcoker, try other locker", response: false)
+                    return
+                }
+                print(self.objectDetail.ocs_master_code, self.userCode)
+                self.extendedLicenseFrame = try self.extendedLicense.generateConfigForDedicatedLock(
+                    lockNumber: Int(self.lock.getLockNumber()),
+                    newMasterCode: self.objectDetail.ocs_master_code,
+                    userCode: self.userCode,
+                    blockKeypad: true,
+                    buzzerOn: true,
+                    ledType: Led.LED_ON_TYPE,
+                    expirationDate: Calendar.current.date(byAdding: .day, value: 2, to: Date()),
+                    automaticClosing: false)
+                self.configureLock()
+            }catch let err{
+                print("Error catch block: ", err)
+            }
+        }
+    }
+    
+    func configureLock(){
+        self.isConfiguring = true
+        OcsSmartManager.sharedInstance.connectAndSend(ocsLock: self.lock, connectionTimeoutSec: 6, communicationTimeoutSec: 10, frame: self.extendedLicenseFrame, callback: self)
+    }
+    
+    func configured(){
+        DispatchQueue.main.async {
+            do{
+                let licenseString = try self.extendedLicense.getUserFrameDedicatedLocksString(dedicatedlocks: [Int(self.lock.getLockNumber())], userCode: self.userCode)
+                self.license = try License.getLicense(license: licenseString)
+                self.lockOcsLock()
+            }catch let err{
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    func lockOcsLock(){
+        if self.lock.getLockStatus() == LockStatus.OPEN{
+            self.objectBookingAPI_Called()
+        }else{
+            StaticClass.sharedInstance.ShowSpiner()
+            self.isConfiguring = false
+            OcsSmartManager.sharedInstance.reconnectAndSendToNode(withTag: self.lock.getTag(), connectionTimeoutSec: 6, communicationTimeoutSec: 10, frame: self.license.getFrame(), callback: self)
+        }
     }
     
     func errorInLock(_ msg: String = "Error while unlocking the lock please"){
@@ -408,6 +486,7 @@ extension QRCodeScaneVC: AVCaptureMetadataOutputObjectsDelegate{
         Global.appdel.setupLocationManager()
         self.getBikeDetail_Web(strBikeName: code)
     }
+    
 }
 
 //MARK: - Check Bluetooth Delegate's
@@ -465,7 +544,7 @@ extension UIApplication {
 }
 
 //MARK: - Web Api's
-extension QRCodeScaneVC {
+extension QRCodeScaneVC: CLLocationManagerDelegate{
     
     func getBikeDetail_Web(strBikeName:String) {
         
@@ -552,6 +631,8 @@ extension QRCodeScaneVC {
                         Global.appdel.strIsUserType = dict["user_type"] as? String ?? "0"
                         if self.lockType == LockType.axa{
                             self.objectBookingAPI_Called()
+                        }else if self.lockType == LockType.ocs{
+                            self.loadPinCodePopUp(type: "qr_code_scan")
                         }else{
                             self.fetchAccessToken { (_) in
                                 self.loaderBgView.isHidden = false
@@ -577,6 +658,7 @@ extension QRCodeScaneVC {
         
         dictParameter.setValue(StaticClass.sharedInstance.strUserId ,forKey:"user_id")
         dictParameter.setValue(objectDetail.strId, forKey: "object_id")
+        dictParameter.setValue(self.userCode, forKey: "ocs_code")
         dictParameter.setValue(objectDetail.booking_object_type, forKey: "object_type")
         dictParameter.setValue(objectDetail.booking_object_sub_type, forKey: "object_sub_type")
         dictParameter.setValue(sharedCreditCardObj.token_id ,forKey:"card_token")
@@ -632,6 +714,8 @@ extension QRCodeScaneVC {
                                 Global.appdel.setUpSlideMenuController()
                             }
                         }
+                    }else if self.lockType == LockType.ocs{
+                        Global.appdel.setUpSlideMenuController()
                     }else{
                         _ = self.lockConnectionService.doUnLock(macAddress: Singleton.shared.bikeData.strDeviceID, delegate: self)
                     }
@@ -676,6 +760,60 @@ extension QRCodeScaneVC {
         }
     }
     
+}
+
+//MARK: - OCS Lock Delegate's
+extension QRCodeScaneVC: ScanDelegate, ProcessDelegate{
+    func onCompletion() {
+        print("Scan completed")
+        OcsSmartManager.sharedInstance.stopScan()
+        StaticClass.sharedInstance.HideSpinner()
+    }
+
+    func onError(error: OcsSmartManagerError) {
+        print("Error while scanning: ", error)
+        OcsSmartManager.sharedInstance.stopScan()
+        StaticClass.sharedInstance.HideSpinner()
+    }
+
+    func onSearchResult(lock: OcsLock) {
+        if "\(lock.getLockNumber())" == self.objectDetail.ocs_lock_number{
+            self.lock = lock
+            self.loadPriceContainerView(self)
+        }
+    }
+    
+    func onSuccess(response: String) {
+        print("onSuccess: ", response)
+        StaticClass.sharedInstance.HideSpinner()
+        do{
+            let event = try Event.getEventFromFrame(frame: response)
+            print(event.isSuccessEvent())
+            if self.isConfiguring{
+                self.configured()
+            }else{
+                self.objectBookingAPI_Called()
+            }
+        }catch let err{
+            print("Error catch block: ", err)
+        }
+        OcsSmartManager.sharedInstance.stopScan()
+    }
+    
+    func onErrorProcessDelegate(error: OcsSmartManagerError) {
+        print("onErrorProcessDelegate: ", error)
+        OcsSmartManager.sharedInstance.stopScan()
+        StaticClass.sharedInstance.HideSpinner()
+        self.showAlertWithAction(actionTitle: "Try again", cancelTitle: "Cancel", title: "Alert", msg: "Lock is not connected, Please Try again", completion: { (response) in
+            if response{
+                if self.isConfiguring{
+                    self.configureLock()
+                }else{
+                    self.configured()
+                }
+            }
+        })
+    }
 }
 
 //MARK: - Lock Connection Delegate's
@@ -999,7 +1137,7 @@ extension QRCodeScaneVC: CBCentralManagerDelegate, CBPeripheralDelegate{
         
         if characteristic.uuid == stateCharUUID{
             if let bytes = characteristic.value{
-                let data = characteristic.value?.bytes ?? []
+                let data = characteristic.value?.byteArray ?? []
                 print("Bytes -", bytes)
                 if data.count > 0{
                     print(data[0])
@@ -1056,7 +1194,6 @@ extension QRCodeScaneVC: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.lockGuidCollectionView.dequeueReusableCell(withReuseIdentifier: "GuideCollectionCell", for: indexPath)as! GuideCollectionCell
-        cell.titleContainerView.backgroundColor = CustomColor.primaryColor
         let data = Singleton.lockInstructionArray[indexPath.row]
         cell.title_lbl.text = data["assets_name"]as? String ?? ""
         DispatchQueue.main.async {

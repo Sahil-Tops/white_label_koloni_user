@@ -12,8 +12,6 @@ import SkeletonView
 class BuyMembershipVC: UIViewController {
     
     //MARK: - Outlet's
-    @IBOutlet weak var headerBg_img: UIImageView!
-    @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var btnBack: IPAutoScalingButton!
     @IBOutlet weak var tblBuyMembership: UITableView!
     @IBOutlet weak var txtSearch: UITextField!
@@ -53,14 +51,6 @@ class BuyMembershipVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.headerView.addUnderLine(color: .lightGray)
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
-            self.logoImg.image = image
-        }
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.headerBg_img.backgroundColor = CustomColor.primaryColor
-        }
     }
     
     //MARK: - @IBAction's
@@ -162,6 +152,8 @@ extension BuyMembershipVC {
         paramer.setValue("0", forKey: "distance_unit")
         paramer.setValue(StaticClass.sharedInstance.latitude, forKey: "latitude")
         paramer.setValue(StaticClass.sharedInstance.longitude, forKey: "longitude")
+        //        paramer.setValue("23.033863", forKey: "latitude")
+        //        paramer.setValue("72.585022", forKey: "longitude")
         
         self.tblBuyMembership.infiniteScrollingView?.stopAnimating()
         self.tblBuyMembership.pullToRefreshView?.stopAnimating()

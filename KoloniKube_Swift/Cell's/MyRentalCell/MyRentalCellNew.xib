@@ -23,7 +23,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvc-U2-CX3" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="290" height="40"/>
                                 <subviews>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6V7-r1-7ex">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="6V7-r1-7ex">
                                         <rect key="frame" x="0.0" y="0.0" width="290" height="40"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGY-IX-AmH">
@@ -197,4 +197,7 @@
             <point key="canvasLocation" x="132.80000000000001" y="209.59520239880061"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="side_menu" width="1242" height="2208"/>
+    </resources>
 </document>

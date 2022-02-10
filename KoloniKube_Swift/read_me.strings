@@ -6,9 +6,8 @@
   Copyright © 2020 Self. All rights reserved.
  
  ---- Credentials For Firebase Crashlytics:- brian@kolonishare.com, borabora_2019
-
- ---- In this app white label functionality implemented on 9th Dec 2021.
  
+ Update Detail.
+ 25/10/21: - In this build Auth0 login and OCS Lock is implemented.
  
 */
-

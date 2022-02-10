@@ -54,10 +54,8 @@ class Singleton: NSObject {
     static var isOpeningAppFromNotification = false
     static var notificationRunningRentalDetail: [String:Any] = [:]
     static var isCalledDidFinishLaunch = true
-    static var partnerIdWhiteLabel = "62"
     var socialMediaUserData: ShareUser = ShareUser()
-    var cardListsArray: [shareCraditCard] = []
-    var referalCount = ""
+    static var accessToken = ""
     
     private override init() {
         
@@ -67,7 +65,7 @@ class Singleton: NSObject {
         return instance
     }()
     
-    var bikeData = ShareBikeData()
+    var bikeData = ShareBikeKube()
     
     func parseDeviceJson(arr:NSArray,arrOut:NSMutableArray) -> Void{
         
@@ -110,7 +108,7 @@ class Singleton: NSObject {
                 device.total_assets = dict.object(forKey: "total_assets")as? String ?? "0"
                 if let arrKube = dict["kube_list"] as? NSArray{
                     for dictKube in arrKube as! [NSDictionary]{
-                        let kube = ShareBikeData()
+                        let kube = ShareBikeKube()
                         kube.strId = dictKube.object(forKey: "id") as? String ?? ""
                         kube.strImg = dictKube.object(forKey: "image") as? String ?? ""
                         kube.strName = dictKube.object(forKey: "name") as? String ?? ""
@@ -125,7 +123,7 @@ class Singleton: NSObject {
                 }
                 if let arrBike = dict["bike_list"] as? NSArray{
                     for dictBike in arrBike as! [NSDictionary]{
-                        let Bike = ShareBikeData()
+                        let Bike = ShareBikeKube()
                         Bike.strId = dictBike.object(forKey: "id") as? String ?? ""
                         Bike.strImg = dictBike.object(forKey: "image") as? String ?? ""
                         Bike.strName = dictBike.object(forKey: "name") as? String ?? ""
@@ -231,7 +229,9 @@ class Singleton: NSObject {
     }
     
     deinit {
+        
         print("Singleton Denited....")
+        
     }
     
     static func showSkeltonViewOnViews(viewsArray: [UIView]){
@@ -246,51 +246,6 @@ class Singleton: NSObject {
         }
     }
     
-    func getCardsList_Web(){
-        let dictParam : NSMutableDictionary = NSMutableDictionary()
-        let strCustID = StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.Customer_ID)as? String ?? ""
-        dictParam.setValue(strCustID, forKey: "bt_customer")
-        dictParam.setValue(StaticClass.sharedInstance.strUserId, forKey: "user_id")
-        dictParam.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
-        Singleton.shared.cardListsArray.removeAll()
-        APICall.shared.postWeb("creditCardList", parameters: dictParam, showLoder: false, successBlock: { (responseOBJ) in
-            
-            if let dict =  responseOBJ as? NSDictionary {
-                if let flag = dict.value(forKey: "FLAG")as? Int, flag == 1{
-                    
-                    if let referalCount = dict["referral_count"]as? String{
-                        Singleton.shared.referalCount = referalCount
-                    }
-                    
-                    if let bookingUserType = dict.value(forKey: "booking_user_type")as? String, bookingUserType == "1"{
-                        
-                    }else{
-                        let arrCard = (dict["bt_card_details"] as? NSArray)
-                        DispatchQueue.main.async(execute: {
-                            for element in arrCard! {
-                                if let dict = element as? NSDictionary {
-                                    let cardDetail = shareCraditCard()
-                                    cardDetail.cardType = dict.object(forKey: "cardType") as? String ?? ""
-                                    cardDetail.card_number = dict.object(forKey: "card_number") as? String ?? ""
-                                    cardDetail.exipry = dict.object(forKey: "exipry") as? String ?? ""
-                                    cardDetail.exipry_month = dict.object(forKey: "exipry_month") as? String ?? ""
-                                    cardDetail.exipry_year = dict.object(forKey: "exipry_year") as? String ?? ""
-                                    cardDetail.name = dict.object(forKey: "name") as? String ?? ""
-                                    cardDetail.token_id = dict.object(forKey: "token_id") as? String ?? ""
-                                    Singleton.shared.cardListsArray.append(cardDetail)
-                                }
-                            }
-                            
-                        })
-                    }
-                }else{
-                }
-            }
-        }) { (error) in
-            
-        }
-    }
-    
 }
 
 struct ERLOCK_ATTRIBUTES {
@@ -300,5 +255,5 @@ struct ERLOCK_ATTRIBUTES {
 }
 
 enum LockType {
-    case linka,axa
+    case linka, axa, ocs
 }

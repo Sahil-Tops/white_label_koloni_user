@@ -64,7 +64,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                    <state key="normal" title="Got It">
+                    <state key="normal" title="Got It" backgroundImage="side_menu">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -90,17 +90,17 @@
                 <outlet property="descriptionMsg_lbl" destination="Tyw-bG-CZP" id="WGa-5Y-Gdk"/>
                 <outlet property="faqText_lbl" destination="1hz-NO-Ozs" id="NdY-AO-q1d"/>
                 <outlet property="gotIt_btn" destination="ZIE-Ww-gV6" id="ene-0h-Nbu"/>
-                <outlet property="title_lbl" destination="doj-7R-l6G" id="WxN-AI-uu2"/>
             </connections>
             <point key="canvasLocation" x="139" y="81"/>
         </view>
     </objects>
     <designables>
         <designable name="ZIE-Ww-gV6">
-            <size key="intrinsicContentSize" width="87" height="24"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
     <resources>
+        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

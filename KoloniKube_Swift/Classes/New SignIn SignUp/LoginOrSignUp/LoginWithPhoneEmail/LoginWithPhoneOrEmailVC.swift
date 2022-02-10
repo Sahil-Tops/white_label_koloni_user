@@ -34,14 +34,9 @@ class LoginWithPhoneOrEmailVC: UIViewController {
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         self.gettingDefaultCountryFlag()
         self.loadSignUpHeaderView(view: self.headerView, headerTitle: "Sign In", isBackBtnHidden: false)
-    
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.loadUI()
     }
     
     //MARK: - @IBAction's
@@ -55,7 +50,7 @@ class LoginWithPhoneOrEmailVC: UIViewController {
             self.emailView.isHidden = true
             self.phoneNumber_btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
             self.email_btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-            self.phoneNumber_btn.setTitleColor(CustomColor.primaryColor, for: .normal)
+            self.phoneNumber_btn.setTitleColor(CustomColor.customBlue, for: .normal)
             self.email_btn.setTitleColor(.darkGray, for: .normal)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 UIView.animate(withDuration: 0.3, animations: {
@@ -71,10 +66,10 @@ class LoginWithPhoneOrEmailVC: UIViewController {
             self.description_lbl.text = "Enter email to sign in"
             self.phoneNumberView.isHidden = true
             self.emailView.isHidden = false
-            self.phoneNumber_btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
             self.email_btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-            self.email_btn.setTitleColor(CustomColor.primaryColor, for: .normal)
+            self.phoneNumber_btn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
             self.phoneNumber_btn.setTitleColor(.darkGray, for: .normal)
+            self.email_btn.setTitleColor(CustomColor.customBlue, for: .normal)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.underLinePhone_lbl.isHidden = true
@@ -118,14 +113,6 @@ class LoginWithPhoneOrEmailVC: UIViewController {
         }
     }
     
-    func loadUI(){
-        self.next_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        self.underLinePhone_lbl.backgroundColor = CustomColor.primaryColor
-        self.underLineEmail_lbl.backgroundColor = CustomColor.primaryColor
-        self.phoneNumber_btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-        self.phoneNumber_btn.setTitleColor(CustomColor.primaryColor, for: .normal)        
-    }
-    
 }
 
 //MARK: - Web Api's
@@ -161,7 +148,7 @@ extension LoginWithPhoneOrEmailVC{
                                 vc.mobile_or_email = "\(self.phoneCode)\(self.enterPhoneNumber_textField.text!)"
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }else{
-                                self.showTopPop(message: "User id not found, please try again", response: false)
+                                self.showTopPop(message: "User id not found", response: false)
                             }
                         }
                     }

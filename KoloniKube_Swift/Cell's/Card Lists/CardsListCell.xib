@@ -21,23 +21,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="master_card_icn" translatesAutoresizingMaskIntoConstraints="NO" id="xD9-Zl-CpF">
-                                <rect key="frame" x="12" y="2" width="47.5" height="31.5"/>
+                                <rect key="frame" x="12" y="7" width="47.5" height="31.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx    xxxx    xxxx    0078" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="jkG-a9-lvO">
-                                <rect key="frame" x="79.5" y="2" width="225.5" height="30"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xxxx    xxxx    xxxx    0078" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkG-a9-lvO">
+                                <rect key="frame" x="86" y="9.5" width="219" height="26"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="19"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="jkG-a9-lvO" secondAttribute="bottom" constant="13" id="7uS-TJ-9C6"/>
-                            <constraint firstItem="jkG-a9-lvO" firstAttribute="top" secondItem="9bM-U1-cBu" secondAttribute="top" constant="2" id="Gin-Tf-a0L"/>
-                            <constraint firstItem="jkG-a9-lvO" firstAttribute="leading" secondItem="xD9-Zl-CpF" secondAttribute="trailing" constant="20" id="JN2-ny-OVl"/>
+                            <constraint firstItem="xD9-Zl-CpF" firstAttribute="centerY" secondItem="9bM-U1-cBu" secondAttribute="centerY" id="10a-Jq-OTy"/>
                             <constraint firstItem="xD9-Zl-CpF" firstAttribute="leading" secondItem="9bM-U1-cBu" secondAttribute="leading" constant="12" id="KuE-Ed-JCT"/>
-                            <constraint firstItem="xD9-Zl-CpF" firstAttribute="centerY" secondItem="9bM-U1-cBu" secondAttribute="centerY" constant="-5" id="XQo-KM-pGl"/>
                             <constraint firstAttribute="trailing" secondItem="jkG-a9-lvO" secondAttribute="trailing" constant="15" id="bGb-MM-RGH"/>
+                            <constraint firstItem="jkG-a9-lvO" firstAttribute="centerY" secondItem="9bM-U1-cBu" secondAttribute="centerY" id="cHM-95-4iq"/>
                             <constraint firstItem="xD9-Zl-CpF" firstAttribute="width" secondItem="xD9-Zl-CpF" secondAttribute="height" multiplier="12:8" id="wfV-TE-gWj"/>
                             <constraint firstItem="xD9-Zl-CpF" firstAttribute="height" secondItem="9bM-U1-cBu" secondAttribute="height" multiplier="0.7" id="x7P-Ew-r0B"/>
                         </constraints>

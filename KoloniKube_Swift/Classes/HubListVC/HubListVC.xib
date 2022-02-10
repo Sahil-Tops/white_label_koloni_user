@@ -19,10 +19,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HubListVC" customModule="koloni1" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionText_lbl" destination="JgQ-RH-VY6" id="5uf-rf-Sqk"/>
-                <outlet property="headerBg_img" destination="blT-SS-gKd" id="Cot-Gx-NHD"/>
                 <outlet property="headerView_height" destination="16h-6a-B77" id="FG9-bN-ADM"/>
                 <outlet property="lblNoResultFound" destination="i9A-aG-EMS" id="pWL-Zf-AjR"/>
-                <outlet property="logoImg" destination="kjj-UZ-NJ6" id="E5N-wK-FvZ"/>
                 <outlet property="table_view" destination="eKi-FQ-StH" id="JWh-0d-jBT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="blT-SS-gKd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="blT-SS-gKd">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a11-bh-bI3">
@@ -53,7 +51,7 @@
                                 <action selector="tapBackBtn:" destination="-1" eventType="touchUpInside" id="vdN-tZ-mUw"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kjj-UZ-NJ6">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo_2" translatesAutoresizingMaskIntoConstraints="NO" id="kjj-UZ-NJ6">
                             <rect key="frame" x="103.5" y="-0.5" width="207" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="3rJ-cr-k7O"/>
@@ -73,7 +71,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lL7-x8-5v9">
                     <rect key="frame" x="0.0" y="98" width="414" height="50.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Each membership provides unlimited rentals for a set time period. Normal rates apply after that." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgQ-RH-VY6">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Each membership provides unlimited rides for a set time period. Normal rates apply after that." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgQ-RH-VY6">
                             <rect key="frame" x="20" y="6" width="374" height="38.5"/>
                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="14"/>
                             <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -122,4 +120,8 @@
             <point key="canvasLocation" x="10.4" y="-181.0344827586207"/>
         </view>
     </objects>
+    <resources>
+        <image name="login_logo_2" width="713" height="277"/>
+        <image name="side_menu" width="1242" height="2208"/>
+    </resources>
 </document>

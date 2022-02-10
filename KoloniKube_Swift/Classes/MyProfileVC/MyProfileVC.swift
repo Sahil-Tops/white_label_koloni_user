@@ -11,7 +11,6 @@ import UIKit
 class MyProfileVC: UIViewController {
     
     //MARK:- Outlet's
-    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblUserEmail: UILabel!
@@ -21,11 +20,15 @@ class MyProfileVC: UIViewController {
     @IBOutlet weak var buttonCollection_height: NSLayoutConstraint!
     
     @IBOutlet weak var signOutBtnContainerView: CustomView!
+    @IBOutlet weak var btnMyMembership: UIButton!
+    @IBOutlet weak var btnPaymenteInfo: UIButton!
+    @IBOutlet weak var btnChangePassword: UIButton!
     @IBOutlet weak var btnSignOut: UIButton!
     
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var imgUser: UIImageView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var btnContainerView: UIView!
     
     @IBOutlet weak var btnBack: IPAutoScalingButton!
     @IBOutlet weak var viewProfile: UIView!
@@ -42,6 +45,7 @@ class MyProfileVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.btnChangePassword.isHidden = false
         self.storeAllInformation()
         self.buttonCollectionView.reloadData()
         _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: { (_) in
@@ -52,7 +56,6 @@ class MyProfileVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.loadUI()
         if Global.appdel.is_rentalRunning == true {
         }
         self.viewProfile.setBorder(border_width: 4, border_color: UIColor.white)
@@ -72,26 +75,37 @@ class MyProfileVC: UIViewController {
         self.navigationController?.pushViewController(editProfileVController, animated: true)
     }
     
+    @IBAction func btnMymembershipPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func btnPaymentInfPressed(_ sender: UIButton) {
+        let CraditCardAddVController = CraditCardAddVC(nibName: "CraditCardAddVC", bundle: nil)
+        CraditCardAddVController.isFromProfileView = true
+        self.navigationController?.pushViewController(CraditCardAddVController, animated: true)
+    }
+    
+    @IBAction func btnChangePasswordPressed(_ sender: UIButton) {
+        let changePwdVc = ChangePasswordViewController(nibName: "ChangePasswordViewController", bundle: nil)
+        self.navigationController?.pushViewController(changePwdVc, animated: true)
+    }
     
     @IBAction func btnSignOutPressed(_ sender: UIButton) {
         self.showAlertWithOkAndCancelBtn("Logout" ,"Are you sure you want to logout?", yesBtn_title: "Yes", noBtn_title: "No") { (response) in
             if response == "ok"{
                 Singleton.internetCheckTimer.invalidate()
                 Global.appdel.logoutUser()
+//                LoginWithAuth0(vc: self).logoutAuth0 { (response) in
+//                    if response{
+//                        Singleton.internetCheckTimer.invalidate()
+//                        Global.appdel.logoutUser()
+//                    }
+//                }
             }
         }
     }
     
     //MARK: - Custom Function's
-    
-    func loadUI(){
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.bgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.bgImage.backgroundColor = CustomColor.primaryColor
-        }
-    }
-    
     func loadContent(){
         
         self.view.layoutIfNeeded()
@@ -105,6 +119,10 @@ class MyProfileVC: UIViewController {
         self.lblName.text  = "\(StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.USERFIRSTNAME) as? String ?? "")" + " \(StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.USERLASTNAME) as? String ?? "")"
         
         self.lblUserEmail.text = StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.UserEMail) as? String ?? "";
+        
+        if let stSocial = StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.USER_IS_social) as? String {
+            self.btnChangePassword.isHidden = stSocial == "1"
+        }
         
         if let stbirth = StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserData.USER_DOB) as? String {
             
@@ -164,7 +182,6 @@ extension MyProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.buttonCollectionView.dequeueReusableCell(withReuseIdentifier: "MyProfileCell", for: indexPath)as! MyProfileCell
         
-        cell.icon_lbl.textColor = CustomColor.primaryColor
         cell.title_lbl.text = self.buttonArray[indexPath.row]
         cell.icon_lbl.text = self.iconsArray[indexPath.row]
         cell.cell_btn.tag = indexPath.row

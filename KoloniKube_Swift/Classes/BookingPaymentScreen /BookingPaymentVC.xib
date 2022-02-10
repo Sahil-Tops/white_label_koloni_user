@@ -22,7 +22,6 @@
                 <outlet property="btnStartRide" destination="LJE-5B-4nF" id="pZT-57-8W1"/>
                 <outlet property="giftImg" destination="WX1-RV-gkp" id="47Z-sG-K8b"/>
                 <outlet property="giftViewPresent" destination="163-m3-MTr" id="1Rd-Vk-WBf"/>
-                <outlet property="headerBg_img" destination="F7A-dr-Ljr" id="O1f-cV-2jP"/>
                 <outlet property="tblCard" destination="loa-Sf-0NQ" id="ZDO-NT-GRP"/>
                 <outlet property="tblCard_height" destination="WvV-1H-LHB" id="IpA-93-Umt"/>
                 <outlet property="view" destination="N1s-Pt-09A" id="96J-66-XEU"/>
@@ -33,7 +32,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F7A-dr-Ljr">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="F7A-dr-Ljr">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNn-fG-KLA">
@@ -104,7 +103,7 @@
                         <constraint firstAttribute="height" constant="60" id="q3k-ex-haI"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
-                    <state key="normal" image="plus">
+                    <state key="normal" image="plus" backgroundImage="side_menu">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -118,7 +117,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="START YOUR RIDE ">
+                    <state key="normal" title="START YOUR RIDE " backgroundImage="side_menu">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -215,7 +214,7 @@
                                 <constraint firstAttribute="height" constant="45" id="Ovx-Nv-Iul"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                            <state key="normal" title="Add Credit/Debit Card">
+                            <state key="normal" title="Add Credit/Debit Card" backgroundImage="side_menu">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -277,13 +276,13 @@
     </objects>
     <designables>
         <designable name="LJE-5B-4nF">
-            <size key="intrinsicContentSize" width="127" height="32"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
         <designable name="ViY-cy-Ky3">
-            <size key="intrinsicContentSize" width="186" height="36"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
         <designable name="z8y-vd-NPs">
-            <size key="intrinsicContentSize" width="136" height="136"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
     <resources>
@@ -291,5 +290,6 @@
         <image name="add_card" width="997" height="742"/>
         <image name="close" width="53" height="53"/>
         <image name="plus" width="100" height="100"/>
+        <image name="side_menu" width="1242" height="2208"/>
     </resources>
 </document>

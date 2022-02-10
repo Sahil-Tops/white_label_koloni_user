@@ -18,11 +18,9 @@
                 <outlet property="btnBack" destination="I0x-vS-zaH" id="y3s-T7-Bga"/>
                 <outlet property="btnClose" destination="7Wt-KV-SB4" id="Srs-8h-189"/>
                 <outlet property="btnGift" destination="T8d-QC-ost" id="UAN-1m-tH9"/>
-                <outlet property="headerBg_img" destination="sAY-Ih-gMA" id="WTi-HG-kmv"/>
                 <outlet property="headerView" destination="rTg-En-Ktz" id="ODE-2w-QGe"/>
                 <outlet property="imgSearch" destination="dt4-yO-8mr" id="rVL-JB-nsK"/>
                 <outlet property="lblNoResultFound" destination="fDC-tr-XGt" id="1LT-mC-zVr"/>
-                <outlet property="logoImg" destination="e7U-CR-yte" id="5Si-iR-T37"/>
                 <outlet property="referralCount_lbl" destination="ENX-IW-ShN" id="JrP-zt-slL"/>
                 <outlet property="rippleView" destination="g91-lt-iM9" id="opH-EI-IXm"/>
                 <outlet property="searchView" destination="MdU-0d-Ett" id="Hcw-Nm-pL5"/>
@@ -36,7 +34,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sAY-Ih-gMA">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="sAY-Ih-gMA">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTg-En-Ktz" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
@@ -56,7 +54,7 @@
                                 <action selector="btnSliderMenuClick:" destination="-1" eventType="touchUpInside" id="DYx-fc-CaL"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e7U-CR-yte">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo_2" translatesAutoresizingMaskIntoConstraints="NO" id="e7U-CR-yte">
                             <rect key="frame" x="93.666666666666671" y="-0.3333333333333357" width="187.66666666666663" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="SNZ-N0-jeU"/>
@@ -227,7 +225,9 @@
         </view>
     </objects>
     <resources>
+        <image name="login_logo_2" width="713" height="277"/>
         <image name="search" width="16" height="16.5"/>
+        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

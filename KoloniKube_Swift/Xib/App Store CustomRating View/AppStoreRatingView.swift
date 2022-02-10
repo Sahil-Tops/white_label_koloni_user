@@ -10,7 +10,6 @@ import UIKit
 
 class AppStoreRatingView: UIView {
 
-    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var description_lbl: UILabel!
     @IBOutlet weak var checkBox_btn: UIButton!
     @IBOutlet weak var close_btn: UIButton!
@@ -56,30 +55,17 @@ class AppStoreRatingView: UIView {
     
     func loadContent(){
         
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.rateUs_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.rateUs_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        if AppLocalStorage.sharedInstance.use_tertiary_text_color == "1"{
-            self.title_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-        }else{
-            self.title_lbl.textColor = CustomColor.secondaryColor
-        }
-        self.title_lbl.text = "Enjoy the \(AppLocalStorage.sharedInstance.sitename) app?"
-        
         let string = "Didn't like your experience? Report Issue how we can improve!"
         let report_issue = "Report Issue"
         let range = (string as NSString).range(of: report_issue)
         let attributtedString = NSMutableAttributedString.init(string: string)
-        attributtedString.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.link: URL(string: "http://www.tellus.com")!], range: range)
+        attributtedString.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customCyan, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.link: URL(string: "http://www.tellus.com")!], range: range)
         self.didNotLike_textView.attributedText = attributtedString
         self.didNotLike_textView.textAlignment = .center
         self.didNotLike_textView.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
-        self.didNotLike_textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor]
+        self.didNotLike_textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor.customBlue]
         self.didNotLike_textView.delegate = self
         self.didNotLike_textView.isEditable = false
-        
     }
     
 }

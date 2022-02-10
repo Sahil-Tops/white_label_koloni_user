@@ -21,7 +21,6 @@ enum NewLeftMenu: Int {
 class LeftMenuViewController: UIViewController {
     
     //MARK: - @IBOutlet's
-    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var menuTableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var userImage: UIImageView!
@@ -29,7 +28,6 @@ class LeftMenuViewController: UIViewController {
     
     //MARK: ViewControllers Variables
     var BookNowVController: UIViewController!
-    var LocationListingController: UIViewController!
     var MyProfileVController: UIViewController!
     var BuyMembershipVController: UIViewController!
     var MyMemberShipVController: UIViewController!
@@ -60,14 +58,6 @@ class LeftMenuViewController: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.bgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.bgImage.backgroundColor = CustomColor.primaryColor
-        }
-    }
-    
     //MARK: - @IBAction's
     @IBAction func tapHeaderBtn(_ sender: UIButton) {
         self.sideMenuViewController?.setContentViewController(self.MyProfileVController, animated: true)
@@ -84,7 +74,7 @@ class LeftMenuViewController: UIViewController {
                     if let firstName = userData["first_name"]as? String, firstName != ""{
                         self.userName_lbl.text = firstName
                     }else{
-                        self.userName_lbl.text = userData["username"]as? String ?? ""
+                        self.userName_lbl.text = userData["username"]as? String ?? "Koloni User"
                     }
                     print("\(self.userName_lbl.text!)")
                     if let userProfileImage = userData["profile_image"]as? String{
@@ -106,9 +96,6 @@ class LeftMenuViewController: UIViewController {
         
         let BookNowController = BookNowVC(nibName: "BookNowVC", bundle: nil)
         self.BookNowVController = UINavigationController(rootViewController: BookNowController)
-        
-        let LocationListController = LocationListingViewController(nibName: "LocationListingViewController", bundle: nil)
-        self.LocationListingController = UINavigationController(rootViewController: LocationListController)
         
         let MyProfileController = MyProfileVC(nibName: "MyProfileVC", bundle: nil)
         self.MyProfileVController = UINavigationController(rootViewController: MyProfileController)
@@ -138,7 +125,7 @@ class LeftMenuViewController: UIViewController {
         switch menuController {
         
         case .map:            
-            self.sideMenuViewController?.setContentViewController(self.LocationListingController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.BookNowVController, animated: true)            
         case .MyMembership:
             self.sideMenuViewController?.setContentViewController(self.BuyMembershipVController, animated: true)
         case .MyBooking:

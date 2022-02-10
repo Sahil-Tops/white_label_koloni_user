@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShareBikeData: NSObject {
+class ShareBikeKube: NSObject {
     var strId:String = ""
     var strObjUniqueId = ""
     var strName:String = ""
@@ -44,7 +44,9 @@ class ShareBikeData: NSObject {
     var show_member_button = ""
     var partner_name = ""
     var lock_id = ""
-//    var axa_identifier = ""
+    var axa_identifier = ""
+    var ocs_lock_number = ""
+    var ocs_master_code = ""
     var device_name = ""
 }
 

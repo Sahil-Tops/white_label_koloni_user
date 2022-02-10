@@ -20,8 +20,7 @@ class RentalImageViewController: UIViewController {
     
     
     let cameraController = CameraController()
-    var bookNowVC : BookNowVC?
-    var locationVc: LocationListingViewController?
+    var bookNowVC : BookNowVC!
     var lastVc = UIViewController()
     var cameraType = ""     //hub - For hub image, bike - For bike image
     
@@ -39,18 +38,10 @@ class RentalImageViewController: UIViewController {
     
     //MARK: - @IBAction's
     @IBAction func tapCantTakeImage(_ sender: Any){
-        if self.lastVc is BookNowVC{
-            self.bookNowVC?.rentalImage = nil
-            self.bookNowVC?.isCamBroken = true
-            self.dismiss(animated: true) {
-                self.bookNowVC?.uploadImgForFinishRide()
-            }
-        }else{
-            self.locationVc?.runningRentalView?.rentalImage = nil
-            self.locationVc?.runningRentalView?.isCamBroken = true
-            self.dismiss(animated: true) {
-                self.locationVc?.runningRentalView?.uploadImgForFinishRide()
-            }
+        self.bookNowVC.rentalImage = nil
+        self.bookNowVC.isCamBroken = true
+        self.dismiss(animated: true) {
+            self.bookNowVC.uploadImgForFinishRide()
         }
     }
     @IBAction func captureTapped(_ sender: Any){
@@ -61,18 +52,10 @@ class RentalImageViewController: UIViewController {
                 return
             }
             print("Image Size", image.size)
-            if self.lastVc is BookNowVC{
-                self.bookNowVC?.rentalImage = image
-                self.bookNowVC?.isCamBroken = false
-                self.dismiss(animated: true) {
-                    self.bookNowVC?.uploadImgForFinishRide()
-                }
-            }else{
-                self.locationVc?.runningRentalView?.rentalImage = image
-                self.locationVc?.runningRentalView?.isCamBroken = false
-                self.dismiss(animated: true) {
-                    self.locationVc?.runningRentalView?.uploadImgForFinishRide()
-                }
+            self.bookNowVC.rentalImage = image
+            self.bookNowVC.isCamBroken = false
+            self.dismiss(animated: true) {
+                self.bookNowVC.uploadImgForFinishRide()
             }
         }
     }

@@ -10,7 +10,6 @@ import UIKit
 
 class RentalAlertView: UIView {
 
-    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var checkBox_btn: UIButton!
     @IBOutlet weak var endRental_btn: CustomButton!
     @IBOutlet weak var lock_btn: CustomButton!
@@ -18,31 +17,19 @@ class RentalAlertView: UIView {
     
     
     var bookNowVc: BookNowVC?
-    var locationVc: LocationListingViewController?
-    var vc: UIViewController?
     
     //MARK: - @IBAction's
     @IBAction func clickOnBtn(_ sender: UIButton) {
         
         switch sender {
         case lock_btn:
-            if self.vc is BookNowVC{
-                self.bookNowVc?.rentalActionPerformed = 0
-                self.bookNowVc?.permissionAlertToPause()
-            }else{
-                self.locationVc?.runningRentalView?.rentalActionPerformed = 0
-                self.locationVc?.runningRentalView?.pauseResumeEndAlert(action: "pause")
-            }
+            self.bookNowVc?.rentalActionPerformed = 0
+            self.bookNowVc?.permissionAlertToPause()
             self.removeView()
             break
         case endRental_btn:
-            if self.vc is BookNowVC{
-                self.bookNowVc?.rentalActionPerformed = 1
-                self.bookNowVc?.permissionAlertToEnd()
-            }else{
-                self.locationVc?.runningRentalView?.rentalActionPerformed = 1
-                self.locationVc?.runningRentalView?.pauseResumeEndAlert(action: "end")
-            }
+            self.bookNowVc?.rentalActionPerformed = 1
+            self.bookNowVc?.permissionAlertToEnd()
             self.removeView()
             break
         case checkBox_btn:
@@ -75,20 +62,6 @@ class RentalAlertView: UIView {
 
     }
     
-    func loadContent(){
-        if let viewController = self.vc as? BookNowVC{
-            self.bookNowVc = viewController
-        }else if let viewController = self.vc as? LocationListingViewController{
-            self.locationVc = viewController
-        }
-        self.title_lbl.textColor = CustomColor.primaryColor
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.lock_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.lock_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-    }
-    
 }
 
 extension UIViewController{
@@ -96,10 +69,10 @@ extension UIViewController{
     func loadRentalAlertView(){
         let view = Bundle.main.loadNibNamed("RentalAlertView", owner: nil, options: [:])?.first as! RentalAlertView
         view.frame = self.view.bounds
-        view.vc = self
+        view.bookNowVc = self as? BookNowVC
         view.frame.origin.y += view.frame.height
-        view.loadContent()
         self.view.addSubview(view)
+        
         UIView.animate(withDuration: 0.5) {
             view.frame.origin.y = 0
             self.view.layoutIfNeeded()

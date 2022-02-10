@@ -16,6 +16,7 @@
  import Cosmos
  import UPCarouselFlowLayout
  import CoreBluetooth
+ import OcsSmartLibrary
  
  class POIItem: NSObject, GMUClusterItem {
     var color: UIColor!
@@ -44,7 +45,6 @@
     //MARK:- Outlet's
     
     //View's, ScrollView
-    @IBOutlet weak var navigationBgImage: UIImageView!
     @IBOutlet weak var adImageScrollView: UIScrollView!
     @IBOutlet weak var rippleView: UIView!
     @IBOutlet weak var startBtnContainerView: UIView!
@@ -55,7 +55,6 @@
     @IBOutlet weak var popUpAd: UIView!
     @IBOutlet weak var qrBtnView: UIView!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var headerKoloniLogo_img: UIImageView!
     @IBOutlet weak var rentalContainerView: CustomView!
     @IBOutlet weak var adTitleView: UIView!
     @IBOutlet weak var bikeLock_imageView: CustomView!
@@ -104,9 +103,9 @@
     @IBOutlet weak var lockGuideCollection_height: NSLayoutConstraint!
     
     //PauseRentalView
-    @IBOutlet weak var rentalBgImageView: UIImageView!
     @IBOutlet weak var pauseRentalCollectionView_height: NSLayoutConstraint!
     @IBOutlet weak var pauseRentalCollection_bottom: NSLayoutConstraint!
+    @IBOutlet weak var numberOfRentalRunningTop_lbl: UILabel!
     @IBOutlet weak var numberOfRentalsRunning_lbl: UILabel!
     @IBOutlet weak var currentRentalAmount_lbl: UILabel!
     @IBOutlet weak var axaLoaderMsg_lbl: UILabel!
@@ -121,10 +120,10 @@
     @IBOutlet weak var lblLoaderTitle: UILabel!
     @IBOutlet var ViewLoader: UIView!
     @IBOutlet weak var linkaLockImg: UIImageView!
-    @IBOutlet weak var underLine1_lbl: UILabel!
     
     
     var startBookingSwift: StartBooking?
+    var ocslockConnection: OCSLOCK_CONNECTION?
     var axaLoader = AnimatedCircularView()
     let lockConnectionService : LockConnectionService = LockConnectionService.sharedInstance
     var batteryPercentage = 50
@@ -138,8 +137,8 @@
     
     var shareDeviceObj = ShareDevice()
     var sharedCreditCardObj = shareCraditCard()
-    var bikeSharedData = ShareBikeData()
-    var bikeSharedDataArray: [ShareBikeData] = []
+    var BikeSharedData = ShareBikeKube()
+    var bikeSharedDataArray: [ShareBikeKube] = []
     var endingRentalData: [String:Any] = [:]
     var isMyRental = Bool()
     var currentLat: CGFloat = 0.0;
@@ -169,7 +168,7 @@
     var isTableHide: Bool = true
     var selectedBikeMacAddress = ""
     var isRentalViewDown = false
-    var btnPressedPause = false
+    var btnPressedPause = false     //true - Unlocking, false - Locking
     var selectedRentalIndex = 0
     var lastSelectedIndex = 0
     var isRentalCellChagned = false
@@ -189,6 +188,7 @@
     var axaLockConnection: AXALOCK_CONNECTION?
     var lockCommand = "0"
     var isAxaLoaderLoad = false
+        
     
     var layout = UPCarouselFlowLayout()
     fileprivate var pageSize: CGSize {
@@ -217,7 +217,6 @@
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
         Singleton.isCalledDidFinishLaunch = false
         self.loadContent()
         self.getlockInstructionList_Web()
@@ -226,10 +225,11 @@
         Global().startInternetCheckTimer()
         self.setAdsImageScrollFunctionality()
         self.registerCollectionCell()
+//        self.showReferralPopup()
         Global.getUserProfile_Web(vc: self) { (response, data) in
             
         }
-        
+        self.ocslockConnection = OCSLOCK_CONNECTION.init()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -259,7 +259,6 @@
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.loadUI()
         self.btnStartQRScan.layer.cornerRadius = btnStartQRScan.frame.size.height/2
         self.btnFindNearest.layer.cornerRadius = btnFindNearest.frame.size.height/2
         self.qrBtnView.circleObject()
@@ -438,34 +437,10 @@
  //MARK: - Custom Function's
  extension BookNowVC{
     
-    func loadUI(){
-        
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
-            self.headerKoloniLogo_img.image = image
-        }
-        
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.rentalBgImageView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.navigationBgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.qrBtnView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.next_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.onLinkaViewNext_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.rentalBgImageView.backgroundColor = CustomColor.primaryColor
-            self.navigationBgImage.backgroundColor = CustomColor.primaryColor
-            self.qrBtnView.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.next_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.onLinkaViewNext_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        self.referralCount_lbl.backgroundColor = CustomColor.primaryColor
-        self.choose_btn.setTitleColor(CustomColor.secondaryColor, for: .normal)
-        self.underLine1_lbl.backgroundColor = CustomColor.secondaryColor        
-        self.view.layoutIfNeeded()
-    }
-    
     func loadContent(){
+        self.navigationController?.navigationBar.isHidden = true
         self.appGroupDefaults = UserDefaults(suiteName:"group.com.koloni.kolonikube")!
-        Singleton.smRippleView = nil        
+        Singleton.smRippleView = nil
         self.centerLatLong_current = CLLocationCoordinate2D(latitude: CLLocationDegrees(StaticClass.sharedInstance.latitude), longitude: CLLocationDegrees(StaticClass.sharedInstance.longitude))
         self.shareParameters.strUser_id = StaticClass.sharedInstance.strUserId
         self.shareParameters.doubleLat = Double(StaticClass.sharedInstance.latitude)
@@ -494,8 +469,6 @@
         self.btnSlideToFinish.resetSlideButton()
         self.btnSlideToFinish.isUserInteractionEnabled = true
         self.lblSlideAnimation.isHidden = true
-        
-        
     }
     
     func setAdsImageScrollFunctionality(){
@@ -544,7 +517,7 @@
         if self.totalRidesTaken == 0{
             if !UserDefaults.standard.bool(forKey: "isRippleEffectClosed"){
                 if !Global.appdel.is_rentalRunning{
-                    let fillColor: UIColor? = CustomColor.primaryColor
+                    let fillColor: UIColor? = CustomColor.customAppGreen
                     Singleton.smRippleView = SMRippleView(frame: self.rippleView.bounds, rippleColor: UIColor.black, rippleThickness: 0.2, rippleTimer: 2, fillColor: fillColor, animationDuration: 3, parentFrame: CGRect(x: 0, y: 0, width: 100, height: 100))
                     self.rippleView.addSubview(Singleton.smRippleView)
                 }
@@ -710,7 +683,7 @@
             self.isRentalViewDown = true
             self.isTableHide = true
             self.rentalContainerView.isHidden = false
-//            self.nearestDropZone_btn.isHidden = true
+            self.nearestDropZone_btn.isHidden = true
             self.addRentalContainerView.isHidden = false
             self.view.layoutIfNeeded()
         })
@@ -796,11 +769,26 @@
         self.isEventStatus = "3"
         self.changeStateOfPauseButton(isLocked: true)
         if self.rentalActionPerformed == 1{
-            if Singleton.runningRentalArray.count > 0{
-                if Singleton.runningRentalArray[self.selectedRentalIndex]["object_location_type"]as? String ?? "" == "1"{
-                    self.nearestDropZone_Web()
+            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+                print(self.ocslockConnection?.lock.getLockStatus() ?? "")
+                if self.ocslockConnection?.lockStatus == "closed"{
+                    if Singleton.runningRentalArray.count > 0{
+                        if Singleton.runningRentalArray[self.selectedRentalIndex]["object_location_type"]as? String ?? "" == "1"{
+                            self.nearestDropZone_Web()
+                        }else{
+                            self.calculationPrice_Web(isNreaBY: true)
+                        }
+                    }
                 }else{
-                    self.calculationPrice_Web(isNreaBY: true)
+                    self.alert(title: "Alert", msg: "Rental can be end after closing the lock.")
+                }
+            }else{
+                if Singleton.runningRentalArray.count > 0{
+                    if Singleton.runningRentalArray[self.selectedRentalIndex]["object_location_type"]as? String ?? "" == "1"{
+                        self.nearestDropZone_Web()
+                    }else{
+                        self.calculationPrice_Web(isNreaBY: true)
+                    }
                 }
             }
             UserDefaults.standard.setValue(0, forKey: "isRentalPause")
@@ -814,10 +802,25 @@
         self.btnPressedPause = !self.btnPressedPause
         self.isEventStatus = "4"
         self.changeStateOfPauseButton(isLocked: false)
+        if self.rentalActionPerformed == 1{
+            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+                print(self.ocslockConnection?.lock.getLockStatus() ?? "")
+                if self.rentalActionPerformed == 1 && self.ocslockConnection?.lockStatus == "closed"{
+                    if Singleton.runningRentalArray.count > 0{
+                        if Singleton.runningRentalArray[self.selectedRentalIndex]["object_location_type"]as? String ?? "" == "1"{
+                            self.nearestDropZone_Web()
+                        }else{
+                            self.calculationPrice_Web(isNreaBY: true)
+                        }
+                    }
+                }else{
+                    self.alert(title: "Alert", msg: "Rental can be end after closing the lock.")
+                }
+            }
+        }
+        UserDefaults.standard.setValue(0, forKey: "isRentalPause")
         if !isPause{
             isPause = true
-        }else{
-            
         }
         self.lockUnlock_Web(strEvent: "1")
     }
@@ -832,28 +835,26 @@
         
         if let cell = self.collectionCellForIndex(index: self.selectedRentalIndex) {
             if self.pauseRentalCollectionView.indexPath(for: cell) != nil{
-                if isLocked{
-                    if Singleton.runningRentalArray[self.selectedRentalIndex]["object_type"] as? String ?? "" == "2"{
-                        cell.pause_resume_lbl.text = AppLocalStorage.sharedInstance.resume_button_text//"Unlock"
-                    }else{
-                        cell.pause_resume_lbl.text = AppLocalStorage.sharedInstance.resume_button_text//"Open"
-                    }
-                    AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "pause_img") { (image) in
-                        cell.pauseOrStartBtn_img.image = image
-                    }
-                    cell.pause_btn.backgroundColor = AppLocalStorage.sharedInstance.resume_button_color
-                    cell.pause_btn.isSelected = true
+                if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+                    cell.pause_resume_lbl.text = "Open/Close"                    
                 }else{
-                    if Singleton.runningRentalArray[self.selectedRentalIndex]["object_type"] as? String ?? "" == "2"{
-                        cell.pause_resume_lbl.text = AppLocalStorage.sharedInstance.pause_button_text//"Lock"
+                    if isLocked{
+                        if Singleton.runningRentalArray[self.selectedRentalIndex]["object_type"] as? String ?? "" == "2"{
+                            cell.pause_resume_lbl.text = "Unlock"
+                        }else{
+                            cell.pause_resume_lbl.text = "Open"
+                        }
+                        cell.pause_btn.backgroundColor = CustomColor.customCyan
+                        cell.pause_btn.isSelected = true
                     }else{
-                        cell.pause_resume_lbl.text = AppLocalStorage.sharedInstance.pause_button_text//"Close"
+                        if Singleton.runningRentalArray[self.selectedRentalIndex]["object_type"] as? String ?? "" == "2"{
+                            cell.pause_resume_lbl.text = "Lock"
+                        }else{
+                            cell.pause_resume_lbl.text = "Close"
+                        }
+                        cell.pause_btn.backgroundColor = CustomColor.customYellow
+                        cell.pause_btn.isSelected = false
                     }
-                    AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "resume_img") { (image) in
-                        cell.pauseOrStartBtn_img.image = image
-                    }
-                    cell.pause_btn.backgroundColor = AppLocalStorage.sharedInstance.pause_button_color
-                    cell.pause_btn.isSelected = false
                 }
             }
         }
@@ -898,21 +899,21 @@
         self.appGroupDefaults.setValue(dict, forKey: "ride")
     }
     
-    func setUPSlider(dict:NSDictionary){
+    func setUPSlider(dict:NSDictionary,param:NSMutableDictionary){
         if let currentRental = dict["CURRENT_RENTAL"] as? [[String:Any]],currentRental.count > 0 {
             for currentRetalObj in currentRental {
                 if self.shareDeviceObj.arrBikes.count > 0 {
                     
                 } else {
-                    self.bikeSharedData.strId = currentRetalObj["object_id"] as? String ?? ""
-                    self.bikeSharedData.is_outof_dropzone = Int(String(describing: currentRetalObj["is_outof_dropzone"]!)) ?? -1
-                    self.bikeSharedData.outOfDropzoneMsg = currentRetalObj["outof_dropzone_message"]as? String ?? ""
-                    self.bikeSharedData.strName = currentRetalObj["name"] as? String ?? ""
-                    self.bikeSharedData.strAddress = currentRetalObj["address"] as? String ?? ""
-                    self.bikeSharedData.doublePrice = StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_price"] as? String ?? "" )
-                    StaticClass.sharedInstance.saveToUserDefaultsString(value:self.bikeSharedData.strId, forKey: Global.g_UserData.ObjectID)
-                    self.bikeSharedData.intType = Int(StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_type"] as? String ?? "0"))
-                    self.bikeSharedDataArray.append(bikeSharedData)
+                    self.BikeSharedData.strId = currentRetalObj["object_id"] as? String ?? ""
+                    self.BikeSharedData.is_outof_dropzone = Int(String(describing: currentRetalObj["is_outof_dropzone"]!)) ?? -1
+                    self.BikeSharedData.outOfDropzoneMsg = currentRetalObj["outof_dropzone_message"]as? String ?? ""
+                    self.BikeSharedData.strName = currentRetalObj["name"] as? String ?? ""
+                    self.BikeSharedData.strAddress = currentRetalObj["address"] as? String ?? ""
+                    self.BikeSharedData.doublePrice = StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_price"] as? String ?? "" )
+                    StaticClass.sharedInstance.saveToUserDefaultsString(value:self.BikeSharedData.strId, forKey: Global.g_UserData.ObjectID)
+                    self.BikeSharedData.intType = Int(StaticClass.sharedInstance.getDouble(value: currentRetalObj["object_type"] as? String ?? "0"))
+                    self.bikeSharedDataArray.append(BikeSharedData)
                 }
                 
                 if let strObjectType = currentRetalObj["object_type"] as? String  {
@@ -944,6 +945,7 @@
                 }
             }
             if currentRental.count > 0{
+                
                 self.strLocationID = currentRental[0]["location_id"] as? String ?? ""
                 self.strBikeKubeID = currentRental[0]["object_id"] as? String ?? ""
                 
@@ -964,11 +966,11 @@
                 }
                 let polyline = GMSPolygon(path: path)
                 if data.isAffiliateLocation == 1{
-                    polyline.strokeColor = AppLocalStorage.sharedInstance.geofence_affiliate_color
-                    polyline.fillColor = AppLocalStorage.sharedInstance.geofence_affiliate_color.withAlphaComponent(0.3)
+                    polyline.strokeColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3254901961, alpha: 1)//Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 1.0)
+                    polyline.fillColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3254901961, alpha: 1).withAlphaComponent(0.3)//Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 0.05)
                 }else{
-                    polyline.strokeColor = AppLocalStorage.sharedInstance.geofence_color
-                    polyline.fillColor = AppLocalStorage.sharedInstance.geofence_color.withAlphaComponent(0.3)
+                    polyline.strokeColor = Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 1.0)
+                    polyline.fillColor = Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 0.1)
                 }
                 polyline.strokeWidth = 3.0
                 polyline.map = self.mapView
@@ -984,11 +986,11 @@
                 let polyline = GMSPolygon(path: path)
                 
                 if data.isAffiliateLocation == 1{
-                    polyline.strokeColor = AppLocalStorage.sharedInstance.geofence_affiliate_color
-                    polyline.fillColor = AppLocalStorage.sharedInstance.geofence_affiliate_color.withAlphaComponent(0.3)
+                    polyline.strokeColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3254901961, alpha: 1)//Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 1.0)
+                    polyline.fillColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3254901961, alpha: 1).withAlphaComponent(0.3)//Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 0.05)
                 }else{
-                    polyline.strokeColor = AppLocalStorage.sharedInstance.geofence_color
-                    polyline.fillColor = AppLocalStorage.sharedInstance.geofence_color.withAlphaComponent(0.3)
+                    polyline.strokeColor = Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 1.0)
+                    polyline.fillColor = Global().RGB(r: 25.0, g: 191.0, b: 175.0, a: 0.3)
                 }
                 polyline.isTappable = true
                 polyline.zIndex = Int32(count)
@@ -1077,22 +1079,7 @@
                 let longitude = device.strLong
                 
                 marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "map_flag_img") { (image) in
-                    let iconView = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 50))
-                    iconView.backgroundColor = .clear
-                    let imageView = UIImageView(frame: CGRect(x: 3, y: 3, width: 38, height: 38))
-                    let layer = CAShapeLayer()
-                    layer.path = UIBezierPath(roundedRect: CGRect(x: iconView
-                                                                    .center.x - 3, y: iconView.center.y, width: 6, height: 20), cornerRadius: 20).cgPath
-                    layer.fillColor = CustomColor.primaryColor.cgColor
-                    iconView.layer.addSublayer(layer)
-                    imageView.image = image
-                    imageView.circleObject()
-                    iconView.addSubview(imageView)
-                    iconView.cornerRadius(cornerValue: 25)
-                    iconView.shadow(color: .gray, radius: 1.0, opacity: 0.5)
-                    marker.iconView = iconView
-                }
+                marker.icon = UIImage(named: "geofence_marker")
                 marker.isTappable = true
                 marker.userData = "geofence"
                 marker.zIndex = Int32(index)
@@ -1139,6 +1126,8 @@
                     }
                 })
             }
+        }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+            self.ocslockConnection?.initialize(lock_number: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_lock_number"]as? String ?? "", vc: self, user_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_code"]as? String ?? "", master_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_master_code"]as? String ?? "")
         }else{
             CoreBluetoothClass.sharedInstance.isBluetoothOn(vc: self)
         }
@@ -1163,8 +1152,9 @@
                     }
                 })
             }
+        }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+            self.ocslockConnection?.initialize(lock_number: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_lock_number"]as? String ?? "", vc: self, user_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_code"]as? String ?? "", master_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_master_code"]as? String ?? "")
         }else{
-            
             if Singleton.runningRentalArray[self.selectedRentalIndex]["object_type"] as? String ?? "" == "2"{
                 self.pauseRentalCollection_bottom.constant = -370
                 self.rentalContainerView.isHidden = true
@@ -1193,9 +1183,10 @@
         if !self.btnPressedPause{
             self.isPause = true
             self.lockCommand = "0"
-            
             if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
                 self.axaLockConnection?.lockDevice()
+            }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"]as? String ?? "" == "7"{
+                self.ocslockConnection?.lockUnlockOcsLock()
             }else{
                 if self.btnPressedPause{
                     self.showLoader(withMsg: "Unlocking. Please wait...")
@@ -1210,6 +1201,8 @@
             
             if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
                 self.axaLockConnection?.unlockDevice()
+            }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"]as? String ?? "" == "7"{
+                self.ocslockConnection?.lockUnlockOcsLock()
             }else{
                 if self.btnPressedPause{
                     self.showLoader(withMsg: "Unlocking. Please wait...")
@@ -1250,6 +1243,22 @@
         }
     }
  }
+ 
+ //MARK: - OCS Connection Delegate's
+ extension BookNowVC: OCSConnectionDelegates{
+    func responseFromConnection() {
+        var command_sent = ""
+        if self.btnPressedPause{
+            command_sent = "1"
+            self.deviceUnlockedSuccessfully()
+        }else{
+            command_sent = "0"
+            self.deviceLockedSuccessfully()
+        }
+        self.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": Singleton.runningRentalArray[selectedRentalIndex]["object_id"]as? String ?? "", "booking_id": Singleton.runningRentalArray[selectedRentalIndex]["id"]as? String ?? "", "command_sent": command_sent, "command_status": "0", "error_message": "", "device_type": "1"])
+    }
+ }
+ 
  
  //MARK: - Web Api's
  extension BookNowVC{
@@ -1326,16 +1335,9 @@
                 }else{
                     UserDefaults.standard.set(false, forKey: "isShowEnterRefBtn")
                 }
-                
-                if AppLocalStorage.sharedInstance.refer_friend == "1"{
-                    self.btnGift.isHidden = false
-                    if Singleton.smRippleView == nil{
-                        self.loadRippleView()
-                    }
-                }else{
-                    self.btnGift.isHidden = true
+                if Singleton.smRippleView == nil{
+                    self.loadRippleView()
                 }
-                
                 if (dict["FLAG"] as! Bool){
                     if let arrResult = dict["LOACTION_DATA"] as? NSArray, arrResult.count > 0{
                         self.arrDeviceData.removeAllObjects()
@@ -1394,7 +1396,7 @@
                                     })
                                 })
                                 self.numberOfRentalsRunning_lbl.text = "\(self.selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
-//                                self.numberOfRentalRunningTop_lbl.text = "\(self.selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
+                                self.numberOfRentalRunningTop_lbl.text = "\(self.selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
                                 if self.selectedRentalIndex < Singleton.runningRentalArray.count{
                                     self.currentRentalAmount_lbl.text = "$\(Singleton.runningRentalArray[self.selectedRentalIndex]["total_price"]as? Double ?? 0.0)"
                                 }
@@ -1435,7 +1437,7 @@
                             }
                         }
                         if let cr = currentRental[0] as? NSDictionary{
-                            self.setUPSlider(dict:cr)
+                            self.setUPSlider(dict:cr,param: params)
                         }
                         self.pauseRentalCollectionView.alpha = 1.0
                         self.pauseRentalCollectionView.isUserInteractionEnabled = true
@@ -1444,7 +1446,8 @@
                         self.hideRunningRentalItems()
                     }
                     Global.appdel.checkLocationMangereMethod()
-                    if let payment_id = dict["payment_id"]as? String, payment_id != "0"{
+                    if let payment_id = dict["payment_id"]as? String, payment_id != "0"
+                    {
                         StaticClass.sharedInstance.saveToUserDefaultsString(value: payment_id , forKey: Global.g_UserData.BookingID)
                     }
                     if !self.isMapDraggin{
@@ -1487,7 +1490,7 @@
                         self.loadPrimaryAccountView(data: data)
                     }
                 }
-            }            
+            }
         }) { (error) in
             self.loaderBgView.isHidden = true
             self.isViewDidCall = false
@@ -1740,6 +1743,7 @@
         self.paymentId = selectedRentalDic["id"]as? String ?? ""
         
         let dictionary = NSMutableDictionary()
+        dictionary.setObject(self.ocslockConnection?.userCode ?? "", forKey: "new_ocs_code" as NSCopying)
         dictionary.setObject(selectedRentalDic["id"]as? String ?? "", forKey: "payment_id" as NSCopying)
         dictionary.setObject(self.isEndingRentalManual, forKey: "manually_end" as NSCopying)
         dictionary.setObject(self.shareDeviceObj.totalCalulationPrice, forKey: "amount" as NSCopying)
@@ -2276,7 +2280,7 @@
                         }
                     }
                     if array.count > 0{
-                        self.loadAssestListView(vc: self, assetList: array)
+                        self.loadAssestListView(assetList: array)
                     }else{
                         self.showTopPop(message: "No asset available on this location", response: false)
                     }
@@ -2348,9 +2352,9 @@
             }
         }
         if bikesArray.count > 0{
-            self.loadAssestListView(vc: self, assetList: bikesArray)
+            self.loadAssestListView(assetList: bikesArray)
         }else{
-            self.loadAssestListView(vc: self, assetList: [data])
+            self.loadAssestListView(assetList: [data])
         }
     }
  }
@@ -2407,7 +2411,7 @@
         if indexPath.row == 0{
             self.sharedCreditCardObj = self.arrCardList.object(at: indexPath.row)as! shareCraditCard
             self.cardSelected = 1
-            cell.containerView.backgroundColor = CustomColor.primaryColor
+            cell.containerView.backgroundColor = CustomColor.customAppBlueWithAlpha
             cell.cardNumber_lbl.textColor = UIColor.white
         }else{
             cell.containerView.backgroundColor = UIColor.white
@@ -2426,7 +2430,7 @@
         for i in 0..<arrCardList.count{
             self.cardListCell = self.cardListTableView.cellForRow(at: IndexPath(row: i, section: 0)) as! CardsListCell
             if i == indexPath.row{
-                self.cardListCell.containerView.backgroundColor = CustomColor.primaryColor
+                self.cardListCell.containerView.backgroundColor = CustomColor.customAppBlueWithAlpha
                 self.cardListCell.cardNumber_lbl.textColor = UIColor.white
             }else{
                 self.cardListCell.containerView.backgroundColor = UIColor.white
@@ -2460,7 +2464,7 @@
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.pauseRentalCollectionView{
             let cell = self.pauseRentalCollectionView.dequeueReusableCell(withReuseIdentifier: "PauseRentalCollectionCell", for: indexPath)as! PauseRentalCollectionCell
-            cell.vc = self
+            cell.bookNowVc = self
             cell.tag = indexPath.row
             cell.setDataOnCell(dataDictionary: Singleton.runningRentalArray[indexPath.row])
             cell.report_btn.tag = indexPath.row
@@ -2474,7 +2478,6 @@
             return cell
         }else{
             let cell = self.lockGuidCollection.dequeueReusableCell(withReuseIdentifier: "GuideCollectionCell", for: indexPath)as! GuideCollectionCell
-            cell.titleContainerView.backgroundColor = CustomColor.primaryColor
             let data = Singleton.lockInstructionArray[indexPath.row]
             cell.title_lbl.text = data["assets_name"]as? String ?? ""
             DispatchQueue.main.async {
@@ -2591,7 +2594,7 @@
             self.lastSelectedIndex = self.selectedRentalIndex
             self.isRentalCellChagned = false
             self.numberOfRentalsRunning_lbl.text = "\(selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
-//            self.numberOfRentalRunningTop_lbl.text = "\(selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
+            self.numberOfRentalRunningTop_lbl.text = "\(selectedRentalIndex + 1)/\(Singleton.runningRentalArray.count)"
             if self.selectedRentalIndex < Singleton.trackLocationRentalArray.count{
                 self.currentRentalAmount_lbl.text = "$\(Singleton.trackLocationRentalArray[selectedRentalIndex]["total_price"]as? Double ?? 0.0)"
             }

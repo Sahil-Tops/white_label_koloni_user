@@ -17,9 +17,7 @@
             <connections>
                 <outlet property="btnGift" destination="zId-0r-6pQ" id="EaH-HE-h5L"/>
                 <outlet property="headerView" destination="wAf-d4-hbQ" id="gKq-YA-Pe0"/>
-                <outlet property="logoImg" destination="qdy-R1-bL3" id="FkC-BF-CEx"/>
                 <outlet property="menuOrBack_btn" destination="A1y-94-fIf" id="i3j-SG-Mlw"/>
-                <outlet property="navigationBgImage" destination="cjU-Wp-i2f" id="ijs-o9-Q16"/>
                 <outlet property="referralCount_lbl" destination="SBC-nP-1Od" id="fc2-sR-i9i"/>
                 <outlet property="rippleView" destination="bAg-i7-Wl9" id="HdM-ix-Aps"/>
                 <outlet property="searchIcon_Img" destination="hNS-8J-Vbv" id="vFL-Yp-DLn"/>
@@ -33,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cjU-Wp-i2f">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="cjU-Wp-i2f">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAf-d4-hbQ">
@@ -84,7 +82,7 @@
                             <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdy-R1-bL3">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo_2" translatesAutoresizingMaskIntoConstraints="NO" id="qdy-R1-bL3">
                             <rect key="frame" x="93.666666666666671" y="-3.3333333333333357" width="187.66666666666663" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="FOC-Cn-jWX"/>
@@ -209,7 +207,9 @@
         </view>
     </objects>
     <resources>
+        <image name="login_logo_2" width="713" height="277"/>
         <image name="search-1" width="30" height="30"/>
+        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

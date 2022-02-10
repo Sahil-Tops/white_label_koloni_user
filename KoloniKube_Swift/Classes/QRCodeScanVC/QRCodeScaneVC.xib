@@ -73,13 +73,13 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sr-09-HnB" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="177" y="798" width="60" height="60"/>
+                    <rect key="frame" x="177" y="780" width="60" height="78"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="crF-X0-eqb"/>
-                        <constraint firstAttribute="width" secondItem="6sr-09-HnB" secondAttribute="height" multiplier="10:10" id="m4d-a8-dXT"/>
+                        <constraint firstAttribute="width" secondItem="6sr-09-HnB" secondAttribute="height" multiplier="10:13" id="m4d-a8-dXT"/>
                     </constraints>
-                    <state key="normal">
+                    <state key="normal" image="flash_light">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -334,13 +334,14 @@
     </objects>
     <designables>
         <designable name="6sr-09-HnB">
-            <size key="intrinsicContentSize" width="30" height="34"/>
+            <size key="intrinsicContentSize" width="67.5" height="86.5"/>
         </designable>
         <designable name="xKO-P6-CfR">
             <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
     <resources>
+        <image name="flash_light" width="67.5" height="86.5"/>
         <image name="qrcode_scan_light_green.png" width="250" height="16"/>
         <image name="side_menu" width="1242" height="2208"/>
         <image name="unchecked_gray" width="30" height="30"/>

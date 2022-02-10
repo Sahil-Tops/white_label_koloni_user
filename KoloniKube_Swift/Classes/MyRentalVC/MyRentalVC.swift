@@ -13,8 +13,6 @@ import SkeletonView
 class MyRentalVC: UIViewController {
 
     //MARK: - Outlet's
-    @IBOutlet weak var logoImg: UIImageView!
-    @IBOutlet weak var headerBg_img: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var lblNoHistoryFound: UILabel!
     @IBOutlet weak var tblRental: UITableView!
@@ -72,7 +70,6 @@ class MyRentalVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.headerView.addUnderLine(color: .lightGray)
-        self.loadUI()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -92,17 +89,6 @@ class MyRentalVC: UIViewController {
     func ApiCall()  {
         Global().delay(delay: 0.1) {
             self.rentalListApiCall(isLoader: true)
-        }
-    }
-    
-    func loadUI(){
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
-            self.logoImg.image = image
-        }
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.headerBg_img.backgroundColor = CustomColor.primaryColor
         }
     }
     
@@ -297,12 +283,7 @@ extension MyRentalVC: UITableViewDelegate, UITableViewDataSource {
                     Singleton.showSkeltonViewOnViews(viewsArray: [cell.containerView])
                 }else{
                     Singleton.hideSkeltonViewFromViews(viewsArray: [cell.containerView])
-                    if AppLocalStorage.sharedInstance.application_gradient{
-                        cell.vehicleNameContainerView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.2, endPosition: 1.0)
-                    }else{
-                        cell.vehicleNameContainerView.backgroundColor = CustomColor.primaryColor
-                    }
-                    cell.totalAmountPaid_lbl.textColor = CustomColor.primaryColor
+                    cell.vehicleNameContainerView.createGradientLayer(color1: CustomColor.customBlue, color2: CustomColor.customCyan, startPosition: 0.2, endPosition: 1.0)
                     if self.arrRentalList.count > 0{
                         cell.vehicleNameContainerView.roundCorners(corners: [.topLeft, .topRight], radius: 15)
                         let rentalOBJ = self.arrRentalList[indexPath.row] as! shareRental

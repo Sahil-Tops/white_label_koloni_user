@@ -18,7 +18,6 @@
                 <outlet property="addCardContainerView" destination="WZE-Qp-Hd8" id="8b5-bO-Dgm"/>
                 <outlet property="addCard_btn" destination="HpK-TI-wyx" id="5qp-BC-eqX"/>
                 <outlet property="add_btn" destination="qcR-y8-6f8" id="YuQ-32-v5O"/>
-                <outlet property="bgImage" destination="Ezc-6e-iYo" id="ec3-HM-Er4"/>
                 <outlet property="btnBuyPlan" destination="HdB-pu-MGw" id="Q68-YX-nci"/>
                 <outlet property="buyBtn_height" destination="oMC-7s-5md" id="Suo-fX-pPZ"/>
                 <outlet property="headerView" destination="RmE-sD-iFK" id="prh-T5-2fb"/>
@@ -59,7 +58,7 @@
                         <constraint firstItem="biK-9p-w9P" firstAttribute="centerX" secondItem="POV-9b-Rdw" secondAttribute="centerX" id="f1z-MK-58Z"/>
                     </constraints>
                 </scrollView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ezc-6e-iYo">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="Ezc-6e-iYo">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmE-sD-iFK">
@@ -101,7 +100,7 @@
                         <constraint firstAttribute="height" constant="40" id="oMC-7s-5md"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
-                    <state key="normal" title="Buy">
+                    <state key="normal" title="Buy" backgroundImage="side_menu">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -116,7 +115,7 @@
                         <constraint firstAttribute="width" constant="60" id="RVx-ul-3HU"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="18" minY="18" maxX="18" maxY="18"/>
-                    <state key="normal" image="plus">
+                    <state key="normal" image="plus" backgroundImage="side_menu">
                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -150,7 +149,7 @@
                                 <constraint firstAttribute="height" constant="45" id="PFw-3Q-MB0"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                            <state key="normal" title="Add Credit/Debit Card">
+                            <state key="normal" title="Add Credit/Debit Card" backgroundImage="side_menu">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -208,17 +207,18 @@
     </objects>
     <designables>
         <designable name="HdB-pu-MGw">
-            <size key="intrinsicContentSize" width="34" height="37"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
         <designable name="HpK-TI-wyx">
-            <size key="intrinsicContentSize" width="186" height="36"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
         <designable name="qcR-y8-6f8">
-            <size key="intrinsicContentSize" width="136" height="136"/>
+            <size key="intrinsicContentSize" width="1242" height="2208"/>
         </designable>
     </designables>
     <resources>
         <image name="add_card" width="997" height="742"/>
         <image name="plus" width="100" height="100"/>
+        <image name="side_menu" width="1242" height="2208"/>
     </resources>
 </document>

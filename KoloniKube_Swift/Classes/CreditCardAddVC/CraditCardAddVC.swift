@@ -19,7 +19,6 @@ protocol ClassCardDetailPasssDelegate: class {
 
 class CraditCardAddVC: UIViewController {
     
-    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tblCard: UITableView!
     @IBOutlet weak var tblCard_height: NSLayoutConstraint!
@@ -45,7 +44,7 @@ class CraditCardAddVC: UIViewController {
     var indexPathSelection : Int = 0
     var isStatusCardEdit = Bool()
     let shareDevice = ShareDevice()
-    let bike = ShareBikeData()
+    let bike = ShareBikeKube()
     let shareCreditCardOBJ = shareCraditCard()
     var isFromFinishRental = Bool()
     var isFromProfileView = Bool()
@@ -92,7 +91,6 @@ class CraditCardAddVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.loadUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -127,22 +125,6 @@ class CraditCardAddVC: UIViewController {
     
     
     //MARK: - Custom Function's
-    
-    func loadUI(){
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.bgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.addCard_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.add_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.btnBuyPlan.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.bgImage.backgroundColor = CustomColor.primaryColor
-            self.addCard_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.add_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.btnBuyPlan.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        
-    }
-    
     func loadContent(){
         self.btnBuyPlan.circleObject()
         self.add_btn.circleObject()
@@ -213,7 +195,7 @@ extension CraditCardAddVC{
     }
     
     func getValidTokerFromAPIforBrainTree() {
-        APICall.shared.getWeb("createClientToken", withLoader: true, successBlock: { (responseObj) in
+        APICall.shared.getWeb("createClientToken?ios_version=\(appDelegate.getCurrentAppVersion)", bearerToken: true, withLoader: true, successBlock: { (responseObj) in
             if let dictObj = responseObj as? NSDictionary {
                 if let success = dictObj["FLAG"] as? Bool{
                     if (success) {

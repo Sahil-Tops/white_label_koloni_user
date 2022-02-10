@@ -26,7 +26,6 @@ class EmailSentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadUI()
         self.loadContent()
         self.loadSignUpHeaderView(view: self.headerView, headerTitle: "Check Your Email", isBackBtnHidden: false)
     }
@@ -74,25 +73,12 @@ class EmailSentVC: UIViewController {
                 let string = "An email was sent to \(String(array[0].prefix(1)))xxxx@\(array[1]) with a link to sign in."
                 let range = (string as NSString).range(of: "\(String(array[0].prefix(1)))xxxx@\(array[1])")
                 let attributtedStr = NSMutableAttributedString.init(string: string)
-                attributtedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+                attributtedStr.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], range: range)
                 self.emailSent_lbl.attributedText = attributtedStr
             }
         }
     }
     
-    func loadUI(){
-        self.openEmail_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        let range = ("Enter Code" as NSString).range(of: "Enter Code")
-        let attributtedStr = NSMutableAttributedString.init(string: "Enter Code")
-        attributtedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
-        self.enterCode_btn.setAttributedTitle(attributtedStr, for: .normal)
-        let range1 = ("Resend" as NSString).range(of: "Resend")
-        let attributtedStr1 = NSMutableAttributedString.init(string: "Resend")
-        attributtedStr1.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range1)
-        self.resendEmail_btn.setAttributedTitle(attributtedStr1, for: .normal)
-        self.one_lbl.backgroundColor = CustomColor.primaryColor
-        self.two_lbl.backgroundColor = CustomColor.primaryColor
-    }
 }
 
 //MARK: - Web Api's

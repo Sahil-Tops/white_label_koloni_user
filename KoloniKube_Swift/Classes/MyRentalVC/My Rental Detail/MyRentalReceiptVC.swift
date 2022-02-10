@@ -11,10 +11,8 @@ import UIKit
 class MyRentalReceiptVC: UIViewController {
     
     //MARK: - Outlet's
-    @IBOutlet weak var headerBg_img: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var mapImage: UIImageView!
-    @IBOutlet weak var underLine_lbl: UILabel!
     @IBOutlet weak var downloadReceipt_btn: CustomButton!
     @IBOutlet weak var orderNumber_lbl: UILabel!
     @IBOutlet weak var assetId_lbl: EZLabel!
@@ -56,28 +54,12 @@ class MyRentalReceiptVC: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        self.loadUI()
-    }
-    
     //MARK: - @IBAction's
     @IBAction func tapDownloadReceiptBtn(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: self.rideData.strPrintRecipt)!, options: [:], completionHandler: nil)
     }
     
     //MARK: - Custom Function's
-    
-    func loadUI(){
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.headerBg_img.backgroundColor = CustomColor.primaryColor
-        }
-        self.totalAmountPaid_lbl.textColor = CustomColor.primaryColor
-        self.underLine_lbl.backgroundColor = CustomColor.secondaryColor
-        self.downloadReceipt_btn.backgroundColor = CustomColor.secondaryColor
-    }
-    
     func loadNavigation(){
         
         let navBar = Bundle.main.loadNibNamed("NavigationView", owner: nil, options: [:])?.first as? NavigationView

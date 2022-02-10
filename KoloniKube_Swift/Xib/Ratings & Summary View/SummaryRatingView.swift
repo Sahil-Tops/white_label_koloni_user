@@ -9,10 +9,6 @@
 import UIKit
 
 class SummaryRatingView: UIView {
-    @IBOutlet weak var title_lbl: UILabel!
-    @IBOutlet weak var title2_lbl: UILabel!
-    @IBOutlet weak var timeIcon2_lbl: UILabel!
-    @IBOutlet weak var amountIcon2_lbl: UILabel!
     //Summary View Outlet's
     @IBOutlet weak var summaryContainerView: CustomView!
     @IBOutlet weak var bikeSummaryView: CustomView!
@@ -25,14 +21,9 @@ class SummaryRatingView: UIView {
     @IBOutlet weak var amount_2_lbl: UILabel!
     @IBOutlet weak var gotIt_btn: UIButton!
     @IBOutlet weak var gotIt_2_btn: CustomButton!
-    @IBOutlet weak var logo_btn: UIButton!
+    @IBOutlet weak var logo_btn: CustomButton!
     @IBOutlet weak var seeMore_lbl: UILabel!
     @IBOutlet weak var seeMore_2_lbl: UILabel!
-    @IBOutlet weak var timeIcon_lbl: UILabel!
-    @IBOutlet weak var amountIcon_lbl: UILabel!
-//    @IBOutlet weak var time2Icon_lbl: UILabel!
-    @IBOutlet weak var distanceIcon_lbl: UILabel!
-    @IBOutlet weak var engryIcon_lbl: UILabel!
     
     //Rating View Outlet's
     @IBOutlet weak var ratingContainerView: CustomView!
@@ -48,8 +39,6 @@ class SummaryRatingView: UIView {
     
     var numberOfRating = 0
     var bookNowVc: BookNowVC?
-    var locationVc: LocationListingViewController?
-    var vc: UIViewController?
     var orderId = ""
     
     //Default Function's
@@ -67,20 +56,11 @@ class SummaryRatingView: UIView {
         }) { (_) in
             self.removeFromSuperview()
             if !UserDefaults.standard.bool(forKey: "dont_show_app_store_rating"){
-                if self.vc is BookNowVC{
-                    if !(self.bookNowVc?.iamAtHub ?? false){
-                        self.bookNowVc?.loadAppStoreRatingView()
-                        Singleton.lastRideSummaryData = [:]
-                    }else{
-                        Global.appdel.setUpSlideMenuController()
-                    }
+                if !(self.bookNowVc?.iamAtHub ?? false){
+                    self.bookNowVc?.loadAppStoreRatingView()
+                    Singleton.lastRideSummaryData = [:]
                 }else{
-                    if !(self.locationVc?.runningRentalView?.iamAtHub ?? false){
-                        self.locationVc?.loadAppStoreRatingView()
-                        Singleton.lastRideSummaryData = [:]
-                    }else{
-                        Global.appdel.setUpSlideMenuController()
-                    }
+                    Global.appdel.setUpSlideMenuController()
                 }
             }
         }
@@ -155,20 +135,11 @@ class SummaryRatingView: UIView {
             self.removeFromSuperview()
             if self.numberOfRating > 3{
                 if !UserDefaults.standard.bool(forKey: "dont_show_app_store_rating"){
-                    if self.vc is BookNowVC{
-                        if !(self.bookNowVc?.iamAtHub ?? false){
-                            self.bookNowVc?.loadAppStoreRatingView()
-                            Singleton.lastRideSummaryData = [:]
-                        }else{
-                            Global.appdel.setUpSlideMenuController()
-                        }
+                    if !(self.bookNowVc?.iamAtHub ?? false){
+                        self.bookNowVc?.loadAppStoreRatingView()
+                        Singleton.lastRideSummaryData = [:]
                     }else{
-                        if !(self.locationVc?.runningRentalView?.iamAtHub ?? false){
-                            self.locationVc?.loadAppStoreRatingView()
-                            Singleton.lastRideSummaryData = [:]
-                        }else{
-                            Global.appdel.setUpSlideMenuController()
-                        }
+                        Global.appdel.setUpSlideMenuController()
                     }
                 }
             }
@@ -177,41 +148,6 @@ class SummaryRatingView: UIView {
     }
     
     //MARK: - Custom Function's
-    
-    func loadContent(){
-        
-        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "flag_logo_img") { (image) in
-            self.logo_btn.setImage(image, for: .normal)
-            self.logo_btn.setBorder(border_width: 2, border_color: .white)
-            self.logo_btn.circleObject()
-        }
-        if AppLocalStorage.sharedInstance.application_gradient{
-            self.gotIt_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-            self.gotIt_2_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
-        }else{
-            self.gotIt_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-            self.gotIt_2_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
-        }
-        if AppLocalStorage.sharedInstance.use_tertiary_text_color == "1"{
-            self.title_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.timeIcon_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.distanceIcon_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.engryIcon_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.amountIcon_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.title2_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.timeIcon2_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-            self.amountIcon2_lbl.textColor = AppLocalStorage.sharedInstance.tertiary_color
-        }else{
-            self.title_lbl.textColor = CustomColor.secondaryColor
-            self.timeIcon_lbl.textColor = CustomColor.secondaryColor
-            self.distanceIcon_lbl.textColor = CustomColor.secondaryColor
-            self.engryIcon_lbl.textColor = CustomColor.secondaryColor
-            self.amountIcon_lbl.textColor = CustomColor.secondaryColor
-            self.title2_lbl.textColor = CustomColor.secondaryColor
-            self.timeIcon2_lbl.textColor = CustomColor.secondaryColor
-            self.amountIcon2_lbl.textColor = CustomColor.secondaryColor
-        }
-    }
     
     func showHideCommentTextView(isHide: Bool){
         if isHide{
@@ -238,7 +174,7 @@ class SummaryRatingView: UIView {
         let str = "See more detail here"
         let range = (str as NSString).range(of: "here")
         let attributedStr = NSMutableAttributedString(string: str)
-        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.primaryColor, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         self.seeMore_lbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapHere(_:))))
         self.seeMore_2_lbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapHere(_:))))
         self.seeMore_lbl.isUserInteractionEnabled = true
@@ -253,14 +189,9 @@ class SummaryRatingView: UIView {
         let range = ("See more detail here" as NSString).range(of: "here")
         if gesture.didTapAttributedTextInLabel(label: self.seeMore_lbl, inRange: range){
             let rentalReciptVc = MyRentalReceiptVC(nibName: "MyRentalReceiptVC", bundle: nil)
+            rentalReciptVc.backVc = "book_now"
             rentalReciptVc.paymentId = Singleton.lastRideSummaryData["payment_id"]as? String ?? ""
-            if self.vc is BookNowVC{
-                rentalReciptVc.backVc = "book_now"
-                self.bookNowVc?.present(rentalReciptVc, animated: true, completion: nil)
-            }else{
-                rentalReciptVc.backVc = "location_vc"
-                self.locationVc?.present(rentalReciptVc, animated: true, completion: nil)
-            }
+            self.bookNowVc?.present(rentalReciptVc, animated: true, completion: nil)
         }
     }
     
@@ -320,11 +251,10 @@ extension UIViewController{
     func loadSummaryView(summaryType: String){
         let summaryView = Bundle.main.loadNibNamed("Summary&RatingView", owner: nil, options: [:])?.first as? SummaryRatingView
         summaryView?.frame = self.view.frame
-        summaryView?.vc = self
-        summaryView?.loadContent()
         summaryView?.summaryContainerView.frame.origin.y += (summaryView?.summaryContainerView.frame.origin.y)! * 1.5
-        summaryView?.bookNowVc = self as? BookNowVC
-        summaryView?.locationVc = self as? LocationListingViewController
+        if let vc = self as? BookNowVC{
+            summaryView?.bookNowVc = vc
+        }
         summaryView?.createAtrributedLabel()
         summaryView?.ratingContainerView.isHidden = true
         if !Singleton.lastRideSummaryData.isEmpty{
@@ -355,10 +285,9 @@ extension UIViewController{
     func loadRatingView(){
         let ratingView = Bundle.main.loadNibNamed("Summary&RatingView", owner: nil, options: [:])?.first as? SummaryRatingView
         ratingView?.frame = self.view.frame
-        ratingView?.vc = self
-        ratingView?.loadContent()
-        ratingView?.bookNowVc = self as? BookNowVC
-        ratingView?.locationVc = self as? LocationListingViewController
+        if let vc = self as? BookNowVC{
+            ratingView?.bookNowVc = vc
+        }
         ratingView?.summaryContainerView.isHidden = true
         ratingView?.comment_textView.setBorder(border_width: 1.0, border_color: UIColor.black)
         ratingView?.comment_textView.cornerRadius(cornerValue: 3)

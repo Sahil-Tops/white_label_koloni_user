@@ -23,6 +23,7 @@ import FirebaseAnalytics
 import SDWebImage
 import Braintree
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate,UITabBarDelegate,CLLocationManagerDelegate{
     
@@ -52,8 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         GIDSignIn.sharedInstance()?.delegate = self
         BTAppSwitch.setReturnURLScheme("com.app.kolonishare.payments")
         SDImageCache.shared.clearMemory()
-        SDImageCache.shared.clearDisk {
-            
+        SDImageCache.shared.clearDisk {            
         }
         
         // Get Current Application version
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         self.getDeviceName()
         
         // set the minimimum background Fetch interval
-//        UIApplication.shared.setMinimumBackgroundFetchInterval(2)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(2)
         
         self.createFolder()
         
@@ -78,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         self.setupLocationManager()
         // Set up Linka
         self.setupLinkaLock()
+        
         // IQkeyboard initiallization
         IQKeyboardManager.shared.enable = true
         
@@ -94,7 +95,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         if let notification = launchOptions?[.remoteNotification] as? NSDictionary {
             self.notificationReceived(notification: notification as [NSObject : AnyObject])
         }
-        _ = AppLocalStorage.init()
+        
+        // Check user is logged in or not
+        if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
+            
+            if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
+                self.setNavigationLaunchFlow()
+            }else  {
+                self.setNavigationFlow()
+            }
+            
+        }else{
+            self.setNavigationFlow()
+        }
+        
         type(of: self).shared = self
         return true
     }
@@ -104,10 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
+        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        print("applicationDidEnterBackground")        
+        print("applicationDidEnterBackground")
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -181,13 +196,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         self.getCurrentDeviceName = UIDevice.current.modelName
     }
     
-    
     //MARK:- Get running Booking Details -
     func userRunningRental_Web(loader: Bool) {
         
-        let stringwsName = "user_running_rental/user_id/\(StaticClass.sharedInstance.strUserId)"
+        let stringwsName = "user_running_rental/user_id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
         
-        APICall.shared.getWeb(stringwsName, withLoader: loader, successBlock: { (response) in
+        APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: loader, successBlock: { (response) in
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){
                     if let arrResult = dict["CURRENT_RENTAL"] as? NSArray , arrResult.count > 0  {
@@ -240,13 +254,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     //MARK:- Set Navigation for Launch Screen -
-//    func setNavigationLaunchFlow() {
-//        self.lunchVC = LaunchScreenVC(nibName: "LaunchScreenVC", bundle:nil)
-//        self.navigation = UINavigationController(rootViewController: lunchVC!)
-//        self.navigation?.isNavigationBarHidden = true
-//        self.window?.rootViewController = navigation
-//        self.window?.makeKeyAndVisible()
-//    }
+    func setNavigationLaunchFlow() {
+        lunchVC = LaunchScreenVC (nibName: "LaunchScreenVC", bundle:nil)
+        self.navigation = UINavigationController(rootViewController: lunchVC!)
+        self.navigation?.isNavigationBarHidden = true
+        self.window?.rootViewController = navigation
+        self.window?.makeKeyAndVisible()
+    }
     //MARK:- Set Navigation for Login Screen -
     func setNavigationFlow() {
         self.loginWithGoogleAppleVc = LoginWithGoogleAppleVC(nibName: "LoginWithGoogleAppleVC", bundle: nil)
@@ -258,9 +272,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     //MARK:- Get User Details -
     func userDetailCall(navigationVc: UINavigationController = UINavigationController(), vc: UIViewController = UIViewController()) -> Void {
-        let stringwsName = "profile_details/id/\(StaticClass.sharedInstance.strUserId)"
+        let stringwsName = "profile_details/id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
         
-        APICall.shared.getWeb(stringwsName, withLoader: false, successBlock: { (response) in
+        APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: false, successBlock: { (response) in
             
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){                    
@@ -378,8 +392,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     //MARK:-  LOGOUT CALL -
     private func userLogoutCall() -> Void {
-        let strUrl = "logout/id/\(StaticClass.sharedInstance.strUserId)"
-        APICall.shared.getWeb(strUrl, withLoader: true, successBlock: { (response) in
+        let strUrl = "logout/id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
+        APICall.shared.getWeb(strUrl, bearerToken: true, withLoader: true, successBlock: { (response) in
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){
                     
@@ -645,10 +659,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func pushToSideMenuVC(){
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            let bookNowVController = BookNowVC(nibName: "BookNowVC", bundle: nil)
-            let locationListingVc = LocationListingViewController(nibName: "LocationListingViewController", bundle: nil)
+            let bookNowVController = BookNowVC(nibName: "BookNowVC", bundle: nil)
             let leftMenu = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
-            let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: locationListingVc, leftMenuViewController: leftMenu, rightMenuViewController: nil)
+            let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: bookNowVController, leftMenuViewController: leftMenu, rightMenuViewController: nil)
             sideMenuViewController.bouncesHorizontally = false
             sideMenuViewController.contentViewScaleValue = 0.65
             sideMenuViewController.scaleContentView = true
@@ -726,16 +739,4 @@ extension AppDelegate: GIDSignInDelegate{
 
 func trackUserInFirebase(userId: String){
     Analytics.setUserID(userId)
-}
-
-public extension UIApplication {
-
-    func clearLaunchScreenCache() {
-        do {
-            try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
-        } catch {
-            print("Failed to delete launch screen cache: \(error)")
-        }
-    }
-
 }

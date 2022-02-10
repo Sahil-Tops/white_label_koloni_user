@@ -43,7 +43,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjH-wY-5mM">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="whJ-Zn-b66">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="whJ-Zn-b66">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
                                 </imageView>
                             </subviews>
@@ -117,13 +117,13 @@
                 <outlet property="containerView" destination="grs-Fg-Tdr" id="Utw-ad-lQ6"/>
                 <outlet property="left_arrow_btn" destination="wY9-bm-l66" id="fxr-ke-cAr"/>
                 <outlet property="right_arrow_btn" destination="GEy-GQ-Efh" id="mla-TQ-QIQ"/>
-                <outlet property="titleBacgkground_imgView" destination="whJ-Zn-b66" id="Ju2-yO-Vm0"/>
                 <outlet property="titleBackgroundView" destination="rjH-wY-5mM" id="2Ff-5J-KzX"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="97.767857142857139"/>
         </view>
     </objects>
     <resources>
+        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -23,7 +23,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHn-xZ-j4h" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="330" height="40"/>
                                 <subviews>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yJJ-cV-k1O">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="yJJ-cV-k1O">
                                         <rect key="frame" x="0.0" y="0.0" width="330" height="40"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXb-Wi-qlO">
@@ -92,7 +92,7 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per rental" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6O-ss-sp2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per ride" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6O-ss-sp2">
                                                 <rect key="frame" x="4" y="30" width="148" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -173,9 +173,11 @@
                 <outlet property="perRide_lbl" destination="1Jg-ls-QMR" id="YdY-lT-o4c"/>
                 <outlet property="plansName_lbl" destination="VXb-Wi-qlO" id="cgx-hh-5i0"/>
                 <outlet property="price_lbl" destination="pr1-jH-cBp" id="vog-Ik-wpU"/>
-                <outlet property="titleHeader_img" destination="yJJ-cV-k1O" id="Z1z-AD-3ax"/>
             </connections>
             <point key="canvasLocation" x="156.80000000000001" y="211.84407796101951"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="side_menu" width="1242" height="2208"/>
+    </resources>
 </document>
