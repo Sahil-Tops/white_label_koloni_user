@@ -26,11 +26,12 @@ class Global {
     static var PopUpColor = UIColor(red: 40.0/255, green: 40.0/255, blue: 40.0/255, alpha: 0.0)
     
     // LIVE
-        static let g_APIBaseURL = "http://13.59.246.255/app/ws/v13/"
+//        static let g_APIBaseURL = "http://13.59.246.255/app/ws/v13/"
     
     // BETA    
-//    static let g_APIBaseURL = "https://kolonishare.com/design/ws/v13/"
-    
+    static let g_APIBaseURL = "https://kolonishare.com/design/ws/v13/"
+    static let baseUrl = "https://api.lockers.koloni.io/"
+        
     static let licensingAgreementURL = "http://kolonishare.com/app/software_license"
     static let TearmsURL = "http://kolonishare.com/app/term_and_condition"
     

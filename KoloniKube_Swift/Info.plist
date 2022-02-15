@@ -62,9 +62,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ClientId</key>
-	<string>vYCUKqPE3nquXBBf0LylgjOTbyvw0PL7</string>
+	<string>ZVGCyfDmt9789SaBb1K8kqWWMZJ9X0VO</string>
 	<key>Domain</key>
-	<string>koloni.us.auth0.com</string>
+	<string>koloni-dev.us.auth0.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>com.venmo.touch.v2</string>

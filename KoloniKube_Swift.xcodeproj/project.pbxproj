@@ -46,11 +46,14 @@
 		05F7103A1E9B736500F6A272 /* RangeSeekSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F710381E9B736500F6A272 /* RangeSeekSlider.swift */; };
 		05F7103B1E9B736500F6A272 /* RangeSeekSliderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F710391E9B736500F6A272 /* RangeSeekSliderDelegate.swift */; };
 		05F7103D1E9B73D400F6A272 /* CustomRangeSeekSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F7103C1E9B73D400F6A272 /* CustomRangeSeekSlider.swift */; };
+		2238771427B522EA00126141 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2238771327B522EA00126141 /* AuthManager.swift */; };
+		2238771627B52A1B00126141 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2238771527B52A1B00126141 /* Auth0.plist */; };
+		223D466627B6CCB700A01020 /* ApiLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D466527B6CCB700A01020 /* ApiLists.swift */; };
+		223D466827B6D3F300A01020 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D466727B6D3F300A01020 /* APIRequest.swift */; };
 		22A8D6F327A2F27B0028BC2A /* OcsSmartLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */; };
 		22A8D6F427A2F27B0028BC2A /* OcsSmartLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A8D6FD27A30F350028BC2A /* LinkaAPIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6FA27A30ED90028BC2A /* LinkaAPIKit.framework */; };
 		22A8D6FE27A30F350028BC2A /* LinkaAPIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6FA27A30ED90028BC2A /* LinkaAPIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8A10F42126C3CF5E0045C6FD /* LoginWithAuth0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A10F42026C3CF5E0045C6FD /* LoginWithAuth0.swift */; };
 		8A12A09926A5AB3600D3C8BE /* FAQDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12A09826A5AB3600D3C8BE /* FAQDataModel.swift */; };
 		8A16EC96255433120026B4F4 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16EC95255433120026B4F4 /* ImagePicker.swift */; };
 		8A1CD9622692F99300B440BD /* SelectPrimaryAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A1CD9612692F99300B440BD /* SelectPrimaryAccountView.xib */; };
@@ -408,12 +411,15 @@
 		05F710381E9B736500F6A272 /* RangeSeekSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSeekSlider.swift; sourceTree = "<group>"; };
 		05F710391E9B736500F6A272 /* RangeSeekSliderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSeekSliderDelegate.swift; sourceTree = "<group>"; };
 		05F7103C1E9B73D400F6A272 /* CustomRangeSeekSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRangeSeekSlider.swift; sourceTree = "<group>"; };
+		2238771327B522EA00126141 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		2238771527B52A1B00126141 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
+		223D466527B6CCB700A01020 /* ApiLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiLists.swift; sourceTree = "<group>"; };
+		223D466727B6D3F300A01020 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OcsSmartLibrary.framework; sourceTree = "<group>"; };
 		22A8D6FA27A30ED90028BC2A /* LinkaAPIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LinkaAPIKit.framework; sourceTree = "<group>"; };
 		3BA466D8F284E6423E0A5E63 /* Pods-koloniKube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-koloniKube.release.xcconfig"; path = "Target Support Files/Pods-koloniKube/Pods-koloniKube.release.xcconfig"; sourceTree = "<group>"; };
 		5F692A8E503B8B3E941A1E02 /* Pods_KoloniKube_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KoloniKube_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7815321BB8E7BB49AE60AAF6 /* Pods-KoloniKube_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoloniKube_Swift.release.xcconfig"; path = "Target Support Files/Pods-KoloniKube_Swift/Pods-KoloniKube_Swift.release.xcconfig"; sourceTree = "<group>"; };
-		8A10F42026C3CF5E0045C6FD /* LoginWithAuth0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithAuth0.swift; sourceTree = "<group>"; };
 		8A12A09826A5AB3600D3C8BE /* FAQDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQDataModel.swift; sourceTree = "<group>"; };
 		8A16EC95255433120026B4F4 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		8A1CD9612692F99300B440BD /* SelectPrimaryAccountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPrimaryAccountView.xib; sourceTree = "<group>"; };
@@ -912,12 +918,12 @@
 			path = RangeSeekSlider;
 			sourceTree = "<group>";
 		};
-		8A10F41F26C3CF410045C6FD /* Login Auth0 */ = {
+		2238771227B522CF00126141 /* Auth0 Manager */ = {
 			isa = PBXGroup;
 			children = (
-				8A10F42026C3CF5E0045C6FD /* LoginWithAuth0.swift */,
+				2238771327B522EA00126141 /* AuthManager.swift */,
 			);
-			path = "Login Auth0";
+			path = "Auth0 Manager";
 			sourceTree = "<group>";
 		};
 		8A12A09626A5AA4500D3C8BE /* Models */ = {
@@ -1106,7 +1112,6 @@
 		8A56802625496B16001FB2C7 /* LoginWithSocial */ = {
 			isa = PBXGroup;
 			children = (
-				8A10F41F26C3CF410045C6FD /* Login Auth0 */,
 				8AA06822254944AC00B973C6 /* LoginWithGoogleAppleVC.swift */,
 				8AA06823254944AC00B973C6 /* LoginWithGoogleAppleVC.xib */,
 			);
@@ -1183,6 +1188,7 @@
 		8AA068212549447400B973C6 /* LoginOrSignUp */ = {
 			isa = PBXGroup;
 			children = (
+				2238771227B522CF00126141 /* Auth0 Manager */,
 				8A56802625496B16001FB2C7 /* LoginWithSocial */,
 				8A56802725496B29001FB2C7 /* LoginWithPhoneEmail */,
 			);
@@ -1462,18 +1468,21 @@
 				05F2692B1F261A7100E7366B /* KoloniGIFImg.gif */,
 				8A8226992625A0F400D45080 /* GoogleService-Info.plist */,
 				E72E41251E8E5A37006F4EBA /* Info.plist */,
+				2238771527B52A1B00126141 /* Auth0.plist */,
 				E75630931E8E74C30030C5C3 /* KoloniKube_Swift-BridgingHeader.h */,
 				E76DD9D623D9DA7B00EB6EAA /* read_me.strings */,
 			);
 			path = KoloniKube_Swift;
 			sourceTree = "<group>";
 		};
-		E732A88F23D829FD0042FBC2 /* API */ = {
+		E732A88F23D829FD0042FBC2 /* Web Service's */ = {
 			isa = PBXGroup;
 			children = (
 				8A3527232450877E0066C1CA /* APICall.swift */,
+				223D466527B6CCB700A01020 /* ApiLists.swift */,
+				223D466727B6D3F300A01020 /* APIRequest.swift */,
 			);
-			path = API;
+			path = "Web Service's";
 			sourceTree = "<group>";
 		};
 		E735715F240CE569004DB19A /* BookNowVc */ = {
@@ -1573,7 +1582,7 @@
 			children = (
 				8AF0531B277AFD19007C6B37 /* Ocs */,
 				8A16EC94255432F80026B4F4 /* Custom Classes */,
-				E732A88F23D829FD0042FBC2 /* API */,
+				E732A88F23D829FD0042FBC2 /* Web Service's */,
 				058D0DC220989056006D6F2A /* SwiftScanner */,
 				058D0DAD20988E95006D6F2A /* CodeScan.bundle */,
 				E701AC5B1EF905D500D6670C /* LocationTrackerClass */,
@@ -2298,6 +2307,7 @@
 				E762F6412383E01A007635B5 /* MyRentalReceiptVC.xib in Resources */,
 				0550F05E2099BBD5009034FC /* BuyMembershipVC.xib in Resources */,
 				8A5FD6FB2452CA5E0094E2C0 /* AssetsListView.xib in Resources */,
+				2238771627B52A1B00126141 /* Auth0.plist in Resources */,
 				E74147301EEBC08B00F6D75D /* IssuePopupVC.xib in Resources */,
 				E7F360662420CA99002A96A3 /* WakeUpVC.xib in Resources */,
 				E7C3BDD0238BB27F000F9130 /* CardsListCell.xib in Resources */,
@@ -2412,6 +2422,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
 				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
 				"${PODS_ROOT}/Braintree/Frameworks/CardinalMobile.framework",
 				"${BUILT_PRODUCTS_DIR}/BraintreeDropIn/BraintreeDropIn.framework",
@@ -2435,6 +2446,7 @@
 				"${BUILT_PRODUCTS_DIR}/ICSPullToRefresh/ICSPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ISMessages/ISMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework",
 				"${BUILT_PRODUCTS_DIR}/KMPlaceholderTextView/KMPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/KWVerificationCodeView/KWVerificationCodeView.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
@@ -2445,6 +2457,8 @@
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/UPCarouselFlowLayout/UPCarouselFlowLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -2454,6 +2468,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AKSideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardinalMobile.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BraintreeDropIn.framework",
@@ -2477,6 +2492,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ICSPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWTDecode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KWVerificationCodeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
@@ -2487,6 +2503,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UPCarouselFlowLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -2573,6 +2591,7 @@
 				8AF2405825E4F12500846BC8 /* PromoCodeView.swift in Sources */,
 				E7CE0AEC238547110091B093 /* MyStyle.swift in Sources */,
 				051196F51F2708A900A02F25 /* UIImage+Gif.swift in Sources */,
+				223D466827B6D3F300A01020 /* APIRequest.swift in Sources */,
 				05E1D81C1E990CE9004EA44B /* PopupController.swift in Sources */,
 				E7A5C3632390DF5400E2A6CC /* RefferView.swift in Sources */,
 				E7D4621D25F8C58600A0EA3D /* BottomPopUp.swift in Sources */,
@@ -2587,6 +2606,7 @@
 				E701AC611EF905FB00D6670C /* LocationTracker.swift in Sources */,
 				8A5202B126676F0F00B0E86E /* GMUStaticCluster.m in Sources */,
 				8AB88988268DC9B7008A2C1A /* ProfileCompletionPopUp.swift in Sources */,
+				223D466627B6CCB700A01020 /* ApiLists.swift in Sources */,
 				8ABE0899251CE0F20013B615 /* AxaLockConnection.swift in Sources */,
 				E75630731E8E71B30030C5C3 /* LocalizeHelper.m in Sources */,
 				051C6A3520946FF800CBA34F /* QRCodeScaneVC.swift in Sources */,
@@ -2610,6 +2630,7 @@
 				E77D4569238E975000D5CCF4 /* HeaderView.swift in Sources */,
 				8A56802A25496B7D001FB2C7 /* LoginWithPhoneOrEmailVC.swift in Sources */,
 				E774B64C1ED45D54006E2412 /* AppLinkaAPIManager.swift in Sources */,
+				2238771427B522EA00126141 /* AuthManager.swift in Sources */,
 				05550E6D1EEA75130022087E /* CraditCardAddVC.swift in Sources */,
 				E7EC36641E9F61290072A8E4 /* REVClusterManager.m in Sources */,
 				8A90C2AB26418D510042B30D /* RentalAlertView.swift in Sources */,
@@ -2736,7 +2757,6 @@
 				E756306C1E8E71B30030C5C3 /* UIColor+Extra.swift in Sources */,
 				8A5202AA26676F0F00B0E86E /* GMUClusterManager.m in Sources */,
 				0582A24020A2C72200B2D37B /* IPAutoScalingButton.swift in Sources */,
-				8A10F42126C3CF5E0045C6FD /* LoginWithAuth0.swift in Sources */,
 				8A4E191E2721A7A200800BBF /* PinCodePopUp.swift in Sources */,
 				E756306B1E8E71B30030C5C3 /* UIButton+Border.swift in Sources */,
 				8A56802F25499745001FB2C7 /* OtpVerificationVC.swift in Sources */,
@@ -2915,8 +2935,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = KoloniKube_Swift/KoloniKube_Swift.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.5.7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2945,7 +2965,7 @@
 				PRODUCT_MODULE_NAME = koloni1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = koloni_distribution;
+				PROVISIONING_PROFILE_SPECIFIER = koloni_development;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2965,8 +2985,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = KoloniKube_Swift/KoloniKube_Swift.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.5.7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2995,7 +3015,7 @@
 				PRODUCT_MODULE_NAME = koloni1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = koloni_distribution;
+				PROVISIONING_PROFILE_SPECIFIER = koloni_development;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3016,8 +3036,8 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = koloniKube/koloniKube.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.5.7;
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
@@ -3031,7 +3051,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.kolonishare.koloniwidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Dist_koloni_Widget_Profile;
+				PROVISIONING_PROFILE_SPECIFIER = Koloni_Widget_Dev;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -3049,8 +3069,8 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = koloniKube/koloniKube.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Koloni, LLC (ZJ93T82PV5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.5.7;
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
@@ -3063,7 +3083,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.kolonishare.koloniwidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Dist_koloni_Widget_Profile;
+				PROVISIONING_PROFILE_SPECIFIER = Koloni_Widget_Dev;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;

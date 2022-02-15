@@ -55,7 +55,6 @@ class Singleton: NSObject {
     static var notificationRunningRentalDetail: [String:Any] = [:]
     static var isCalledDidFinishLaunch = true
     var socialMediaUserData: ShareUser = ShareUser()
-    static var accessToken = ""
     
     private override init() {
         

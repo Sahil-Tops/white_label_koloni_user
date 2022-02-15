@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -54,7 +54,7 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spv-54-Z8I" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="15" y="507" width="360" height="295"/>
+                    <rect key="frame" x="15" y="562" width="360" height="240"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abj-zQ-R1v">
                             <rect key="frame" x="20" y="58" width="25" height="25"/>
@@ -92,10 +92,10 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UKY-nt-xp4">
-                            <rect key="frame" x="20" y="125" width="320" height="155"/>
+                            <rect key="frame" x="20" y="125" width="320" height="100"/>
                             <subviews>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYE-tB-tGQ" customClass="CustomView">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYE-tB-tGQ" customClass="CustomView">
+                                    <rect key="frame" x="0.0" y="-45" width="320" height="45"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxV-ZC-3s6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -142,8 +142,8 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zT6-9w-z20" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zT6-9w-z20" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="-45" width="320" height="45"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLp-iv-M0j">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -187,24 +187,8 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u92-xm-x6n" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="110" width="320" height="45"/>
-                                    <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                                    <state key="normal" title="Other Option">
-                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="22.5"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="clickOnBtn:" destination="-1" eventType="touchUpInside" id="MuO-Xc-KQW"/>
-                                    </connections>
-                                </button>
-                                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhK-3z-FJs" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="155" width="320" height="45"/>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhK-3z-FJs" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjz-HH-uVp">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -238,6 +222,22 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u92-xm-x6n" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                    <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                                    <state key="normal" title="Other Option">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="22.5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="clickOnBtn:" destination="-1" eventType="touchUpInside" id="MuO-Xc-KQW"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="rhK-3z-FJs" firstAttribute="height" secondItem="zT6-9w-z20" secondAttribute="height" id="0bO-le-Sgb"/>
@@ -265,7 +265,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tv8-ZD-7C6" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="157.66666666666666" y="471" width="75" height="75"/>
+                    <rect key="frame" x="157.66666666666666" y="526" width="75" height="75"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="k3B-Ka-i5U" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="10" y="10" width="55" height="55"/>

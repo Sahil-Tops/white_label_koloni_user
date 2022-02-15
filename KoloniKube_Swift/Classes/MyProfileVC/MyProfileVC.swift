@@ -95,7 +95,7 @@ class MyProfileVC: UIViewController {
             if response == "ok"{
                 Singleton.internetCheckTimer.invalidate()
                 Global.appdel.logoutUser()
-//                LoginWithAuth0(vc: self).logoutAuth0 { (response) in
+//                AuthManager(vc: self).logoutAuth0 { (response) in
 //                    if response{
 //                        Singleton.internetCheckTimer.invalidate()
 //                        Global.appdel.logoutUser()

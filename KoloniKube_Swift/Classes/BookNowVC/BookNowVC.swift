@@ -1610,8 +1610,7 @@
         dictParameter.setObject(StaticClass.sharedInstance.latitude, forKey: "latitude" as NSCopying)
         dictParameter.setObject(StaticClass.sharedInstance.longitude, forKey: "longitude" as NSCopying)        
         dictParameter.setObject(StaticClass.sharedInstance.strUserId, forKey: "user_id" as NSCopying)
-        dictParameter.setObject(Singleton.runningRentalArray[self.selectedRentalIndex]["partner_id"]as? String ?? ""
-                                , forKey: "partner_id" as NSCopying)
+        dictParameter.setObject(Singleton.runningRentalArray[self.selectedRentalIndex]["partner_id"]as? String ?? "", forKey: "partner_id" as NSCopying)
         dictParameter.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
         self.loaderBgView.isHidden = false
         APICall.shared.postWeb("available_dropzones", parameters: dictParameter, showLoder: true, successBlock: { (responseObj) in

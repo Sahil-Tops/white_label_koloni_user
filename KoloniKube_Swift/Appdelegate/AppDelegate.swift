@@ -22,7 +22,8 @@ import Firebase
 import FirebaseAnalytics
 import SDWebImage
 import Braintree
-
+import Auth0
+import Sentry
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate,UITabBarDelegate,CLLocationManagerDelegate{
@@ -54,6 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         BTAppSwitch.setReturnURLScheme("com.app.kolonishare.payments")
         SDImageCache.shared.clearMemory()
         SDImageCache.shared.clearDisk {            
+        }
+        
+        SentrySDK.start { options in
+            options.dsn = "https://ff6ad814a2414ae4b9d67afd66e7050e@o1019195.ingest.sentry.io/6004341"
+            options.debug = true // Enabled debug when first installing is always helpful
         }
         
         // Get Current Application version

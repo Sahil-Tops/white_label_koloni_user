@@ -40,11 +40,11 @@ class LoginWithGoogleAppleVC: UIViewController {
 //            self.present(vc, animated: true, completion: nil)
 //        }
         
-//        LoginWithAuth0(vc: self).checkLoginStatus { (status) in
-//            if status{
-//                //User Already Login
-//            }
-//        }
+        AuthManager(vc: self).checkLoginStatus { (status) in
+            if status{
+                //User Already Login
+            }
+        }
         self.loadContent()
     }
     
@@ -65,7 +65,8 @@ class LoginWithGoogleAppleVC: UIViewController {
             if self.checkBox_btn.tag == 0{
                 self.showWarningMessage()
             }else{
-//                LoginWithAuth0(vc: self).loginWithAuth0()
+                AuthManager(vc: self).loginWithAuth0()
+                
             }
             break
         case signInWithApple_btn:
