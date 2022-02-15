@@ -1,5 +1,5 @@
 //
-//  LoginWithGoogleAppleViewController.swift
+//  LoginWithGoogleAppleVC.swift
 //  KoloniKube_Swift
 //
 //  Created by Sahil Mehra on 10/28/20.
@@ -65,8 +65,7 @@ class LoginWithGoogleAppleVC: UIViewController {
             if self.checkBox_btn.tag == 0{
                 self.showWarningMessage()
             }else{
-                AuthManager(vc: self).loginWithAuth0()
-                
+                AuthManager(vc: self).loginWithAuth0()                
             }
             break
         case signInWithApple_btn:
@@ -89,8 +88,11 @@ class LoginWithGoogleAppleVC: UIViewController {
             if self.checkBox_btn.tag == 0{
                 self.showWarningMessage()
             }else{
-                let vc = LoginWithPhoneOrEmailVC(nibName: "LoginWithPhoneOrEmailVC", bundle: nil)
-                self.navigationController?.pushViewController(vc, animated: true)
+//                let vc = LoginWithPhoneOrEmailVC(nibName: "LoginWithPhoneOrEmailVC", bundle: nil)
+//                self.navigationController?.pushViewController(vc, animated: true)
+                OpenAPI.sharedInstance.getOrganizations_Web { response in
+                    
+                }
             }
             break
         case checkBox_btn:

@@ -29,50 +29,82 @@ class AuthManager: NSObject{
     }
     
     func loginWithAuth0(){
-        Auth0.webAuth().scope("openid email sms profile offline_access read:current_user update:current_user_metadata").audience("https://koloni-dev.us.auth0.com/userinfo").start { result in
-            switch result {
-            case .failure(let error):
-                // Handle the error
-                print("Auth0 Error: \(error)")
+        
+        Auth0.webAuth().redirectURL(URL(string: "https://koloni-dev.us.auth0.com/authorize")!).audience("https://api.koloni.io").start { result in
+            switch result{
             case .success(let credentials):
-                // Do something with credentials e.g.: save them.
-                // Auth0 will automatically dismiss the login page
                 print("Login Credentials: \(credentials)")
                 _ = self.credentialManager.store(credentials: credentials)
-                AuthManager.accessToken = credentials.accessToken ?? ""
-                StaticClass.sharedInstance.saveToUserDefaultsString(value: AuthManager.accessToken, forKey: "bearer_access_token")
+                if let accessToken = credentials.accessToken{
+                    AuthManager.accessToken = accessToken
+                }
+                if let refreshToken = credentials.idToken{
+                    AuthManager.refreshToken = refreshToken
+                }
+                self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken, refreshToken: AuthManager.refreshToken)
                 self.getUserInfo(credentials: credentials)
-                print("Acess Token: ", AuthManager.accessToken)
+                print("Acess Token: ", AuthManager.accessToken, "Refresh Token: ", AuthManager.refreshToken)
+                return
+            case .failure(let err):
+                print("Auth0 Error: \(err)")
+                return
             }
         }
+        
+//        Auth0.webAuth().scope("openid email sms profile offline_access read:current_user update:current_user_metadata").audience("https://koloni-dev.us.auth0.com/userinfo").start { result in
+//            switch result {
+//            case .failure(let error):
+//                // Handle the error
+//                print("Auth0 Error: \(error)")
+//            case .success(let credentials):
+//                // Do something with credentials e.g.: save them.
+//                // Auth0 will automatically dismiss the login page
+//                print("Login Credentials: \(credentials)")
+//                _ = self.credentialManager.store(credentials: credentials)
+//                if let accessToken = credentials.accessToken{
+//                    AuthManager.accessToken = accessToken
+//                }
+//                if let refreshToken = credentials.idToken{
+//                    AuthManager.refreshToken = refreshToken
+//                }
+//                self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken, refreshToken: AuthManager.refreshToken)
+//                self.getUserInfo(credentials: credentials)
+//                print("Acess Token: ", AuthManager.accessToken, "Refresh Token: ", AuthManager.refreshToken)
+//            }
+//        }
     }
     
-    func getRefreshToken(){
-        let headers = ["content-type": "application/x-www-form-urlencoded"]
-
-        let postData = NSMutableData(data: "grant_type=authorization_code".data(using: String.Encoding.utf8)!)
-        postData.append("&client_id=\(AuthManager.clientId)".data(using: String.Encoding.utf8)!)
-        postData.append("&code=YOUR_AUTHORIZATION_CODE".data(using: String.Encoding.utf8)!)
-        postData.append("&redirect_uri=com.app.kolonishare://koloni-dev.us.auth0.com/ios/com.app.kolonishare/callback".data(using: String.Encoding.utf8)!)
-
-        let request = NSMutableURLRequest(url: NSURL(string: "https://koloni-dev.us.auth0.com/oauth/token")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
-        request.httpBody = postData as Data
-
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-          if (error != nil) {
-            print(error?.localizedDescription ?? "")
-          } else {
-            let httpResponse = response as? HTTPURLResponse
-            print(httpResponse ?? "Nil")
-          }
-        })
-
-        dataTask.resume()
+    func renewToken(){
+        
+        if let rToken = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "auth0_refresh_token"){
+            Auth0.authentication().renew(withRefreshToken: rToken).start { result in
+                switch result{
+                case .success(let credentials):
+                    guard let accessToken = credentials.accessToken else {
+                        return
+                    }
+                    AuthManager.accessToken = accessToken
+                    guard let refreshToken = credentials.refreshToken else {
+                        return
+                    }
+                    AuthManager.refreshToken = refreshToken
+                    print("Acess Token: ", AuthManager.accessToken, "Refresh Token: ", AuthManager.refreshToken)
+                    self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken, refreshToken: AuthManager.refreshToken)
+                    return
+                case .failure(let err):
+                    print("Error: ", err)
+                    return
+                }
+            }
+        }
+        
+    }
+    
+    func storedTokenIntoUserDefault(accessToken: String, refreshToken: String){
+        
+        StaticClass.sharedInstance.saveToUserDefaultsString(value: accessToken, forKey: "auth0_access_token")
+        StaticClass.sharedInstance.saveToUserDefaultsString(value: refreshToken, forKey: "auth0_refresh_token")
+        
     }
     
     func getUserInfo(credentials: (Credentials)){
@@ -93,8 +125,8 @@ class AuthManager: NSObject{
                     }else if profile.sub.contains("email"){
                         type = "email"
                     }
-//                    self.checkAccessToken_Web(token: credentials.idToken ?? "", type: type)
-                    self.testSwaggerAPI()
+                    StaticClass.sharedInstance.HideSpinner()
+                    self.checkAccessToken_Web(token: credentials.accessToken ?? "", type: type)
                     break
                 case .failure(let err):
                     print("Error: ", err)
@@ -118,56 +150,48 @@ class AuthManager: NSObject{
     
     func checkAccessToken_Web(token: String, type: String){
         
-        let params: NSMutableDictionary = NSMutableDictionary()
-        params.setValue(token, forKey: "access_token")
-        params.setValue(type, forKey: "access_type")
-        params.setValue("1", forKey: "device_type")
-        params.setValue(StaticClass.sharedInstance.strDeviceToken, forKey: "device_token")
-        params.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "os_version")
-        params.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
-        params.setValue(appDelegate.getCurrentDeviceName, forKey: "device_name")
-        params.setValue(String(describing: StaticClass.sharedInstance.latitude), forKey: "latitude")
-        params.setValue(String(describing: StaticClass.sharedInstance.longitude), forKey: "longitude")
-                
-        APICall.shared.postWeb("check_access_token", parameters: params, showLoder: true) { (response) in
-            if let data = response as? [String:Any]{
-                print("Data: ", data)
-                if let status = data["FLAG"]as? Int, status == 1{
-                    if let arrResult = data["LOGIN_DETAILS"] as? NSArray, arrResult.count > 0{
-                        if let dicResult = arrResult[0] as? NSDictionary {
-                            StaticClass.sharedInstance.saveToUserDefaults((dicResult.object(forKey:"id") as? String  ?? "") as AnyObject, forKey: Global.g_UserData.UserID)
-                            StaticClass.sharedInstance.saveToUserDefaults((true) as AnyObject, forKey: Global.g_UserDefaultKey.IS_USERLOGIN)
-                            Global.storeLoginData(dicResult: dicResult)
-                            Global.getUserProfile_Web(vc: self.vc) { (response, data) in
-                                if response{
-                                    if let is_new_user = data["is_new_user"]as? String, is_new_user == "1"{
-                                        let vc = AddCardsViewController(nibName: "AddCardsViewController", bundle: nil)
-                                        self.vc.navigationController?.pushViewController(vc, animated: true)
-                                    }else{
-                                        Global.appdel.userRunningRental_Web(loader: true)
-                                    }
-                                }
-                            }
-                        }else{
-                            //                            self.socialSignUp_Web(params: params)
-                        }
-                    }
-                }else{
-                    StaticClass.sharedInstance.ShowNotification(false, strmsg: data["MESSAGE"]as? String ?? "")
-                }
-            }
-        } failure: { (error) in
-            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
-        }
-        
-    }
-    
-    func testSwaggerAPI(){
-        APIRequest.sharedInstance.startConnectionWithJSON(urlStr: "\(MODULE.instance.organizations)/\(API_LISTS.instance.all)", methodType: .get, params: [:], showLoader: true) { response in
-            print("Response: ", response)
-        } errorHandler: { error in
-            print("Error: ", error)
-        }
+        //        let params: NSMutableDictionary = NSMutableDictionary()
+        //        params.setValue(token, forKey: "access_token")
+        //        params.setValue(type, forKey: "access_type")
+        //        params.setValue("1", forKey: "device_type")
+        //        params.setValue(StaticClass.sharedInstance.strDeviceToken, forKey: "device_token")
+        //        params.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "os_version")
+        //        params.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
+        //        params.setValue(appDelegate.getCurrentDeviceName, forKey: "device_name")
+        //        params.setValue(String(describing: StaticClass.sharedInstance.latitude), forKey: "latitude")
+        //        params.setValue(String(describing: StaticClass.sharedInstance.longitude), forKey: "longitude")
+        //
+        //        APICall.shared.postWeb("check_access_token", parameters: params, showLoder: true) { (response) in
+        //            if let data = response as? [String:Any]{
+        //                print("Data: ", data)
+        //                if let status = data["FLAG"]as? Int, status == 1{
+        //                    if let arrResult = data["LOGIN_DETAILS"] as? NSArray, arrResult.count > 0{
+        //                        if let dicResult = arrResult[0] as? NSDictionary {
+        //                            StaticClass.sharedInstance.saveToUserDefaults((dicResult.object(forKey:"id") as? String  ?? "") as AnyObject, forKey: Global.g_UserData.UserID)
+        //                            StaticClass.sharedInstance.saveToUserDefaults((true) as AnyObject, forKey: Global.g_UserDefaultKey.IS_USERLOGIN)
+        //                            Global.storeLoginData(dicResult: dicResult)
+        //                            Global.getUserProfile_Web(vc: self.vc) { (response, data) in
+        //                                if response{
+        //                                    if let is_new_user = data["is_new_user"]as? String, is_new_user == "1"{
+        //                                        let vc = AddCardsViewController(nibName: "AddCardsViewController", bundle: nil)
+        //                                        self.vc.navigationController?.pushViewController(vc, animated: true)
+        //                                    }else{
+        //                                        Global.appdel.userRunningRental_Web(loader: true)
+        //                                    }
+        //                                }
+        //                            }
+        //                        }else{
+        //                            //                            self.socialSignUp_Web(params: params)
+        //                        }
+        //                    }
+        //                }else{
+        //                    StaticClass.sharedInstance.ShowNotification(false, strmsg: data["MESSAGE"]as? String ?? "")
+        //                }
+        //            }
+        //        } failure: { (error) in
+        //            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
+        //        }
+        //
     }
     
 }

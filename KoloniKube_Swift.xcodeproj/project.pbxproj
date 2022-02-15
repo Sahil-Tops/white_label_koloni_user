@@ -50,6 +50,8 @@
 		2238771627B52A1B00126141 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2238771527B52A1B00126141 /* Auth0.plist */; };
 		223D466627B6CCB700A01020 /* ApiLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D466527B6CCB700A01020 /* ApiLists.swift */; };
 		223D466827B6D3F300A01020 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D466727B6D3F300A01020 /* APIRequest.swift */; };
+		2286A70327BBA29200206475 /* SentryCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286A70227BBA29200206475 /* SentryCaptureManager.swift */; };
+		2286A70627BBF27B00206475 /* OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286A70527BBF27B00206475 /* OpenAPI.swift */; };
 		22A8D6F327A2F27B0028BC2A /* OcsSmartLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */; };
 		22A8D6F427A2F27B0028BC2A /* OcsSmartLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22A8D6FD27A30F350028BC2A /* LinkaAPIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6FA27A30ED90028BC2A /* LinkaAPIKit.framework */; };
@@ -415,6 +417,8 @@
 		2238771527B52A1B00126141 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		223D466527B6CCB700A01020 /* ApiLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiLists.swift; sourceTree = "<group>"; };
 		223D466727B6D3F300A01020 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		2286A70227BBA29200206475 /* SentryCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryCaptureManager.swift; sourceTree = "<group>"; };
+		2286A70527BBF27B00206475 /* OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAPI.swift; sourceTree = "<group>"; };
 		22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OcsSmartLibrary.framework; sourceTree = "<group>"; };
 		22A8D6FA27A30ED90028BC2A /* LinkaAPIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LinkaAPIKit.framework; sourceTree = "<group>"; };
 		3BA466D8F284E6423E0A5E63 /* Pods-koloniKube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-koloniKube.release.xcconfig"; path = "Target Support Files/Pods-koloniKube/Pods-koloniKube.release.xcconfig"; sourceTree = "<group>"; };
@@ -525,7 +529,6 @@
 		8AE4F7F940C9DB69635FD20F /* Pods-koloniKube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-koloniKube.debug.xcconfig"; path = "Target Support Files/Pods-koloniKube/Pods-koloniKube.debug.xcconfig"; sourceTree = "<group>"; };
 		8AEC547425711B6C008E4AE8 /* LockerLockInstructionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerLockInstructionView.swift; sourceTree = "<group>"; };
 		8AEC547525711B6D008E4AE8 /* LockerLockInstructionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockerLockInstructionView.xib; sourceTree = "<group>"; };
-		8AF0531C277AFD28007C6B37 /* OcsSmartLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OcsSmartLibrary.framework; sourceTree = "<group>"; };
 		8AF2405425E4F11300846BC8 /* PromoCodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PromoCodeView.xib; sourceTree = "<group>"; };
 		8AF2405725E4F12500846BC8 /* PromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeView.swift; sourceTree = "<group>"; };
 		8AFFA735265F99C0004AFA6C /* CustomAlertViewWithOkCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewWithOkCancelButton.swift; sourceTree = "<group>"; };
@@ -926,6 +929,22 @@
 			path = "Auth0 Manager";
 			sourceTree = "<group>";
 		};
+		2286A70127BBA21C00206475 /* Sentry Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2286A70227BBA29200206475 /* SentryCaptureManager.swift */,
+			);
+			path = "Sentry Manager";
+			sourceTree = "<group>";
+		};
+		2286A70427BBF25400206475 /* Open API's */ = {
+			isa = PBXGroup;
+			children = (
+				2286A70527BBF27B00206475 /* OpenAPI.swift */,
+			);
+			path = "Open API's";
+			sourceTree = "<group>";
+		};
 		8A12A09626A5AA4500D3C8BE /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1323,14 +1342,6 @@
 			path = "Locker Lock Instruction";
 			sourceTree = "<group>";
 		};
-		8AF0531B277AFD19007C6B37 /* Ocs */ = {
-			isa = PBXGroup;
-			children = (
-				8AF0531C277AFD28007C6B37 /* OcsSmartLibrary.framework */,
-			);
-			path = Ocs;
-			sourceTree = "<group>";
-		};
 		8AF2405225E4F0F500846BC8 /* PromoCodeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1478,6 +1489,7 @@
 		E732A88F23D829FD0042FBC2 /* Web Service's */ = {
 			isa = PBXGroup;
 			children = (
+				2286A70427BBF25400206475 /* Open API's */,
 				8A3527232450877E0066C1CA /* APICall.swift */,
 				223D466527B6CCB700A01020 /* ApiLists.swift */,
 				223D466727B6D3F300A01020 /* APIRequest.swift */,
@@ -1580,7 +1592,7 @@
 		E75630171E8E71B30030C5C3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				8AF0531B277AFD19007C6B37 /* Ocs */,
+				2286A70127BBA21C00206475 /* Sentry Manager */,
 				8A16EC94255432F80026B4F4 /* Custom Classes */,
 				E732A88F23D829FD0042FBC2 /* Web Service's */,
 				058D0DC220989056006D6F2A /* SwiftScanner */,
@@ -2670,6 +2682,7 @@
 				E7B697D5236060FD00BAE114 /* LeftMenuViewController.swift in Sources */,
 				8AFFA736265F99C0004AFA6C /* CustomAlertViewWithOkCancelButton.swift in Sources */,
 				E7860F5B235D8C950062B90A /* CustomButton.swift in Sources */,
+				2286A70627BBF27B00206475 /* OpenAPI.swift in Sources */,
 				8AC4861D2555466D000D784F /* HelpTipsViewController.swift in Sources */,
 				E7B7592B239E1A8B00599C32 /* FAQViewController.swift in Sources */,
 				E7EC36631E9F61290072A8E4 /* REVClusterBlock.m in Sources */,
@@ -2698,6 +2711,7 @@
 				05EB449520B420CA00922DD2 /* BuyMembershipTblCell.swift in Sources */,
 				E75630631E8E71B30030C5C3 /* DropDownManager.swift in Sources */,
 				8AA810E02689D38700DBEB66 /* EndRentalPopUpView.swift in Sources */,
+				2286A70327BBA29200206475 /* SentryCaptureManager.swift in Sources */,
 				E71C14702602195800EA8908 /* SMRippleView.swift in Sources */,
 				E7F360632420CA99002A96A3 /* Critical_LowBatteryVC.swift in Sources */,
 				8A4E2A73266A64A100A4625B /* LinkaLockingView.swift in Sources */,

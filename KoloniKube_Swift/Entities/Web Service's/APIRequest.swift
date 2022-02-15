@@ -32,7 +32,7 @@ class APIRequest{
         config.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: config)
-        let header = ["\(Global.g_Username)": "\(Global.g_Password)", "Authorization": "Bearer \(AuthManager.accessToken)"]
+        let header = ["Authorization": "Bearer \(AuthManager.refreshToken)"]
         
         switch methodType {
         case .post:
@@ -46,12 +46,21 @@ class APIRequest{
                     successHandler(["data": data])
                 }
             } failure: { task, err in
+                if showLoader{
+                    StaticClass.sharedInstance.HideSpinner()
+                }
                 print("Error: ", err.localizedDescription)
                 errorHandler(err.localizedDescription)
             }
             break
         case .get:
-            manager.get(url, parameters: params, headers: header, progress: nil) { dataTask, response in
+            var getUrl = url + "?"
+            for (key, value) in params{
+                getUrl.append("\(key)=\(value)&")
+            }
+            getUrl.removeLast()
+            print(getUrl)
+            manager.get(getUrl, parameters: [:], headers: header, progress: nil) { dataTask, response in
                 if showLoader{
                     StaticClass.sharedInstance.HideSpinner()
                 }
@@ -59,10 +68,16 @@ class APIRequest{
                     successHandler(["data": data])
                 }else if let data = response as? NSDictionary{
                     successHandler(["data": data])
+                }else{
+                    print(response as Any)
                 }
             } failure: { dataTask, err in
+                if showLoader{
+                    StaticClass.sharedInstance.HideSpinner()
+                }
                 print("Error: ", err)
                 errorHandler(err.localizedDescription)
+//                SentryCaptureManager.instance.captureError(error: err)
             }
         default:break
         }

@@ -22,19 +22,19 @@ struct MODULE{
     
     let organizations = "organizations"
     let commands = "commands"
-    let device = "devices"
+    let devices = "devices"
     let debug = "debug"
     let admin = "admin"
     let stripe = "stripe"
     let algolia = "algolia"
-    let location = "location"
+    let locations = "locations"
     let transactions = "transactions"
-    let grid = "grid"
+    let grids = "grids"
     let reservations = "reservations"
     let prices = "prices"
     let signup = "signup"
     let auth0 = "auth0"
-    let user = "user"
+    let users = "users"
     let defaults = "default"
     
 }

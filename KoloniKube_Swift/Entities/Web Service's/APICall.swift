@@ -67,7 +67,7 @@ class APICall {
         manager.responseSerializer.acceptableStatusCodes = NSIndexSet(indexSet:[500,200]) as IndexSet
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         if bearerToken{
-//            header["Bearer-Authorization"] = "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"
+
         }
         manager.get(urlPath1, parameters: nil, headers: header, progress: nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
             if(showLoder){
@@ -146,7 +146,6 @@ class APICall {
         configuration.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
-//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
         manager.post(urlPath1, parameters: parameters, headers: header, progress: nil, success: { (task: URLSessionDataTask, responseObject: Any?) in
@@ -223,7 +222,6 @@ class APICall {
         self.registerBackgroundTask()
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
-//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
@@ -306,7 +304,6 @@ class APICall {
         configuration.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
-//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setValue("application/json", forHTTPHeaderField: "Content-Type")
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
@@ -350,7 +347,6 @@ class APICall {
         configuration.httpMaximumConnectionsPerHost = 10
         
         let manager = AFHTTPSessionManager(sessionConfiguration: configuration)
-//        let header = ["\(Global.g_Username)":"\(Global.g_Password)", "Bearer-Authorization": "Bearer \(StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "bearer_access_token") ?? "")"]
         let header = ["\(Global.g_Username)":"\(Global.g_Password)"]
         manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(Global.g_Username, password: Global.g_Password)
         var Timestamp: String {
