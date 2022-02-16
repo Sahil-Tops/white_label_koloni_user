@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AFNetworking
+import Alamofire
 
 class APIRequest{
     
@@ -16,70 +16,51 @@ class APIRequest{
     }()    
     
     
-    func startConnectionWithJSON(urlStr: String, methodType: HTTP_METHOD, params: [String:Any], showLoader: Bool, successHandler: @escaping(_ response: [String:Any])-> Void, errorHandler: @escaping(_ error: String)-> Void){
-    
-        if showLoader{
-            StaticClass.sharedInstance.ShowSpiner("", true)
-        }
+    func startConnectionWithPost(urlStr: String, methodType: HTTP_METHOD,_ params: [String:Any] = [:], showLoader: Bool, successHandler: @escaping(_ response: Data)-> Void, errorHandler: @escaping(_ error: String)-> Void){
         
-        let url = BASE_URLS.baseUrl + urlStr
-        print("Requested Params: ", params)
-        print("Url: ", url)
-        
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 20
-        config.timeoutIntervalForResource = 20
-        config.httpMaximumConnectionsPerHost = 10
-        
-        let manager = AFHTTPSessionManager(sessionConfiguration: config)
-        let header = ["Authorization": "Bearer \(AuthManager.refreshToken)"]
-        
-        switch methodType {
-        case .post:
-            manager.post(url, parameters: params, headers: header, progress: nil) { task, response in
-                if showLoader{
-                    StaticClass.sharedInstance.HideSpinner()
+        if let url = URL(string: BASE_URLS.baseUrl + urlStr){
+            var urlRequest = URLRequest(url: url)
+            if methodType == .post{
+                do{
+                    urlRequest.httpBody = try JSONSerialization.data(withJSONObject: params, options: .sortedKeys)
+                }catch let err{
+                    print("Catch Error: ", err)
                 }
-                if let data = response as? NSArray{
-                    successHandler(["data": data])
-                }else if let data = response as? NSDictionary{
-                    successHandler(["data": data])
+            }else if methodType == .get{
+                var getUrl = BASE_URLS.baseUrl + urlStr + "?"
+                for (key, value) in params{
+                    getUrl.append("\(key)=\(value)&")
                 }
-            } failure: { task, err in
-                if showLoader{
-                    StaticClass.sharedInstance.HideSpinner()
+                getUrl.removeLast()
+                if let url = URL(string: getUrl){
+                    urlRequest = URLRequest(url: url)
                 }
-                print("Error: ", err.localizedDescription)
-                errorHandler(err.localizedDescription)
             }
-            break
-        case .get:
-            var getUrl = url + "?"
-            for (key, value) in params{
-                getUrl.append("\(key)=\(value)&")
+            urlRequest.allHTTPHeaderFields = ["Content-Type": "application/json",
+                                              "Authorization": "Bearer \(AuthManager.accessToken)"]
+            urlRequest.httpMethod = methodType.rawValue
+            
+            print("Requested Params: ", params)
+            print("URL Request: ", urlRequest)
+            
+            if showLoader{
+                StaticClass.sharedInstance.ShowSpiner("", true)
             }
-            getUrl.removeLast()
-            print(getUrl)
-            manager.get(getUrl, parameters: [:], headers: header, progress: nil) { dataTask, response in
+            AF.request(urlRequest).response { response in
                 if showLoader{
                     StaticClass.sharedInstance.HideSpinner()
                 }
-                if let data = response as? NSArray{
-                    successHandler(["data": data])
-                }else if let data = response as? NSDictionary{
-                    successHandler(["data": data])
-                }else{
-                    print(response as Any)
+                if let data = response.data{
+                    do{
+                        let jsonObj = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                        print("Reponse: ", jsonObj)
+                        successHandler(data)
+                    }catch let err{
+                        print("Error: ", err)
+                        errorHandler("Error: \(err.localizedDescription)")
+                    }
                 }
-            } failure: { dataTask, err in
-                if showLoader{
-                    StaticClass.sharedInstance.HideSpinner()
-                }
-                print("Error: ", err)
-                errorHandler(err.localizedDescription)
-//                SentryCaptureManager.instance.captureError(error: err)
             }
-        default:break
         }
     }
     

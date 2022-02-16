@@ -14,6 +14,7 @@ target 'KoloniKube_Swift' do
   use_frameworks!
   
   pod 'Auth0', '~> 1.0'
+  pod 'Alamofire', '~> 5.5'
   pod 'AFNetworking'
   pod 'IQKeyboardManagerSwift'
   pod 'ISMessages'

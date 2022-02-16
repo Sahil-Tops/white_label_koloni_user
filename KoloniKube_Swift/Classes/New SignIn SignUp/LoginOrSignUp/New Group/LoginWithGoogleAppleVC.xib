@@ -54,7 +54,7 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spv-54-Z8I" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="15" y="562" width="360" height="240"/>
+                    <rect key="frame" x="15" y="617" width="360" height="185"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abj-zQ-R1v">
                             <rect key="frame" x="20" y="58" width="25" height="25"/>
@@ -92,10 +92,10 @@
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UKY-nt-xp4">
-                            <rect key="frame" x="20" y="125" width="320" height="100"/>
+                            <rect key="frame" x="20" y="125" width="320" height="45"/>
                             <subviews>
                                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYE-tB-tGQ" customClass="CustomView">
-                                    <rect key="frame" x="0.0" y="-45" width="320" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxV-ZC-3s6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -143,7 +143,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zT6-9w-z20" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="-45" width="320" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLp-iv-M0j">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
@@ -222,8 +222,8 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u92-xm-x6n" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u92-xm-x6n" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                                     <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
                                     <state key="normal" title="Other Option">
@@ -265,7 +265,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tv8-ZD-7C6" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="157.66666666666666" y="526" width="75" height="75"/>
+                    <rect key="frame" x="157.66666666666666" y="581" width="75" height="75"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="k3B-Ka-i5U" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="10" y="10" width="55" height="55"/>

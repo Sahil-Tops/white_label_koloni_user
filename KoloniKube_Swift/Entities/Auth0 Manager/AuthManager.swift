@@ -12,9 +12,9 @@ import Auth0
 class AuthManager: NSObject{
     
     static let clientId = "ZVGCyfDmt9789SaBb1K8kqWWMZJ9X0VO"
+    let apiIdentifier = "https://api.koloni.io"
     static var sharedInstance: AuthManager!
     static var accessToken = ""
-    static var refreshToken = ""
     var credentialManager = CredentialsManager.init(authentication: Auth0.authentication())
     var vc: UIViewController!
     
@@ -30,66 +30,38 @@ class AuthManager: NSObject{
     
     func loginWithAuth0(){
         
-        Auth0.webAuth().redirectURL(URL(string: "https://koloni-dev.us.auth0.com/authorize")!).audience("https://api.koloni.io").start { result in
-            switch result{
+        Auth0.webAuth().scope("openid email sms profile offline_access read:current_user update:current_user_metadata").audience(self.apiIdentifier).start { result in
+            switch result {
+            case .failure(let error):
+                // Handle the error
+                print("Auth0 Error: \(error)")
             case .success(let credentials):
+                // Do something with credentials e.g.: save them.
+                // Auth0 will automatically dismiss the login page
                 print("Login Credentials: \(credentials)")
                 _ = self.credentialManager.store(credentials: credentials)
                 if let accessToken = credentials.accessToken{
                     AuthManager.accessToken = accessToken
                 }
-                if let refreshToken = credentials.idToken{
-                    AuthManager.refreshToken = refreshToken
-                }
-                self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken, refreshToken: AuthManager.refreshToken)
+                self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken)
                 self.getUserInfo(credentials: credentials)
-                print("Acess Token: ", AuthManager.accessToken, "Refresh Token: ", AuthManager.refreshToken)
-                return
-            case .failure(let err):
-                print("Auth0 Error: \(err)")
-                return
+                print("Acess Token: ", AuthManager.accessToken)
             }
         }
-        
-//        Auth0.webAuth().scope("openid email sms profile offline_access read:current_user update:current_user_metadata").audience("https://koloni-dev.us.auth0.com/userinfo").start { result in
-//            switch result {
-//            case .failure(let error):
-//                // Handle the error
-//                print("Auth0 Error: \(error)")
-//            case .success(let credentials):
-//                // Do something with credentials e.g.: save them.
-//                // Auth0 will automatically dismiss the login page
-//                print("Login Credentials: \(credentials)")
-//                _ = self.credentialManager.store(credentials: credentials)
-//                if let accessToken = credentials.accessToken{
-//                    AuthManager.accessToken = accessToken
-//                }
-//                if let refreshToken = credentials.idToken{
-//                    AuthManager.refreshToken = refreshToken
-//                }
-//                self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken, refreshToken: AuthManager.refreshToken)
-//                self.getUserInfo(credentials: credentials)
-//                print("Acess Token: ", AuthManager.accessToken, "Refresh Token: ", AuthManager.refreshToken)
-//            }
-//        }
     }
     
     func renewToken(){
         
-        if let rToken = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "auth0_refresh_token"){
-            Auth0.authentication().renew(withRefreshToken: rToken).start { result in
+        if let token = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "auth0_access_token"){
+            Auth0.authentication().renew(withRefreshToken: token).start { result in
                 switch result{
                 case .success(let credentials):
                     guard let accessToken = credentials.accessToken else {
                         return
                     }
                     AuthManager.accessToken = accessToken
-                    guard let refreshToken = credentials.refreshToken else {
-                        return
-                    }
-                    AuthManager.refreshToken = refreshToken
-                    print("Acess Token: ", AuthManager.accessToken, "Refresh Token: ", AuthManager.refreshToken)
-                    self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken, refreshToken: AuthManager.refreshToken)
+                    print("Acess Token: ", AuthManager.accessToken)
+                    self.storedTokenIntoUserDefault(accessToken: AuthManager.accessToken)
                     return
                 case .failure(let err):
                     print("Error: ", err)
@@ -100,10 +72,9 @@ class AuthManager: NSObject{
         
     }
     
-    func storedTokenIntoUserDefault(accessToken: String, refreshToken: String){
+    func storedTokenIntoUserDefault(accessToken: String){
         
         StaticClass.sharedInstance.saveToUserDefaultsString(value: accessToken, forKey: "auth0_access_token")
-        StaticClass.sharedInstance.saveToUserDefaultsString(value: refreshToken, forKey: "auth0_refresh_token")
         
     }
     
@@ -126,7 +97,13 @@ class AuthManager: NSObject{
                         type = "email"
                     }
                     StaticClass.sharedInstance.HideSpinner()
-                    self.checkAccessToken_Web(token: credentials.accessToken ?? "", type: type)
+                    OpenAPI.sharedInstance.getWhoIamI_Web { response in
+                        print(WhoIamI().id ?? "")
+                        OpenAPI.sharedInstance.getLocationListing_Web { data in
+                            
+                        }
+                    }
+//                    self.checkAccessToken_Web(token: credentials.accessToken ?? "", type: type)
                     break
                 case .failure(let err):
                     print("Error: ", err)

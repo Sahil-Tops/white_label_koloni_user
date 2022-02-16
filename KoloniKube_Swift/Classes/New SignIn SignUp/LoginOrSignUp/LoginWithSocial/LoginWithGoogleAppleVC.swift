@@ -88,11 +88,8 @@ class LoginWithGoogleAppleVC: UIViewController {
             if self.checkBox_btn.tag == 0{
                 self.showWarningMessage()
             }else{
-//                let vc = LoginWithPhoneOrEmailVC(nibName: "LoginWithPhoneOrEmailVC", bundle: nil)
-//                self.navigationController?.pushViewController(vc, animated: true)
-                OpenAPI.sharedInstance.getOrganizations_Web { response in
-                    
-                }
+                let vc = LoginWithPhoneOrEmailVC(nibName: "LoginWithPhoneOrEmailVC", bundle: nil)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             break
         case checkBox_btn:
