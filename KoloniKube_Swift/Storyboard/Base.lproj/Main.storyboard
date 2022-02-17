@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yw1-n4-5tT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yw1-n4-5tT">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,178 +11,8 @@
         <array key="Koloni.ttf">
             <string>Koloni</string>
         </array>
-        <array key="Muli-Bold.ttf">
-            <string>Muli-Bold</string>
-        </array>
-        <array key="Muli-Regular.ttf">
-            <string>Muli-Regular</string>
-        </array>
-        <array key="Muli-SemiBold.ttf">
-            <string>Muli-SemiBold</string>
-        </array>
     </customFonts>
     <scenes>
-        <!--Resend Email VerifyVC-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="ResendEmailVerifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ResendEmailVerifyVC" customModule="koloni1" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7M-ZY-gI7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <subviews>
-                                    <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkg-xN-TrC">
-                                        <rect key="frame" x="14" y="54" width="100" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="Ew7-Tl-Mgg"/>
-                                            <constraint firstAttribute="width" constant="100" id="cSB-lS-S8x"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="15"/>
-                                        <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="6" minY="5" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="SIGN IN" image="back">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="clickOnBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="spB-pM-zmv"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ebl-5u-DXY">
-                                        <rect key="frame" x="133.66666666666666" y="94" width="107.66666666666666" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="ebl-5u-DXY" secondAttribute="height" multiplier="5:2" id="v5e-0g-V6a"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Verification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDK-JU-Nj8">
-                                        <rect key="frame" x="30" y="172" width="315" height="25.666666666666657"/>
-                                        <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="20"/>
-                                        <color key="textColor" red="0.23137254900000001" green="0.74509803919999995" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="if you have not received an email yet, check your junk folder or resend the email now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEE-xl-KkR">
-                                        <rect key="frame" x="30" y="207.66666666666666" width="315" height="60.333333333333343"/>
-                                        <fontDescription key="fontDescription" name="Muli-SemiBold" family="Muli" pointSize="16"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFh-A1-vYQ">
-                                        <rect key="frame" x="20" y="288" width="335" height="36"/>
-                                        <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8FU-wc-HXQ">
-                                                <rect key="frame" x="5" y="2" width="304" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="8FU-wc-HXQ" secondAttribute="height" multiplier="125:13" constant="-1" id="1nw-gN-x0H"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                                            </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email" translatesAutoresizingMaskIntoConstraints="NO" id="JgB-df-QOR">
-                                                <rect key="frame" x="314" y="10" width="16" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="16" id="ckL-Zc-mY1"/>
-                                                    <constraint firstAttribute="width" constant="16" id="jSk-KE-0TH"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9I-jC-k4c">
-                                                <rect key="frame" x="0.0" y="35" width="335" height="1"/>
-                                                <color key="backgroundColor" red="0.23137254900000001" green="0.74509803919999995" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="tKE-cE-rOx"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="E9I-jC-k4c" firstAttribute="leading" secondItem="OFh-A1-vYQ" secondAttribute="leading" id="14u-9u-YgH"/>
-                                            <constraint firstItem="JgB-df-QOR" firstAttribute="centerY" secondItem="OFh-A1-vYQ" secondAttribute="centerY" id="1hD-Ag-Wss"/>
-                                            <constraint firstItem="8FU-wc-HXQ" firstAttribute="leading" secondItem="OFh-A1-vYQ" secondAttribute="leading" constant="5" id="Gxa-5i-fBi"/>
-                                            <constraint firstAttribute="trailing" secondItem="JgB-df-QOR" secondAttribute="trailing" constant="5" id="NZT-ep-Uvm"/>
-                                            <constraint firstItem="JgB-df-QOR" firstAttribute="leading" secondItem="8FU-wc-HXQ" secondAttribute="trailing" constant="5" id="bXO-of-EU8"/>
-                                            <constraint firstItem="8FU-wc-HXQ" firstAttribute="top" secondItem="OFh-A1-vYQ" secondAttribute="top" constant="2" id="hIV-5s-NTo"/>
-                                            <constraint firstAttribute="bottom" secondItem="E9I-jC-k4c" secondAttribute="bottom" id="ibb-a1-STi"/>
-                                            <constraint firstAttribute="width" secondItem="OFh-A1-vYQ" secondAttribute="height" multiplier="28:3" id="nqU-2b-9DD"/>
-                                            <constraint firstAttribute="trailing" secondItem="E9I-jC-k4c" secondAttribute="trailing" id="ucc-rm-J7r"/>
-                                        </constraints>
-                                    </view>
-                                    <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtv-8T-Tr8">
-                                        <rect key="frame" x="20" y="354" width="335" height="43"/>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.74509803919999995" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="xtv-8T-Tr8" secondAttribute="height" multiplier="70:9" id="ijy-q0-AOB"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Muli-Bold" family="Muli" pointSize="14"/>
-                                        <state key="normal" title="RESEND VERIFY EMAIL">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="clickOnBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iU3-zC-cYp"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzL-EO-dNa">
-                                        <rect key="frame" x="111.66666666666669" y="417" width="152" height="31"/>
-                                        <fontDescription key="fontDescription" name="Muli-SemiBold" family="Muli" pointSize="15"/>
-                                        <state key="normal" title="Already a user? Login">
-                                            <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="clickOnBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="esy-GB-QPi"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <viewLayoutGuide key="safeArea" id="Jf7-Mg-o2x"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="xtv-8T-Tr8" firstAttribute="leading" secondItem="C7M-ZY-gI7" secondAttribute="leading" constant="20" id="0Xf-tt-SN4"/>
-                                    <constraint firstItem="zEE-xl-KkR" firstAttribute="top" secondItem="XDK-JU-Nj8" secondAttribute="bottom" constant="10" id="5PF-MJ-tTl"/>
-                                    <constraint firstItem="zEE-xl-KkR" firstAttribute="leading" secondItem="Jf7-Mg-o2x" secondAttribute="leading" constant="30" id="5zb-pg-Ipm"/>
-                                    <constraint firstItem="lzL-EO-dNa" firstAttribute="centerX" secondItem="xtv-8T-Tr8" secondAttribute="centerX" id="7nA-Zd-umI"/>
-                                    <constraint firstItem="XDK-JU-Nj8" firstAttribute="leading" secondItem="C7M-ZY-gI7" secondAttribute="leading" constant="30" id="G1c-qH-Bfj"/>
-                                    <constraint firstItem="Jf7-Mg-o2x" firstAttribute="trailing" secondItem="zEE-xl-KkR" secondAttribute="trailing" constant="30" id="G28-6C-ue0"/>
-                                    <constraint firstItem="xtv-8T-Tr8" firstAttribute="top" secondItem="OFh-A1-vYQ" secondAttribute="bottom" constant="30" id="Lcd-ZJ-jpT"/>
-                                    <constraint firstItem="ebl-5u-DXY" firstAttribute="centerX" secondItem="C7M-ZY-gI7" secondAttribute="centerX" id="Tof-em-ZPk"/>
-                                    <constraint firstItem="XDK-JU-Nj8" firstAttribute="top" secondItem="ebl-5u-DXY" secondAttribute="bottom" constant="35" id="U7i-Bl-Umh"/>
-                                    <constraint firstItem="ebl-5u-DXY" firstAttribute="width" secondItem="C7M-ZY-gI7" secondAttribute="width" multiplier="92/320" id="Wxd-gz-GC7"/>
-                                    <constraint firstItem="ebl-5u-DXY" firstAttribute="top" secondItem="Jf7-Mg-o2x" secondAttribute="top" constant="50" id="bP6-uQ-qot"/>
-                                    <constraint firstItem="Dkg-xN-TrC" firstAttribute="leading" secondItem="C7M-ZY-gI7" secondAttribute="leading" constant="14" id="cMb-aj-efA"/>
-                                    <constraint firstAttribute="trailing" secondItem="xtv-8T-Tr8" secondAttribute="trailing" constant="20" id="iw1-BQ-iYT"/>
-                                    <constraint firstItem="Dkg-xN-TrC" firstAttribute="top" secondItem="Jf7-Mg-o2x" secondAttribute="top" constant="10" id="mN5-vR-iXu"/>
-                                    <constraint firstItem="OFh-A1-vYQ" firstAttribute="top" secondItem="zEE-xl-KkR" secondAttribute="bottom" constant="20" id="rQd-46-Eun"/>
-                                    <constraint firstItem="lzL-EO-dNa" firstAttribute="top" secondItem="xtv-8T-Tr8" secondAttribute="bottom" constant="20" id="rf7-9y-8gM"/>
-                                    <constraint firstAttribute="trailing" secondItem="OFh-A1-vYQ" secondAttribute="trailing" constant="20" id="vYv-9o-svI"/>
-                                    <constraint firstItem="OFh-A1-vYQ" firstAttribute="leading" secondItem="C7M-ZY-gI7" secondAttribute="leading" constant="20" id="xB9-bl-3TG"/>
-                                    <constraint firstAttribute="trailing" secondItem="XDK-JU-Nj8" secondAttribute="trailing" constant="30" id="xzN-WU-cOo"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="C7M-ZY-gI7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4qV-sr-Grn"/>
-                            <constraint firstItem="C7M-ZY-gI7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7n1-YG-XWW"/>
-                            <constraint firstAttribute="bottom" secondItem="C7M-ZY-gI7" secondAttribute="bottom" id="DkG-Rv-Wxc"/>
-                            <constraint firstAttribute="trailing" secondItem="C7M-ZY-gI7" secondAttribute="trailing" id="hgf-as-vY8"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="alreadyUser_btn" destination="lzL-EO-dNa" id="c10-1b-iY9"/>
-                        <outlet property="emailLine_label" destination="E9I-jC-k4c" id="L72-Yh-cDy"/>
-                        <outlet property="email_textField" destination="8FU-wc-HXQ" id="xZ7-Zi-qXO"/>
-                        <outlet property="imgEmail" destination="JgB-df-QOR" id="9sJ-yC-ZHP"/>
-                        <outlet property="resendEmail_btn" destination="xtv-8T-Tr8" id="Ut5-Qk-iAg"/>
-                        <outlet property="signIn_btn" destination="Dkg-xN-TrC" id="HoE-72-gTa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="121.88905547226388"/>
-        </scene>
         <!--Left Menu View Controller-->
         <scene sceneID="h0B-ZR-m1o">
             <objects>
@@ -252,7 +82,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MenuTableCell" focusStyle="custom" rowHeight="60" id="05V-8X-S3j" customClass="MenuTableCell" customModule="koloni1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="103" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="99.333333969116211" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="05V-8X-S3j" id="pgP-IG-4Ti">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -380,9 +210,6 @@
     <resources>
         <image name="NoProfileImage" width="75" height="75"/>
         <image name="arrow_right" width="30" height="30"/>
-        <image name="back" width="5.6666665077209473" height="9.6666669845581055"/>
-        <image name="email" width="12.666666984558105" height="8.6666669845581055"/>
-        <image name="login_logo" width="293.33334350585938" height="156.66667175292969"/>
         <image name="side_menu" width="1242" height="2208"/>
     </resources>
 </document>

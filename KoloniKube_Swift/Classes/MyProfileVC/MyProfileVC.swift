@@ -49,7 +49,7 @@ class MyProfileVC: UIViewController {
         self.storeAllInformation()
         self.buttonCollectionView.reloadData()
         _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: { (_) in
-            self.callUserDetail_Web()
+//            self.callUserDetail_Web()
         })
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -71,36 +71,40 @@ class MyProfileVC: UIViewController {
     }
     
     @IBAction func btnEditPressed(_ sender: UIButton) {
-        let editProfileVController = EditProfileVC(nibName: "EditProfileVC", bundle: nil)
-        self.navigationController?.pushViewController(editProfileVController, animated: true)
+        self.alert(title: "Alert", msg: "Under Work")
+//        let editProfileVController = EditProfileVC(nibName: "EditProfileVC", bundle: nil)
+//        self.navigationController?.pushViewController(editProfileVController, animated: true)
     }
     
     @IBAction func btnMymembershipPressed(_ sender: UIButton) {
-        
+        self.alert(title: "Alert", msg: "Under Work")
     }
     
     @IBAction func btnPaymentInfPressed(_ sender: UIButton) {
-        let CraditCardAddVController = CraditCardAddVC(nibName: "CraditCardAddVC", bundle: nil)
-        CraditCardAddVController.isFromProfileView = true
-        self.navigationController?.pushViewController(CraditCardAddVController, animated: true)
+        self.alert(title: "Alert", msg: "Under Work")
+//        let CraditCardAddVController = CraditCardAddVC(nibName: "CraditCardAddVC", bundle: nil)
+//        CraditCardAddVController.isFromProfileView = true
+//        self.navigationController?.pushViewController(CraditCardAddVController, animated: true)
     }
     
     @IBAction func btnChangePasswordPressed(_ sender: UIButton) {
-        let changePwdVc = ChangePasswordViewController(nibName: "ChangePasswordViewController", bundle: nil)
-        self.navigationController?.pushViewController(changePwdVc, animated: true)
+        self.alert(title: "Alert", msg: "Under Work")
+//        let changePwdVc = ChangePasswordViewController(nibName: "ChangePasswordViewController", bundle: nil)
+//        self.navigationController?.pushViewController(changePwdVc, animated: true)
     }
     
     @IBAction func btnSignOutPressed(_ sender: UIButton) {
         self.showAlertWithOkAndCancelBtn("Logout" ,"Are you sure you want to logout?", yesBtn_title: "Yes", noBtn_title: "No") { (response) in
             if response == "ok"{
-                Singleton.internetCheckTimer.invalidate()
-                Global.appdel.logoutUser()
-//                AuthManager(vc: self).logoutAuth0 { (response) in
-//                    if response{
+//                Singleton.internetCheckTimer.invalidate()
+//                Global.appdel.logoutUser()
+                AuthManager(vc: self).logoutAuth0 { (response) in
+                    if response{
+                        Global.appdel.setNavigationFlow()
 //                        Singleton.internetCheckTimer.invalidate()
 //                        Global.appdel.logoutUser()
-//                    }
-//                }
+                    }
+                }
             }
         }
     }
@@ -194,13 +198,15 @@ extension MyProfileVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         print("Button pressed: ", sender.tag)
         
         if self.buttonArray[sender.tag] == "My Memberships"{
-            let myMembershipVc = MyMemberShipVC(nibName: "MyMemberShipVC", bundle: nil)
-            myMembershipVc.backVc = self
-            self.navigationController?.pushViewController(myMembershipVc, animated: true)
+            self.alert(title: "Alert", msg: "Under Work")
+//            let myMembershipVc = MyMemberShipVC(nibName: "MyMemberShipVC", bundle: nil)
+//            myMembershipVc.backVc = self
+//            self.navigationController?.pushViewController(myMembershipVc, animated: true)
         }else if self.buttonArray[sender.tag] == "Saved Cards"{
-            let CraditCardAddVController = CraditCardAddVC(nibName: "CraditCardAddVC", bundle: nil)
-            CraditCardAddVController.isFromProfileView = true
-            self.navigationController?.pushViewController(CraditCardAddVController, animated: true)
+            self.alert(title: "Alert", msg: "Under Work")
+//            let CraditCardAddVController = CraditCardAddVC(nibName: "CraditCardAddVC", bundle: nil)
+//            CraditCardAddVController.isFromProfileView = true
+//            self.navigationController?.pushViewController(CraditCardAddVController, animated: true)
         }
     }
     

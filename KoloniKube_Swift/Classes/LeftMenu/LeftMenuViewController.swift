@@ -27,6 +27,7 @@ class LeftMenuViewController: UIViewController {
     @IBOutlet weak var userName_lbl: UILabel!
     
     //MARK: ViewControllers Variables
+    var HomeVController: UIViewController!
     var BookNowVController: UIViewController!
     var MyProfileVController: UIViewController!
     var BuyMembershipVController: UIViewController!
@@ -94,6 +95,9 @@ class LeftMenuViewController: UIViewController {
     
     func setControllerMethod() {
         
+        let HomeController = HomeViewController(nibName: "HomeViewController", bundle: nil)
+        self.HomeVController = UINavigationController(rootViewController: HomeController)
+        
         let BookNowController = BookNowVC(nibName: "BookNowVC", bundle: nil)
         self.BookNowVController = UINavigationController(rootViewController: BookNowController)
         
@@ -125,17 +129,23 @@ class LeftMenuViewController: UIViewController {
         switch menuController {
         
         case .map:            
-            self.sideMenuViewController?.setContentViewController(self.BookNowVController, animated: true)            
+            self.sideMenuViewController?.setContentViewController(self.HomeVController, animated: true)
         case .MyMembership:
-            self.sideMenuViewController?.setContentViewController(self.BuyMembershipVController, animated: true)
+            self.alert(title: "Alert", msg: "Under Work")
+            break
+//            self.sideMenuViewController?.setContentViewController(self.BuyMembershipVController, animated: true)
         case .MyBooking:
-            self.sideMenuViewController?.setContentViewController(self.MyBookingVController, animated: true)
+            self.alert(title: "Alert", msg: "Under Work")
+//            self.sideMenuViewController?.setContentViewController(self.MyBookingVController, animated: true)
         case .Settings:
-            self.sideMenuViewController?.setContentViewController(self.SettingVController, animated: true)
+            self.alert(title: "Alert", msg: "Under Work")
+//            self.sideMenuViewController?.setContentViewController(self.SettingVController, animated: true)
         case .RateUs:
+            self.alert(title: "Alert", msg: "Under Work")
             break
         case .Faq:
-            self.sideMenuViewController?.setContentViewController(self.FaqVController, animated: true)
+            self.alert(title: "Alert", msg: "Under Work")
+//            self.sideMenuViewController?.setContentViewController(self.FaqVController, animated: true)
         }
     }
     

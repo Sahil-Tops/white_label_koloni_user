@@ -12,8 +12,15 @@ class WhoIamI: Codable{
     var id: String?
 }
 
-class Locations: Codable{
+class LocationsModel: Codable{
     
+    var location_id: String?
+    var name: String?
+    var org_id: String?
+    var point: Points?
     
-    
+}
+class Points: Codable{
+    var latitude: Double?
+    var longitude: Double?
 }

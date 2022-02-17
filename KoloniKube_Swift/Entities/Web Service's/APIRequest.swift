@@ -16,7 +16,7 @@ class APIRequest{
     }()    
     
     
-    func startConnectionWithPost(urlStr: String, methodType: HTTP_METHOD,_ params: [String:Any] = [:], showLoader: Bool, successHandler: @escaping(_ response: Data)-> Void, errorHandler: @escaping(_ error: String)-> Void){
+    func startConnectionWithJson(urlStr: String, methodType: HTTP_METHOD,_ params: [String:Any] = [:], showLoader: Bool, successHandler: @escaping(_ response: Data)-> Void, errorHandler: @escaping(_ error: String)-> Void){
         
         if let url = URL(string: BASE_URLS.baseUrl + urlStr){
             var urlRequest = URLRequest(url: url)

@@ -50,6 +50,14 @@
 		2238771627B52A1B00126141 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2238771527B52A1B00126141 /* Auth0.plist */; };
 		223D466627B6CCB700A01020 /* ApiLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D466527B6CCB700A01020 /* ApiLists.swift */; };
 		223D466827B6D3F300A01020 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223D466727B6D3F300A01020 /* APIRequest.swift */; };
+		227400C127BE457F00D0DA81 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227400BF27BE457F00D0DA81 /* HomeViewController.swift */; };
+		227400C227BE457F00D0DA81 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227400C027BE457F00D0DA81 /* HomeViewController.xib */; };
+		227400C627BE491200D0DA81 /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227400C427BE491200D0DA81 /* HomeTableCell.swift */; };
+		227400C727BE491200D0DA81 /* HomeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227400C527BE491200D0DA81 /* HomeTableCell.xib */; };
+		227400CB27BE7D5800D0DA81 /* AssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227400C927BE7D5800D0DA81 /* AssetsListViewController.swift */; };
+		227400CC27BE7D5800D0DA81 /* AssetsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227400CA27BE7D5800D0DA81 /* AssetsListViewController.xib */; };
+		227400D027BE89A300D0DA81 /* AssetsListTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227400CE27BE89A300D0DA81 /* AssetsListTableCell.swift */; };
+		227400D127BE89A300D0DA81 /* AssetsListTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227400CF27BE89A300D0DA81 /* AssetsListTableCell.xib */; };
 		2286A70327BBA29200206475 /* SentryCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286A70227BBA29200206475 /* SentryCaptureManager.swift */; };
 		2286A70627BBF27B00206475 /* OpenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2286A70527BBF27B00206475 /* OpenAPI.swift */; };
 		22A8D6F327A2F27B0028BC2A /* OcsSmartLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */; };
@@ -418,6 +426,14 @@
 		2238771527B52A1B00126141 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		223D466527B6CCB700A01020 /* ApiLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiLists.swift; sourceTree = "<group>"; };
 		223D466727B6D3F300A01020 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		227400BF27BE457F00D0DA81 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		227400C027BE457F00D0DA81 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		227400C427BE491200D0DA81 /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
+		227400C527BE491200D0DA81 /* HomeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableCell.xib; sourceTree = "<group>"; };
+		227400C927BE7D5800D0DA81 /* AssetsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsListViewController.swift; sourceTree = "<group>"; };
+		227400CA27BE7D5800D0DA81 /* AssetsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetsListViewController.xib; sourceTree = "<group>"; };
+		227400CE27BE89A300D0DA81 /* AssetsListTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsListTableCell.swift; sourceTree = "<group>"; };
+		227400CF27BE89A300D0DA81 /* AssetsListTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetsListTableCell.xib; sourceTree = "<group>"; };
 		2286A70227BBA29200206475 /* SentryCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryCaptureManager.swift; sourceTree = "<group>"; };
 		2286A70527BBF27B00206475 /* OpenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAPI.swift; sourceTree = "<group>"; };
 		22A8D6F127A2F2610028BC2A /* OcsSmartLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OcsSmartLibrary.framework; sourceTree = "<group>"; };
@@ -929,6 +945,44 @@
 				2238771327B522EA00126141 /* AuthManager.swift */,
 			);
 			path = "Auth0 Manager";
+			sourceTree = "<group>";
+		};
+		227400BE27BE456B00D0DA81 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				227400C827BE7D4100D0DA81 /* Assets List */,
+				227400BF27BE457F00D0DA81 /* HomeViewController.swift */,
+				227400C027BE457F00D0DA81 /* HomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		227400C327BE48B700D0DA81 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				227400CD27BE891E00D0DA81 /* Assets List */,
+				227400C427BE491200D0DA81 /* HomeTableCell.swift */,
+				227400C527BE491200D0DA81 /* HomeTableCell.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		227400C827BE7D4100D0DA81 /* Assets List */ = {
+			isa = PBXGroup;
+			children = (
+				227400C927BE7D5800D0DA81 /* AssetsListViewController.swift */,
+				227400CA27BE7D5800D0DA81 /* AssetsListViewController.xib */,
+			);
+			path = "Assets List";
+			sourceTree = "<group>";
+		};
+		227400CD27BE891E00D0DA81 /* Assets List */ = {
+			isa = PBXGroup;
+			children = (
+				227400CE27BE89A300D0DA81 /* AssetsListTableCell.swift */,
+				227400CF27BE89A300D0DA81 /* AssetsListTableCell.xib */,
+			);
+			path = "Assets List";
 			sourceTree = "<group>";
 		};
 		2286A70127BBA21C00206475 /* Sentry Manager */ = {
@@ -1551,6 +1605,7 @@
 		E75630031E8E71B30030C5C3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				227400BE27BE456B00D0DA81 /* Home */,
 				8AE82F032548186200E4827E /* New SignIn SignUp */,
 				E7B75928239E1A6E00599C32 /* FAQ */,
 				E766E35223701CD400297877 /* Country Picker  */,
@@ -1781,6 +1836,7 @@
 		E7860F3F235D8C5C0062B90A /* Cell's */ = {
 			isa = PBXGroup;
 			children = (
+				227400C327BE48B700D0DA81 /* Home */,
 				053D0AAC1ECC7EF1008BD3F9 /* MyRentalCell */,
 				8ADEDE63255EA5010037DD7C /* Instructions */,
 				E7D0FEEA23ED6D9400EC2DEC /* Book Now */,
@@ -2288,6 +2344,7 @@
 				E70390D42351E65700C1D6FA /* ReportVC.xib in Resources */,
 				E76F39992382943900E9B59A /* Summary&RatingView.xib in Resources */,
 				05BB72BF20B6DB850072F685 /* HubListVC.xib in Resources */,
+				227400C227BE457F00D0DA81 /* HomeViewController.xib in Resources */,
 				8A1CD9622692F99300B440BD /* SelectPrimaryAccountView.xib in Resources */,
 				E7EC365F1E9F61290072A8E4 /* cluster.png in Resources */,
 				8A4E191B2721A79100800BBF /* PinCodePopUp.xib in Resources */,
@@ -2317,6 +2374,7 @@
 				8AC5C0F625275BE5004EBF51 /* AnimatedCirculerLoader.xib in Resources */,
 				E7A054B51E93A403000E95DA /* MyProfileVC.xib in Resources */,
 				E77D456D238EA55100D5CCF4 /* HubTableViewCell.xib in Resources */,
+				227400C727BE491200D0DA81 /* HomeTableCell.xib in Resources */,
 				E7D0FEF023ED6DE000EC2DEC /* PauseRentalCollectionCell.xib in Resources */,
 				E72796741E98C861008B44B9 /* Muli-Bold.ttf in Resources */,
 				E762F6412383E01A007635B5 /* MyRentalReceiptVC.xib in Resources */,
@@ -2336,12 +2394,14 @@
 				E73CC5EF23D596EF00532A5C /* icomoon.ttf in Resources */,
 				0550F0622099BBEF009034FC /* MyMemberShipVC.xib in Resources */,
 				8AFFA739265F99CD004AFA6C /* CustomAlertViewWithOkCancelButton.xib in Resources */,
+				227400D127BE89A300D0DA81 /* AssetsListTableCell.xib in Resources */,
 				E78C00BC237064E5009E2BD5 /* EnterMobileNumberView.xib in Resources */,
 				E73CC5F123D596EF00532A5C /* Kolonishare-v3.ttf in Resources */,
 				E7BC15FF22E5C87D00F496C9 /* Refferal_popup.xib in Resources */,
 				E76EA8F4238CFB20004080DB /* ReferralView.xib in Resources */,
 				8A5202A926676F0F00B0E86E /* README.md in Resources */,
 				E766E35D23702DB900297877 /* CountryCodeListCell.xib in Resources */,
+				227400CC27BE7D5800D0DA81 /* AssetsListViewController.xib in Resources */,
 				E73CC60C23D5976100532A5C /* Koloni.ttf in Resources */,
 				8A880F8B24615B010064D531 /* AssetsListCollectionCell.xib in Resources */,
 				E72A32B81F7BCAC800223995 /* ViewBookingRunning.xib in Resources */,
@@ -2649,6 +2709,7 @@
 				E774B64C1ED45D54006E2412 /* AppLinkaAPIManager.swift in Sources */,
 				2238771427B522EA00126141 /* AuthManager.swift in Sources */,
 				05550E6D1EEA75130022087E /* CraditCardAddVC.swift in Sources */,
+				227400CB27BE7D5800D0DA81 /* AssetsListViewController.swift in Sources */,
 				E7EC36641E9F61290072A8E4 /* REVClusterManager.m in Sources */,
 				8A90C2AB26418D510042B30D /* RentalAlertView.swift in Sources */,
 				8ADEDE67255EA5010037DD7C /* InstructionCollectionCell.swift in Sources */,
@@ -2686,6 +2747,7 @@
 				8A5202AC26676F0F00B0E86E /* GMUWrappingDictionaryKey.m in Sources */,
 				E7B697D5236060FD00BAE114 /* LeftMenuViewController.swift in Sources */,
 				8AFFA736265F99C0004AFA6C /* CustomAlertViewWithOkCancelButton.swift in Sources */,
+				227400D027BE89A300D0DA81 /* AssetsListTableCell.swift in Sources */,
 				E7860F5B235D8C950062B90A /* CustomButton.swift in Sources */,
 				2286A70627BBF27B00206475 /* OpenAPI.swift in Sources */,
 				8AC4861D2555466D000D784F /* HelpTipsViewController.swift in Sources */,
@@ -2740,6 +2802,7 @@
 				058C9B711ECF0AF100494559 /* shareCraditCard.swift in Sources */,
 				E75630821E8E71B30030C5C3 /* ShareUser.swift in Sources */,
 				8A5FD6FD2452CA830094E2C0 /* AssetsListView.swift in Sources */,
+				227400C127BE457F00D0DA81 /* HomeViewController.swift in Sources */,
 				05BB72BE20B6DB850072F685 /* HubListVC.swift in Sources */,
 				8AC5C0F725275BE5004EBF51 /* AnimatedCircularView.swift in Sources */,
 				E7860F5A235D8C950062B90A /* CustomColor.swift in Sources */,
@@ -2766,6 +2829,7 @@
 				8ACE7968260CE064007D7D2E /* CustomAlertWithGradientButtonView.swift in Sources */,
 				E75630701E8E71B30030C5C3 /* UITextview+Extra.swift in Sources */,
 				E7EC36661E9F61290072A8E4 /* REVClusterPin.m in Sources */,
+				227400C627BE491200D0DA81 /* HomeTableCell.swift in Sources */,
 				E76F399B2382A51E00E9B59A /* PaddingLabel.swift in Sources */,
 				E7ADCE4B23322A490043877C /* Storyboard.swift in Sources */,
 				8A5202AB26676F0F00B0E86E /* GMUGridBasedClusterAlgorithm.m in Sources */,

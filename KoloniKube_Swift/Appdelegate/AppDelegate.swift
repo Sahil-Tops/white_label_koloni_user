@@ -662,12 +662,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     //MARK: - Side bar setup
-    func pushToSideMenuVC(){
-        
+    func pushToSideMenuVC(){    
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let bookNowVController = BookNowVC(nibName: "BookNowVC", bundle: nil)
+            let homeVc = HomeViewController(nibName: "HomeViewController", bundle: nil)
             let leftMenu = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
-            let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: bookNowVController, leftMenuViewController: leftMenu, rightMenuViewController: nil)
+            let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: homeVc, leftMenuViewController: leftMenu, rightMenuViewController: nil)
             sideMenuViewController.bouncesHorizontally = false
             sideMenuViewController.contentViewScaleValue = 0.65
             sideMenuViewController.scaleContentView = true

@@ -98,10 +98,7 @@ class AuthManager: NSObject{
                     }
                     StaticClass.sharedInstance.HideSpinner()
                     OpenAPI.sharedInstance.getWhoIamI_Web { response in
-                        print(WhoIamI().id ?? "")
-                        OpenAPI.sharedInstance.getLocationListing_Web { data in
-                            
-                        }
+                        AppDelegate.shared.pushToSideMenuVC()
                     }
 //                    self.checkAccessToken_Web(token: credentials.accessToken ?? "", type: type)
                     break
