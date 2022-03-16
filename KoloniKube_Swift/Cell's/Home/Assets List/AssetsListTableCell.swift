@@ -12,7 +12,9 @@ class AssetsListTableCell: UITableViewCell {
 
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var viewTitle: CustomView!
-    @IBOutlet weak var lblAssetId: UILabel!
+    @IBOutlet weak var lblAssignment: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var lblMacId: UILabel!
     
     
     override func awakeFromNib() {

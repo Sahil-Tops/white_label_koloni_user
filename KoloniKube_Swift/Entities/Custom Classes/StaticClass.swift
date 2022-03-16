@@ -53,6 +53,10 @@ class StaticClass {
     //        }
     //    }
     
+    var strDeviceUUID: String{
+        return UIDevice.current.identifierForVendor?.uuidString ?? ""
+    }
+    
     var strDeviceToken : String {
         get {
             return retriveFromUserDefaults(Global.g_UserDefaultKey.DeviceToken) as? String ?? ""
@@ -202,6 +206,11 @@ class StaticClass {
     func saveToUserDefaultBool(forkey key: String, value: Bool) {
         let defaults = UserDefaults.standard
         defaults.setValue(value, forKey: key)
+    }
+    
+    func removeValueForKey(forKey key: String){
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: key)
     }
     
     func saveToUserDefaultsString (value: String, forKey key: String) {

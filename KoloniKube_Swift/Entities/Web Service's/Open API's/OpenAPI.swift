@@ -15,54 +15,50 @@ class OpenAPI{
     }
     var queue = DispatchQueue.init(label: "api_response")
     
-    func getWhoIamI_Web(outputBlock: @escaping(_ response: Any)-> Void){
+    
+    func getWhoIamI_Web(outputBlock: @escaping(_ response: WhoIamI)-> Void){
         self.queue.async {
             let urlStr = "\(MODULE.instance.debug)/\(API_LISTS.instance.whoami)"
-            APIRequest.sharedInstance.startConnectionWithJson(urlStr: urlStr, methodType: .get, showLoader: true) { data in
-                do{
-                    _ = try JSONDecoder().decode(WhoIamI.self, from: data)
-                    outputBlock(data)
-                }catch let err{
-                    print("Error: ", err)
+            APIRequest.sharedInstance.startConnectionWithJson(urlStr: urlStr, methodType: .get, showLoader: true) { response in
+                if let dict = response as? [String:Any]{
+                    let model = WhoIamI().setData(dataDic: dict)
+                    outputBlock(model)
                 }
             } errorHandler: { error in
                 
             }
-
         }
     }
     
-    func getLocationListing_Web(outputBlock: @escaping(_ response: [LocationsModel])-> Void){
+    func getLocationListing_Web(count: String, outputBlock: @escaping(_ response: [LocationsModel])-> Void){
         
         self.queue.async {
             let urlStr = "\(MODULE.instance.locations)/"
-            let params: [String:Any] = ["count": "10"]
+            let params: [String:Any] = ["count": count]
             APIRequest.sharedInstance.startConnectionWithJson(urlStr: urlStr, methodType: .get, params, showLoader: true) { response in
-                do{
-                    let model = try JSONDecoder().decode([LocationsModel].self, from: response)
+                if let array = response as? [[String:Any]]{
+                    let model = LocationsModel().setData(dataArray: array)
                     outputBlock(model)
-                }catch let err{
-                    print("Error: ", err)
                 }
             } errorHandler: { error in
                 
             }
-
         }
-        
     }
     
-    func getDevices_Web(count: Int, outputBlock: @escaping(_ response: Any)-> Void){
+    func getAllDevices_Web(count: Int, outputBlock: @escaping(_ response: [DevicesModel])-> Void){
         
         self.queue.async {
-            let urlStr = "\(MODULE.instance.devices)/"
+            let urlStr = "\(MODULE.instance.devices)/\(API_LISTS.instance.all)"
             let params: [String:Any] = ["count": "\(count)"]
             APIRequest.sharedInstance.startConnectionWithJson(urlStr: urlStr, methodType: .get, params, showLoader: true) { response in
-                
+                if let array = response as? [[String:Any]]{
+                    let model = DevicesModel().setData(dataArray: array)
+                    outputBlock(model)
+                }
             } errorHandler: { error in
                 
             }
-
         }
     }
     
@@ -75,17 +71,19 @@ class OpenAPI{
             } errorHandler: { error in
                 
             }
-
         }
         
     }
     
-    func getReservationDevice(outputBlock: @escaping(_ response: Data)-> Void){
+    func reserveDevice(deviceId: String, outputBlock: @escaping(_ response: ReserveDeviceModel)-> Void){
         self.queue.async {
-            let params: [String:Any] = ["device_id": "24vsZRzpfJY50mDN62EUVgf8wlY", "reservation_type": "storage"]
+            let params: [String:Any] = ["device_id": deviceId, "reservation_type": "storage"]
             let urlStr = "\(MODULE.instance.reservations)/\(API_LISTS.instance.reserve_device)"
             APIRequest.sharedInstance.startConnectionWithJson(urlStr: urlStr, methodType: .post, params, showLoader: true) { response in
-                outputBlock(response)
+                if let dict = response as? [String:Any]{
+                    let model = ReserveDeviceModel().setData(dict: dict)
+                    outputBlock(model)
+                }
             } errorHandler: { error in
                 
             }

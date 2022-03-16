@@ -16,6 +16,8 @@ target 'KoloniKube_Swift' do
   pod 'Auth0', '~> 1.0'
   pod 'Alamofire', '~> 5.5'
   pod 'AFNetworking'
+  pod 'Stripe'
+  
   pod 'IQKeyboardManagerSwift'
   pod 'ISMessages'
   pod 'NVActivityIndicatorView'

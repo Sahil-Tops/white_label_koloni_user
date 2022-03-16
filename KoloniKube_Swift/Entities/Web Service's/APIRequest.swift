@@ -14,9 +14,8 @@ class APIRequest{
     static let sharedInstance: APIRequest = {
         return APIRequest()
     }()    
-    
-    
-    func startConnectionWithJson(urlStr: String, methodType: HTTP_METHOD,_ params: [String:Any] = [:], showLoader: Bool, successHandler: @escaping(_ response: Data)-> Void, errorHandler: @escaping(_ error: String)-> Void){
+        
+    func startConnectionWithJson(urlStr: String, methodType: HTTP_METHOD,_ params: [String:Any] = [:], showLoader: Bool, successHandler: @escaping(_ response: Any)-> Void, errorHandler: @escaping(_ error: String)-> Void){
         
         if let url = URL(string: BASE_URLS.baseUrl + urlStr){
             var urlRequest = URLRequest(url: url)
@@ -54,7 +53,7 @@ class APIRequest{
                     do{
                         let jsonObj = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                         print("Reponse: ", jsonObj)
-                        successHandler(data)
+                        successHandler(jsonObj)
                     }catch let err{
                         print("Error: ", err)
                         errorHandler("Error: \(err.localizedDescription)")

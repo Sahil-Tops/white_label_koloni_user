@@ -22,12 +22,13 @@ class LaunchScreenVC: UIViewController {
         Singleton.currentVc = "launch_screen"
         StaticVariables.window = UIApplication.shared.keyWindow
         self.callAPiForVersionCheck()
+        //        StripeClient.sharedInstance.createToken(name: "John Wick", number: "4242424242424242", expMM: 02, expYY: 23, cvc: "786")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         Singleton.currentVc = ""
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.alertView.layer.cornerRadius = 10
@@ -44,7 +45,7 @@ class LaunchScreenVC: UIViewController {
             
         }
     }
-
+    
 }
 
 //MARK: - Web Api's
@@ -70,51 +71,64 @@ extension LaunchScreenVC {
                     } else {
                         self.alertView.isHidden = true
                         self.viewBgShowAlert.isHidden = true
-                        self.checkForceLogoutStatus_Web()
+                        self.checkLogin()
                     }
                 }else{
                     StaticClass.sharedInstance.ShowNotification(false, strmsg: dict["MESSAGE"] as? String ?? "")
                 }
             }else{
-               
+                
             }
         }) { (error) in
             
         }
     }
     
-    func checkForceLogoutStatus_Web(){
-        let params = NSMutableDictionary()
-        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "user_id")
-        params.setValue(appDelegate.getCurrentAppVersion, forKey: "ios_version")
-        
-        APICall.shared.postWeb("is_force_logout_check", parameters: params, showLoder: true, successBlock: { (response) in
-            if let status = response["FLAG"]as? Int, status == 1{
-                if let logout_status = response["IS_FORCE_LOGOUT"]as? String, logout_status == "1"{
-                    APICall.shared.postWeb("is_force_logout", parameters: params, showLoder: true) { (response) in
-                        if let status = response["FLAG"]as? Int, status == 1{
-                            let viewControllers: [UIViewController] = (Global.appdel.navigation?.viewControllers)!
-                            for(_,element) in viewControllers.enumerated() {
-                                if(element is LoginWithGoogleAppleVC){
-                                    Global.appdel.navigation?.popToViewController(element, animated: false)
-                                    break
-                                }
-                            }
-                        }else{
-                            StaticClass.sharedInstance.ShowNotification(false, strmsg: response["MESSAGE"] as? String ?? "")
-                        }
-                    } failure: { (error) in
-                        StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
-                    }
-                }else{
-                    Global.appdel.userDetailCall(vc: self)
-                }
-            }else{
-                StaticClass.sharedInstance.ShowNotification(false, strmsg: response["MESSAGE"] as? String ?? "")
+    func checkLogin(){
+        AuthManager.sharedInstance.checkLoginStatus { response in
+            print(response)
+            AuthManager.accessToken = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "auth0_access_token") ?? ""
+            AuthManager.sharedInstance.renewToken { response in
+//                if response{
+//                    AppDelegate.shared.pushToSideMenuVC()
+//                }
+                AppDelegate.shared.pushToSideMenuVC()
             }
-        }, failure: { (error) in
-            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
-        })
+        }
     }
+    
+    //    func checkForceLogoutStatus_Web(){
+    //        let params = NSMutableDictionary()
+    //        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "user_id")
+    //        params.setValue(appDelegate.getCurrentAppVersion, forKey: "ios_version")
+    //
+    //        APICall.shared.postWeb("is_force_logout_check", parameters: params, showLoder: true, successBlock: { (response) in
+    //            if let status = response["FLAG"]as? Int, status == 1{
+    //                if let logout_status = response["IS_FORCE_LOGOUT"]as? String, logout_status == "1"{
+    //                    APICall.shared.postWeb("is_force_logout", parameters: params, showLoder: true) { (response) in
+    //                        if let status = response["FLAG"]as? Int, status == 1{
+    //                            let viewControllers: [UIViewController] = (Global.appdel.navigation?.viewControllers)!
+    //                            for(_,element) in viewControllers.enumerated() {
+    //                                if(element is LoginWithGoogleAppleVC){
+    //                                    Global.appdel.navigation?.popToViewController(element, animated: false)
+    //                                    break
+    //                                }
+    //                            }
+    //                        }else{
+    //                            StaticClass.sharedInstance.ShowNotification(false, strmsg: response["MESSAGE"] as? String ?? "")
+    //                        }
+    //                    } failure: { (error) in
+    //                        StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
+    //                    }
+    //                }else{
+    ////                    Global.appdel.userDetailCall(vc: self)
+    //                }
+    //            }else{
+    //                StaticClass.sharedInstance.ShowNotification(false, strmsg: response["MESSAGE"] as? String ?? "")
+    //            }
+    //        }, failure: { (error) in
+    //            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
+    //        })
+    //    }
     
 }

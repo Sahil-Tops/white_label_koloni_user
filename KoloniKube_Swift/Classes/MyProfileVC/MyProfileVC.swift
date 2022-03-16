@@ -98,7 +98,7 @@ class MyProfileVC: UIViewController {
             if response == "ok"{
 //                Singleton.internetCheckTimer.invalidate()
 //                Global.appdel.logoutUser()
-                AuthManager(vc: self).logoutAuth0 { (response) in
+                AuthManager.sharedInstance.logoutAuth0 { (response) in
                     if response{
                         Global.appdel.setNavigationFlow()
 //                        Singleton.internetCheckTimer.invalidate()

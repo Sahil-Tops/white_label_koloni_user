@@ -10,7 +10,7 @@ import Foundation
 
 struct BASE_URLS{
     
-    static let baseUrl = "https://api.lockers.koloni.io/"
+    static let baseUrl = "https://dev-mobile.lockers.koloni.io/"
     
 }
 

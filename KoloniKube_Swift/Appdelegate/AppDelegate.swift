@@ -24,6 +24,7 @@ import SDWebImage
 import Braintree
 import Auth0
 import Sentry
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate,UITabBarDelegate,CLLocationManagerDelegate{
@@ -57,10 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         SDImageCache.shared.clearDisk {            
         }
         
+        //Sentry configuration
         SentrySDK.start { options in
             options.dsn = "https://ff6ad814a2414ae4b9d67afd66e7050e@o1019195.ingest.sentry.io/6004341"
             options.debug = false // Enabled debug when first installing is always helpful
         }
+        
+        //Stripe configuration
+        STPAPIClient.shared.publishableKey = "pk_test_51J2iJVDl5GrA4MdE0X5bCjbEe93jGKPNwfhh7mfw1Z5x3YqUSmjeaD71IlfGwYb5O2ob3anQq6SYwJ29jX2YKD7400fh7r9Oto"
         
         // Get Current Application version
         self.getCurrentApplicationVersion()
@@ -69,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         // set the minimimum background Fetch interval
         UIApplication.shared.setMinimumBackgroundFetchInterval(2)
         
-        self.createFolder()
+//        self.createFolder()
         
         // For Push Notifications
         if #available(iOS 9.0, *) {
@@ -103,18 +108,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         
         // Check user is logged in or not
-        if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
-            
-            if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
-                self.setNavigationLaunchFlow()
-            }else  {
-                self.setNavigationFlow()
-            }
-            
-        }else{
+        if !StaticClass.sharedInstance.retriveFromUserDefaultsBool(key: "isUserLogin"){
             self.setNavigationFlow()
+        }else{
+            self.setNavigationLaunchFlow()
         }
-        
         type(of: self).shared = self
         return true
     }
@@ -182,7 +180,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }else{
             return true
         }
-        
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -206,7 +203,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func userRunningRental_Web(loader: Bool) {
         
         let stringwsName = "user_running_rental/user_id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
-        
         APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: loader, successBlock: { (response) in
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){
@@ -453,7 +449,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         StaticClass.sharedInstance.saveToUserDefaultsString(value:"", forKey: Global.g_UserData.TempBookingRentalStoreID)
         StaticClass.sharedInstance.saveToUserDefaults((false) as AnyObject, forKey: Global.g_UserDefaultKey.IS_USERLOGIN)
         StaticClass.sharedInstance.saveToUserDefaults("" as AnyObject, forKey: Global.g_UserData.UserID)
-        
         StaticClass.sharedInstance.saveToUserDefaultsString(value:"" , forKey: Global.g_UserData.BookingID)
         StaticClass.sharedInstance.saveToUserDefaultsString(value:"" , forKey: Global.g_UserData.ObjectID)
         
@@ -531,7 +526,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                                 if !StaticClass.sharedInstance.arrRunningBookingId.contains(strBookingID) {
                                     StaticClass.sharedInstance.arrRunningBookingId.add(strBookingID)
                                 }
-                                
                                 let strObjectID = dict.object(forKey: "object_id")as? String ?? "0"
                                 StaticClass.sharedInstance.saveToUserDefaultsString(value:strObjectID , forKey: Global.g_UserData.ObjectID)
                                 

@@ -58,7 +58,7 @@
     @IBOutlet weak var rentalContainerView: CustomView!
     @IBOutlet weak var adTitleView: UIView!
     @IBOutlet weak var bikeLock_imageView: CustomView!
-    @IBOutlet var axaLoaderBackGroundView: UIView!
+    @IBOutlet var loaderBackGroundView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var loaderBgView: UIView!
     
@@ -108,7 +108,7 @@
     @IBOutlet weak var numberOfRentalRunningTop_lbl: UILabel!
     @IBOutlet weak var numberOfRentalsRunning_lbl: UILabel!
     @IBOutlet weak var currentRentalAmount_lbl: UILabel!
-    @IBOutlet weak var axaLoaderMsg_lbl: UILabel!
+    @IBOutlet weak var loaderMsg_lbl: UILabel!
     @IBOutlet weak var pageController: UIPageControl!
     
     //SlideToFinish
@@ -124,7 +124,7 @@
     
     var startBookingSwift: StartBooking?
     var ocslockConnection: OCSLOCK_CONNECTION?
-    var axaLoader = AnimatedCircularView()
+    var loader = AnimatedCircularView()
     let lockConnectionService : LockConnectionService = LockConnectionService.sharedInstance
     var batteryPercentage = 50
     var isEventStatus = String()
@@ -185,9 +185,8 @@
     var isEndingRentalManual = ""
     
     var lockType: LockType?
-    var axaLockConnection: AXALOCK_CONNECTION?
     var lockCommand = "0"
-    var isAxaLoaderLoad = false
+//    var isAxaLoaderLoad = false
         
     
     var layout = UPCarouselFlowLayout()
@@ -217,6 +216,7 @@
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         Singleton.isCalledDidFinishLaunch = false
         self.loadContent()
         self.getlockInstructionList_Web()
@@ -235,7 +235,7 @@
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.craditCardList_Web()
-        self.axaLockConnection = AXALOCK_CONNECTION(vc: self)
+//        self.axaLockConnection = AXALOCK_CONNECTION(vc: self)
         if !self.imagePickerVcPresent{
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self.setupGoogleMap()
@@ -246,7 +246,7 @@
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.axaLockConnection?.dissconnectDevice()
+//        self.axaLockConnection?.dissconnectDevice()
         if !self.imagePickerVcPresent{
             for i in 0..<Singleton.timerArray.count{
                 (Singleton.timerArray[i]).invalidate()
@@ -265,9 +265,9 @@
     }
     
     deinit {
-        if self.axaLockConnection?.peripheralDevice != nil{
-            self.axaLockConnection?.centralMannager?.cancelPeripheralConnection((self.axaLockConnection?.peripheralDevice!)!)
-        }
+//        if self.axaLockConnection?.peripheralDevice != nil{
+//            self.axaLockConnection?.centralMannager?.cancelPeripheralConnection((self.axaLockConnection?.peripheralDevice!)!)
+//        }
     }
     
  }
@@ -438,7 +438,6 @@
  extension BookNowVC{
     
     func loadContent(){
-        self.navigationController?.navigationBar.isHidden = true
         self.appGroupDefaults = UserDefaults(suiteName:"group.com.koloni.kolonikube")!
         Singleton.smRippleView = nil
         self.centerLatLong_current = CLLocationCoordinate2D(latitude: CLLocationDegrees(StaticClass.sharedInstance.latitude), longitude: CLLocationDegrees(StaticClass.sharedInstance.longitude))
@@ -650,31 +649,28 @@
     }
     
     func showLoader(withMsg msg: String){
-        if !self.isAxaLoaderLoad{
-            self.bikeLock_imageView.isHidden = true
-            self.axaLoaderMsg_lbl.isHidden = true
-            self.axaLoader.showSpiner(message: msg, labelColor: .white)
-            self.axaLoader.frame = (appDelegate.window?.bounds)!
-            self.axaLoaderBackGroundView.frame = (appDelegate.window?.bounds)!
-            self.view.addSubview(axaLoaderBackGroundView)
-            self.view.addSubview(axaLoader)
-            self.isAxaLoaderLoad = true
-        }
+        self.bikeLock_imageView.isHidden = true
+        self.loaderMsg_lbl.isHidden = true
+        self.loader.showSpiner(message: msg, labelColor: .white)
+        self.loader.frame = (appDelegate.window?.bounds)!
+        self.loaderBackGroundView.frame = (appDelegate.window?.bounds)!
+        self.view.addSubview(loaderBackGroundView)
+        self.view.addSubview(loader)
     }
     
-    func showAxaLockLoaderPopUp(msg: String){
-        self.bikeLock_imageView.isHidden = false
-        self.axaLoaderMsg_lbl.isHidden = false
-        self.axaLoaderMsg_lbl.text = msg
-        self.axaLoaderBackGroundView.frame = (appDelegate.window?.bounds)!
-        self.view.addSubview(axaLoaderBackGroundView)
-    }
+//    func showAxaLockLoaderPopUp(msg: String){
+//        self.bikeLock_imageView.isHidden = false
+//        self.loaderMsg_lbl.isHidden = false
+//        self.loaderMsg_lbl.text = msg
+//        self.loaderBackGroundView.frame = (appDelegate.window?.bounds)!
+//        self.view.addSubview(loaderBackGroundView)
+//    }
     
     func hideLockLoader(){
-        self.isAxaLoaderLoad = false
-        self.axaLoader.hideSpinner()
-        self.axaLoaderBackGroundView.removeFromSuperview()
-        self.axaLoader.removeFromSuperview()
+//        self.isAxaLoaderLoad = false
+        self.loader.hideSpinner()
+        self.loaderBackGroundView.removeFromSuperview()
+        self.loader.removeFromSuperview()
     }
     
     func setRentalViewToInitial(){
@@ -1106,27 +1102,28 @@
     
     //Permission to pause rental
     func permissionAlertToPause(){
-        if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
-            
-            if self.btnPressedPause{
-                self.showLoader(withMsg: "Unlocking. Please wait...")
-            }else{
-                self.showLoader(withMsg: "Locking. Please wait...")
-            }
-            let device_name = Singleton.runningRentalArray[self.selectedRentalIndex]["assets_device_name"]as? String ?? ""
-            if self.axaLockConnection?.peripheralDevice != nil && self.axaLockConnection?.connectedWithDevice == device_name{
-                self.axaLockConnection?.connectToPeripheral(identifire: (self.axaLockConnection?.peripheralDevice)!)
-            }else{
-                self.axaLockConnection?.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
-                _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
-                    self.axaLockConnection?.centralMannager?.stopScan()
-                    if self.axaLockConnection?.peripheralDevice == nil{
-                        AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you and not connected with other device.")
-                        self.hideLockLoader()
-                    }
-                })
-            }
-        }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+//        if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
+//
+//            if self.btnPressedPause{
+//                self.showLoader(withMsg: "Unlocking. Please wait...")
+//            }else{
+//                self.showLoader(withMsg: "Locking. Please wait...")
+//            }
+//            let device_name = Singleton.runningRentalArray[self.selectedRentalIndex]["assets_device_name"]as? String ?? ""
+//            if self.axaLockConnection?.peripheralDevice != nil && self.axaLockConnection?.connectedWithDevice == device_name{
+//                self.axaLockConnection?.connectToPeripheral(identifire: (self.axaLockConnection?.peripheralDevice)!)
+//            }else{
+//                self.axaLockConnection?.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
+//                _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
+//                    self.axaLockConnection?.centralMannager?.stopScan()
+//                    if self.axaLockConnection?.peripheralDevice == nil{
+//                        AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you and not connected with other device.")
+//                        self.hideLockLoader()
+//                    }
+//                })
+//            }
+//        }else
+        if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
             self.ocslockConnection?.initialize(lock_number: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_lock_number"]as? String ?? "", vc: self, user_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_code"]as? String ?? "", master_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_master_code"]as? String ?? "")
         }else{
             CoreBluetoothClass.sharedInstance.isBluetoothOn(vc: self)
@@ -1136,23 +1133,24 @@
     //Permission alert to end rental
     func permissionAlertToEnd() {
         
-        if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
-            
-            self.showLoader(withMsg: "Locking. Please wait...")
-            let device_name = Singleton.runningRentalArray[self.selectedRentalIndex]["assets_device_name"]as? String ?? ""
-            if self.axaLockConnection?.peripheralDevice != nil && self.axaLockConnection?.connectedWithDevice == device_name{
-                self.axaLockConnection?.connectToPeripheral(identifire: (self.axaLockConnection?.peripheralDevice)!)
-            }else{
-                self.axaLockConnection?.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
-                _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
-                    self.axaLockConnection?.centralMannager?.stopScan()
-                    if self.axaLockConnection?.peripheralDevice == nil{
-                        AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you and not connected with other device.")
-                        self.hideLockLoader()
-                    }
-                })
-            }
-        }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
+//        if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
+//
+//            self.showLoader(withMsg: "Locking. Please wait...")
+//            let device_name = Singleton.runningRentalArray[self.selectedRentalIndex]["assets_device_name"]as? String ?? ""
+//            if self.axaLockConnection?.peripheralDevice != nil && self.axaLockConnection?.connectedWithDevice == device_name{
+//                self.axaLockConnection?.connectToPeripheral(identifire: (self.axaLockConnection?.peripheralDevice)!)
+//            }else{
+//                self.axaLockConnection?.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
+//                _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
+//                    self.axaLockConnection?.centralMannager?.stopScan()
+//                    if self.axaLockConnection?.peripheralDevice == nil{
+//                        AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you and not connected with other device.")
+//                        self.hideLockLoader()
+//                    }
+//                })
+//            }
+//        }else
+        if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "7"{
             self.ocslockConnection?.initialize(lock_number: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_lock_number"]as? String ?? "", vc: self, user_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_code"]as? String ?? "", master_code: Singleton.runningRentalArray[self.selectedRentalIndex]["ocs_master_code"]as? String ?? "")
         }else{
             if Singleton.runningRentalArray[self.selectedRentalIndex]["object_type"] as? String ?? "" == "2"{
@@ -1167,7 +1165,6 @@
     
     /** Function to slide down the rental view while ending the ride */
     func slideDownRentalView(){
-        
         Global().delay(delay: 0.2) {
             self.btnSlideToFinish.delegate = self
             self.finishRentalsView.isHidden = false
@@ -1175,7 +1172,6 @@
                 
             })
         }
-        
     }
     
     //Lock Unlock
@@ -1183,9 +1179,10 @@
         if !self.btnPressedPause{
             self.isPause = true
             self.lockCommand = "0"
-            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
-                self.axaLockConnection?.lockDevice()
-            }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"]as? String ?? "" == "7"{
+//            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
+//                self.axaLockConnection?.lockDevice()
+//            }else
+            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"]as? String ?? "" == "7"{
                 self.ocslockConnection?.lockUnlockOcsLock()
             }else{
                 if self.btnPressedPause{
@@ -1199,9 +1196,10 @@
             self.isPause = false
             self.lockCommand = "1"
             
-            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
-                self.axaLockConnection?.unlockDevice()
-            }else if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"]as? String ?? "" == "7"{
+//            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
+//                self.axaLockConnection?.unlockDevice()
+//            }else
+            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"]as? String ?? "" == "7"{
                 self.ocslockConnection?.lockUnlockOcsLock()
             }else{
                 if self.btnPressedPause{
@@ -1719,18 +1717,18 @@
                 }else {
                     
                 }
-                if self.isAxaLoaderLoad{
-                    if self.rentalActionPerformed == 1{
-                        self.isAxaLoaderLoad = false
-                    }else{
-                        
-                    }
-                }
+//                if self.isAxaLoaderLoad{
+//                    if self.rentalActionPerformed == 1{
+//                        self.isAxaLoaderLoad = false
+//                    }else{
+//
+//                    }
+//                }
             }
         }) { (error) in
-            if self.isAxaLoaderLoad{
-                self.hideLockLoader()
-            }
+//            if self.isAxaLoaderLoad{
+//                self.hideLockLoader()
+//            }
         }
     }
     
@@ -1804,7 +1802,7 @@
                         }
                         if Singleton.runningRentalArray.count > self.selectedRentalIndex{
                             Singleton.order_id = Singleton.runningRentalArray[self.selectedRentalIndex]["id"]as? String ?? ""
-                            Singleton.axa_ekey_dictionary = [:]
+//                            Singleton.axa_ekey_dictionary = [:]
                             Singleton.runningRentalArray.remove(at: self.selectedRentalIndex)
                             self.pauseRentalCollectionView.reloadData()
                         }
@@ -1868,42 +1866,42 @@
         }
     }
     
-    func getAxaEkeyPasskeyForBookNow_Web(assetId: String, outputBlock: @escaping(_ response: Bool)-> Void){
-        
-        let params: NSMutableDictionary = NSMutableDictionary()
-        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "id")
-        params.setValue("0", forKey: "parent_id")
-        params.setValue(assetId, forKey: "object_id")
-        params.setValue("otp", forKey: "passkey_type")
-        params.setValue("8.5", forKey: "ios_version")
-        APICall.shared.postWeb("update_ekey", parameters: params, showLoder: false, successBlock: { (response) in
-            if let status = response["FLAG"]as? Int, status == 1{
-                if let assets_detail = response["ASSETS_DETAIL"]as? [String:Any]{
-                    var dictionary: [String:Any] = ["object_id": assetId]
-                    if let ekey = assets_detail["axa_ekey"]as? String{
-                        dictionary["axa_ekey"] = ekey
-                        Singleton.axa_ekey = ekey
-                    }
-                    if let passkey = assets_detail["axa_passkey"]as? String{
-                        dictionary["axa_passkey"] = passkey
-                        Singleton.axa_passkey = passkey
-                    }
-                    if dictionary["axa_ekey"] as? String ?? "" != "" && dictionary["axa_passkey"] as? String ?? "" != ""{
-                        dictionary["current_index"] = 0
-                        Singleton.axa_ekey_dictionary = dictionary
-                        outputBlock(true)
-                    }else{
-                        outputBlock(false)
-                    }
-                }
-            }else{
-                outputBlock(true)
-            }
-        }) { (error) in
-            outputBlock(true)
-            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
-        }
-    }
+//    func getAxaEkeyPasskeyForBookNow_Web(assetId: String, outputBlock: @escaping(_ response: Bool)-> Void){
+//        
+//        let params: NSMutableDictionary = NSMutableDictionary()
+//        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "id")
+//        params.setValue("0", forKey: "parent_id")
+//        params.setValue(assetId, forKey: "object_id")
+//        params.setValue("otp", forKey: "passkey_type")
+//        params.setValue("8.5", forKey: "ios_version")
+//        APICall.shared.postWeb("update_ekey", parameters: params, showLoder: false, successBlock: { (response) in
+//            if let status = response["FLAG"]as? Int, status == 1{
+//                if let assets_detail = response["ASSETS_DETAIL"]as? [String:Any]{
+//                    var dictionary: [String:Any] = ["object_id": assetId]
+//                    if let ekey = assets_detail["axa_ekey"]as? String{
+//                        dictionary["axa_ekey"] = ekey
+//                        Singleton.axa_ekey = ekey
+//                    }
+//                    if let passkey = assets_detail["axa_passkey"]as? String{
+//                        dictionary["axa_passkey"] = passkey
+//                        Singleton.axa_passkey = passkey
+//                    }
+//                    if dictionary["axa_ekey"] as? String ?? "" != "" && dictionary["axa_passkey"] as? String ?? "" != ""{
+//                        dictionary["current_index"] = 0
+//                        Singleton.axa_ekey_dictionary = dictionary
+//                        outputBlock(true)
+//                    }else{
+//                        outputBlock(false)
+//                    }
+//                }
+//            }else{
+//                outputBlock(true)
+//            }
+//        }) { (error) in
+//            outputBlock(true)
+//            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
+//        }
+//    }
     
  }
  
@@ -2168,17 +2166,20 @@
         if position == .bottom{
             self.finishRentalsView.isHidden = true
             self.btnSlideToFinish.resetSlideButton()
-            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
-                if self.axaLockConnection?.peripheralDevice != nil{
-                    self.axaLockConnection?.centralMannager?.cancelPeripheralConnection((self.axaLockConnection?.peripheralDevice!)!)
-                }
-//                StaticClass.sharedInstance.ShowSpiner()
-                self.axaLockConnection?.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
-            }else{
-                self.lockCommand = "0"
-                self.showLoader(withMsg: "Locking. Please wait....")
-                _ = self.lockConnectionService.doLock(macAddress: self.selectedBikeMacAddress, delegate: self)
-            }
+            self.lockCommand = "0"
+            self.showLoader(withMsg: "Locking. Please wait....")
+            _ = self.lockConnectionService.doLock(macAddress: self.selectedBikeMacAddress, delegate: self)
+//            if Singleton.runningRentalArray[self.selectedRentalIndex]["lock_id"] as? String ?? "" == "6"{
+//                if self.axaLockConnection?.peripheralDevice != nil{
+//                    self.axaLockConnection?.centralMannager?.cancelPeripheralConnection((self.axaLockConnection?.peripheralDevice!)!)
+//                }
+////                StaticClass.sharedInstance.ShowSpiner()
+//                self.axaLockConnection?.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
+//            }else{
+//                self.lockCommand = "0"
+//                self.showLoader(withMsg: "Locking. Please wait....")
+//                _ = self.lockConnectionService.doLock(macAddress: self.selectedBikeMacAddress, delegate: self)
+//            }
         }
     }
  }

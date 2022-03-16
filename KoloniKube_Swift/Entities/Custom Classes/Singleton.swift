@@ -44,9 +44,9 @@ class Singleton: NSObject {
     static var emailConfirmationToken = ""
     static var lockInstructionArray: [[String:Any]] = []
     static var editProfileVc: EditProfileVC?
-    static var axa_ekey = ""
-    static var axa_passkey = ""
-    static var axa_ekey_dictionary: [String:Any] = [:]
+//    static var axa_ekey = ""
+//    static var axa_passkey = ""
+//    static var axa_ekey_dictionary: [String:Any] = [:]
     static var currentIndex = 0
     static var bottomPopUpView: BottomPopUp?
     static var appFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 17)
@@ -54,7 +54,7 @@ class Singleton: NSObject {
     static var isOpeningAppFromNotification = false
     static var notificationRunningRentalDetail: [String:Any] = [:]
     static var isCalledDidFinishLaunch = true
-    var socialMediaUserData: ShareUser = ShareUser()
+    var socialMediaUserData: ShareUser = ShareUser()    
     
     private override init() {
         
@@ -66,7 +66,7 @@ class Singleton: NSObject {
     
     var bikeData = ShareBikeKube()
     
-    func parseDeviceJson(arr:NSArray,arrOut:NSMutableArray) -> Void{
+    func parseDeviceJson(arr: NSArray,arrOut: NSMutableArray) -> Void{
         
         if let array = arr as? [NSDictionary]{
             for dict in array
@@ -254,5 +254,5 @@ struct ERLOCK_ATTRIBUTES {
 }
 
 enum LockType {
-    case linka, axa, ocs
+    case linka, ocs
 }

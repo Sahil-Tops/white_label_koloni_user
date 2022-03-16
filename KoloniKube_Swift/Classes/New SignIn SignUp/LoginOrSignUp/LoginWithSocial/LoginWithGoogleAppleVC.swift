@@ -39,22 +39,16 @@ class LoginWithGoogleAppleVC: UIViewController {
 //            vc.modalPresentationStyle = .overFullScreen
 //            self.present(vc, animated: true, completion: nil)
 //        }
-        
-        AuthManager(vc: self).checkLoginStatus { (status) in
-            if status{
-                //User Already Login
-            }
-        }
         self.loadContent()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if #available(iOS 13.0, *) {
-            self.signInWithAppleView.isHidden = false
-        }else{
-            self.signInWithAppleView.isHidden = true
-        }
+//        if #available(iOS 13.0, *) {
+//            self.signInWithAppleView.isHidden = false
+//        }else{
+//            self.signInWithAppleView.isHidden = true
+//        }
     }
     
     //MARK: - @IBAction's
@@ -65,7 +59,7 @@ class LoginWithGoogleAppleVC: UIViewController {
             if self.checkBox_btn.tag == 0{
                 self.showWarningMessage()
             }else{
-                AuthManager(vc: self).loginWithAuth0()                
+                AuthManager.sharedInstance.loginWithAuth0()
             }
             break
         case signInWithApple_btn:

@@ -17,11 +17,9 @@ class AssetsListView: UIView {
     @IBOutlet weak var containerView: CustomView!
     @IBOutlet weak var titleBackgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-//    @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var left_arrow_btn: UIButton!
     @IBOutlet weak var right_arrow_btn: UIButton!
-    
-    
+        
     var assetsListArray: [AvailabelBike] = []
     var delegate: AssetsListViewDelegate?
     var vc: BookNowVC!

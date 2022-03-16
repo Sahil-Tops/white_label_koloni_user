@@ -201,6 +201,16 @@ PODS:
   - Sentry/Core (7.9.0)
   - SimpleKeychain (0.12.5)
   - SkeletonView (1.12.1)
+  - Stripe (21.11.1):
+    - Stripe/Stripe3DS2 (= 21.11.1)
+    - StripeCore (= 21.11.1)
+    - StripeUICore (= 21.11.1)
+  - Stripe/Stripe3DS2 (21.11.1):
+    - StripeCore (= 21.11.1)
+    - StripeUICore (= 21.11.1)
+  - StripeCore (21.11.1)
+  - StripeUICore (21.11.1):
+    - StripeCore (= 21.11.1)
   - UPCarouselFlowLayout (1.1.2)
 
 DEPENDENCIES:
@@ -239,6 +249,7 @@ DEPENDENCIES:
   - SDWebImage
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `7.9.0`)
   - SkeletonView
+  - Stripe
   - UPCarouselFlowLayout
 
 SPEC REPOS:
@@ -290,6 +301,9 @@ SPEC REPOS:
     - SDWebImage
     - SimpleKeychain
     - SkeletonView
+    - Stripe
+    - StripeCore
+    - StripeUICore
     - UPCarouselFlowLayout
 
 EXTERNAL SOURCES:
@@ -357,8 +371,11 @@ SPEC CHECKSUMS:
   Sentry: 2f7e91f247cfb05b05bd01e0b5d0692557a7687b
   SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SkeletonView: c3c2ac84cbcb96ddb13d518c9e88f9f5ee589da9
+  Stripe: f2bed8369154c35c8ec794704e042e05240d6f21
+  StripeCore: 36571be19dae15e90c8ad47e1af45712aea93f5a
+  StripeUICore: 1b32566d6a69581be786609a032872b0fb5a6823
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: f18fbc93a1b30f2e597e93259fa33d356a2d21e5
+PODFILE CHECKSUM: ae329208b5bf6cd6662a837c2c09d84baeccd185
 
 COCOAPODS: 1.11.2

@@ -115,5 +115,4 @@ class AssetsListCollectionCell: UICollectionViewCell {
         
     }
     
-    
 }

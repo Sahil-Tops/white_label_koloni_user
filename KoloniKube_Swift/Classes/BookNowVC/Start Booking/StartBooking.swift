@@ -61,17 +61,18 @@ class StartBooking: UIViewController{
     }
     
     func deinitialize(){
-        if self.lockType == LockType.axa{
-            if self.peripheralDevice != nil{
-                self.centralMannager?.cancelPeripheralConnection(self.peripheralDevice!)
-                self.centralMannager = nil
-            }
-        }else{
-            self.lockConnectionService.disconnectWithExistingController()
-        }
+        self.lockConnectionService.disconnectWithExistingController()
+//        if self.lockType == LockType.axa{
+//            if self.peripheralDevice != nil{
+//                self.centralMannager?.cancelPeripheralConnection(self.peripheralDevice!)
+//                self.centralMannager = nil
+//            }
+//        }else{
+//            self.lockConnectionService.disconnectWithExistingController()
+//        }
     }
     
-    func startSpinner(){
+    func startSpinner() {
         self.spinnerView.frame = (appDelegate.window?.bounds)!
         self.spinnerView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         self.spinner.frame = (appDelegate.window?.bounds)!
@@ -147,16 +148,16 @@ class StartBooking: UIViewController{
                 let licenseString = try self.extendedLicense.getUserFrameDedicatedLocksString(dedicatedlocks: [Int(self.lock.getLockNumber())], userCode: self.userCode)
                 self.license = try License.getLicense(license: licenseString)
                 self.lockOcsLock()
-            }catch let err{
+            }catch let err {
                 print(err.localizedDescription)
             }
         }
     }
     
-    func lockOcsLock(){
-        if self.lock.getLockStatus() == LockStatus.OPEN{
+    func lockOcsLock() {
+        if self.lock.getLockStatus() == LockStatus.OPEN {
             self.objectBookingAPI_Called()
-        }else{
+        } else {
             self.startSpinner()
             self.isConfiguring = false
             OcsSmartManager.sharedInstance.reconnectAndSendToNode(withTag: self.lock.getTag(), connectionTimeoutSec: 6, communicationTimeoutSec: 10, frame: self.license.getFrame(), callback: self)
@@ -182,7 +183,6 @@ class StartBooking: UIViewController{
         Singleton.shared.bikeData.strDeviceID = StartBooking.sharedInstance.objectDetail.strDeviceID
         StartBooking.sharedInstance.objectDetail.strPartnerID = detail["partner_id"] as? String ?? ""
         StaticClass.sharedInstance.saveToUserDefaultsString(value:StartBooking.sharedInstance.objectDetail.strPartnerID, forKey: Global.g_UserData.PartnerID)
-        
         StartBooking.sharedInstance.objectDetail.strBooked = detail["is_booked"] as? String ?? ""
         StartBooking.sharedInstance.objectDetail.strLatitude = StaticClass.sharedInstance.getDouble(value: detail["latitude"] as? String ?? "0")
         StartBooking.sharedInstance.objectDetail.strLongitude = StaticClass.sharedInstance.getDouble(value: detail["longitude"] as? String ?? "0")
@@ -210,24 +210,26 @@ class StartBooking: UIViewController{
     
     func loadContent(){
         
-        if StartBooking.sharedInstance.objectDetail.lock_id == "6"{
-            StartBooking.sharedInstance.lockType = .axa
-        }else if StartBooking.sharedInstance.objectDetail.lock_id == "7"{
+//        if StartBooking.sharedInstance.objectDetail.lock_id == "6"{
+//            StartBooking.sharedInstance.lockType = .axa
+//        }else
+        if StartBooking.sharedInstance.objectDetail.lock_id == "7"{
             StartBooking.sharedInstance.lockType = .ocs
         }else{
             StartBooking.sharedInstance.lockType = .linka
         }
-        if StartBooking.sharedInstance.lockType == LockType.axa{
-            StartBooking.sharedInstance.centralMannager = CBCentralManager(delegate: self, queue: nil)
-            _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
-                self.centralMannager?.stopScan()
-                if self.peripheralDevice == nil && !self.isLinkaConnected{
-                    AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you and not connected with other device.")
-                    self.hideSpinner()
-                    self.deinitialize()
-                }
-            })
-        }else if StartBooking.sharedInstance.lockType == LockType.ocs{
+//        if StartBooking.sharedInstance.lockType == LockType.axa{
+//            StartBooking.sharedInstance.centralMannager = CBCentralManager(delegate: self, queue: nil)
+//            _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (_) in
+//                self.centralMannager?.stopScan()
+//                if self.peripheralDevice == nil && !self.isLinkaConnected{
+//                    AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you and not connected with other device.")
+//                    self.hideSpinner()
+//                    self.deinitialize()
+//                }
+//            })
+//        }else
+        if StartBooking.sharedInstance.lockType == LockType.ocs{
             self.loadOcsLock()
         }else{
             self.hideSpinner()
@@ -237,34 +239,34 @@ class StartBooking: UIViewController{
         }
     }
     
-    func connectToPeripheral(identifire: CBPeripheral){
-        self.peripheralDevice = identifire
-        if self.peripheralDevice != nil{
-            print("Peripheral Device", self.peripheralDevice!)
-            self.getAxaEkeyPasskeyForQrCode_Web(assetId: self.objectDetail.strId) { (response) in
-                if response{
-                    Singleton.currentIndex = 0
-                    self.centralMannager?.connect(self.peripheralDevice!, options: [:])
-                }
-            }
-        }
-    }
+//    func connectToPeripheral(identifire: CBPeripheral){
+//        self.peripheralDevice = identifire
+//        if self.peripheralDevice != nil{
+//            print("Peripheral Device", self.peripheralDevice!)
+//            self.getAxaEkeyPasskeyForQrCode_Web(assetId: self.objectDetail.strId) { (response) in
+//                if response{
+//                    Singleton.currentIndex = 0
+//                    self.centralMannager?.connect(self.peripheralDevice!, options: [:])
+//                }
+//            }
+//        }
+//    }
     
-    func loadAxaFunctionality(){
-        
-        let eKeyArray = Singleton.axa_ekey.components(separatedBy: "-")
-        self.writingEkeyCommand = true
-        DispatchQueue.global().async {
-            for item in eKeyArray{
-                if self.ctrCharacteristic != nil{
-                    self.writeCommandArray.append(1)
-                    let bytes = self.stringToBytes(item)!
-                    let data = Data(bytes: bytes, count: bytes.count)
-                    self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
-                }
-            }
-        }
-    }
+//    func loadAxaFunctionality(){
+//        
+//        let eKeyArray = Singleton.axa_ekey.components(separatedBy: "-")
+//        self.writingEkeyCommand = true
+//        DispatchQueue.global().async {
+//            for item in eKeyArray{
+//                if self.ctrCharacteristic != nil{
+//                    self.writeCommandArray.append(1)
+//                    let bytes = self.stringToBytes(item)!
+//                    let data = Data(bytes: bytes, count: bytes.count)
+//                    self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
+//                }
+//            }
+//        }
+//    }
     
     func errorInLock(_ msg: String = "Error while unlocking the lock please"){
         if self.tryUnlockAgain{
@@ -358,164 +360,164 @@ extension StartBooking: ScanDelegate, ProcessDelegate{
 }
 
 //MARK: - CBCentralManager & CBPeripheralManager Delegate's
-extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch central.state {
-        case .unknown:
-            print("central.state is .unknown")
-        case .resetting:
-            print("central.state is .resetting")
-        case .unsupported:
-            print("central.state is .unsupported")
-        case .unauthorized:
-            print("central.state is .unauthorized")
-        case .poweredOff:
-            print("central.state is .poweredOff")
-        case .poweredOn:
-            print("central.state is .poweredOn")
-            self.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
-            _ = Timer.scheduledTimer(withTimeInterval: 20, repeats: false, block: { (_) in
-                self.centralMannager?.stopScan()
-                if self.peripheralDevice == nil && !self.isLinkaConnected{
-                    AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you.")
-                    StaticClass.sharedInstance.HideSpinner()
-                }
-            })
-        default:
-            break
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        
-        let filter = self.scannedDevices.filter({$0 == peripheral.name})
-        if filter.count == 0{
-            self.scannedDevices.append(peripheral.name ?? "")
-        }
-        let device_name_array = peripheral.name?.components(separatedBy: ":") ?? []
-        print("Array", device_name_array)
-        if device_name_array.count > 1{
-            if device_name_array[1] == self.objectDetail.device_name{
-                self.centralMannager?.stopScan()
-                self.connectToPeripheral(identifire: peripheral)
-            }
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("Did connect")
-        self.peripheralDevice = peripheral
-        self.peripheralDevice?.delegate = self
-        self.peripheralDevice?.discoverServices([serviceUUID])
-    }
-    
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("Central Manager Failed To Connect with Error: ", error ?? "Error nill")
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        for service in peripheral.services ?? [] {
-            // Fiter: Only allow the eRLock UUID's to pass.
-            if service.uuid == (serviceUUID) {
-                peripheral.discoverCharacteristics(nil, for: service)
-            }
-        }
-        if peripheral.services?.count == 0{
-            self.alertBox("Warning", "No service found on this device") {
-                self.navigationController?.popViewController(animated: true)
-            }
-        }
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        print("didDiscoverCharacteristicsFor: ", service)
-        
-        print(ctrUUID)
-        for char in service.characteristics ?? []{
-            if char.uuid == ctrUUID{
-                self.ctrCharacteristic = char
-            }
-            if char.uuid == stateCharUUID{
-                self.peripheralDevice?.readValue(for: char)
-                self.peripheralDevice?.setNotifyValue(true, for: char)
-            }
-        }
-        if self.ctrCharacteristic != nil{
-            self.loadAxaFunctionality()
-        }
-        
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        print("didWriteValueFor", characteristic)
-        if self.writingEkeyCommand{
-            self.writeCommandArray.removeLast()
-            if self.writeCommandArray.count == 0{
-                self.writingEkeyCommand = false
-                self.hideSpinner()                
-                if let bookNowVc = self.viewController as? BookNowVC{
-                    bookNowVc.loadPriceContainerView(self)
-                }
-            }
-        }
-        self.peripheralDevice?.setNotifyValue(true, for: characteristic)
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        print("didUpdateValueFor", characteristic)
-        
-        if characteristic.uuid == stateCharUUID{
-            if let bytes = characteristic.value{
-                let data = characteristic.value?.byteArray ?? []
-                print("Bytes -", bytes)
-                if data.count > 0{
-                    print(data[0])
-                    switch data[0] {
-                    case 0x00:
-                        print("Unlocked")
-                        self.axaLockStatus = "opened"
-                        if self.tappedConfirmBooking{
-                            lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
-                                self.hideSpinner()
-                                self.deinitialize()
-                                if let bookNowVc = self.viewController as? BookNowVC{
-                                    bookNowVc.isViewDidCall = true
-                                    bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
-                                }
-                            }
-                        }
-                        break
-                    case 0x80:
-                        print("Unlocked")
-                        self.axaLockStatus = "opened"
-                        break
-                    case 0x01, 0x09:
-                        print("Locked")
-                        self.axaLockStatus = "closed"
-                        break
-                    case 0x81:
-                        print("Locked")
-                        self.axaLockStatus = "closed"
-                        break
-                    case 0x08:
-                        print("Waiting for lock")
-                        break
-                    default:
-                        break
-                    }
-                }
-            }
-        }
-        
-    }
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
-        if  let value = characteristic.value{
-            let data = [UInt8](value)
-            print("didUpdateNotificationStateFor", characteristic, data)
-        }
-    }
-}
+//extension StartBooking: CBCentralManagerDelegate, CBPeripheralDelegate{
+//    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+//        switch central.state {
+//        case .unknown:
+//            print("central.state is .unknown")
+//        case .resetting:
+//            print("central.state is .resetting")
+//        case .unsupported:
+//            print("central.state is .unsupported")
+//        case .unauthorized:
+//            print("central.state is .unauthorized")
+//        case .poweredOff:
+//            print("central.state is .poweredOff")
+//        case .poweredOn:
+//            print("central.state is .poweredOn")
+//            self.centralMannager?.scanForPeripherals(withServices: nil, options: nil)
+//            _ = Timer.scheduledTimer(withTimeInterval: 20, repeats: false, block: { (_) in
+//                self.centralMannager?.stopScan()
+//                if self.peripheralDevice == nil && !self.isLinkaConnected{
+//                    AppDelegate.shared.window?.showBottomAlert(message: "Please make sure asset is near by you.")
+//                    StaticClass.sharedInstance.HideSpinner()
+//                }
+//            })
+//        default:
+//            break
+//        }
+//    }
+//
+//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+//
+//        let filter = self.scannedDevices.filter({$0 == peripheral.name})
+//        if filter.count == 0{
+//            self.scannedDevices.append(peripheral.name ?? "")
+//        }
+//        let device_name_array = peripheral.name?.components(separatedBy: ":") ?? []
+//        print("Array", device_name_array)
+//        if device_name_array.count > 1{
+//            if device_name_array[1] == self.objectDetail.device_name{
+//                self.centralMannager?.stopScan()
+//                self.connectToPeripheral(identifire: peripheral)
+//            }
+//        }
+//    }
+//
+//    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+//        print("Did connect")
+//        self.peripheralDevice = peripheral
+//        self.peripheralDevice?.delegate = self
+////        self.peripheralDevice?.discoverServices([serviceUUID])
+//    }
+//
+//    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+//        print("Central Manager Failed To Connect with Error: ", error ?? "Error nill")
+//    }
+//
+//    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+//        for service in peripheral.services ?? [] {
+//            // Fiter: Only allow the eRLock UUID's to pass.
+//            if service.uuid == (serviceUUID) {
+//                peripheral.discoverCharacteristics(nil, for: service)
+//            }
+//        }
+//        if peripheral.services?.count == 0{
+//            self.alertBox("Warning", "No service found on this device") {
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//        }
+//    }
+//
+//    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+//        print("didDiscoverCharacteristicsFor: ", service)
+//
+//        print(ctrUUID)
+//        for char in service.characteristics ?? []{
+//            if char.uuid == ctrUUID{
+//                self.ctrCharacteristic = char
+//            }
+//            if char.uuid == stateCharUUID{
+//                self.peripheralDevice?.readValue(for: char)
+//                self.peripheralDevice?.setNotifyValue(true, for: char)
+//            }
+//        }
+//        if self.ctrCharacteristic != nil{
+//            self.loadAxaFunctionality()
+//        }
+//
+//    }
+//
+//    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+//        print("didWriteValueFor", characteristic)
+//        if self.writingEkeyCommand{
+//            self.writeCommandArray.removeLast()
+//            if self.writeCommandArray.count == 0{
+//                self.writingEkeyCommand = false
+//                self.hideSpinner()
+//                if let bookNowVc = self.viewController as? BookNowVC{
+//                    bookNowVc.loadPriceContainerView(self)
+//                }
+//            }
+//        }
+//        self.peripheralDevice?.setNotifyValue(true, for: characteristic)
+//    }
+//
+//    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+//        print("didUpdateValueFor", characteristic)
+//
+//        if characteristic.uuid == stateCharUUID{
+//            if let bytes = characteristic.value{
+//                let data = characteristic.value?.byteArray ?? []
+//                print("Bytes -", bytes)
+//                if data.count > 0{
+//                    print(data[0])
+//                    switch data[0] {
+//                    case 0x00:
+//                        print("Unlocked")
+//                        self.axaLockStatus = "opened"
+//                        if self.tappedConfirmBooking{
+//                            lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
+//                                self.hideSpinner()
+//                                self.deinitialize()
+//                                if let bookNowVc = self.viewController as? BookNowVC{
+//                                    bookNowVc.isViewDidCall = true
+//                                    bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
+//                                }
+//                            }
+//                        }
+//                        break
+//                    case 0x80:
+//                        print("Unlocked")
+//                        self.axaLockStatus = "opened"
+//                        break
+//                    case 0x01, 0x09:
+//                        print("Locked")
+//                        self.axaLockStatus = "closed"
+//                        break
+//                    case 0x81:
+//                        print("Locked")
+//                        self.axaLockStatus = "closed"
+//                        break
+//                    case 0x08:
+//                        print("Waiting for lock")
+//                        break
+//                    default:
+//                        break
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
+//
+//    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+//        if  let value = characteristic.value{
+//            let data = [UInt8](value)
+//            print("didUpdateNotificationStateFor", characteristic, data)
+//        }
+//    }
+//}
 
 //MARK: - Linka Lock Delegate's
 extension StartBooking: LockConnectionServiceDelegate  {
@@ -737,9 +739,10 @@ extension StartBooking{
                 if (dict["IS_ACTIVE"] as! Bool){
                     if (dict["FLAG"] as! Bool){
                         Global.appdel.strIsUserType = dict["user_type"] as? String ?? "0"
-                        if self.lockType == LockType.axa{
-                            self.objectBookingAPI_Called()
-                        }else if self.lockType == LockType.ocs{
+//                        if self.lockType == LockType.axa{
+//                            self.objectBookingAPI_Called()
+//                        }else
+                        if self.lockType == LockType.ocs{
                             self.hideSpinner()
                             if let bookNowVc = self.viewController as? BookNowVC{
                                 bookNowVc.loadPinCodePopUp(type: "start_booking")
@@ -807,35 +810,36 @@ extension StartBooking{
                     }
                     StaticClass.sharedInstance.saveToUserDefaults(self.objectDetail.strId as AnyObject , forKey: Global.g_UserDefaultKey.ObjectiIdList)
                     self.lockCommand = "1"
-                    if self.lockType == LockType.axa{
-                        if self.axaLockStatus == "closed"{
-                            if self.ctrCharacteristic != nil{
-                                let strArray = Singleton.axa_passkey.components(separatedBy: "-")
-                                let bytes = self.stringToBytes(strArray[Singleton.currentIndex])!
-                                let data = Data(bytes: bytes, count: bytes.count)
-                                self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
-                                Singleton.currentIndex += 1
-                                self.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": self.objectDetail.strId, "booking_id": "0", "command_sent": self.lockCommand, "command_status": "0", "error_message": "", "device_type": "1"])
-                            }else{
-                                print("Characteristic nill")
-                                self.cancelRental_Web(paymentId: StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: Global.g_UserData.BookingID) ?? "") { (response) in
-                                    if response{
-                                        Global.appdel.setUpSlideMenuController()
-                                    }
-                                }
-                            }
-                        }else{
-//                            self.startSpinner()
-                            self.lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
-//                                self.hideSpinner()
-                                self.deinitialize()
-                                if let bookNowVc = self.viewController as? BookNowVC{
-                                    bookNowVc.isViewDidCall = true
-                                    bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
-                                }
-                            }
-                        }
-                    }else if self.lockType == LockType.ocs{
+//                    if self.lockType == LockType.axa{
+//                        if self.axaLockStatus == "closed"{
+//                            if self.ctrCharacteristic != nil{
+//                                let strArray = Singleton.axa_passkey.components(separatedBy: "-")
+//                                let bytes = self.stringToBytes(strArray[Singleton.currentIndex])!
+//                                let data = Data(bytes: bytes, count: bytes.count)
+//                                self.peripheralDevice?.writeValue(data, for: self.ctrCharacteristic!, type: .withResponse)
+//                                Singleton.currentIndex += 1
+//                                self.lockLog_Web(params: ["user_id": StaticClass.sharedInstance.strUserId, "object_id": self.objectDetail.strId, "booking_id": "0", "command_sent": self.lockCommand, "command_status": "0", "error_message": "", "device_type": "1"])
+//                            }else{
+//                                print("Characteristic nill")
+//                                self.cancelRental_Web(paymentId: StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: Global.g_UserData.BookingID) ?? "") { (response) in
+//                                    if response{
+//                                        Global.appdel.setUpSlideMenuController()
+//                                    }
+//                                }
+//                            }
+//                        }else{
+////                            self.startSpinner()
+//                            self.lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
+////                                self.hideSpinner()
+//                                self.deinitialize()
+//                                if let bookNowVc = self.viewController as? BookNowVC{
+//                                    bookNowVc.isViewDidCall = true
+//                                    bookNowVc.searchHome_Web(lat: String(describing: Double(StaticClass.sharedInstance.latitude)), long: String(describing: Double(StaticClass.sharedInstance.longitude)))
+//                                }
+//                            }
+//                        }
+//                    }else
+                    if self.lockType == LockType.ocs{
 //                        self.startSpinner()
                         self.lockUnlock_Web(assetId: self.objectDetail.strId) { (response) in
 //                            self.hideSpinner()
@@ -861,37 +865,37 @@ extension StartBooking{
         }
     }
     
-    func getAxaEkeyPasskeyForQrCode_Web(assetId: String, outputBlock: @escaping(_ response: Bool)-> Void){
-        
-        let params: NSMutableDictionary = NSMutableDictionary()
-        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "id")
-        params.setValue("0", forKey: "parent_id")
-        params.setValue(assetId, forKey: "object_id")
-        params.setValue("otp", forKey: "passkey_type")
-        params.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
-        APICall.shared.postWeb("update_ekey", parameters: params, showLoder: false, successBlock: { (response) in
-            if let status = response["FLAG"]as? Int, status == 1{
-                if let assets_detail = response["ASSETS_DETAIL"]as? [String:Any]{
-                    if let ekey = assets_detail["axa_ekey"]as? String{
-                        Singleton.axa_ekey = ekey
-                    }
-                    if let passkey = assets_detail["axa_passkey"]as? String{
-                        Singleton.axa_passkey = passkey
-                    }
-                    if Singleton.axa_ekey != "" && Singleton.axa_passkey != ""{
-                        outputBlock(true)
-                    }else{
-                        outputBlock(false)
-                    }
-                }
-            }else{
-                outputBlock(true)
-            }
-        }) { (error) in
-            outputBlock(true)
-            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "", vc: self.viewController)
-        }
-    }
+//    func getAxaEkeyPasskeyForQrCode_Web(assetId: String, outputBlock: @escaping(_ response: Bool)-> Void){
+//
+//        let params: NSMutableDictionary = NSMutableDictionary()
+//        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "id")
+//        params.setValue("0", forKey: "parent_id")
+//        params.setValue(assetId, forKey: "object_id")
+//        params.setValue("otp", forKey: "passkey_type")
+//        params.setValue("\(appDelegate.getCurrentAppVersion)", forKey: "ios_version")
+//        APICall.shared.postWeb("update_ekey", parameters: params, showLoder: false, successBlock: { (response) in
+//            if let status = response["FLAG"]as? Int, status == 1{
+//                if let assets_detail = response["ASSETS_DETAIL"]as? [String:Any]{
+//                    if let ekey = assets_detail["axa_ekey"]as? String{
+//                        Singleton.axa_ekey = ekey
+//                    }
+//                    if let passkey = assets_detail["axa_passkey"]as? String{
+//                        Singleton.axa_passkey = passkey
+//                    }
+//                    if Singleton.axa_ekey != "" && Singleton.axa_passkey != ""{
+//                        outputBlock(true)
+//                    }else{
+//                        outputBlock(false)
+//                    }
+//                }
+//            }else{
+//                outputBlock(true)
+//            }
+//        }) { (error) in
+//            outputBlock(true)
+//            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "", vc: self.viewController)
+//        }
+//    }
     
 }
 
