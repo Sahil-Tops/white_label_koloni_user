@@ -13,7 +13,7 @@ public struct MyStyle : StyleProperty {
     /*** style properties **********************************************************************************/
     
     // Progress Size
-    public var progressSize: CGFloat = 80
+    public var progressSize: CGFloat = 85
     
     // Gradient Circular
     public var arcLineWidth: CGFloat = 8

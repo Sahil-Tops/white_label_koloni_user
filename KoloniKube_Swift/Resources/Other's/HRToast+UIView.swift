@@ -270,7 +270,7 @@ extension UIView {
         wrapperView.layer.cornerRadius = HRToastCornerRadius
         //        wrapperView.backgroundColor = UIColor.black.withAlphaComponent(HRToastOpacity)
         //        wrapperView.backgroundColor = UIColor.green.withAlphaComponent(HRToastOpacity)
-        wrapperView.backgroundColor = CustomColor.customCyan.withAlphaComponent(0.5)
+        wrapperView.backgroundColor = CustomColor.secondaryColor.withAlphaComponent(0.5)
         
         //        73 190 174
         if HRToastDisplayShadow {

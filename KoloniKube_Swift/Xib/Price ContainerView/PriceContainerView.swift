@@ -106,10 +106,6 @@ class PriceContainerView: UIView {
     }
     
     func loadContent(){
-        self.startRental_btn.circleObject()
-        self.buyMembership_btn.circleObject()
-        self.startRental2_btn.circleObject()
-        self.promoCodeResponseText_lbl.text = ""
         
         if self.controller == "qr_code"{
             if self.qrCode.objectDetail.promotional_header == ""{
@@ -136,7 +132,7 @@ class PriceContainerView: UIView {
             self.enjoyFirstMinutesText_lbl.text = self.qrCode.objectDetail.promotional_hours
             self.afterPrice_lbl.text = "After that: $\(Int(round(Double(self.qrCode.objectDetail.rental_fee)!)))/h"
         }else{
-            if self.startBooking.objectDetail.promotional_header == ""{                
+            if self.startBooking.objectDetail.promotional_header != ""{
                 self.priceDetailView.isHidden = false
                 self.buy_startRental_stackView.isHidden = false
                 self.membershipPriceView.isHidden = true
@@ -164,6 +160,22 @@ class PriceContainerView: UIView {
             self.afterPrice_lbl.text = "After that: $\(Int(round(Double(self.startBooking.objectDetail.price_per_hour)!)))/h"
         }
         
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.startRental_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.startRental2_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.buyMembership_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.startRental_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            self.startRental2_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            self.buyMembership_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        
+        self.startRental_btn.circleObject()
+        self.buyMembership_btn.circleObject()
+        self.startRental2_btn.circleObject()
+        self.promoCodeResponseText_lbl.text = ""
+        self.priceDetailTitle_lbl.textColor = CustomColor.secondaryColor
+        self.layoutIfNeeded()
     }
     
 }
@@ -182,7 +194,7 @@ extension PriceContainerView: PromoCodeDelegate{
             self.promoCodeResponseText_lbl.textColor = CustomColor.customAppGreen
             self.promoCodeCheck_btn.tag = 1
             self.promoCodeCheck_btn.setTitle("", for: .normal)
-            self.promoCodeCheck_btn.setTitleColor(CustomColor.customBlue, for: .normal)
+            self.promoCodeCheck_btn.setTitleColor(CustomColor.primaryColor, for: .normal)
         }else{
             self.promoCodeText_lbl.text = "I have a Promo Code"
             self.promoCodeResponseText_lbl.textColor = CustomColor.customAppRed

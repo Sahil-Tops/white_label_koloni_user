@@ -26,9 +26,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_back" translatesAutoresizingMaskIntoConstraints="NO" id="zGO-jS-UrU">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEJ-aK-wx9">
                     <rect key="frame" x="0.0" y="152" width="414" height="744"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -38,7 +35,6 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYL-tT-SLV">
                             <rect key="frame" x="178" y="65" width="58" height="58"/>
-                            <color key="backgroundColor" red="0.023529411764705882" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="vYL-tT-SLV" secondAttribute="height" multiplier="1:1" id="rPa-Ey-nDf"/>
                             </constraints>
@@ -54,7 +50,6 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxq-30-2cI">
                             <rect key="frame" x="178" y="228" width="58" height="58"/>
-                            <color key="backgroundColor" red="0.023529411760000001" green="0.82352941180000006" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="yxq-30-2cI" secondAttribute="height" multiplier="1:1" id="tQh-O1-G1h"/>
                             </constraints>
@@ -80,7 +75,7 @@
                                 <constraint firstAttribute="height" constant="45" id="UY1-ze-kby"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="19"/>
-                            <state key="normal" title="Open Email" backgroundImage="side_menu">
+                            <state key="normal" title="Open Email">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -161,10 +156,10 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ExY-bs-BTn">
-                    <rect key="frame" x="0.0" y="44" width="414" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="yKI-xj-M8N"/>
+                        <constraint firstAttribute="height" constant="144" id="yKI-xj-M8N"/>
                     </constraints>
                 </view>
             </subviews>
@@ -174,31 +169,25 @@
                 <constraint firstItem="as9-xD-6SG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3mk-Dw-5mf"/>
                 <constraint firstItem="vYL-tT-SLV" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.14" id="4Ij-q2-i9F"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ExY-bs-BTn" secondAttribute="trailing" id="5nQ-L0-BOZ"/>
-                <constraint firstItem="zGO-jS-UrU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="APW-Fz-i0t"/>
                 <constraint firstAttribute="bottom" secondItem="as9-xD-6SG" secondAttribute="bottom" id="Duc-TD-Rlo"/>
                 <constraint firstItem="ExY-bs-BTn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FB2-Ja-LTd"/>
                 <constraint firstItem="oEJ-aK-wx9" firstAttribute="bottom" secondItem="as9-xD-6SG" secondAttribute="bottom" id="Ghb-61-SSx"/>
+                <constraint firstItem="ExY-bs-BTn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KXc-Yb-hgx"/>
                 <constraint firstItem="oEJ-aK-wx9" firstAttribute="top" secondItem="as9-xD-6SG" secondAttribute="top" id="MgR-ig-jnK"/>
                 <constraint firstItem="as9-xD-6SG" firstAttribute="top" secondItem="ExY-bs-BTn" secondAttribute="bottom" constant="8" symbolic="YES" id="S7X-WT-V2X"/>
                 <constraint firstItem="oEJ-aK-wx9" firstAttribute="trailing" secondItem="as9-xD-6SG" secondAttribute="trailing" id="SgG-pd-kLq"/>
-                <constraint firstAttribute="bottom" secondItem="zGO-jS-UrU" secondAttribute="bottom" id="bcP-88-3Uo"/>
-                <constraint firstItem="zGO-jS-UrU" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="iZC-t6-44Z"/>
                 <constraint firstItem="oEJ-aK-wx9" firstAttribute="leading" secondItem="as9-xD-6SG" secondAttribute="leading" id="kN9-zg-xR1"/>
-                <constraint firstItem="ExY-bs-BTn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="m6T-3g-gvM"/>
                 <constraint firstItem="as9-xD-6SG" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rOY-84-ire"/>
-                <constraint firstItem="zGO-jS-UrU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xuO-rR-fDC"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="98.4375"/>
         </view>
     </objects>
     <designables>
         <designable name="dru-zB-4Mj">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="108" height="38"/>
         </designable>
     </designables>
     <resources>
-        <image name="login_back" width="1242" height="2208"/>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

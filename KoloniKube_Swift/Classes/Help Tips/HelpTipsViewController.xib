@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Kolonishare.ttf">
+        <array key="kolonishare-phase2-ttf.ttf">
             <string>Kolonishare</string>
         </array>
     </customFonts>
@@ -18,9 +18,13 @@
             <connections>
                 <outlet property="close_btn" destination="t4w-rO-tEA" id="xJl-wI-Rks"/>
                 <outlet property="havingTroubleText_textView" destination="Vqb-oW-oLV" id="haS-Bq-jLA"/>
+                <outlet property="htmlTextView" destination="Vyp-P7-s21" id="2OA-Gy-KZ1"/>
                 <outlet property="one_lbl" destination="syl-cz-e13" id="oos-O2-uVn"/>
                 <outlet property="third_lbl" destination="cs0-MM-a2d" id="P9S-ZW-dVd"/>
+                <outlet property="title_lbl" destination="bfC-Pa-28b" id="SXr-8p-57k"/>
                 <outlet property="two_lbl" destination="Afo-hA-5lm" id="Yt7-Gp-muV"/>
+                <outlet property="underLine1_lbl" destination="TKV-6g-1wG" id="RHl-cN-Yeb"/>
+                <outlet property="underLine2_lbl" destination="RXd-Kl-WDA" id="kiy-JL-5X2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -179,6 +183,13 @@
                                 <constraint firstItem="cs0-MM-a2d" firstAttribute="width" secondItem="Afo-hA-5lm" secondAttribute="width" id="rR6-QN-X5U"/>
                             </constraints>
                         </stackView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vyp-P7-s21">
+                            <rect key="frame" x="0.0" y="120.5" width="352" height="352.5"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="textColor" systemColor="labelColor"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXd-Kl-WDA">
                             <rect key="frame" x="89" y="472" width="174" height="1"/>
                             <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -212,8 +223,11 @@
                         <constraint firstAttribute="trailing" secondItem="sEg-bV-7Tx" secondAttribute="trailing" id="0qg-lF-EpT"/>
                         <constraint firstItem="Vqb-oW-oLV" firstAttribute="top" secondItem="sEg-bV-7Tx" secondAttribute="bottom" constant="10" id="1yu-AT-a28"/>
                         <constraint firstItem="t4w-rO-tEA" firstAttribute="centerY" secondItem="bfC-Pa-28b" secondAttribute="centerY" id="4OT-RM-bFw"/>
+                        <constraint firstItem="Vyp-P7-s21" firstAttribute="leading" secondItem="sEg-bV-7Tx" secondAttribute="leading" id="7Wj-5j-04P"/>
                         <constraint firstItem="TKV-6g-1wG" firstAttribute="centerX" secondItem="Q38-6e-6bZ" secondAttribute="centerX" id="A8H-4T-pE0"/>
+                        <constraint firstItem="Vyp-P7-s21" firstAttribute="trailing" secondItem="sEg-bV-7Tx" secondAttribute="trailing" id="BPS-gC-7mN"/>
                         <constraint firstItem="Vqb-oW-oLV" firstAttribute="leading" secondItem="dFW-Lk-dvy" secondAttribute="leading" constant="20" id="Be7-aT-39e"/>
+                        <constraint firstItem="Vyp-P7-s21" firstAttribute="bottom" secondItem="sEg-bV-7Tx" secondAttribute="bottom" id="IZW-Bz-qVo"/>
                         <constraint firstItem="RXd-Kl-WDA" firstAttribute="leading" secondItem="TKV-6g-1wG" secondAttribute="leading" id="KWm-o1-B9J"/>
                         <constraint firstItem="bfC-Pa-28b" firstAttribute="width" secondItem="dFW-Lk-dvy" secondAttribute="width" multiplier="0.662189" id="Kuc-hx-Z8W"/>
                         <constraint firstItem="sEg-bV-7Tx" firstAttribute="leading" secondItem="dFW-Lk-dvy" secondAttribute="leading" id="NQb-Yt-wCC"/>
@@ -230,6 +244,7 @@
                         <constraint firstItem="sEg-bV-7Tx" firstAttribute="top" secondItem="TKV-6g-1wG" secondAttribute="bottom" constant="15" id="plp-cL-Ii9"/>
                         <constraint firstAttribute="trailing" secondItem="t4w-rO-tEA" secondAttribute="trailing" constant="10" id="t24-IQ-QxX"/>
                         <constraint firstItem="bfC-Pa-28b" firstAttribute="top" secondItem="dFW-Lk-dvy" secondAttribute="top" constant="15" id="tCn-2O-RwY"/>
+                        <constraint firstItem="Vyp-P7-s21" firstAttribute="top" secondItem="sEg-bV-7Tx" secondAttribute="top" id="zSa-WU-3pV"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -249,6 +264,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

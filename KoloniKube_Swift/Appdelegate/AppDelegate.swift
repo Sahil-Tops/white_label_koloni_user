@@ -22,9 +22,6 @@ import Firebase
 import FirebaseAnalytics
 import SDWebImage
 import Braintree
-import Auth0
-import Sentry
-import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate,UITabBarDelegate,CLLocationManagerDelegate{
@@ -55,26 +52,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         GIDSignIn.sharedInstance()?.delegate = self
         BTAppSwitch.setReturnURLScheme("com.app.kolonishare.payments")
         SDImageCache.shared.clearMemory()
-        SDImageCache.shared.clearDisk {            
+        SDImageCache.shared.clearDisk {
+            
         }
-        
-        //Sentry configuration
-        SentrySDK.start { options in
-            options.dsn = "https://ff6ad814a2414ae4b9d67afd66e7050e@o1019195.ingest.sentry.io/6004341"
-            options.debug = false // Enabled debug when first installing is always helpful
-        }
-        
-        //Stripe configuration
-        STPAPIClient.shared.publishableKey = "pk_test_51J2iJVDl5GrA4MdE0X5bCjbEe93jGKPNwfhh7mfw1Z5x3YqUSmjeaD71IlfGwYb5O2ob3anQq6SYwJ29jX2YKD7400fh7r9Oto"
         
         // Get Current Application version
         self.getCurrentApplicationVersion()
         self.getDeviceName()
         
         // set the minimimum background Fetch interval
-        UIApplication.shared.setMinimumBackgroundFetchInterval(2)
+//        UIApplication.shared.setMinimumBackgroundFetchInterval(2)
         
-//        self.createFolder()
+        self.createFolder()
         
         // For Push Notifications
         if #available(iOS 9.0, *) {
@@ -89,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         self.setupLocationManager()
         // Set up Linka
         self.setupLinkaLock()
-        
         // IQkeyboard initiallization
         IQKeyboardManager.shared.enable = true
         
@@ -106,13 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         if let notification = launchOptions?[.remoteNotification] as? NSDictionary {
             self.notificationReceived(notification: notification as [NSObject : AnyObject])
         }
-        
-        // Check user is logged in or not
-        if !StaticClass.sharedInstance.retriveFromUserDefaultsBool(key: "isUserLogin"){
-            self.setNavigationFlow()
-        }else{
-            self.setNavigationLaunchFlow()
-        }
+        _ = AppLocalStorage.init()
         type(of: self).shared = self
         return true
     }
@@ -122,11 +104,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        print("applicationDidEnterBackground")
+        print("applicationDidEnterBackground")        
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -180,6 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }else{
             return true
         }
+        
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -199,11 +181,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         self.getCurrentDeviceName = UIDevice.current.modelName
     }
     
+    
     //MARK:- Get running Booking Details -
     func userRunningRental_Web(loader: Bool) {
         
-        let stringwsName = "user_running_rental/user_id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
-        APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: loader, successBlock: { (response) in
+        let stringwsName = "user_running_rental/user_id/\(StaticClass.sharedInstance.strUserId)"
+        
+        APICall.shared.getWeb(stringwsName, withLoader: loader, successBlock: { (response) in
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){
                     if let arrResult = dict["CURRENT_RENTAL"] as? NSArray , arrResult.count > 0  {
@@ -256,13 +240,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     //MARK:- Set Navigation for Launch Screen -
-    func setNavigationLaunchFlow() {
-        lunchVC = LaunchScreenVC (nibName: "LaunchScreenVC", bundle:nil)
-        self.navigation = UINavigationController(rootViewController: lunchVC!)
-        self.navigation?.isNavigationBarHidden = true
-        self.window?.rootViewController = navigation
-        self.window?.makeKeyAndVisible()
-    }
+//    func setNavigationLaunchFlow() {
+//        self.lunchVC = LaunchScreenVC(nibName: "LaunchScreenVC", bundle:nil)
+//        self.navigation = UINavigationController(rootViewController: lunchVC!)
+//        self.navigation?.isNavigationBarHidden = true
+//        self.window?.rootViewController = navigation
+//        self.window?.makeKeyAndVisible()
+//    }
     //MARK:- Set Navigation for Login Screen -
     func setNavigationFlow() {
         self.loginWithGoogleAppleVc = LoginWithGoogleAppleVC(nibName: "LoginWithGoogleAppleVC", bundle: nil)
@@ -274,9 +258,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     //MARK:- Get User Details -
     func userDetailCall(navigationVc: UINavigationController = UINavigationController(), vc: UIViewController = UIViewController()) -> Void {
-        let stringwsName = "profile_details/id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
+        let stringwsName = "profile_details/id/\(StaticClass.sharedInstance.strUserId)"
         
-        APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: false, successBlock: { (response) in
+        APICall.shared.getWeb(stringwsName, withLoader: false, successBlock: { (response) in
             
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){                    
@@ -394,8 +378,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     //MARK:-  LOGOUT CALL -
     private func userLogoutCall() -> Void {
-        let strUrl = "logout/id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
-        APICall.shared.getWeb(strUrl, bearerToken: true, withLoader: true, successBlock: { (response) in
+        let strUrl = "logout/id/\(StaticClass.sharedInstance.strUserId)"
+        APICall.shared.getWeb(strUrl, withLoader: true, successBlock: { (response) in
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){
                     
@@ -449,6 +433,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         StaticClass.sharedInstance.saveToUserDefaultsString(value:"", forKey: Global.g_UserData.TempBookingRentalStoreID)
         StaticClass.sharedInstance.saveToUserDefaults((false) as AnyObject, forKey: Global.g_UserDefaultKey.IS_USERLOGIN)
         StaticClass.sharedInstance.saveToUserDefaults("" as AnyObject, forKey: Global.g_UserData.UserID)
+        
         StaticClass.sharedInstance.saveToUserDefaultsString(value:"" , forKey: Global.g_UserData.BookingID)
         StaticClass.sharedInstance.saveToUserDefaultsString(value:"" , forKey: Global.g_UserData.ObjectID)
         
@@ -526,6 +511,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                                 if !StaticClass.sharedInstance.arrRunningBookingId.contains(strBookingID) {
                                     StaticClass.sharedInstance.arrRunningBookingId.add(strBookingID)
                                 }
+                                
                                 let strObjectID = dict.object(forKey: "object_id")as? String ?? "0"
                                 StaticClass.sharedInstance.saveToUserDefaultsString(value:strObjectID , forKey: Global.g_UserData.ObjectID)
                                 
@@ -656,9 +642,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     //MARK: - Side bar setup
-    func pushToSideMenuVC(){    
+    func pushToSideMenuVC(){        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let homeVc = HomeViewController(nibName: "HomeViewController", bundle: nil)
+            let homeVc = BookNowVC(nibName: "BookNowVC", bundle: nil)
             let leftMenu = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
             let sideMenuViewController: AKSideMenu = AKSideMenu(contentViewController: homeVc, leftMenuViewController: leftMenu, rightMenuViewController: nil)
             sideMenuViewController.bouncesHorizontally = false
@@ -738,4 +724,16 @@ extension AppDelegate: GIDSignInDelegate{
 
 func trackUserInFirebase(userId: String){
     Analytics.setUserID(userId)
+}
+
+public extension UIApplication {
+
+    func clearLaunchScreenCache() {
+        do {
+            try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
+        } catch {
+            print("Failed to delete launch screen cache: \(error)")
+        }
+    }
+
 }

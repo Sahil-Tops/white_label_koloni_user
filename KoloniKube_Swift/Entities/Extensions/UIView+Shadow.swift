@@ -38,12 +38,13 @@ extension NSLayoutConstraint {
 
 extension UIView {
     
-    func shadowWithCorner(corner: CGFloat){
-        self.layer.masksToBounds = false
-        self.layer.cornerRadius = corner
+    func shadowWithCorner(corner: CGFloat, color: UIColor = .darkGray, radius: CGFloat = 4.0){        
         self.layer.shadowOffset = CGSize(width: 0,height: 0)
-        self.layer.shadowRadius = 4.0
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = 0.7
+        self.layer.shadowColor = color.cgColor
+        self.layer.cornerRadius = corner
+        self.layer.masksToBounds = true
     }
     
     func viewTrnsformAnimation(){

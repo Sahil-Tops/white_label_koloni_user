@@ -12,6 +12,8 @@ import RSKPlaceholderTextView
 class SettingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate{
     
     //MARK: - Outlet's
+    @IBOutlet weak var headerBg_img: UIImageView!
+    @IBOutlet weak var logoImg: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var swithOnOff: UISwitch!
     @IBOutlet weak var lblPushnotification: UILabel!
@@ -38,9 +40,7 @@ class SettingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate{
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.headerView.addUnderLine(color: .lightGray)
-        if Global.appdel.is_rentalRunning {
-            
-        }
+        self.loadUI()
     }
     
     //MARK: - @IBAction's
@@ -60,9 +60,16 @@ class SettingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate{
         }
     }
  
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func loadUI(){
+        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
+            self.logoImg.image = image
+        }
+        self.swithOnOff.onTintColor = CustomColor.primaryColor
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.headerBg_img.backgroundColor = CustomColor.primaryColor
+        }
     }
 }
 

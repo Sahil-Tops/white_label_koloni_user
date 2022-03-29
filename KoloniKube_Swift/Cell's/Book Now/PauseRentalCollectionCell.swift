@@ -20,7 +20,8 @@ class PauseRentalCollectionCell: UICollectionViewCell {
     @IBOutlet weak var arrow_btn: UIButton!
     @IBOutlet weak var chooseOherCardView: UIView!
     @IBOutlet weak var cardContainerView: UIView!
-    @IBOutlet weak var flag_img: UIImageView!
+    @IBOutlet weak var pauseOrStartBtn_img: UIImageView!
+    @IBOutlet weak var endBtn_img: UIImageView!
     @IBOutlet weak var cardListTableView: UITableView!
     @IBOutlet weak var cardListTable_height: NSLayoutConstraint!
     
@@ -47,30 +48,36 @@ class PauseRentalCollectionCell: UICollectionViewCell {
     
     //Setting Data on collection cell
     func setDataOnCell(dataDictionary: [String:Any]){
-        
+                
         DispatchQueue.main.async {
-            if dataDictionary["lock_id"] as? String ?? "" == "7"{
-                self.pause_resume_lbl.text = "Open/Close"
-                self.pause_btn.setTitle("", for: .normal)
-                self.pause_btn.titleLabel?.font = UIFont(name: "Koloni", size: 40)
-            }else{
-                if dataDictionary["lock_status"]as? String ?? "0" == "0"{
-                    self.pause_btn.isSelected = true
-                    if dataDictionary["object_type"]as? String ?? "" == "2"{
-                        self.pause_resume_lbl.text = "Unlock"
-                    }else{
-                        self.pause_resume_lbl.text = "Open"
-                    }
-                    self.pause_btn.backgroundColor = CustomColor.customCyan
+            AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "end_img") { (image) in
+                self.endBtn_img.image = image
+            }
+            self.end_btn.backgroundColor = AppLocalStorage.sharedInstance.end_button_color
+            if dataDictionary["lock_status"]as? String ?? "0" == "0"{
+                self.pause_btn.isSelected = true
+                
+                if dataDictionary["object_type"]as? String ?? "" == "2"{
+                    self.pause_resume_lbl.text = AppLocalStorage.sharedInstance.resume_button_text//"Unlock"
                 }else{
-                    self.pause_btn.isSelected = false
-                    if dataDictionary["object_type"]as? String ?? "" == "2"{
-                        self.pause_resume_lbl.text = "Lock"
-                    }else{
-                        self.pause_resume_lbl.text = "Close"
-                    }
-                    self.pause_btn.backgroundColor = CustomColor.customYellow
+                    self.pause_resume_lbl.text = AppLocalStorage.sharedInstance.resume_button_text//"Open"
                 }
+                AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "pause_img") { (image) in
+                    self.pauseOrStartBtn_img.image = image
+                }
+                self.pause_btn.backgroundColor = AppLocalStorage.sharedInstance.resume_button_color
+            }else{
+                self.pause_btn.isSelected = false
+                
+                if dataDictionary["object_type"]as? String ?? "" == "2"{
+                    self.pause_resume_lbl.text = AppLocalStorage.sharedInstance.pause_button_text//"Lock"
+                }else{
+                    self.pause_resume_lbl.text = AppLocalStorage.sharedInstance.pause_button_text//"Close"
+                }
+                AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "resume_img") { (image) in
+                    self.pauseOrStartBtn_img.image = image
+                }
+                self.pause_btn.backgroundColor = AppLocalStorage.sharedInstance.pause_button_color
             }
             
             self.orderNum_lbl.text = dataDictionary["obj_unique_id"]as? String ?? ""
@@ -99,7 +106,10 @@ class PauseRentalCollectionCell: UICollectionViewCell {
                 self.bookNowVc.pauseRentalCollectionView_height.constant = CGFloat(self.bookNowVc.layout.itemSize.height + 115)
                 self.bookNowVc.view.layoutIfNeeded()
             }
+            self.pauseOrStartBtn_img.circleObject()
+            self.endBtn_img.circleObject()
             self.cardListTableView.reloadData()
+            self.bookNowVc.loadUI()
         }
         
     }

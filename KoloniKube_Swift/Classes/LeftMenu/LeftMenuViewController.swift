@@ -21,13 +21,13 @@ enum NewLeftMenu: Int {
 class LeftMenuViewController: UIViewController {
     
     //MARK: - @IBOutlet's
+    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var menuTableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName_lbl: UILabel!
     
     //MARK: ViewControllers Variables
-    var HomeVController: UIViewController!
     var BookNowVController: UIViewController!
     var MyProfileVController: UIViewController!
     var BuyMembershipVController: UIViewController!
@@ -59,6 +59,14 @@ class LeftMenuViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.bgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.bgImage.backgroundColor = CustomColor.primaryColor
+        }
+    }
+    
     //MARK: - @IBAction's
     @IBAction func tapHeaderBtn(_ sender: UIButton) {
         self.sideMenuViewController?.setContentViewController(self.MyProfileVController, animated: true)
@@ -75,7 +83,7 @@ class LeftMenuViewController: UIViewController {
                     if let firstName = userData["first_name"]as? String, firstName != ""{
                         self.userName_lbl.text = firstName
                     }else{
-                        self.userName_lbl.text = userData["username"]as? String ?? "Koloni User"
+                        self.userName_lbl.text = userData["username"]as? String ?? ""
                     }
                     print("\(self.userName_lbl.text!)")
                     if let userProfileImage = userData["profile_image"]as? String{
@@ -94,9 +102,6 @@ class LeftMenuViewController: UIViewController {
     }
     
     func setControllerMethod() {
-        
-        let HomeController = HomeViewController(nibName: "HomeViewController", bundle: nil)
-        self.HomeVController = UINavigationController(rootViewController: HomeController)
         
         let BookNowController = BookNowVC(nibName: "BookNowVC", bundle: nil)
         self.BookNowVController = UINavigationController(rootViewController: BookNowController)
@@ -129,23 +134,17 @@ class LeftMenuViewController: UIViewController {
         switch menuController {
         
         case .map:            
-            self.sideMenuViewController?.setContentViewController(self.HomeVController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.BookNowVController, animated: true)
         case .MyMembership:
-            self.alert(title: "Alert", msg: "Under Work")
-            break
-//            self.sideMenuViewController?.setContentViewController(self.BuyMembershipVController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.BuyMembershipVController, animated: true)
         case .MyBooking:
-            self.alert(title: "Alert", msg: "Under Work")
-//            self.sideMenuViewController?.setContentViewController(self.MyBookingVController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.MyBookingVController, animated: true)
         case .Settings:
-            self.alert(title: "Alert", msg: "Under Work")
-//            self.sideMenuViewController?.setContentViewController(self.SettingVController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.SettingVController, animated: true)
         case .RateUs:
-            self.alert(title: "Alert", msg: "Under Work")
             break
         case .Faq:
-            self.alert(title: "Alert", msg: "Under Work")
-//            self.sideMenuViewController?.setContentViewController(self.FaqVController, animated: true)
+            self.sideMenuViewController?.setContentViewController(self.FaqVController, animated: true)
         }
     }
     
@@ -205,8 +204,7 @@ extension LeftMenuViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {         
         if self.menuTableView.contentSize.height <= self.menuTableView.frame.height{
             self.menuTableView.isScrollEnabled = false
         }else{

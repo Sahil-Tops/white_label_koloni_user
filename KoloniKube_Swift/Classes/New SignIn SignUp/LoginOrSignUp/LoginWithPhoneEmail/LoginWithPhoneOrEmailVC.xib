@@ -34,18 +34,15 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_back" translatesAutoresizingMaskIntoConstraints="NO" id="yKH-V7-Ohs">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="876"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hq5-7l-IPO">
                     <rect key="frame" x="0.0" y="144" width="414" height="752"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ThH-xQ-ldD">
-                    <rect key="frame" x="0.0" y="44" width="414" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="gRX-2e-0ys"/>
+                        <constraint firstAttribute="height" constant="144" id="gRX-2e-0ys"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BrR-dU-bAU">
@@ -54,9 +51,9 @@
                         <constraint firstAttribute="height" constant="35" id="0vJ-is-687"/>
                         <constraint firstAttribute="width" constant="135" id="YxL-8r-QNa"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="19"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                     <state key="normal" title="Phone Number">
-                        <color key="titleColor" red="0.32941176470588235" green="0.29803921568627451" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="clickOnBtn:" destination="-1" eventType="touchUpInside" id="WJh-zG-6eY"/>
@@ -64,7 +61,7 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xW-IT-cvg">
                     <rect key="frame" x="25" y="247" width="135" height="2"/>
-                    <color key="backgroundColor" red="0.32941176470588235" green="0.29803921568627451" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="Zwl-nF-U6P"/>
                     </constraints>
@@ -77,7 +74,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="OWT-OH-Qmd"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="19"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                     <state key="normal" title="Email">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -87,7 +84,7 @@
                 </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ee0-jQ-hi8">
                     <rect key="frame" x="180" y="247" width="100" height="2"/>
-                    <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="dd8-9n-6fL"/>
                     </constraints>
@@ -194,7 +191,7 @@
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUy-td-ZPs" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="20" y="100" width="374" height="45"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
-                            <state key="normal" title="Next" backgroundImage="side_menu">
+                            <state key="normal" title="Next">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -228,18 +225,16 @@
             <constraints>
                 <constraint firstItem="Ee0-jQ-hi8" firstAttribute="leading" secondItem="ER2-Xf-T8X" secondAttribute="leading" id="3XF-QZ-Zpl"/>
                 <constraint firstItem="ER2-Xf-T8X" firstAttribute="height" secondItem="BrR-dU-bAU" secondAttribute="height" id="4O9-UG-7yp"/>
-                <constraint firstAttribute="bottom" secondItem="yKH-V7-Ohs" secondAttribute="bottom" constant="20" symbolic="YES" id="5R8-Iy-zT9"/>
-                <constraint firstItem="ThH-xQ-ldD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6wV-mo-TQ6"/>
                 <constraint firstItem="ER2-Xf-T8X" firstAttribute="leading" secondItem="BrR-dU-bAU" secondAttribute="trailing" constant="20" id="79c-Qq-FoI"/>
                 <constraint firstAttribute="bottom" secondItem="Hq5-7l-IPO" secondAttribute="bottom" id="DGQ-UY-gRT"/>
                 <constraint firstItem="BrR-dU-bAU" firstAttribute="top" secondItem="ThH-xQ-ldD" secondAttribute="bottom" constant="70" id="DoY-FC-nK2"/>
                 <constraint firstItem="iik-R6-w4z" firstAttribute="top" secondItem="Lqa-EA-Bw6" secondAttribute="bottom" id="Eru-jp-gfn"/>
-                <constraint firstAttribute="trailing" secondItem="yKH-V7-Ohs" secondAttribute="trailing" id="IGU-07-YYf"/>
                 <constraint firstItem="ER2-Xf-T8X" firstAttribute="centerY" secondItem="BrR-dU-bAU" secondAttribute="centerY" id="IHP-hz-a41"/>
                 <constraint firstItem="iik-R6-w4z" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="JFn-VO-66w"/>
                 <constraint firstItem="Hq5-7l-IPO" firstAttribute="top" secondItem="ThH-xQ-ldD" secondAttribute="bottom" id="OVd-mr-xl8"/>
                 <constraint firstItem="iik-R6-w4z" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="R2v-Lp-aAM"/>
                 <constraint firstItem="Lqa-EA-Bw6" firstAttribute="top" secondItem="BrR-dU-bAU" secondAttribute="bottom" constant="20" id="T7g-Td-Sqf"/>
+                <constraint firstItem="ThH-xQ-ldD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VEc-MD-jiF"/>
                 <constraint firstItem="ThH-xQ-ldD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="WTN-Zv-xs1"/>
                 <constraint firstItem="BrR-dU-bAU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="ZpB-yx-Ucx"/>
                 <constraint firstItem="9xW-IT-cvg" firstAttribute="leading" secondItem="BrR-dU-bAU" secondAttribute="leading" id="Zrn-SW-HOx"/>
@@ -248,8 +243,6 @@
                 <constraint firstItem="Hq5-7l-IPO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eyb-jO-Ccl"/>
                 <constraint firstItem="Lqa-EA-Bw6" firstAttribute="leading" secondItem="BrR-dU-bAU" secondAttribute="leading" id="h2j-RK-JV8"/>
                 <constraint firstItem="9xW-IT-cvg" firstAttribute="trailing" secondItem="BrR-dU-bAU" secondAttribute="trailing" id="i6T-PJ-1zI"/>
-                <constraint firstItem="yKH-V7-Ohs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="j2v-k9-2mk"/>
-                <constraint firstItem="yKH-V7-Ohs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jHg-g6-tHu"/>
                 <constraint firstItem="Ee0-jQ-hi8" firstAttribute="trailing" secondItem="ER2-Xf-T8X" secondAttribute="trailing" id="jPP-UA-AqR"/>
                 <constraint firstItem="ThH-xQ-ldD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="k1D-eY-6Jp"/>
                 <constraint firstItem="Ee0-jQ-hi8" firstAttribute="bottom" secondItem="ER2-Xf-T8X" secondAttribute="bottom" id="qAg-1C-q0q"/>
@@ -260,13 +253,11 @@
     </objects>
     <designables>
         <designable name="UUy-td-ZPs">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="47" height="40"/>
         </designable>
     </designables>
     <resources>
         <image name="US.png" width="40" height="30"/>
-        <image name="login_back" width="1242" height="2208"/>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

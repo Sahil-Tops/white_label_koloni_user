@@ -44,7 +44,6 @@ class ShareBikeKube: NSObject {
     var show_member_button = ""
     var partner_name = ""
     var lock_id = ""
-    var axa_identifier = ""
     var ocs_lock_number = ""
     var ocs_master_code = ""
     var device_name = ""

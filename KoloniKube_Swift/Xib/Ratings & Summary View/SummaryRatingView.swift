@@ -9,6 +9,7 @@
 import UIKit
 
 class SummaryRatingView: UIView {
+    @IBOutlet weak var title_lbl: UILabel!
     //Summary View Outlet's
     @IBOutlet weak var summaryContainerView: CustomView!
     @IBOutlet weak var bikeSummaryView: CustomView!
@@ -21,9 +22,14 @@ class SummaryRatingView: UIView {
     @IBOutlet weak var amount_2_lbl: UILabel!
     @IBOutlet weak var gotIt_btn: UIButton!
     @IBOutlet weak var gotIt_2_btn: CustomButton!
-    @IBOutlet weak var logo_btn: CustomButton!
+    @IBOutlet weak var logo_btn: UIButton!
     @IBOutlet weak var seeMore_lbl: UILabel!
     @IBOutlet weak var seeMore_2_lbl: UILabel!
+    @IBOutlet weak var timeIcon_lbl: UILabel!
+    @IBOutlet weak var amountIcon_lbl: UILabel!
+//    @IBOutlet weak var time2Icon_lbl: UILabel!
+    @IBOutlet weak var distanceIcon_lbl: UILabel!
+    @IBOutlet weak var engryIcon_lbl: UILabel!
     
     //Rating View Outlet's
     @IBOutlet weak var ratingContainerView: CustomView!
@@ -149,6 +155,27 @@ class SummaryRatingView: UIView {
     
     //MARK: - Custom Function's
     
+    func loadContent(){
+        
+        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "flag_logo_img") { (image) in
+            self.logo_btn.setImage(image, for: .normal)
+            self.logo_btn.setBorder(border_width: 2, border_color: .white)
+            self.logo_btn.circleObject()
+        }
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.gotIt_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.gotIt_2_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.gotIt_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            self.gotIt_2_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        self.title_lbl.textColor = CustomColor.secondaryColor
+        self.timeIcon_lbl.textColor = CustomColor.secondaryColor
+        self.distanceIcon_lbl.textColor = CustomColor.secondaryColor
+        self.engryIcon_lbl.textColor = CustomColor.secondaryColor
+        self.amountIcon_lbl.textColor = CustomColor.secondaryColor
+    }
+    
     func showHideCommentTextView(isHide: Bool){
         if isHide{
             self.comment_textView.isHidden = true
@@ -174,7 +201,7 @@ class SummaryRatingView: UIView {
         let str = "See more detail here"
         let range = (str as NSString).range(of: "here")
         let attributedStr = NSMutableAttributedString(string: str)
-        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.primaryColor, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         self.seeMore_lbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapHere(_:))))
         self.seeMore_2_lbl.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapHere(_:))))
         self.seeMore_lbl.isUserInteractionEnabled = true
@@ -251,6 +278,7 @@ extension UIViewController{
     func loadSummaryView(summaryType: String){
         let summaryView = Bundle.main.loadNibNamed("Summary&RatingView", owner: nil, options: [:])?.first as? SummaryRatingView
         summaryView?.frame = self.view.frame
+        summaryView?.loadContent()
         summaryView?.summaryContainerView.frame.origin.y += (summaryView?.summaryContainerView.frame.origin.y)! * 1.5
         if let vc = self as? BookNowVC{
             summaryView?.bookNowVc = vc
@@ -285,6 +313,7 @@ extension UIViewController{
     func loadRatingView(){
         let ratingView = Bundle.main.loadNibNamed("Summary&RatingView", owner: nil, options: [:])?.first as? SummaryRatingView
         ratingView?.frame = self.view.frame
+        ratingView?.loadContent()
         if let vc = self as? BookNowVC{
             ratingView?.bookNowVc = vc
         }

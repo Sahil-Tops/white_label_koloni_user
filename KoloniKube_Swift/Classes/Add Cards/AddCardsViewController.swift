@@ -99,7 +99,7 @@ class AddCardsViewController: UIViewController {
     }
     
     func getValidTokerFromAPIforBrainTree() {
-        APICall.shared.getWeb("createClientToken?ios_version=\(appDelegate.getCurrentAppVersion)", bearerToken: true, withLoader: true, successBlock: { (responseObj) in
+        APICall.shared.getWeb("createClientToken", withLoader: true, successBlock: { (responseObj) in
             if let dictObj = responseObj as? NSDictionary {
                 if let success = dictObj["FLAG"] as? Bool{
                     if (success) {

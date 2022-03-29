@@ -11,6 +11,7 @@ import UIKit
 class MyMemberCustomCell: UITableViewCell {
 
     //MARK: - Outlet's
+    @IBOutlet weak var titleImage: UIImageView!
     @IBOutlet weak var containerView: CustomView!
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var planName_lbl: UILabel!

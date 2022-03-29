@@ -15,6 +15,7 @@
                 <outlet property="description_lbl" destination="5OK-6a-WDe" id="p3E-QN-5zF"/>
                 <outlet property="findNearestHub_btn" destination="UFf-qM-nAN" id="KPj-06-Lky"/>
                 <outlet property="nearBy_btn" destination="maY-13-rjp" id="FSY-fc-yka"/>
+                <outlet property="title_lbl" destination="2IJ-OH-th4" id="bsP-KR-bik"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -79,10 +80,9 @@
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maY-13-rjp" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="154.5" y="0.0" width="144.5" height="40"/>
-                            <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                            <state key="normal" title="I'm at a hub" backgroundImage="side_menu"/>
+                            <state key="normal" title="I'm at a hub"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="20"/>
@@ -157,10 +157,7 @@
             <size key="intrinsicContentSize" width="117" height="25"/>
         </designable>
         <designable name="maY-13-rjp">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="119" height="25"/>
         </designable>
     </designables>
-    <resources>
-        <image name="side_menu" width="1242" height="2208"/>
-    </resources>
 </document>

@@ -105,26 +105,6 @@ extension UIViewController{
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showAlertWithTextField(outputBlock: @escaping(_ response: String)->Void){
-        let alertVc = UIAlertController(title: "", message: "Enter 4 digit code to lock and open the lock", preferredStyle: .alert)
-        alertVc.addTextField { (textField) in
-            textField.placeholder = "Enter 4 digit code"
-            textField.keyboardType = .numberPad
-        }
-        
-        let saveBtn = UIAlertAction(title: "Save", style: .default) { (_) in
-            outputBlock((alertVc.textFields![0] as UITextField).text ?? "1234")
-        }
-        
-        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-            outputBlock("")
-        }
-        
-        alertVc.addAction(saveBtn)
-        alertVc.addAction(cancelBtn)
-        self.present(alertVc, animated: true, completion: nil)
-    }
-    
 }
 
 extension UITextField{
@@ -224,6 +204,10 @@ extension UIView{
         
     }
     
+    func removeLayer(){
+        
+    }
+    
     func createGradientLayerForLeftMenu(color1: UIColor, color2: UIColor, startPosition: CGFloat, endPosition: CGFloat) {
         
         let gradientLayer = CAGradientLayer()
@@ -284,7 +268,7 @@ extension UIView{
     func cornerRadius(cornerValue: Int){
         
         self.layer.cornerRadius = CGFloat(cornerValue)
-        self.layer.masksToBounds = true
+//        self.layer.masksToBounds = true
         
     }
     
@@ -367,17 +351,7 @@ extension UIViewController{
     
 }
 
-extension UIViewController{
-    func generate4DigitRandomCode()-> Int{
-        let digits = 0...9
-        let shuffledDigits = digits.shuffled()
-        let fourDigits = shuffledDigits.prefix(4)
-        let value = fourDigits.reduce(0) {
-            $0*10 + $1
-        }
-        return value
-    }
-}
+
 
 extension UIView{
     func animShow(){
@@ -654,5 +628,17 @@ extension UIButton{
 extension String {
     subscript(idx: Int) -> String {
         String(self[index(startIndex, offsetBy: idx)])
+    }
+}
+
+extension UIViewController{
+    func generate4DigitRandomCode()-> Int{
+        let digits = 0...9
+        let shuffledDigits = digits.shuffled()
+        let fourDigits = shuffledDigits.prefix(4)
+        let value = fourDigits.reduce(0) {
+            $0*10 + $1
+        }
+        return value
     }
 }

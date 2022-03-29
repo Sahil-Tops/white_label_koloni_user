@@ -12,6 +12,7 @@ import CountryPickerView
 class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
     //MARK:- Outlet's
+    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var viewUserName: UIView!
     @IBOutlet weak var viewBirth: UIView!
     @IBOutlet weak var imgUserProfile: UIImageView!
@@ -31,8 +32,7 @@ class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationController
     
     @IBOutlet weak var mobileNumber_lbl: UILabel!
     @IBOutlet var isCorrectMobileNumberView: UIView!
-    @IBOutlet weak var emailContainerView: UIView!
-    @IBOutlet weak var mobileNumberContainerView: UIView!
+    @IBOutlet weak var mobileNumberContainerView: CustomView!
     @IBOutlet weak var maleBtnContainerView: CustomView!
     @IBOutlet weak var femaleBtnContainerView: CustomView!
     @IBOutlet weak var otherBtnContainerView: CustomView!
@@ -83,6 +83,7 @@ class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationController
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.loadUI()
         self.photoView.circleObject()
     }
     
@@ -159,10 +160,6 @@ class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationController
         self.showImagePicker()
     }
     
-//    @IBAction func btnClosePressed(_ sender: UIButton) {
-//        self.imgUserProfile.image = nil
-//    }
-    
     @IBAction func btnSavePressed(_ sender: UIButton) {
         self.view.endEditing(true)
         
@@ -194,6 +191,18 @@ class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationController
     }
     
     //MARK: - Custom Function's
+    
+    func loadUI(){
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.bgImage.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.btnSave.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.bgImage.backgroundColor = CustomColor.primaryColor
+            self.btnSave.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        
+    }
+    
     func loadContent(){
         
         StaticClass.sharedInstance.arrGender = ["Male","Female"]
@@ -254,11 +263,9 @@ class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationController
     func setAllProfileDataFromShareClass(){
         
         if UserDataModel.sharedInstance?.primary_account == "1"{
-            self.emailContainerView.isUserInteractionEnabled = false
             self.emailPrimaryAcc_lbl.isHidden = false
             self.mobilePrimaryAcc_lbl.isHidden = true
         }else if UserDataModel.sharedInstance?.primary_account == "2"{
-            self.mobileNumberContainerView.isUserInteractionEnabled = false
             self.emailPrimaryAcc_lbl.isHidden = true
             self.mobilePrimaryAcc_lbl.isHidden = false
         }
@@ -415,27 +422,52 @@ class EditProfileVC: UIViewController,UITextFieldDelegate,UINavigationController
     }
     
     func changeGenderButtonColor(){
-        if selectedGender == "1"{
-            self.maleBtnContainerView.backgroundColor = CustomColor.customBlue
-            self.male_lbl.textColor = UIColor.white
-            self.femaleBtnContainerView.backgroundColor = CustomColor.customLightGray
-            self.female_lbl.textColor = UIColor.darkGray
-            self.otherBtnContainerView.backgroundColor = CustomColor.customLightGray
-            self.other_lbl.textColor = UIColor.darkGray
-        }else if selectedGender == "0"{
-            self.maleBtnContainerView.backgroundColor = CustomColor.customLightGray
-            self.male_lbl.textColor = UIColor.darkGray
-            self.femaleBtnContainerView.backgroundColor = CustomColor.customBlue
-            self.female_lbl.textColor = UIColor.white
-            self.otherBtnContainerView.backgroundColor = CustomColor.customLightGray
-            self.other_lbl.textColor = UIColor.darkGray
-        }else if selectedGender == "2"{
-            self.maleBtnContainerView.backgroundColor = CustomColor.customLightGray
-            self.male_lbl.textColor = UIColor.darkGray
-            self.femaleBtnContainerView.backgroundColor = CustomColor.customLightGray
-            self.female_lbl.textColor = UIColor.darkGray
-            self.otherBtnContainerView.backgroundColor = CustomColor.customBlue
-            self.other_lbl.textColor = UIColor.white
+        if AppLocalStorage.sharedInstance.application_gradient{
+            if selectedGender == "1"{
+                self.maleBtnContainerView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+                self.male_lbl.textColor = UIColor.white
+                self.femaleBtnContainerView.removeLayer()
+                self.female_lbl.textColor = UIColor.darkGray
+                self.otherBtnContainerView.removeLayer()
+                self.other_lbl.textColor = UIColor.darkGray
+            }else if selectedGender == "0"{
+                self.maleBtnContainerView.removeLayer()
+                self.male_lbl.textColor = UIColor.darkGray
+                self.femaleBtnContainerView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+                self.female_lbl.textColor = UIColor.white
+                self.otherBtnContainerView.removeLayer()
+                self.other_lbl.textColor = UIColor.darkGray
+            }else if selectedGender == "2"{
+                self.maleBtnContainerView.removeLayer()
+                self.male_lbl.textColor = UIColor.darkGray
+                self.femaleBtnContainerView.removeLayer()
+                self.female_lbl.textColor = UIColor.darkGray
+                self.otherBtnContainerView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+                self.other_lbl.textColor = UIColor.white
+            }
+        }else{
+            if selectedGender == "1"{
+                self.maleBtnContainerView.backgroundColor = AppLocalStorage.sharedInstance.button_color
+                self.male_lbl.textColor = UIColor.white
+                self.femaleBtnContainerView.backgroundColor = CustomColor.customLightGray
+                self.female_lbl.textColor = UIColor.darkGray
+                self.otherBtnContainerView.backgroundColor = CustomColor.customLightGray
+                self.other_lbl.textColor = UIColor.darkGray
+            }else if selectedGender == "0"{
+                self.maleBtnContainerView.backgroundColor = CustomColor.customLightGray
+                self.male_lbl.textColor = UIColor.darkGray
+                self.femaleBtnContainerView.backgroundColor = AppLocalStorage.sharedInstance.button_color
+                self.female_lbl.textColor = UIColor.white
+                self.otherBtnContainerView.backgroundColor = CustomColor.customLightGray
+                self.other_lbl.textColor = UIColor.darkGray
+            }else if selectedGender == "2"{
+                self.maleBtnContainerView.backgroundColor = CustomColor.customLightGray
+                self.male_lbl.textColor = UIColor.darkGray
+                self.femaleBtnContainerView.backgroundColor = CustomColor.customLightGray
+                self.female_lbl.textColor = UIColor.darkGray
+                self.otherBtnContainerView.backgroundColor = AppLocalStorage.sharedInstance.button_color
+                self.other_lbl.textColor = UIColor.white
+            }
         }
     }
     

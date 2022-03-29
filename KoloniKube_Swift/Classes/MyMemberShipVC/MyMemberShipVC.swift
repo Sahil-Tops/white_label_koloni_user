@@ -11,6 +11,7 @@ import UIKit
 class MyMemberShipVC: UIViewController {
     
     //MARK: - Outlet's
+    @IBOutlet weak var navigationImg: UIImageView!
     @IBOutlet weak var skeltonView: UIView!
     @IBOutlet weak var tblMembership: UITableView!
     @IBOutlet weak var btnBack: IPAutoScalingButton!
@@ -31,7 +32,7 @@ class MyMemberShipVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        self.loadUI()
     }
     
     //MARK: - @IBAction's
@@ -44,6 +45,15 @@ class MyMemberShipVC: UIViewController {
     }
     
     //MARK: - Custom Function's
+    
+    func loadUI(){
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.navigationImg.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.navigationImg.backgroundColor = CustomColor.primaryColor
+        }
+    }
+    
     func loadContent(){
         tblMembership.register(UINib(nibName: "MyMemberCustomCell", bundle: nil), forCellReuseIdentifier: "MyMemberCustomCell")
         self.navigationController?.navigationBar.isHidden = true
@@ -70,10 +80,10 @@ class MyMemberShipVC: UIViewController {
 extension MyMemberShipVC {
     func callWebserviceForMyMebership() {
         
-        let stringwsName = "my_membership_list/user_id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
+        let stringwsName = "my_membership_list/user_id/\(StaticClass.sharedInstance.strUserId)"
         
         self.showSkeltonView()
-        APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: false, successBlock: { (response) in
+        APICall.shared.getWeb(stringwsName, withLoader: false, successBlock: { (response) in
             
             self.hideSkeltonView()
             if let dict = response as? NSDictionary {
@@ -125,8 +135,14 @@ extension MyMemberShipVC : UITableViewDelegate, UITableViewDataSource {
         
         let cell: MyMemberCustomCell = tableView.dequeueReusableCell(withIdentifier: "MyMemberCustomCell") as! MyMemberCustomCell
         let shareBuyMember = self.arrBuyMemebershipOBJ[indexPath.row]
-        cell.titleView.createGradientLayer(color1: CustomColor.customBlue, color2: CustomColor.customCyan, startPosition: 0.2, endPosition: 1.0)
+        if AppLocalStorage.sharedInstance.application_gradient{
+            cell.titleView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.2, endPosition: 1.0)
+        }else{
+            cell.titleView.backgroundColor = CustomColor.primaryColor
+        }
+        cell.dropDown_btn.tintColor = CustomColor.primaryColor
         cell.planName_lbl.text = shareBuyMember.strPlanName
+        cell.price_lbl.textColor = CustomColor.primaryColor
         cell.price_lbl.text = "$\(shareBuyMember.strAmount)"
         cell.planExpiresDate_lbl.text = "Expires \(shareBuyMember.strExpireDate)"
         cell.duration_lbl.text = (Int(shareBuyMember.strTotalPlanDay) ?? 0) > 1 ? "\(shareBuyMember.strTotalPlanDay) Days":"\(shareBuyMember.strTotalPlanDay) Day"

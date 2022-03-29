@@ -18,6 +18,7 @@ class ReportVC: UIViewController {
     
     @IBOutlet weak var containerView: CustomView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var underLine_lbl: UILabel!
     @IBOutlet weak var navTitle_lbl: UILabel!
     @IBOutlet weak var btnFirst: UIButton!
     @IBOutlet weak var btnSecond: UIButton!
@@ -65,13 +66,6 @@ class ReportVC: UIViewController {
     //MARK: Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Global.notification.is_KeyboardNumbericOpen), object: nil);
-//
-//        NotificationCenter.default.addObserver(self, selector: #selector(setUpKeyboardOpenFunctionality(notification:)), name: NSNotification.Name(rawValue: Global.notification.is_KeyboardNumbericOpen), object: nil)
-//
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Global.notification.is_PushNotification_Report), object: nil);
-//
-//        NotificationCenter.default.addObserver(self, selector: #selector(currentReportCallMethod(notification:)), name: NSNotification.Name(rawValue: Global.notification.is_PushNotification_Report), object: nil)
         
         self.navigationController?.navigationBar.isHidden = true
         self.currentReportsetU()
@@ -87,11 +81,6 @@ class ReportVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         btnSubmit.layer.cornerRadius = btnSubmit.frame.height / 2
-    }
-    
-    deinit {
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Global.notification.is_KeyboardNumbericOpen), object: nil);
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Global.notification.is_PushNotification_Report), object: nil);
     }
     
     //MARK: - @IBAction's
@@ -125,7 +114,6 @@ class ReportVC: UIViewController {
             self.imgFirst.image = UIImage(named: "")
             self.btnFirst.setBackgroundImage(UIImage(named: "camIcon"), for: .normal)
             self.arrImageSelection.replaceObject(at: 0, with: (UIImage(named: "imgPlaceHolderIcon")!))
-//            self.firstImgPlacholder_lbl.text = ""
         } else {
             self.actionSheetForPhoto()
             sender.isSelected = true
@@ -140,7 +128,6 @@ class ReportVC: UIViewController {
             self.imgSecond.image = UIImage(named: "")
             self.btnSecond.setBackgroundImage(UIImage(named: "camIcon"), for: .normal)
             self.arrImageSelection.replaceObject(at: 1, with: (UIImage(named: "imgPlaceHolderIcon")!))
-//            self.secondImgPlacholder_lbl.text = ""
         } else {
             self.actionSheetForPhoto()
             sender.isSelected = true
@@ -155,7 +142,6 @@ class ReportVC: UIViewController {
             self.imgThird.image = UIImage(named: "")
             self.btnThird.setBackgroundImage(UIImage(named: "camIcon"), for: .normal)
             self.arrImageSelection.replaceObject(at: 2, with: (UIImage(named: "imgPlaceHolderIcon")!))
-//            self.thirdImgPlacholder_lbl.text = ""
         }else {
             self.actionSheetForPhoto()
             sender.isSelected = true
@@ -198,10 +184,17 @@ class ReportVC: UIViewController {
     func loadContent(){
         
         self.reportIssue_lbl.text = "Report an Issue"
-//        self.btnSubmit.createGradientLayer(color1: CustomColor.customBlue, color2: CustomColor.customAppGreen, startPosition: 0.2, endPosition: 1.0)
         self.txtComment.layer.cornerRadius = 10
         self.txtComment.layer.masksToBounds = true
-        
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.btnSubmit.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.btnSubmit.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        self.reportIssue_lbl.textColor = CustomColor.primaryColor
+        self.txtOrderId2_lbl.textColor = CustomColor.primaryColor
+        self.txtOrderId_lbl.textColor = CustomColor.primaryColor
+        self.underLine_lbl.backgroundColor = CustomColor.primaryColor
     }
     
     func addGesture(){
@@ -213,17 +206,7 @@ class ReportVC: UIViewController {
     
     @objc func tapGestureAction(_ sender: UITapGestureRecognizer){
         self.dropDownView?.removeFromSuperview()
-    }
-    
-//    @objc  func checkStatusBookingOnGoing(notification:Notification) -> Void {
-//        if Global.appdel.is_rentalRunning == true {
-//            self.view.layoutIfNeeded()
-//        }
-//    }
-    
-//    @objc func currentReportCallMethod(notification:Notification) -> Void {
-//        currentReportsetU()
-//    }
+    }    
     
     func showSkeltonView(){
         self.skeltonView.isHidden = false
@@ -306,14 +289,15 @@ class ReportVC: UIViewController {
     }
     
     func hideBookingIdView(){
-//        self.bookingIdView_height.constant = 0
+        self.bookingIdView_height.constant = 0
         self.btnSelectBookingId.isUserInteractionEnabled = false
-        self.txtOrderId2_lbl.isHidden = false
+        self.txtOrderId2_lbl.isHidden = true
+        self.txtOrderId_lbl.isHidden = true
         self.selectBookingIdView.isHidden = true
         self.dropDownArrow_lbl.isHidden = true
         self.whichRentalText_lbl.isHidden = true
         self.whichRentalText_height.constant = 0
-        self.bookingIdView_height.constant = 65
+//        self.bookingIdView_height.constant = 65
         self.view.layoutIfNeeded()
     }
     
@@ -324,7 +308,7 @@ class ReportVC: UIViewController {
     
     func CommentText(strEmail:String) -> Void {
         if (strEmail.count) > 0 {
-            txtComment.textColor = CustomColor.customBlue
+            txtComment.textColor = CustomColor.primaryColor
         }else{
             txtComment.textColor = UIColor(hexxString:Global.g_ColorString.GreyLightTxt)
         }
@@ -561,11 +545,11 @@ extension ReportVC{
                             self.strOrderID = self.orderIdArray[1]["id"]as? String ?? ""
                             if self.showForRunningRental{
                                 self.txtOrderId2_lbl.text = self.orderIdArray[1]["order_id"]as? String ?? ""
-                                self.txtOrderId2_lbl.textColor = CustomColor.customBlue
+                                self.txtOrderId2_lbl.textColor = CustomColor.primaryColor
                                 self.hideBookingIdView()
                             }else{
                                 self.txtOrderId_lbl.text = self.orderIdArray[1]["order_id"]as? String ?? ""
-                                self.txtOrderId_lbl.textColor = CustomColor.customBlue
+                                self.txtOrderId_lbl.textColor = CustomColor.primaryColor
                                 self.showBookingIdView()
                             }
                         } else {
@@ -602,6 +586,6 @@ extension ReportVC: DropDownViewDelegate{
     func selectedItem(item: String, index: Int) {
         self.strOrderID = self.orderIdArray[index]["id"]as? String ?? ""
         self.txtOrderId_lbl.text = self.orderIdArray[index]["order_id"]as? String ?? "Select booking ID"
-        self.txtOrderId_lbl.textColor = CustomColor.customBlue
+        self.txtOrderId_lbl.textColor = CustomColor.primaryColor
     }
 }

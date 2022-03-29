@@ -11,19 +11,13 @@
         <array key="Koloni.ttf">
             <string>Koloni</string>
         </array>
-        <array key="Muli-Regular.ttf">
-            <string>Muli-Regular</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyProfileVC" customModule="koloni1" customModuleProvider="target">
             <connections>
+                <outlet property="bgImage" destination="PYY-Ww-LBx" id="273-2x-MyN"/>
                 <outlet property="btnBack" destination="YVd-oe-MDt" id="iBd-ne-cOy"/>
-                <outlet property="btnChangePassword" destination="GIv-32-bkr" id="2VF-IA-ScF"/>
-                <outlet property="btnContainerView" destination="Oo6-0M-b1i" id="SlR-pR-VSC"/>
                 <outlet property="btnEdit" destination="dX0-1d-Odf" id="MCg-pb-Jta"/>
-                <outlet property="btnMyMembership" destination="kGJ-2f-4Ki" id="M5n-ve-IbW"/>
-                <outlet property="btnPaymenteInfo" destination="JH0-M3-sUl" id="G1E-MU-1tN"/>
                 <outlet property="btnSignOut" destination="EPV-zY-fwY" id="2Vq-EO-jvl"/>
                 <outlet property="buttonCollectionView" destination="Hhp-ac-t2x" id="gm7-dm-WZo"/>
                 <outlet property="buttonCollection_height" destination="f1E-Lw-Kh8" id="pdg-UT-Tra"/>
@@ -44,182 +38,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oo6-0M-b1i">
-                    <rect key="frame" x="18" y="203" width="337.66666666666669" height="406"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWd-YY-13B" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="30.333333333333329" y="19.999999999999993" width="128.33333333333337" height="111.33333333333331"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIf-t9-kBj" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="178.66666666666663" y="19.999999999999993" width="128.33333333333337" height="111.33333333333331"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bl-rc-GP2" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="30.333333333333329" y="151.33333333333334" width="128.33333333333337" height="111.00000000000003"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFl-mb-wBj" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="178.66666666666663" y="151.33333333333334" width="128.33333333333337" height="111.00000000000003"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="15"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNQ-hc-WIk">
-                            <rect key="frame" x="69.666666666666671" y="38" width="50" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Koloni" family="Koloni" pointSize="32"/>
-                            <color key="textColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K58-qn-xrB">
-                            <rect key="frame" x="218" y="38" width="50" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Koloni" family="Koloni" pointSize="32"/>
-                            <color key="textColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyz-A3-LRm">
-                            <rect key="frame" x="69.666666666666671" y="163.66666666666666" width="50" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Koloni" family="Koloni" pointSize="32"/>
-                            <color key="textColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3L-Hz-6bz">
-                            <rect key="frame" x="218" y="163.66666666666666" width="50" height="45"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Koloni" family="Koloni" pointSize="32"/>
-                            <color key="textColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My memberships" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77b-eG-dBR">
-                            <rect key="frame" x="36.333333333333336" y="85" width="116.33333333333331" height="19.333333333333329"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saved Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWp-pl-LXz">
-                            <rect key="frame" x="184.66666666666666" y="85" width="116.33333333333334" height="19.333333333333329"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5Y-Ko-FPj">
-                            <rect key="frame" x="36.333333333333336" y="210.66666666666666" width="116.33333333333331" height="19.333333333333343"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign out" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIo-ux-3UD">
-                            <rect key="frame" x="184.66666666666666" y="210.66666666666666" width="116.33333333333334" height="19.333333333333343"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGJ-2f-4Ki" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="30.333333333333329" y="19.999999999999993" width="128.33333333333337" height="111.33333333333331"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="15"/>
-                            <state key="normal">
-                                <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="btnMymembershipPressed:" destination="-1" eventType="touchUpInside" id="ujd-f1-LAh"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH0-M3-sUl" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="178.66666666666663" y="19.999999999999993" width="128.33333333333337" height="111.33333333333331"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="15"/>
-                            <state key="normal">
-                                <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="btnPaymentInfPressed:" destination="-1" eventType="touchUpInside" id="Y5D-PC-RVn"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-32-bkr" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="30.333333333333329" y="151.33333333333334" width="128.33333333333337" height="111.00000000000003"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="15"/>
-                            <state key="normal">
-                                <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="btnChangePasswordPressed:" destination="-1" eventType="touchUpInside" id="afr-bo-0LS"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3R-pc-e2R" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="178.66666666666663" y="151.33333333333334" width="128.33333333333337" height="111.00000000000003"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="15"/>
-                            <state key="normal">
-                                <color key="titleColor" systemColor="viewFlipsideBackgroundColor"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_back" translatesAutoresizingMaskIntoConstraints="NO" id="PYY-Ww-LBx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PYY-Ww-LBx">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="737"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="PYY-Ww-LBx" secondAttribute="height" multiplier="1:1.78" id="dPe-x1-qmm"/>
@@ -512,36 +331,11 @@
         </view>
     </objects>
     <designables>
-        <designable name="E3R-pc-e2R">
-            <size key="intrinsicContentSize" width="30" height="31"/>
-        </designable>
-        <designable name="GIv-32-bkr">
-            <size key="intrinsicContentSize" width="30" height="31"/>
-        </designable>
-        <designable name="JH0-M3-sUl">
-            <size key="intrinsicContentSize" width="30" height="31"/>
-        </designable>
         <designable name="dX0-1d-Odf">
-            <size key="intrinsicContentSize" width="30" height="30"/>
-        </designable>
-        <designable name="kGJ-2f-4Ki">
-            <size key="intrinsicContentSize" width="30" height="31"/>
+            <size key="intrinsicContentSize" width="30" height="33"/>
         </designable>
     </designables>
     <resources>
         <image name="NoProfileImage" width="66.5" height="66.5"/>
-        <image name="login_back" width="1242" height="2208"/>
-        <systemColor name="viewFlipsideBackgroundColor">
-            <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="viewFlipsideBackgroundColor">
-            <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="viewFlipsideBackgroundColor">
-            <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="viewFlipsideBackgroundColor">
-            <color red="0.1215686274509804" green="0.12941176470588239" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

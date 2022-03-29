@@ -81,7 +81,7 @@
                                 <constraint firstAttribute="height" constant="40" id="HDA-qB-OJf"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                            <state key="normal" title="Start Rental" backgroundImage="side_menu">
+                            <state key="normal" title="Start Rental">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -113,16 +113,16 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSe-Kj-hVn" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="20.5" y="336.5" width="373" height="223.5"/>
+                    <rect key="frame" x="20.5" y="337.5" width="373" height="221"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rental Pricing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aT7-fB-wCP">
-                            <rect key="frame" x="10" y="20" width="353" height="33"/>
-                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
+                            <rect key="frame" x="10" y="20" width="353" height="30.5"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
                             <color key="textColor" red="0.2901960784" green="0.25882352939999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="V4V-UG-JsJ">
-                            <rect key="frame" x="40" y="63" width="298" height="55"/>
+                            <rect key="frame" x="40" y="60.5" width="298" height="55"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zYz-Hr-Kgo">
                                     <rect key="frame" x="0.0" y="0.0" width="298" height="23.5"/>
@@ -167,7 +167,7 @@
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUL-4I-Egs">
-                            <rect key="frame" x="95.5" y="132" width="30" height="30"/>
+                            <rect key="frame" x="95.5" y="129.5" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="E10-Lh-vuf"/>
                                 <constraint firstAttribute="height" constant="30" id="oH7-EA-Pl5"/>
@@ -182,13 +182,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have a promo code" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hm-Pg-wpN">
-                            <rect key="frame" x="129.5" y="136" width="151" height="22"/>
+                            <rect key="frame" x="129.5" y="133.5" width="151" height="22"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid promo code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7x0-YB-KKD">
-                            <rect key="frame" x="35" y="164" width="303" height="19.5"/>
+                            <rect key="frame" x="35" y="161.5" width="303" height="19.5"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -217,11 +217,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vEX-du-7za">
-                    <rect key="frame" x="30" y="538" width="354" height="40"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vEX-du-7za">
+                    <rect key="frame" x="30" y="536.5" width="354" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dy-ez-kEd" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="198" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="174" height="40"/>
                             <color key="backgroundColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="L5n-YO-WSd"/>
@@ -235,13 +235,12 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQc-di-utI" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="204" y="0.0" width="150" height="40"/>
+                            <rect key="frame" x="180" y="0.0" width="174" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="EaT-Fy-9rj"/>
-                                <constraint firstAttribute="width" constant="150" id="HaA-mQ-cs6"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                            <state key="normal" title="Start Rental" backgroundImage="side_menu">
+                            <state key="normal" title="Start Rental">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -251,7 +250,7 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q7x-09-29Q">
-                    <rect key="frame" x="148.5" y="638" width="117" height="35"/>
+                    <rect key="frame" x="148.5" y="636.5" width="117" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="GaP-1h-OV4"/>
                     </constraints>
@@ -322,14 +321,13 @@
             <size key="intrinsicContentSize" width="79" height="36"/>
         </designable>
         <designable name="Mt7-sA-uaE">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="96" height="36"/>
         </designable>
         <designable name="xQc-di-utI">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="96" height="36"/>
         </designable>
     </designables>
     <resources>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

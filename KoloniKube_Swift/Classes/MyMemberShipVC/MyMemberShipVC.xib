@@ -22,6 +22,7 @@
                 <outlet property="btnBack" destination="dU2-rg-maR" id="14k-kZ-LnN"/>
                 <outlet property="headerView" destination="ADA-xt-Qui" id="3hS-LI-qqE"/>
                 <outlet property="lblNoresultFound" destination="gJY-eL-kG7" id="Lhn-S0-JsQ"/>
+                <outlet property="navigationImg" destination="9Vb-DM-sBC" id="Xpo-6w-zgo"/>
                 <outlet property="skeltonView" destination="LXQ-4z-9mL" id="RLg-JI-dhI"/>
                 <outlet property="tblMembership" destination="AtN-rv-dOI" id="hHP-On-tZn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -49,7 +50,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu" translatesAutoresizingMaskIntoConstraints="NO" id="9Vb-DM-sBC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Vb-DM-sBC">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="98"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADA-xt-Qui">
@@ -119,7 +120,6 @@
         </view>
     </objects>
     <resources>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

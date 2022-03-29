@@ -10,6 +10,7 @@ import UIKit
 
 class OtpVerificationVC: UIViewController {
     
+    @IBOutlet weak var navigationBgImage: UIImageView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var otpStackView: UIStackView!
     @IBOutlet weak var one_textField: UITextField!
@@ -20,7 +21,6 @@ class OtpVerificationVC: UIViewController {
     @IBOutlet weak var enterCode_textField: UITextField!
     @IBOutlet weak var submit_btn: CustomButton!
     @IBOutlet weak var resendOtp_btn: UIButton!
-    @IBOutlet weak var whiteBgView: UIView!
     
     var login_type = ""
     var otp = ""
@@ -43,12 +43,15 @@ class OtpVerificationVC: UIViewController {
         }else{
             if Singleton.emailConfirmationToken != ""{
                 self.enterCode_textField.text = Singleton.emailConfirmationToken
-                self.whiteBgView.isHidden = false
                 self.verifyOtpOrToken()
             }
             self.loadNavigationView(title: "Verify Email")
             self.otpStackView.isHidden = true
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.loadUI()
     }
     
     //MARK: - @IBAction's
@@ -65,7 +68,18 @@ class OtpVerificationVC: UIViewController {
         
     }
     
+    
     //MARK: - Custom Function's
+    
+    func loadUI(){
+        self.submit_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        self.navigationBgImage.backgroundColor = CustomColor.primaryColor
+        self.resendOtp_btn.titleLabel?.textColor = CustomColor.primaryColor
+        let range = ("Resend" as NSString).range(of: "Resend")
+        let attributtedStr = NSMutableAttributedString.init(string: "Resend")
+        attributtedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+        self.resendOtp_btn.setAttributedTitle(attributtedStr, for: .normal)
+    }
     func loadNavigationView(title: String){
         
         let navigationView = Bundle.main.loadNibNamed("NavigationView", owner: nil, options: nil)?.first as? NavigationView

@@ -11,6 +11,7 @@ import UIKit
 class LaunchScreenVC: UIViewController {
     
     //MARK: - Outlet's
+    @IBOutlet weak var bgImage: UIImageView!
     @IBOutlet weak var lbl_Version: UILabel!
     @IBOutlet weak var viewBgShowAlert: UIView!
     @IBOutlet weak var btnUpdate: UIButton!
@@ -19,19 +20,21 @@ class LaunchScreenVC: UIViewController {
     //MARK: - Default Function's
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         Singleton.currentVc = "launch_screen"
         StaticVariables.window = UIApplication.shared.keyWindow
-        self.callAPiForVersionCheck()
-        //        StripeClient.sharedInstance.createToken(name: "John Wick", number: "4242424242424242", expMM: 02, expYY: 23, cvc: "786")
+        self.loadAppData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         Singleton.currentVc = ""
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.alertView.layer.cornerRadius = 10
+//        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "splash_img") { (image) in
+//            self.bgImage.image = image
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,15 +48,45 @@ class LaunchScreenVC: UIViewController {
             
         }
     }
-    
+
 }
 
 //MARK: - Web Api's
 extension LaunchScreenVC {
     
+    //Loading White label Data
+    func loadAppData(){
+        
+        let url = "https://kolonishare.com/super_partner_beta/ws/v1/apiVersion?ios_version=\(appDelegate.getCurrentAppVersion)&partner_id_white_label=\(Singleton.partnerIdWhiteLabel)"
+        APICall.shared.getAppData(withUrl: url) { (response) in
+            if let data = response as? [String:Any]{
+                if let status = data["FLAG"]as? Int, status == 1{
+                    if let app_setting = data["application_setting"]as? [String:Any]{
+                        StaticClass.sharedInstance.saveToUserDefaults(app_setting as AnyObject, forKey: "application_setting")
+                        _ = AppLocalStorage.init()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
+                                if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
+                                    self.callAPiForVersionCheck()
+                                }else {
+                                    AppDelegate.shared.setNavigationFlow()
+                                }
+                            }else{
+                                AppDelegate.shared.setNavigationFlow()
+                            }
+                        }
+                    }
+                }
+            }
+        } failure: { (error) in
+            print("Error: ", error)
+        }
+        
+    }
+    
     func callAPiForVersionCheck() {
-        let stringwsName = "apiVersion?ios_version=\(appDelegate.getCurrentAppVersion)"
-        APICall.shared.getWeb(stringwsName, bearerToken: false, withLoader: false, successBlock: { (response) in
+        let stringwsName = "apiVersion"
+        APICall.shared.getWeb(stringwsName, withLoader: true, successBlock: { (response) in
             
             print("apiVersion is",response)
             
@@ -71,64 +104,17 @@ extension LaunchScreenVC {
                     } else {
                         self.alertView.isHidden = true
                         self.viewBgShowAlert.isHidden = true
-                        self.checkLogin()
+                        Global.appdel.userDetailCall(vc: self)
                     }
                 }else{
                     StaticClass.sharedInstance.ShowNotification(false, strmsg: dict["MESSAGE"] as? String ?? "")
                 }
             }else{
-                
+               
             }
         }) { (error) in
             
         }
     }
-    
-    func checkLogin(){
-        AuthManager.sharedInstance.checkLoginStatus { response in
-            print(response)
-            AuthManager.accessToken = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "auth0_access_token") ?? ""
-            AuthManager.sharedInstance.renewToken { response in
-//                if response{
-//                    AppDelegate.shared.pushToSideMenuVC()
-//                }
-                AppDelegate.shared.pushToSideMenuVC()
-            }
-        }
-    }
-    
-    //    func checkForceLogoutStatus_Web(){
-    //        let params = NSMutableDictionary()
-    //        params.setValue(StaticClass.sharedInstance.strUserId, forKey: "user_id")
-    //        params.setValue(appDelegate.getCurrentAppVersion, forKey: "ios_version")
-    //
-    //        APICall.shared.postWeb("is_force_logout_check", parameters: params, showLoder: true, successBlock: { (response) in
-    //            if let status = response["FLAG"]as? Int, status == 1{
-    //                if let logout_status = response["IS_FORCE_LOGOUT"]as? String, logout_status == "1"{
-    //                    APICall.shared.postWeb("is_force_logout", parameters: params, showLoder: true) { (response) in
-    //                        if let status = response["FLAG"]as? Int, status == 1{
-    //                            let viewControllers: [UIViewController] = (Global.appdel.navigation?.viewControllers)!
-    //                            for(_,element) in viewControllers.enumerated() {
-    //                                if(element is LoginWithGoogleAppleVC){
-    //                                    Global.appdel.navigation?.popToViewController(element, animated: false)
-    //                                    break
-    //                                }
-    //                            }
-    //                        }else{
-    //                            StaticClass.sharedInstance.ShowNotification(false, strmsg: response["MESSAGE"] as? String ?? "")
-    //                        }
-    //                    } failure: { (error) in
-    //                        StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
-    //                    }
-    //                }else{
-    ////                    Global.appdel.userDetailCall(vc: self)
-    //                }
-    //            }else{
-    //                StaticClass.sharedInstance.ShowNotification(false, strmsg: response["MESSAGE"] as? String ?? "")
-    //            }
-    //        }, failure: { (error) in
-    //            StaticClass.sharedInstance.ShowNotification(false, strmsg: error as? String ?? "")
-    //        })
-    //    }
     
 }

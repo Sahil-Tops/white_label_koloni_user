@@ -10,6 +10,7 @@ import UIKit
 
 class RentalAlertView: UIView {
 
+    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var checkBox_btn: UIButton!
     @IBOutlet weak var endRental_btn: CustomButton!
     @IBOutlet weak var lock_btn: CustomButton!
@@ -62,6 +63,15 @@ class RentalAlertView: UIView {
 
     }
     
+    func loadContent(){
+        self.title_lbl.textColor = CustomColor.primaryColor
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.lock_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.lock_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+    }
+    
 }
 
 extension UIViewController{
@@ -71,8 +81,8 @@ extension UIViewController{
         view.frame = self.view.bounds
         view.bookNowVc = self as? BookNowVC
         view.frame.origin.y += view.frame.height
+        view.loadContent()
         self.view.addSubview(view)
-        
         UIView.animate(withDuration: 0.5) {
             view.frame.origin.y = 0
             self.view.layoutIfNeeded()

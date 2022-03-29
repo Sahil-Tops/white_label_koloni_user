@@ -14,14 +14,21 @@ class CustomAlertWithGradientButtonView: UIView {
     @IBOutlet weak var message_lbl: UILabel!
     @IBOutlet weak var gotIt_btn: CustomButton!
     
-    var callBack: (()->()) = {}
-    
     @IBAction func tapGotIt_btn(_ sender: UIButton) {
         UIView.animate(withDuration: 0.5) {
             self.frame.origin.y += self.frame.height
         } completion: { (_) in
             self.removeFromSuperview()
         }
+    }
+    
+    func loadContent(){
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.gotIt_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.gotIt_btn.backgroundColor = AppLocalStorage.sharedInstance.primary_color
+        }
+        self.titleMsg_lbl.textColor = CustomColor.secondaryColor
     }
     
 }

@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Auth0.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Braintree-Braintree-Drop-In-Localization.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -194,11 +189,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>JWTDecode.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>KMPlaceholderTextView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -255,11 +245,6 @@
 			<false/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>SimpleKeychain.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

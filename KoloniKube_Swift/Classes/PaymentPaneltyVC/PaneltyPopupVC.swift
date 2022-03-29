@@ -11,6 +11,7 @@ import UIKit
 class PaneltyPopupVC: UIViewController,PopupContentViewController {
     
     //MARK:- Outlet's
+    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var description_lbl: IPAutoScalingLabel!
     @IBOutlet weak var nearBy_btn: UIButton!
     @IBOutlet weak var acceptPenalty_btn: UIButton!
@@ -47,6 +48,12 @@ class PaneltyPopupVC: UIViewController,PopupContentViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.nearBy_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.nearBy_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        self.title_lbl.textColor = CustomColor.secondaryColor
         self.nearBy_btn.layer.cornerRadius  = self.nearBy_btn.layer.frame.height / 2
         self.acceptPenalty_btn.layer.cornerRadius  = self.acceptPenalty_btn.layer.frame.height / 2
     }

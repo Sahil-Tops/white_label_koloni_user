@@ -75,6 +75,7 @@ struct CardTypeValue {
 class BookingPaymentVC: UIViewController {
     
     //MARK:- Outlet's
+    @IBOutlet weak var headerBg_img: UIImageView!
     @IBOutlet var tblCard: UITableView!
     @IBOutlet weak var tblCard_height: NSLayoutConstraint!
     @IBOutlet var btnStartRide: UIButton!
@@ -110,14 +111,16 @@ class BookingPaymentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("BookingPaymentVC")
-        
         self.registerCell()
         self.loadContent()
     }
     
+    override func viewDidLayoutSubviews() {
+        self.loadUI()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -156,6 +159,21 @@ class BookingPaymentVC: UIViewController {
     }
     
     //MARK: - Custom Function's
+    
+    func loadUI(){
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.btnStartRide.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.addCard_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            self.add_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.headerBg_img.backgroundColor = CustomColor.primaryColor
+            self.btnStartRide.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            self.addCard_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            self.add_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+    }
+    
     func loadContent(){
         self.btnStartRide.circleObject()
         self.add_btn.circleObject()
@@ -378,7 +396,7 @@ extension BookingPaymentVC{
     }
     
     func getValidTokerFromAPIforBrainTree() {
-        APICall.shared.getWeb("createClientToken?ios_version=\(appDelegate.getCurrentAppVersion)", bearerToken: true, withLoader: true, successBlock: { (responseObj) in
+        APICall.shared.getWeb("createClientToken", withLoader: true, successBlock: { (responseObj) in
             if let dictObj = responseObj as? NSDictionary {
                 if let success = dictObj["FLAG"] as? Bool{
                     if (success) {

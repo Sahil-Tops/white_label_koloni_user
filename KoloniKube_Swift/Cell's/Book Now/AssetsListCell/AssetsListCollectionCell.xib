@@ -41,7 +41,6 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.98431372549999996" green="0.27450980390000002" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Syz-g4-Phi" firstAttribute="leading" secondItem="fo6-0n-Oz0" secondAttribute="leading" constant="20" id="DKL-AM-fTb"/>
                                     <constraint firstAttribute="trailing" secondItem="Syz-g4-Phi" secondAttribute="trailing" constant="20" id="Rnw-EL-HPz"/>
@@ -178,10 +177,9 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSG-mT-J51" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                                         <rect key="frame" x="122" y="0.0" width="112" height="35"/>
-                                        <color key="backgroundColor" red="0.3294117647" green="0.29803921570000003" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                        <state key="normal" title="Book" backgroundImage="side_menu">
+                                        <state key="normal" title="Book">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -251,7 +249,7 @@
             <size key="intrinsicContentSize" width="750" height="750"/>
         </designable>
         <designable name="bSG-mT-J51">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="63" height="24"/>
         </designable>
         <designable name="eHT-Gk-7OS">
             <size key="intrinsicContentSize" width="99" height="24"/>
@@ -259,7 +257,6 @@
     </designables>
     <resources>
         <image name="placeholder" width="750" height="750"/>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

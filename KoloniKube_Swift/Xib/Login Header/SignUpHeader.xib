@@ -32,7 +32,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43b-a5-0Cb">
-                    <rect key="frame" x="57" y="22.5" width="41.5" height="30"/>
+                    <rect key="frame" x="57" y="22.5" width="45.5" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="uB7-MI-GPS"/>
                     </constraints>
@@ -41,29 +41,27 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s8X-Ih-zsM" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                    <rect key="frame" x="150" y="62.5" width="75" height="75"/>
+                    <rect key="frame" x="150.5" y="63.5" width="74" height="74"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="Fcw-1L-zSi" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
-                            <rect key="frame" x="10" y="10" width="55" height="55"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fcw-1L-zSi" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
+                            <rect key="frame" x="2" y="2" width="70" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="55" id="00h-Rt-CCs"/>
-                                <constraint firstAttribute="height" constant="55" id="ztp-OG-JaM"/>
+                                <constraint firstAttribute="width" constant="70" id="00h-Rt-CCs"/>
+                                <constraint firstAttribute="height" constant="70" id="ztp-OG-JaM"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="27.5"/>
+                                    <real key="value" value="35"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="Fcw-1L-zSi" firstAttribute="centerY" secondItem="s8X-Ih-zsM" secondAttribute="centerY" id="1Xq-Ai-w8I"/>
-                        <constraint firstAttribute="trailing" secondItem="Fcw-1L-zSi" secondAttribute="trailing" constant="10" id="BoS-ZA-u6M"/>
-                        <constraint firstItem="Fcw-1L-zSi" firstAttribute="leading" secondItem="s8X-Ih-zsM" secondAttribute="leading" constant="10" id="X5o-8A-t37"/>
-                        <constraint firstItem="Fcw-1L-zSi" firstAttribute="top" secondItem="s8X-Ih-zsM" secondAttribute="top" constant="10" id="XSD-sQ-xPP"/>
-                        <constraint firstAttribute="bottom" secondItem="Fcw-1L-zSi" secondAttribute="bottom" constant="10" id="jgp-zm-UTw"/>
-                        <constraint firstItem="Fcw-1L-zSi" firstAttribute="centerX" secondItem="s8X-Ih-zsM" secondAttribute="centerX" id="nxG-Al-LiU"/>
+                        <constraint firstAttribute="trailing" secondItem="Fcw-1L-zSi" secondAttribute="trailing" constant="2" id="BoS-ZA-u6M"/>
+                        <constraint firstItem="Fcw-1L-zSi" firstAttribute="leading" secondItem="s8X-Ih-zsM" secondAttribute="leading" constant="2" id="X5o-8A-t37"/>
+                        <constraint firstItem="Fcw-1L-zSi" firstAttribute="top" secondItem="s8X-Ih-zsM" secondAttribute="top" constant="2" id="XSD-sQ-xPP"/>
+                        <constraint firstAttribute="bottom" secondItem="Fcw-1L-zSi" secondAttribute="bottom" constant="2" id="jgp-zm-UTw"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isCircular" value="NO"/>
@@ -77,10 +75,10 @@
                             <size key="value" width="1" height="1"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                            <color key="value" red="0.023529411764705882" green="0.82352941176470584" blue="0.8666666666666667" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="37.5"/>
+                            <real key="value" value="35"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -99,6 +97,8 @@
             <connections>
                 <outlet property="backBtn_width" destination="075-Nl-Y53" id="sbE-pF-LEd"/>
                 <outlet property="back_btn" destination="hxO-mM-gYK" id="9ah-Iy-IXY"/>
+                <outlet property="flagContainerView" destination="s8X-Ih-zsM" id="1Cz-Ur-SlI"/>
+                <outlet property="flagIcon_img" destination="Fcw-1L-zSi" id="zSV-2x-jhf"/>
                 <outlet property="title_lbl" destination="43b-a5-0Cb" id="OWu-in-2qs"/>
             </connections>
             <point key="canvasLocation" x="130.40000000000001" y="-101.19940029985008"/>
@@ -111,6 +111,5 @@
     </designables>
     <resources>
         <image name="back_white" width="30" height="30"/>
-        <image name="flag" width="478" height="488"/>
     </resources>
 </document>

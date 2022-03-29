@@ -11,6 +11,7 @@ import UIKit
 class HubTableViewCell: UITableViewCell {
     
     //Outlet's
+    @IBOutlet weak var titleHeader_img: UIImageView!
     @IBOutlet weak var containerView: CustomView!
     @IBOutlet weak var plansName_lbl: UILabel!
     @IBOutlet weak var price_lbl: UILabel!

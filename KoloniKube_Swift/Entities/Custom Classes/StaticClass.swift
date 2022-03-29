@@ -53,10 +53,6 @@ class StaticClass {
     //        }
     //    }
     
-    var strDeviceUUID: String{
-        return UIDevice.current.identifierForVendor?.uuidString ?? ""
-    }
-    
     var strDeviceToken : String {
         get {
             return retriveFromUserDefaults(Global.g_UserDefaultKey.DeviceToken) as? String ?? ""
@@ -172,14 +168,18 @@ class StaticClass {
     func ShowSpiner(_ msg: String = "", _ showBackgroundColor: Bool = false) -> Void {
         DispatchQueue.main.async {
             print("Starting loader")
-            self.window = UIApplication.shared.keyWindow
-            self.progressBar.show(message: msg, style: MyStyle())
-            self.logoImg.image = UIImage(named: "logo")
-            self.logoImg.contentMode = .scaleAspectFit
-            self.logoImg.center = (self.window?.center)!
-            self.logoImg.circleObject()
-            self.window?.backgroundColor = .clear
-            self.window!.addSubview(self.logoImg)
+            
+            AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "loader_img") { (image) in
+                self.window = UIApplication.shared.keyWindow
+                self.progressBar.show(message: msg, style: MyStyle())
+                self.logoImg.image = image
+                self.logoImg.contentMode = .scaleAspectFit
+                self.logoImg.center = (self.window?.center)!
+                self.logoImg.circleObject()
+                self.window?.backgroundColor = .clear
+                self.window!.addSubview(self.logoImg)
+            }
+            
         }
     }
     func HideSpinner() -> Void {
@@ -206,11 +206,6 @@ class StaticClass {
     func saveToUserDefaultBool(forkey key: String, value: Bool) {
         let defaults = UserDefaults.standard
         defaults.setValue(value, forKey: key)
-    }
-    
-    func removeValueForKey(forKey key: String){
-        let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: key)
     }
     
     func saveToUserDefaultsString (value: String, forKey key: String) {

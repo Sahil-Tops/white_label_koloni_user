@@ -10,6 +10,7 @@ import UIKit
 
 class RentalEndedView: UIView {
 
+    @IBOutlet weak var title_lbl: UILabel!
     @IBOutlet weak var descriptionMsg_lbl: UILabel!
     @IBOutlet weak var faqText_lbl: UILabel!
     @IBOutlet weak var gotIt_btn: CustomButton!
@@ -41,11 +42,16 @@ class RentalEndedView: UIView {
         let str = "Have questions? Click here"
         let range = (str as NSString).range(of: "here")
         let attributedStr = NSMutableAttributedString(string: str)
-        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.customBlue, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
+        attributedStr.addAttributes([NSAttributedString.Key.foregroundColor: CustomColor.primaryColor, NSAttributedString.Key.font: Singleton.appFont ?? Singleton.systemFont, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         self.faqText_lbl.attributedText = attributedStr
         self.faqText_lbl.isUserInteractionEnabled = true
         self.faqText_lbl.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnFaq(_:))))
-        
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.gotIt_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.gotIt_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+        self.title_lbl.textColor = CustomColor.primaryColor
     }
     
     @objc func tapOnFaq(_ gesture: UITapGestureRecognizer){

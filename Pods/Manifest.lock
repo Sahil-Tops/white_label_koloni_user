@@ -15,15 +15,11 @@ PODS:
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - AKSideMenu (1.4.5)
-  - Alamofire (5.5.0)
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - Auth0 (1.38.0):
-    - JWTDecode (~> 2.0)
-    - SimpleKeychain
   - Braintree (4.37.1):
     - Braintree/Card (= 4.37.1)
     - Braintree/Core (= 4.37.1)
@@ -170,7 +166,6 @@ PODS:
   - ICSPullToRefresh (0.6)
   - IQKeyboardManagerSwift (6.5.6)
   - ISMessages (1.3.1)
-  - JWTDecode (2.6.3)
   - KMPlaceholderTextView (1.4.0)
   - KWVerificationCodeView (0.4.0)
   - nanopb (2.30907.0):
@@ -196,28 +191,12 @@ PODS:
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
-  - Sentry (7.9.0):
-    - Sentry/Core (= 7.9.0)
-  - Sentry/Core (7.9.0)
-  - SimpleKeychain (0.12.5)
   - SkeletonView (1.12.1)
-  - Stripe (21.11.1):
-    - Stripe/Stripe3DS2 (= 21.11.1)
-    - StripeCore (= 21.11.1)
-    - StripeUICore (= 21.11.1)
-  - Stripe/Stripe3DS2 (21.11.1):
-    - StripeCore (= 21.11.1)
-    - StripeUICore (= 21.11.1)
-  - StripeCore (21.11.1)
-  - StripeUICore (21.11.1):
-    - StripeCore (= 21.11.1)
   - UPCarouselFlowLayout (1.1.2)
 
 DEPENDENCIES:
   - AFNetworking
   - AKSideMenu
-  - Alamofire (~> 5.5)
-  - Auth0 (~> 1.0)
   - Braintree
   - Braintree/DataCollector
   - Braintree/Venmo
@@ -247,18 +226,14 @@ DEPENDENCIES:
   - PureLayout
   - RSKPlaceholderTextView
   - SDWebImage
-  - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `7.9.0`)
   - SkeletonView
-  - Stripe
   - UPCarouselFlowLayout
 
 SPEC REPOS:
   trunk:
     - AFNetworking
     - AKSideMenu
-    - Alamofire
     - AppAuth
-    - Auth0
     - Braintree
     - BraintreeDropIn
     - CardIO
@@ -287,7 +262,6 @@ SPEC REPOS:
     - ICSPullToRefresh
     - IQKeyboardManagerSwift
     - ISMessages
-    - JWTDecode
     - KMPlaceholderTextView
     - KWVerificationCodeView
     - nanopb
@@ -299,34 +273,22 @@ SPEC REPOS:
     - PureLayout
     - RSKPlaceholderTextView
     - SDWebImage
-    - SimpleKeychain
     - SkeletonView
-    - Stripe
-    - StripeCore
-    - StripeUICore
     - UPCarouselFlowLayout
 
 EXTERNAL SOURCES:
   GradientCircularProgress:
     :git: https://github.com/keygx/GradientCircularProgress
-  Sentry:
-    :git: https://github.com/getsentry/sentry-cocoa.git
-    :tag: 7.9.0
 
 CHECKOUT OPTIONS:
   GradientCircularProgress:
     :commit: 9e2dc60d335ee6eb3677bfd9f965f0ade3607f4c
     :git: https://github.com/keygx/GradientCircularProgress
-  Sentry:
-    :git: https://github.com/getsentry/sentry-cocoa.git
-    :tag: 7.9.0
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   AKSideMenu: 2880c44ee04a68f40be783c5cb997b2e0ee22401
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-  Auth0: 56b4b681712d10bcfddae89d4a73158abebdf5a6
   Braintree: 94a20907b70aeffb29c40380eec583d783a347b6
   BraintreeDropIn: 50b79151c55f2ffbfbbf9157c2d07d8e85479588
   CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
@@ -356,7 +318,6 @@ SPEC CHECKSUMS:
   ICSPullToRefresh: a64f102c6558cc34270ea60e99df7c91d1f3d2c0
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   ISMessages: 562cddc3e960359de95f934a4e5c4e1f4ea6fd7d
-  JWTDecode: 33e5e26e5ddbd21b2065820894c08fef0cad9509
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   KWVerificationCodeView: 92cca6ad028546d3232fa75cda3a40d00109a1a2
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -368,14 +329,9 @@ SPEC CHECKSUMS:
   PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
   RSKPlaceholderTextView: fc8c8932546298ec9d5e5572284aa42adb87b066
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
-  Sentry: 2f7e91f247cfb05b05bd01e0b5d0692557a7687b
-  SimpleKeychain: 8193a9e40967eccac933c1fde82de46c07a5ae26
   SkeletonView: c3c2ac84cbcb96ddb13d518c9e88f9f5ee589da9
-  Stripe: f2bed8369154c35c8ec794704e042e05240d6f21
-  StripeCore: 36571be19dae15e90c8ad47e1af45712aea93f5a
-  StripeUICore: 1b32566d6a69581be786609a032872b0fb5a6823
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: ae329208b5bf6cd6662a837c2c09d84baeccd185
+PODFILE CHECKSUM: dc78be35fdbc380349c9f52b51553f681225520d
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.1

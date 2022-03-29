@@ -26,12 +26,12 @@ class Global {
     static var PopUpColor = UIColor(red: 40.0/255, green: 40.0/255, blue: 40.0/255, alpha: 0.0)
     
     // LIVE
-//        static let g_APIBaseURL = "http://13.59.246.255/app/ws/v13/"
+//        static let g_APIBaseURL = "http://13.59.246.255/app/ws/v11/"
     
     // BETA    
-    static let g_APIBaseURL = "https://kolonishare.com/design/ws/v13/"
-    static let baseUrl = "https://api.lockers.koloni.io/"
-        
+    static let g_APIBaseURL = "https://kolonishare.com/super_partner_beta/ws/v1/"
+    //"https://kolonishare.com/design/ws/v12/"
+    
     static let licensingAgreementURL = "http://kolonishare.com/app/software_license"
     static let TearmsURL = "http://kolonishare.com/app/term_and_condition"
     
@@ -390,9 +390,9 @@ extension Global{
     
     static func getUserProfile_Web(vc: UIViewController, outputBlock: @escaping(_ response: Bool, _ data: NSDictionary)-> Void){
         
-        let stringwsName = "profile_details/id/\(StaticClass.sharedInstance.strUserId)?ios_version=\(appDelegate.getCurrentAppVersion)"
+        let stringwsName = "profile_details/id/\(StaticClass.sharedInstance.strUserId)"
         
-        APICall.shared.getWeb(stringwsName, bearerToken: true, withLoader: false, successBlock: { (response) in
+        APICall.shared.getWeb(stringwsName, withLoader: false, successBlock: { (response) in
             
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool){
@@ -430,16 +430,6 @@ extension UIViewController{
                     self.loadProfileCompletionPopUp(desc: "Please verify your mobile number before taking another rental.")
                 }
                 return false
-//                if StaticClass.sharedInstance.retriveFromUserDefaultsBool(key: "is_email_or_mobile_updation_failed"){
-//                    return true
-//                }else{
-//                    if UserDataModel.sharedInstance?.email_id ?? "" == ""{
-//                        self.loadProfileCompletionPopUp(desc: "Please verify your Email ID before taking another rental.")
-//                    }else if UserDataModel.sharedInstance?.mobile_number ?? "" == ""{
-//                        self.loadProfileCompletionPopUp(desc: "Please verify your mobile number before taking another rental.")
-//                    }
-//                    return false
-//                }
             }
         }else{
             return true

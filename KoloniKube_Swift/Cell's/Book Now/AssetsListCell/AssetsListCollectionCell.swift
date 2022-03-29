@@ -26,10 +26,15 @@ class AssetsListCollectionCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setDataOnCell(data: AvailabelBike){
+    func setAvailableBikeDataOnCell(data: AvailabelBike){
+    
         self.assetType_lbl.text = data.type_name
-//        self.assetsListView.titleBackgroundView.backgroundColor = UIColor.init(hex: data.assetImg_color_code)
         DispatchQueue.main.async {
+            if AppLocalStorage.sharedInstance.application_gradient{
+                self.book_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+            }else{
+                self.book_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+            }
             if data.asset_img_url != ""{
                 if data.type == "2"{
                     if let url = URL(string: data.asset_img_url){
@@ -40,7 +45,7 @@ class AssetsListCollectionCell: UICollectionViewCell {
                     }
                 }else{
                     self.assetImage.image = UIImage(named: "locker_white")
-                    self.imageContainerView.backgroundColor = CustomColor.customCyan
+                    self.imageContainerView.backgroundColor = CustomColor.secondaryColor
                 }
             }
         }
@@ -56,7 +61,6 @@ class AssetsListCollectionCell: UICollectionViewCell {
             if data.isAccessibleUser == 0{
                 self.seePlans_btn.setTitle("Show nearly koloni", for: .normal)
                 self.book_btn.setTitle("Private", for: .normal)
-//                self.book_btn.backgroundColor = CustomColor.customRed
                 if data.is_outof_dropzone == 1{
                     self.seePlans_btn.isHidden = true
                 }else{
@@ -65,7 +69,6 @@ class AssetsListCollectionCell: UICollectionViewCell {
             }else{
                 self.seePlans_btn.setTitle("See plans", for: .normal)
                 self.book_btn.setTitle("Book", for: .normal)
-//                self.book_btn.backgroundColor = CustomColor.customAppGreen
                 if data.is_plan_purchase == "1"{
                     self.seePlans_btn.isHidden = true
                 }else{
@@ -79,17 +82,16 @@ class AssetsListCollectionCell: UICollectionViewCell {
         }
         self.seePlans_btn.titleLabel?.adjustsFontSizeToFitWidth = true
         self.book_btn.titleLabel?.adjustsFontSizeToFitWidth = true
-    }
-    
+    }    
     //MARK: - @IBAction
     @IBAction func clickOnBtn(_ sender: UIButton) {
-        let data = self.assetsListView.assetsListArray[self.tag]
+        let data = self.assetsListView.availabelBikeArray[self.tag]
         if sender == book_btn{
             UIView.animate(withDuration: 0.2, animations: {
                 self.assetsListView.containerView.alpha = 0
             }) { (_) in
                 self.assetsListView.removeFromSuperview()
-                self.assetsListView.vc.selectedObjectId = data.strObjUniqueId
+                self.assetsListView.bookNowVc.selectedObjectId = data.strObjUniqueId
                 if self.book_btn.currentTitle == "Book"{
                     self.assetsListView.delegate?.selectedAsset(buttonPressed: "book", assetId: data.strObjUniqueId)
                 }else{
@@ -105,14 +107,14 @@ class AssetsListCollectionCell: UICollectionViewCell {
                     let HubListVCController = HubListVC(nibName: "HubListVC", bundle: nil)
                     HubListVCController.strPartnerName = data.partner_name
                     HubListVCController.strPartnerID = data.plan_partner_id
-                    self.assetsListView.vc.navigationController?.pushViewController(HubListVCController, animated: true)
+                    self.assetsListView.bookNowVc.navigationController?.pushViewController(HubListVCController, animated: true)
                 }else{
                     self.assetsListView.delegate?.selectedAsset(buttonPressed: "nearly_koloni", assetId: data.strObjUniqueId)
                 }
                 
             }
         }
-        
     }
+    
     
 }

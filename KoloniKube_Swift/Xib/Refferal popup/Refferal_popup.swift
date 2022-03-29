@@ -11,6 +11,7 @@ protocol ReferralCodeDelegate {
 }
 class Refferal_popup: UIView,UITextFieldDelegate {
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var view_center: NSLayoutConstraint!
     @IBOutlet weak var txtReferralCode: UITextField!
     @IBOutlet weak var submit_btn: UIButton!
@@ -57,18 +58,30 @@ class Refferal_popup: UIView,UITextFieldDelegate {
             AppDelegate.shared.window?.showBottomAlert(message: "Please enter referral code!")
         }
     }
+    
+    func loadUI(){
+        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "referral_popup_img") { (image) in
+            self.imageView.image = image
+        }
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.submit_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.submit_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
+    }
+    
     func DisplayPopup(){
         viewTrans = UIView.init(frame: (appDelegate.window?.bounds)!)
         viewTrans.backgroundColor = Global.PopUpColor
         viewTrans.addSubview(self)
-        
         appDelegate.window?.addSubview(viewTrans)
-        
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {
             self.frame.origin.y = 0
+            self.loadUI()
         }) { (t) in
             
         }
+        self.layoutIfNeeded()
     }
     
     func ClosePopup(){

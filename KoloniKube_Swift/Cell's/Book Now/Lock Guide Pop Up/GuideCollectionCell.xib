@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +20,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nJc-WS-WxQ" customClass="CustomView" customModule="koloni1" customModuleProvider="target">
                         <rect key="frame" x="8" y="8" width="284" height="154"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="154" id="KJp-kf-n7G"/>
                         </constraints>
@@ -73,7 +74,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9mT-pS-hJz" firstAttribute="top" secondItem="G9p-pY-Xmd" secondAttribute="bottom" constant="8" id="4Xo-fY-1wU"/>
                             <constraint firstItem="0hG-25-xSh" firstAttribute="top" secondItem="8pV-re-vHI" secondAttribute="top" id="4t7-6d-hY5"/>
@@ -95,6 +96,7 @@
                     </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="8pV-re-vHI" secondAttribute="bottom" constant="8" id="EUI-hy-COg"/>
                 <constraint firstItem="8pV-re-vHI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Gb0-Ag-ZdJ"/>
@@ -105,11 +107,11 @@
                 <constraint firstAttribute="trailing" secondItem="8pV-re-vHI" secondAttribute="trailing" constant="8" id="daN-zi-dha"/>
                 <constraint firstItem="nJc-WS-WxQ" firstAttribute="leading" secondItem="8pV-re-vHI" secondAttribute="leading" id="on4-zU-H2V"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="290" height="153"/>
             <connections>
                 <outlet property="description_lbl" destination="9mT-pS-hJz" id="Zl0-Z2-skc"/>
                 <outlet property="lock_img" destination="G9p-pY-Xmd" id="N89-dZ-IVw"/>
+                <outlet property="titleContainerView" destination="0hG-25-xSh" id="tIS-LI-yuN"/>
                 <outlet property="title_lbl" destination="NKR-t9-0gX" id="iFQ-hp-J4i"/>
             </connections>
             <point key="canvasLocation" x="305.79710144927537" y="154.6875"/>
@@ -117,5 +119,8 @@
     </objects>
     <resources>
         <image name="linka_lock" width="454" height="642"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

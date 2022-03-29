@@ -53,7 +53,7 @@
                         <constraint firstAttribute="height" constant="40" id="JJo-kZ-yvO"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                    <state key="normal" title="Ok" backgroundImage="side_menu">
+                    <state key="normal" title="Ok">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -85,11 +85,10 @@
     </objects>
     <designables>
         <designable name="pRk-v0-qCR">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="30" height="36"/>
         </designable>
     </designables>
     <resources>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

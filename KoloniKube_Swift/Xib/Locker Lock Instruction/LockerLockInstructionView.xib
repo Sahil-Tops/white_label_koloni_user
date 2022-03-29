@@ -83,7 +83,7 @@
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjM-7A-aLz" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="186" height="40"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
-                            <state key="normal" title="Ok" backgroundImage="side_menu">
+                            <state key="normal" title="Ok">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -122,12 +122,11 @@
     </objects>
     <designables>
         <designable name="rjM-7A-aLz">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="30" height="37"/>
         </designable>
     </designables>
     <resources>
         <image name="locker" width="636" height="472"/>
-        <image name="side_menu" width="1242" height="2208"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

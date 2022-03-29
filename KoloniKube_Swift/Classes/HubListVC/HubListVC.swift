@@ -13,6 +13,8 @@ import Cosmos
 class HubListVC: UIViewController {
         
     //MARK: - Outlet's
+    @IBOutlet weak var logoImg: UIImageView!
+    @IBOutlet weak var headerBg_img: UIImageView!
     @IBOutlet weak var headerView_height: NSLayoutConstraint!
     @IBOutlet weak var descriptionText_lbl: UILabel!
     @IBOutlet weak var table_view: UITableView!
@@ -41,7 +43,19 @@ class HubListVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    //MARK: - Custom Function's    
+    //MARK: - Custom Function's
+    
+    func loadUI(){
+        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "logo_img") { (image) in
+            self.logoImg.image = image
+        }
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.headerBg_img.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.headerBg_img.backgroundColor = CustomColor.primaryColor
+        }
+    }
+    
     func loadContent(){
         
         self.table_view.register(UINib(nibName: "HubTableViewCell", bundle: nil), forCellReuseIdentifier: "HubTableViewCell")
@@ -118,7 +132,12 @@ extension HubListVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.table_view.dequeueReusableCell(withIdentifier: "HubTableViewCell")as! HubTableViewCell
-        cell.containerView.createGradientLayer(color1: CustomColor.customBlue, color2: CustomColor.customCyan, startPosition: 0.2, endPosition: 1.0)        
+        if AppLocalStorage.sharedInstance.application_gradient{
+            cell.containerView.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.2, endPosition: 1.0)
+        }else{
+            cell.containerView.backgroundColor = CustomColor.primaryColor
+        }
+        cell.price_lbl.textColor = CustomColor.primaryColor
         let sharedHubListOBJ = self.arrHubList[indexPath.row]
         cell.plansName_lbl.text = sharedHubListOBJ.strPlan_name
         cell.price_lbl.text = "$ " + sharedHubListOBJ.strPrice

@@ -12,11 +12,11 @@
         <array key="Koloni.ttf">
             <string>Koloni</string>
         </array>
-        <array key="Kolonishare.ttf">
-            <string>Kolonishare</string>
-        </array>
         <array key="Muli-Regular.ttf">
             <string>Muli-Regular</string>
+        </array>
+        <array key="kolonishare-phase2-ttf.ttf">
+            <string>Kolonishare</string>
         </array>
     </customFonts>
     <objects>
@@ -45,6 +45,7 @@
                 <outlet property="txtComment" destination="Ah3-xs-ohS" id="EJa-XN-ODC"/>
                 <outlet property="txtOrderId2_lbl" destination="0tk-VX-3FH" id="niH-05-0kr"/>
                 <outlet property="txtOrderId_lbl" destination="oe8-FE-VFC" id="aWW-Na-QnL"/>
+                <outlet property="underLine_lbl" destination="Nct-NY-YQN" id="Dv7-MM-0pL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewFirst" destination="dE2-PU-63u" id="vlP-wz-p3L"/>
                 <outlet property="viewSecond" destination="loK-gg-PGC" id="edB-wP-hWU"/>
@@ -452,13 +453,12 @@
                         </textView>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apy-XJ-qrT" customClass="CustomButton" customModule="koloni1" customModuleProvider="target">
                             <rect key="frame" x="20" y="465" width="324" height="40"/>
-                            <color key="backgroundColor" red="0.46666666670000001" green="0.4431372549" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Qx9-to-e33"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="Submit" backgroundImage="side_menu"/>
+                            <state key="normal" title="Submit"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="20"/>
@@ -538,7 +538,7 @@
     </objects>
     <designables>
         <designable name="apy-XJ-qrT">
-            <size key="intrinsicContentSize" width="1242" height="2208"/>
+            <size key="intrinsicContentSize" width="70" height="40"/>
         </designable>
     </designables>
     <resources>

@@ -14,6 +14,7 @@ protocol PromoCodeDelegate {
 class PromoCodeView: UIView {
 
     @IBOutlet weak var containerView: CustomView!
+    @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var enterCode_textField: UITextField!
     @IBOutlet weak var close_btn: UIButton!
     @IBOutlet weak var submit_btn: UIButton!
@@ -42,6 +43,14 @@ class PromoCodeView: UIView {
     }
     
     func loadContent(){
+        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "referral_popup_img") { (image) in
+            self.bgImageView.image = image
+        }
+        if AppLocalStorage.sharedInstance.application_gradient{
+            self.submit_btn.createGradientLayer(color1: CustomColor.primaryColor, color2: CustomColor.secondaryColor, startPosition: 0.0, endPosition: 0.9)
+        }else{
+            self.submit_btn.backgroundColor = AppLocalStorage.sharedInstance.button_color
+        }
         self.submit_btn.circleObject()
     }
     

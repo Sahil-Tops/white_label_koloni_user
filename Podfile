@@ -13,11 +13,7 @@ target 'KoloniKube_Swift' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   
-  pod 'Auth0', '~> 1.0'
-  pod 'Alamofire', '~> 5.5'
   pod 'AFNetworking'
-  pod 'Stripe'
-  
   pod 'IQKeyboardManagerSwift'
   pod 'ISMessages'
   pod 'NVActivityIndicatorView'
@@ -55,7 +51,6 @@ target 'KoloniKube_Swift' do
   pod 'KWVerificationCodeView'
   pod 'PullUpController'
   pod 'GradientCircularProgress', :git => 'https://github.com/keygx/GradientCircularProgress'
-  pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '7.9.0'
   # Pods for KoloniKube_Swift
   
 end
