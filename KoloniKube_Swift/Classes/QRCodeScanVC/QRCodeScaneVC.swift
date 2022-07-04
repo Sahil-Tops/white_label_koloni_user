@@ -1004,7 +1004,7 @@ extension QRCodeScaneVC: CBCentralManagerDelegate, CBPeripheralDelegate{
                 if data.count > 0{
                     print(data[0])
                     switch data[0] {
-                    case 0x00:
+                    case 0x00, 0x80:
                         print("Unlocked")
                         self.axaLockStatus = "opened"
                         if self.tappedConfirmBooking{
@@ -1014,19 +1014,11 @@ extension QRCodeScaneVC: CBCentralManagerDelegate, CBPeripheralDelegate{
                             }
                         }
                         break
-                    case 0x80:
-                        print("Unlocked")
-                        self.axaLockStatus = "opened"
-                        break
-                    case 0x01, 0x09:
+                    case 0x01, 0x09, 0x81, 17:
                         print("Locked")
                         self.axaLockStatus = "closed"
                         break
-                    case 0x81:
-                        print("Locked")
-                        self.axaLockStatus = "closed"
-                        break
-                    case 0x08:
+                    case 0x08, 136:
                         print("Waiting for lock")
                         break
                     default:

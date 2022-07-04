@@ -48,6 +48,8 @@
 		223E7B2327F32093005CA00C /* OcsSmartLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223E7B2127F32083005CA00C /* OcsSmartLibrary.framework */; };
 		223E7B2427F32093005CA00C /* OcsSmartLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 223E7B2127F32083005CA00C /* OcsSmartLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		223E7B2727F32127005CA00C /* OCSLock_Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223E7B2627F32127005CA00C /* OCSLock_Connection.swift */; };
+		227BC87C2872E1FD00475DB0 /* EnterPartnerIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BC87B2872E1FD00475DB0 /* EnterPartnerIdView.swift */; };
+		227BC87E2872E20700475DB0 /* EnterPartnerIdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 227BC87D2872E20700475DB0 /* EnterPartnerIdView.xib */; };
 		8A12A09926A5AB3600D3C8BE /* FAQDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A12A09826A5AB3600D3C8BE /* FAQDataModel.swift */; };
 		8A16EC96255433120026B4F4 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A16EC95255433120026B4F4 /* ImagePicker.swift */; };
 		8A1CD9622692F99300B440BD /* SelectPrimaryAccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A1CD9612692F99300B440BD /* SelectPrimaryAccountView.xib */; };
@@ -406,6 +408,8 @@
 		05F7103C1E9B73D400F6A272 /* CustomRangeSeekSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRangeSeekSlider.swift; sourceTree = "<group>"; };
 		223E7B2127F32083005CA00C /* OcsSmartLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OcsSmartLibrary.framework; sourceTree = "<group>"; };
 		223E7B2627F32127005CA00C /* OCSLock_Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCSLock_Connection.swift; sourceTree = "<group>"; };
+		227BC87B2872E1FD00475DB0 /* EnterPartnerIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPartnerIdView.swift; sourceTree = "<group>"; };
+		227BC87D2872E20700475DB0 /* EnterPartnerIdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnterPartnerIdView.xib; sourceTree = "<group>"; };
 		3BA466D8F284E6423E0A5E63 /* Pods-koloniKube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-koloniKube.release.xcconfig"; path = "Target Support Files/Pods-koloniKube/Pods-koloniKube.release.xcconfig"; sourceTree = "<group>"; };
 		5F692A8E503B8B3E941A1E02 /* Pods_KoloniKube_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KoloniKube_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7815321BB8E7BB49AE60AAF6 /* Pods-KoloniKube_Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KoloniKube_Swift.release.xcconfig"; path = "Target Support Files/Pods-KoloniKube_Swift/Pods-KoloniKube_Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -919,6 +923,15 @@
 				E7A054AF1E93A3DD000E95DA /* BookNowVC.xib */,
 			);
 			path = BookNow;
+			sourceTree = "<group>";
+		};
+		227BC87A2872E1C500475DB0 /* EnterPartnerIdView */ = {
+			isa = PBXGroup;
+			children = (
+				227BC87B2872E1FD00475DB0 /* EnterPartnerIdView.swift */,
+				227BC87D2872E20700475DB0 /* EnterPartnerIdView.xib */,
+			);
+			path = EnterPartnerIdView;
 			sourceTree = "<group>";
 		};
 		8A12A09626A5AA4500D3C8BE /* Models */ = {
@@ -1521,6 +1534,7 @@
 				E75AC95B23322D6C00EF8498 /* Resend Email */,
 				E747F19E2167242700973830 /* GlobalAlert */,
 				E7A054AB1E93A39E000E95DA /* BookNowVC */,
+				051C6A3220946FD600CBA34F /* QRCodeScanVC */,
 				0525AB5E1E98C14E00F18AC9 /* MarkerClickVC */,
 				05550E6A1EEA75130022087E /* CreditCardAddVC */,
 				05550E721EEADE440022087E /* IssuePopupVC */,
@@ -1534,7 +1548,6 @@
 				059DB26B1EA5ED8C0070B7CD /* EditProfileVC */,
 				E7A054AC1E93A39E000E95DA /* MyProfileVC */,
 				E7A054AD1E93A39E000E95DA /* MyRentalVC */,
-				051C6A3220946FD600CBA34F /* QRCodeScanVC */,
 				0550F0592099BBA1009034FC /* BuyMembershipVC */,
 				05BB72BB20B6DB690072F685 /* HubListVC */,
 				0550F05A2099BBA1009034FC /* MyMemberShipVC */,
@@ -1756,6 +1769,7 @@
 		E7860F42235D8C5F0062B90A /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				227BC87A2872E1C500475DB0 /* EnterPartnerIdView */,
 				8A1CD9682693374D00B440BD /* Create NewAccount View */,
 				8A1CD9602692F97A00B440BD /* Primary Account Pop Up */,
 				8AD5C7C5264A589500664A12 /* Rental Ended */,
@@ -2309,6 +2323,7 @@
 				E7E9DBAB235DCE9A005443D7 /* AddCardsViewController.xib in Resources */,
 				052EE3DF20B3F9B3009D2A20 /* DropDownCellCustom.xib in Resources */,
 				8A82269A2625A0F500D45080 /* GoogleService-Info.plist in Resources */,
+				227BC87E2872E20700475DB0 /* EnterPartnerIdView.xib in Resources */,
 				8AF2405525E4F11300846BC8 /* PromoCodeView.xib in Resources */,
 				E70A7A0822C488C400642E91 /* RentalImageViewController.xib in Resources */,
 				E73CC5F323D596EF00532A5C /* Kolonishare.ttf in Resources */,
@@ -2642,6 +2657,7 @@
 				E7FAC04D2143A9B5008AC8F2 /* Constants.swift in Sources */,
 				E70D276A214A42B100014CDF /* GS_Reach.swift in Sources */,
 				E743FF5E235DAA2E008879BC /* NavigationView.swift in Sources */,
+				227BC87C2872E1FD00475DB0 /* EnterPartnerIdView.swift in Sources */,
 				8A4E2A64266A60C400A4625B /* AxaLockingView.swift in Sources */,
 				E745B60E214657C000169FD1 /* KoloniKube_Swift.xcdatamodeld in Sources */,
 				8A3527242450877E0066C1CA /* APICall.swift in Sources */,
@@ -2893,7 +2909,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -2907,7 +2923,7 @@
 				INFOPLIST_FILE = KoloniKube_Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.3;
+				MARKETING_VERSION = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.kolonishare;
@@ -2933,7 +2949,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
@@ -2947,7 +2963,7 @@
 				INFOPLIST_FILE = KoloniKube_Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 10.3;
+				MARKETING_VERSION = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.kolonishare;
@@ -2975,13 +2991,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = koloniKube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 10.3;
+				MARKETING_VERSION = 10.9;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.kolonishare.koloniwidget;
@@ -3006,13 +3022,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Brian Dewey (SPXG22C3YC)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = ZJ93T82PV5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = koloniKube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 10.3;
+				MARKETING_VERSION = 10.9;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.kolonishare.koloniwidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";

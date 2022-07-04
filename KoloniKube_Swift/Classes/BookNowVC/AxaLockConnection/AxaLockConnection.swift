@@ -238,7 +238,7 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
                 if data.count > 0{
                     print(data[0])
                     switch data[0] {
-                    case 0x00:
+                    case 0x00, 0x80:
                         print("Unlocked")
                         if self.sendingCommand && self.lockStatus == "closed"{
                             self.sendingCommand = false
@@ -251,10 +251,7 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
                         }
                         self.lockStatus = "opened"
                         break
-                    case 0x80:
-                        print("Unlocked 0x08")
-                        break
-                    case 0x01, 0x09:
+                    case 0x01, 0x09, 0x81, 17:
                         print("Locked")
                         if self.sendingCommand{
                             self.sendingCommand = false
@@ -264,10 +261,7 @@ class AXALOCK_CONNECTION: NSObject, CBCentralManagerDelegate, CBPeripheralDelega
                         }
                         self.lockStatus = "closed"
                         break
-                    case 0x81:
-                        print("Locked 0x81")
-                        break
-                    case 0x08:
+                    case 0x08, 136:
                         print("Waiting for lock")
                         self.lockStatus = "opened"
                         self.bookNowVc?.hideLockLoader()

@@ -23,7 +23,12 @@ class LaunchScreenVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         Singleton.currentVc = "launch_screen"
         StaticVariables.window = UIApplication.shared.keyWindow
-        self.loadAppData()
+        if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false {
+            Singleton.partnerIdWhiteLabel = StaticClass.sharedInstance.retriveFromUserDefaultsStrings(key: "partnerIdWhiteLabel") ?? ""
+            self.loadAppData()
+        } else {
+            self.loadEnterPartnerIdView()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -32,9 +37,7 @@ class LaunchScreenVC: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        AppLocalStorage.sharedInstance.reteriveImageFromFileManager(imageName: "splash_img") { (image) in
-//            self.bgImage.image = image
-//        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,7 +59,6 @@ extension LaunchScreenVC {
     
     //Loading White label Data
     func loadAppData(){
-        
         let url = "https://kolonishare.com/super_partner_beta/ws/v1/apiVersion?ios_version=\(appDelegate.getCurrentAppVersion)&partner_id_white_label=\(Singleton.partnerIdWhiteLabel)"
         APICall.shared.getAppData(withUrl: url) { (response) in
             if let data = response as? [String:Any]{
@@ -65,13 +67,9 @@ extension LaunchScreenVC {
                         StaticClass.sharedInstance.saveToUserDefaults(app_setting as AnyObject, forKey: "application_setting")
                         _ = AppLocalStorage.init()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            if UserDefaults.standard.value(forKey: Global.g_UserDefaultKey.IS_USERLOGIN) != nil {
-                                if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false{
-                                    self.callAPiForVersionCheck()
-                                }else {
-                                    AppDelegate.shared.setNavigationFlow()
-                                }
-                            }else{
+                            if StaticClass.sharedInstance.retriveFromUserDefaults(Global.g_UserDefaultKey.IS_USERLOGIN) as? Bool ?? false {
+                                self.callAPiForVersionCheck()
+                            } else {
                                 AppDelegate.shared.setNavigationFlow()
                             }
                         }
@@ -87,9 +85,7 @@ extension LaunchScreenVC {
     func callAPiForVersionCheck() {
         let stringwsName = "apiVersion"
         APICall.shared.getWeb(stringwsName, withLoader: true, successBlock: { (response) in
-            
             print("apiVersion is",response)
-            
             if let dict = response as? NSDictionary {
                 if (dict["FLAG"] as! Bool) {
                     let getVersion = dict["current_ios_version"] as? String ?? ""
@@ -116,5 +112,10 @@ extension LaunchScreenVC {
             
         }
     }
-    
+}
+// MARK: - EnterPartnerId Delegate's
+extension LaunchScreenVC: EnterPartnerIdDelegate {
+    func responseFromDelegate() {
+        self.loadAppData()
+    }
 }

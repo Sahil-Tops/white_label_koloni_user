@@ -148,7 +148,7 @@ class LoginWithGoogleAppleVC: UIViewController {
         
         self.description_textView.attributedText = attributedString
         self.description_textView.font = UIFont(name: "Avenir Next", size: 15.0)
-        self.description_textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor.secondaryColor]
+        self.description_textView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor.primaryColor]
         self.description_textView.delegate = self
         self.description_textView.isEditable = false
         

@@ -14,23 +14,66 @@ class AppLocalStorage{
     static var sharedInstance: AppLocalStorage!
     var data: [String:Any] = [:]
     
-    init(){
+    init() {
         type(of: self).sharedInstance = self
-        if let data = StaticClass.sharedInstance.retriveFromUserDefaults("application_setting")as? [String:Any]{
+        if let data = StaticClass.sharedInstance.retriveFromUserDefaults("application_setting")as? [String:Any] {
             self.data = data
-            
-            for (key, value) in data{
-                print(value)
+            StaticClass.sharedInstance.ShowSpiner()
+            for (key, value) in data {
+                Singleton.shared.dispatchGroupImagesLoad.enter()
                 if key.contains("_img"){
                     DispatchQueue.global(qos: .userInitiated).async {
                         self.storeToFileManager(imgUrl: value as? String ?? "", imageName: key)
                     }
                 }
             }
+            Singleton.shared.dispatchGroupImagesLoad.notify(queue: .main) {
+                StaticClass.sharedInstance.HideSpinner()
+            }
+        }
+        
+    }
+    func storeToFileManager(imgUrl: String, imageName: String) {
+        DispatchQueue.main.async {
+            print(imgUrl)
+            if imgUrl != "" {
+                if let filePath = self.filePath(forKey: imageName) {
+                    do {
+                        let imageData = try Data(contentsOf: URL(string: imgUrl)!)
+                        try imageData.write(to: filePath, options: .atomic)
+                        print("Image Stored on path: ", filePath)
+                        Singleton.shared.dispatchGroupImagesLoad.leave()
+                    } catch let err {
+                        print("Error while writing file path: ", err)
+                    }
+                }
+            }
         }
     }
+    func reteriveImageFromFileManager(imageName: String, outputBlock: @escaping(_ image: UIImage)-> Void) {
+        if let filePath = self.filePath(forKey: imageName){
+            if let fileData = FileManager.default.contents(atPath: filePath.path){
+                if let image = UIImage(data: fileData) {
+                    outputBlock(image)
+                } else {
+                    print("Nil image")
+                }
+            } else {
+                print("No data")
+            }
+        } else {
+            print("Image Path not found")
+        }
+    }
+    private func filePath(forKey key: String) -> URL? {
+        let fileManager = FileManager.default
+        guard let documentURL = fileManager.urls(for: .documentDirectory,
+                                                    in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
+        
+        return documentURL.appendingPathComponent(key + ".jpeg")
+    }
     
-    var application_gradient: Bool{        
+    var application_gradient: Bool{
         return self.data["application_gradient"]as? String ?? "0" == "1" ? true:false
     }
     
@@ -192,48 +235,6 @@ class AppLocalStorage{
     
     var resume_button_str: String{
         return self.data["resume_button_text"]as? String ?? ""
-    }
-    
-    
-    func storeToFileManager(imgUrl: String, imageName: String){
-        DispatchQueue.main.async {
-            print(imgUrl)
-            if imgUrl != ""{
-                if let filePath = self.filePath(forKey: imageName){
-                    do{
-                        let imageData = try Data(contentsOf: URL(string: imgUrl)!)
-                        try imageData.write(to: filePath, options: .atomic)
-                        print("Image Stored on path: ", filePath)
-                    }catch let err{
-                        print("Error while writing file path: ", err)
-                    }
-                }
-            }
-        }
-    }
-    
-    func reteriveImageFromFileManager(imageName: String, outputBlock: @escaping(_ image: UIImage)-> Void){
-        if let filePath = self.filePath(forKey: imageName){
-            if let fileData = FileManager.default.contents(atPath: filePath.path){
-                if let image = UIImage(data: fileData){
-                    outputBlock(image)
-                }else{
-                    print("Nil image")
-                }
-            }else{
-                print("No data")
-            }
-        }else{
-            print("Image Path not found")
-        }
-    }
-    
-    private func filePath(forKey key: String) -> URL? {
-        let fileManager = FileManager.default
-        guard let documentURL = fileManager.urls(for: .documentDirectory,
-                                                 in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
-        
-        return documentURL.appendingPathComponent(key + ".jpeg")
     }
     
 }

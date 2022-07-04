@@ -54,8 +54,9 @@ class Singleton: NSObject {
     static var isOpeningAppFromNotification = false
     static var notificationRunningRentalDetail: [String:Any] = [:]
     static var isCalledDidFinishLaunch = true
-    static var partnerIdWhiteLabel = "64"
+    static var partnerIdWhiteLabel = ""
     var socialMediaUserData: ShareUser = ShareUser()
+    let dispatchGroupImagesLoad = DispatchGroup()
     
     private override init() {
         
